@@ -8,6 +8,7 @@
 
 #import "AddressBookAppDelegate.h"
 #import "PublicData.h"
+#import "DBConnection.h"
 
 @implementation AddressBookAppDelegate
 
@@ -21,6 +22,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
     // Override point for customization after application launch.
+	
+	[DBConnection getSharedDatabase];
 	
 	switchViewController = [[SwitchViewController alloc] init];
 	
@@ -92,6 +95,8 @@
 
 - (void)dealloc 
 {
+	[DBConnection closeDatabase];
+	
 	[switchViewController release];
     [window				  release];
 	[sceneID			  release];
