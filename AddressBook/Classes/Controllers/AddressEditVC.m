@@ -11,16 +11,23 @@
 
 @implementation AddressEditVC
 
+@synthesize m_pUIScrollView_IB;
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
+	
+	[m_pUIScrollView_IB setContentSize:CGSizeMake(SCREEN_W, SCREEN_H/2 + 420)];
 }
 
 
 -(void)myInit
 {
-	
+	if(m_pUIScrollView_IB)
+	{
+		[m_pUIScrollView_IB setContentOffset:CGPointMake(0, 0)];
+	}
 }
 
 
@@ -48,6 +55,8 @@
 
 - (void)dealloc 
 {
+	[m_pUIScrollView_IB release];
+	
     [super dealloc];
 }
 
