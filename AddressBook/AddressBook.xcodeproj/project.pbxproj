@@ -15,6 +15,8 @@
 		216525FC13E52FA30075F387 /* AddressEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 216525FB13E52FA30075F387 /* AddressEditVC.m */; };
 		2165260E13E531BA0075F387 /* AddressInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2165260D13E531BA0075F387 /* AddressInfoVC.xib */; };
 		2165261013E531D10075F387 /* AddressEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2165260F13E531D10075F387 /* AddressEditVC.xib */; };
+		2176A7EF13E5705700944254 /* ImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176A7EE13E5705700944254 /* ImageStore.m */; };
+		2176A7F213E5708500944254 /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176A7F113E5708500944254 /* DataStore.m */; };
 		219D997013E506E900506FCB /* DBConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 219D996D13E506E900506FCB /* DBConnection.m */; };
 		219D997113E506E900506FCB /* Statement.m in Sources */ = {isa = PBXBuildFile; fileRef = 219D996F13E506E900506FCB /* Statement.m */; };
 		219D997313E5070A00506FCB /* AddressBook.db in Resources */ = {isa = PBXBuildFile; fileRef = 219D997213E5070A00506FCB /* AddressBook.db */; };
@@ -60,6 +62,10 @@
 		216525FB13E52FA30075F387 /* AddressEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressEditVC.m; sourceTree = "<group>"; };
 		2165260D13E531BA0075F387 /* AddressInfoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressInfoVC.xib; sourceTree = "<group>"; };
 		2165260F13E531D10075F387 /* AddressEditVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressEditVC.xib; sourceTree = "<group>"; };
+		2176A7ED13E5705700944254 /* ImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageStore.h; sourceTree = "<group>"; };
+		2176A7EE13E5705700944254 /* ImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageStore.m; sourceTree = "<group>"; };
+		2176A7F013E5708500944254 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
+		2176A7F113E5708500944254 /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
 		219D996C13E506E900506FCB /* DBConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBConnection.h; sourceTree = "<group>"; };
 		219D996D13E506E900506FCB /* DBConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBConnection.m; sourceTree = "<group>"; };
 		219D996E13E506E900506FCB /* Statement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Statement.h; sourceTree = "<group>"; };
@@ -162,6 +168,10 @@
 				219D996D13E506E900506FCB /* DBConnection.m */,
 				219D996E13E506E900506FCB /* Statement.h */,
 				219D996F13E506E900506FCB /* Statement.m */,
+				2176A7ED13E5705700944254 /* ImageStore.h */,
+				2176A7EE13E5705700944254 /* ImageStore.m */,
+				2176A7F013E5708500944254 /* DataStore.h */,
+				2176A7F113E5708500944254 /* DataStore.m */,
 			);
 			path = DB;
 			sourceTree = "<group>";
@@ -391,6 +401,8 @@
 				219D997113E506E900506FCB /* Statement.m in Sources */,
 				216525F913E52F8F0075F387 /* AddressInfoVC.m in Sources */,
 				216525FC13E52FA30075F387 /* AddressEditVC.m in Sources */,
+				2176A7EF13E5705700944254 /* ImageStore.m in Sources */,
+				2176A7F213E5708500944254 /* DataStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
