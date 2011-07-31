@@ -22,4 +22,7 @@
 @property (retain,nonatomic) UISearchBar			   * m_pSearchBar;
 @property (retain,nonatomic) IBOutlet UITableView      * m_pTableView_IB;
 
+-(IBAction)editItemBtn:(id)sender;
+-(IBAction)addItemBtn: (id)sender;
+
 @end

@@ -11,6 +11,10 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		216525F913E52F8F0075F387 /* AddressInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 216525F813E52F8F0075F387 /* AddressInfoVC.m */; };
+		216525FC13E52FA30075F387 /* AddressEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 216525FB13E52FA30075F387 /* AddressEditVC.m */; };
+		2165260E13E531BA0075F387 /* AddressInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2165260D13E531BA0075F387 /* AddressInfoVC.xib */; };
+		2165261013E531D10075F387 /* AddressEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2165260F13E531D10075F387 /* AddressEditVC.xib */; };
 		219D997013E506E900506FCB /* DBConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 219D996D13E506E900506FCB /* DBConnection.m */; };
 		219D997113E506E900506FCB /* Statement.m in Sources */ = {isa = PBXBuildFile; fileRef = 219D996F13E506E900506FCB /* Statement.m */; };
 		219D997313E5070A00506FCB /* AddressBook.db in Resources */ = {isa = PBXBuildFile; fileRef = 219D997213E5070A00506FCB /* AddressBook.db */; };
@@ -50,6 +54,12 @@
 		1D3623250D0F684500981E51 /* AddressBookAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* AddressBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddressBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		216525F713E52F8F0075F387 /* AddressInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressInfoVC.h; sourceTree = "<group>"; };
+		216525F813E52F8F0075F387 /* AddressInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressInfoVC.m; sourceTree = "<group>"; };
+		216525FA13E52FA30075F387 /* AddressEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressEditVC.h; sourceTree = "<group>"; };
+		216525FB13E52FA30075F387 /* AddressEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressEditVC.m; sourceTree = "<group>"; };
+		2165260D13E531BA0075F387 /* AddressInfoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressInfoVC.xib; sourceTree = "<group>"; };
+		2165260F13E531D10075F387 /* AddressEditVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressEditVC.xib; sourceTree = "<group>"; };
 		219D996C13E506E900506FCB /* DBConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBConnection.h; sourceTree = "<group>"; };
 		219D996D13E506E900506FCB /* DBConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBConnection.m; sourceTree = "<group>"; };
 		219D996E13E506E900506FCB /* Statement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Statement.h; sourceTree = "<group>"; };
@@ -179,6 +189,12 @@
 				21E7131913E3F52900BF47E6 /* AddressBookVC.h */,
 				21E7131A13E3F52900BF47E6 /* AddressBookVC.m */,
 				21E7132A13E3F60900BF47E6 /* AddressBookVC.xib */,
+				216525F713E52F8F0075F387 /* AddressInfoVC.h */,
+				216525F813E52F8F0075F387 /* AddressInfoVC.m */,
+				2165260D13E531BA0075F387 /* AddressInfoVC.xib */,
+				216525FA13E52FA30075F387 /* AddressEditVC.h */,
+				216525FB13E52FA30075F387 /* AddressEditVC.m */,
+				2165260F13E531D10075F387 /* AddressEditVC.xib */,
 			);
 			name = "通讯录";
 			sourceTree = "<group>";
@@ -349,6 +365,8 @@
 				219D99CB13E5163100506FCB /* image07_kuang.png in Resources */,
 				219D99CC13E5163100506FCB /* image08_kuang.png in Resources */,
 				219D99CD13E5163100506FCB /* image09_kuang.png in Resources */,
+				2165260E13E531BA0075F387 /* AddressInfoVC.xib in Resources */,
+				2165261013E531D10075F387 /* AddressEditVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +389,8 @@
 				21E7137813E3FBA800BF47E6 /* baseVC.m in Sources */,
 				219D997013E506E900506FCB /* DBConnection.m in Sources */,
 				219D997113E506E900506FCB /* Statement.m in Sources */,
+				216525F913E52F8F0075F387 /* AddressInfoVC.m in Sources */,
+				216525FC13E52FA30075F387 /* AddressEditVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

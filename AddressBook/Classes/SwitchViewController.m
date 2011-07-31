@@ -12,7 +12,7 @@
 
 @implementation SwitchViewController
 
-@synthesize m_pAddressBookVC,m_paccountsVC,m_pdateVC,m_pmemoVC,m_psettingVC;
+@synthesize m_pAddressBookVC,m_paccountsVC,m_pdateVC,m_pmemoVC,m_psettingVC,m_pAddressInfoVC,m_pAddressEditVC;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
@@ -51,15 +51,27 @@
 	else if(self.m_psettingVC.view.superview != nil)
 		return self.m_psettingVC;
 	
+	else if(self.m_pAddressInfoVC.view.superview != nil)
+		return self.m_pAddressInfoVC;
+	
+	else if(self.m_pAddressEditVC.view.superview != nil)
+		return self.m_pAddressEditVC;
+	
 	return nil;
 }
 
 -(void)changScene:(NSNotification*)notification
 {
 	 /*
+	  
 	 0 m_pAddressBookVC 通讯录
 	 1 m_paccountsVC    帐号管理
-	 
+	 2 m_pdateVC;       日期提醒
+	 3 m_pmemoVC;       备忘录
+	 4 m_psettingVC;    设置
+	 5 m_pAddressInfoVC 通讯录介绍
+	 6 m_pAddressEditVC 通讯录编辑
+	  
 	 */
 	
 	
@@ -174,6 +186,40 @@
 		
 	}
 	
+	else if(index == 5)
+	{
+		if (self.m_pAddressInfoVC == nil)
+		{
+			AddressInfoVC * pAddressInfoVC = [[AddressInfoVC alloc] init];
+			self.m_pAddressInfoVC = pAddressInfoVC;
+			[pAddressInfoVC release];
+		}
+		
+		if(![AddressBookAppDelegate getAppDelegate].back)
+			[self.m_pAddressInfoVC myInit];
+		
+		coming = self.m_pAddressInfoVC;
+		going  = [self checkGoingView];
+		
+	}
+	
+	else if(index == 6)
+	{
+		if (self.m_pAddressEditVC == nil)
+		{
+			AddressEditVC * pAddressEditVC = [[AddressEditVC alloc] init];
+			self.m_pAddressEditVC = pAddressEditVC;
+			[pAddressEditVC release];
+		}
+		
+		if(![AddressBookAppDelegate getAppDelegate].back)
+			[self.m_pAddressEditVC myInit];
+		
+		coming = self.m_pAddressEditVC;
+		going  = [self checkGoingView];
+		
+	}
+	
 	[coming viewWillAppear:YES];
 	[going viewWillDisappear:YES];
 	[going.view removeFromSuperview];
@@ -225,6 +271,10 @@
 	[m_pdateVC        release];
 	[m_pmemoVC		  release];
 	[m_psettingVC     release];
+	
+	[m_pAddressInfoVC release];
+	[m_pAddressEditVC release];
+	
 	
     [super dealloc];
 }
