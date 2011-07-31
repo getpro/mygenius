@@ -310,4 +310,22 @@
 }
 
 
+-(IBAction)editItemBtn:(id)sender
+{
+	
+}
+
+
+-(IBAction)addItemBtn: (id)sender
+{
+	rightOrLeft = YES;
+	teXiao      = YES;
+	
+	NSString * ss = [NSString stringWithFormat:@"%d" , 6];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
+	
+}
+
+
 @end
