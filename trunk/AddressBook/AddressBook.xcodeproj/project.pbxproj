@@ -1,0 +1,462 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* AddressBookAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AddressBookAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		219D997013E506E900506FCB /* DBConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 219D996D13E506E900506FCB /* DBConnection.m */; };
+		219D997113E506E900506FCB /* Statement.m in Sources */ = {isa = PBXBuildFile; fileRef = 219D996F13E506E900506FCB /* Statement.m */; };
+		219D997313E5070A00506FCB /* AddressBook.db in Resources */ = {isa = PBXBuildFile; fileRef = 219D997213E5070A00506FCB /* AddressBook.db */; };
+		219D999713E507B500506FCB /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 219D999613E507B500506FCB /* libsqlite3.0.dylib */; };
+		219D999913E507D600506FCB /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 219D999813E507D600506FCB /* libxml2.dylib */; };
+		219D99C413E5163100506FCB /* head.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99BA13E5163100506FCB /* head.png */; };
+		219D99C513E5163100506FCB /* image01_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99BB13E5163100506FCB /* image01_kuang.png */; };
+		219D99C613E5163100506FCB /* image02_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99BC13E5163100506FCB /* image02_kuang.png */; };
+		219D99C713E5163100506FCB /* image03_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99BD13E5163100506FCB /* image03_kuang.png */; };
+		219D99C813E5163100506FCB /* image04_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99BE13E5163100506FCB /* image04_kuang.png */; };
+		219D99C913E5163100506FCB /* image05_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99BF13E5163100506FCB /* image05_kuang.png */; };
+		219D99CA13E5163100506FCB /* image06_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99C013E5163100506FCB /* image06_kuang.png */; };
+		219D99CB13E5163100506FCB /* image07_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99C113E5163100506FCB /* image07_kuang.png */; };
+		219D99CC13E5163100506FCB /* image08_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99C213E5163100506FCB /* image08_kuang.png */; };
+		219D99CD13E5163100506FCB /* image09_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99C313E5163100506FCB /* image09_kuang.png */; };
+		21E712D113E3EFF400BF47E6 /* SwitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E712D013E3EFF400BF47E6 /* SwitchViewController.m */; };
+		21E712D913E3F13700BF47E6 /* PublicData.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E712D813E3F13700BF47E6 /* PublicData.m */; };
+		21E712F413E3F3E700BF47E6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21E712F313E3F3E700BF47E6 /* QuartzCore.framework */; };
+		21E7131B13E3F52900BF47E6 /* AddressBookVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E7131A13E3F52900BF47E6 /* AddressBookVC.m */; };
+		21E7131E13E3F56000BF47E6 /* accountsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E7131D13E3F56000BF47E6 /* accountsVC.m */; };
+		21E7132113E3F58700BF47E6 /* dateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E7132013E3F58700BF47E6 /* dateVC.m */; };
+		21E7132413E3F5D300BF47E6 /* memoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E7132313E3F5D300BF47E6 /* memoVC.m */; };
+		21E7132713E3F5E800BF47E6 /* settingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E7132613E3F5E800BF47E6 /* settingVC.m */; };
+		21E7132B13E3F60900BF47E6 /* AddressBookVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E7132A13E3F60900BF47E6 /* AddressBookVC.xib */; };
+		21E7135913E3F8DC00BF47E6 /* accountsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E7135513E3F8DC00BF47E6 /* accountsVC.xib */; };
+		21E7135A13E3F8DC00BF47E6 /* dateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E7135613E3F8DC00BF47E6 /* dateVC.xib */; };
+		21E7135B13E3F8DC00BF47E6 /* memoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E7135713E3F8DC00BF47E6 /* memoVC.xib */; };
+		21E7135C13E3F8DC00BF47E6 /* settingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E7135813E3F8DC00BF47E6 /* settingVC.xib */; };
+		21E7137813E3FBA800BF47E6 /* baseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E7137713E3FBA800BF47E6 /* baseVC.m */; };
+		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* AddressBookAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* AddressBookAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* AddressBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddressBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		219D996C13E506E900506FCB /* DBConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBConnection.h; sourceTree = "<group>"; };
+		219D996D13E506E900506FCB /* DBConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBConnection.m; sourceTree = "<group>"; };
+		219D996E13E506E900506FCB /* Statement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Statement.h; sourceTree = "<group>"; };
+		219D996F13E506E900506FCB /* Statement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Statement.m; sourceTree = "<group>"; };
+		219D997213E5070A00506FCB /* AddressBook.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = AddressBook.db; sourceTree = "<group>"; };
+		219D999613E507B500506FCB /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		219D999813E507D600506FCB /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		219D99BA13E5163100506FCB /* head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head.png; sourceTree = "<group>"; };
+		219D99BB13E5163100506FCB /* image01_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image01_kuang.png; sourceTree = "<group>"; };
+		219D99BC13E5163100506FCB /* image02_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image02_kuang.png; sourceTree = "<group>"; };
+		219D99BD13E5163100506FCB /* image03_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image03_kuang.png; sourceTree = "<group>"; };
+		219D99BE13E5163100506FCB /* image04_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image04_kuang.png; sourceTree = "<group>"; };
+		219D99BF13E5163100506FCB /* image05_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image05_kuang.png; sourceTree = "<group>"; };
+		219D99C013E5163100506FCB /* image06_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image06_kuang.png; sourceTree = "<group>"; };
+		219D99C113E5163100506FCB /* image07_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image07_kuang.png; sourceTree = "<group>"; };
+		219D99C213E5163100506FCB /* image08_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image08_kuang.png; sourceTree = "<group>"; };
+		219D99C313E5163100506FCB /* image09_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image09_kuang.png; sourceTree = "<group>"; };
+		21E7127713E3E6E300BF47E6 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		21E712CF13E3EFF400BF47E6 /* SwitchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchViewController.h; sourceTree = "<group>"; };
+		21E712D013E3EFF400BF47E6 /* SwitchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchViewController.m; sourceTree = "<group>"; };
+		21E712D713E3F13700BF47E6 /* PublicData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicData.h; sourceTree = "<group>"; };
+		21E712D813E3F13700BF47E6 /* PublicData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicData.m; sourceTree = "<group>"; };
+		21E712F313E3F3E700BF47E6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		21E7131913E3F52900BF47E6 /* AddressBookVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookVC.h; sourceTree = "<group>"; };
+		21E7131A13E3F52900BF47E6 /* AddressBookVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookVC.m; sourceTree = "<group>"; };
+		21E7131C13E3F56000BF47E6 /* accountsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = accountsVC.h; sourceTree = "<group>"; };
+		21E7131D13E3F56000BF47E6 /* accountsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = accountsVC.m; sourceTree = "<group>"; };
+		21E7131F13E3F58700BF47E6 /* dateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dateVC.h; sourceTree = "<group>"; };
+		21E7132013E3F58700BF47E6 /* dateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dateVC.m; sourceTree = "<group>"; };
+		21E7132213E3F5D300BF47E6 /* memoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memoVC.h; sourceTree = "<group>"; };
+		21E7132313E3F5D300BF47E6 /* memoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = memoVC.m; sourceTree = "<group>"; };
+		21E7132513E3F5E800BF47E6 /* settingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settingVC.h; sourceTree = "<group>"; };
+		21E7132613E3F5E800BF47E6 /* settingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = settingVC.m; sourceTree = "<group>"; };
+		21E7132A13E3F60900BF47E6 /* AddressBookVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressBookVC.xib; sourceTree = "<group>"; };
+		21E7135513E3F8DC00BF47E6 /* accountsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = accountsVC.xib; sourceTree = "<group>"; };
+		21E7135613E3F8DC00BF47E6 /* dateVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = dateVC.xib; sourceTree = "<group>"; };
+		21E7135713E3F8DC00BF47E6 /* memoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = memoVC.xib; sourceTree = "<group>"; };
+		21E7135813E3F8DC00BF47E6 /* settingVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = settingVC.xib; sourceTree = "<group>"; };
+		21E7137613E3FBA800BF47E6 /* baseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = baseVC.h; sourceTree = "<group>"; };
+		21E7137713E3FBA800BF47E6 /* baseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = baseVC.m; sourceTree = "<group>"; };
+		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* AddressBook_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBook_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* AddressBook-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AddressBook-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
+				21E712F413E3F3E700BF47E6 /* QuartzCore.framework in Frameworks */,
+				219D999713E507B500506FCB /* libsqlite3.0.dylib in Frameworks */,
+				219D999913E507D600506FCB /* libxml2.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				219D996A13E506E900506FCB /* model */,
+				21E712CE13E3EFDF00BF47E6 /* Controllers */,
+				1D3623240D0F684500981E51 /* AddressBookAppDelegate.h */,
+				1D3623250D0F684500981E51 /* AddressBookAppDelegate.m */,
+				21E712CF13E3EFF400BF47E6 /* SwitchViewController.h */,
+				21E712D013E3EFF400BF47E6 /* SwitchViewController.m */,
+				21E712D713E3F13700BF47E6 /* PublicData.h */,
+				21E712D813E3F13700BF47E6 /* PublicData.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* AddressBook.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		219D996A13E506E900506FCB /* model */ = {
+			isa = PBXGroup;
+			children = (
+				219D996B13E506E900506FCB /* DB */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		219D996B13E506E900506FCB /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				219D996C13E506E900506FCB /* DBConnection.h */,
+				219D996D13E506E900506FCB /* DBConnection.m */,
+				219D996E13E506E900506FCB /* Statement.h */,
+				219D996F13E506E900506FCB /* Statement.m */,
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		219D99B913E5163100506FCB /* image */ = {
+			isa = PBXGroup;
+			children = (
+				219D99BA13E5163100506FCB /* head.png */,
+				219D99BB13E5163100506FCB /* image01_kuang.png */,
+				219D99BC13E5163100506FCB /* image02_kuang.png */,
+				219D99BD13E5163100506FCB /* image03_kuang.png */,
+				219D99BE13E5163100506FCB /* image04_kuang.png */,
+				219D99BF13E5163100506FCB /* image05_kuang.png */,
+				219D99C013E5163100506FCB /* image06_kuang.png */,
+				219D99C113E5163100506FCB /* image07_kuang.png */,
+				219D99C213E5163100506FCB /* image08_kuang.png */,
+				219D99C313E5163100506FCB /* image09_kuang.png */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
+		219D99D213E5168F00506FCB /* 通讯录 */ = {
+			isa = PBXGroup;
+			children = (
+				21E7131913E3F52900BF47E6 /* AddressBookVC.h */,
+				21E7131A13E3F52900BF47E6 /* AddressBookVC.m */,
+				21E7132A13E3F60900BF47E6 /* AddressBookVC.xib */,
+			);
+			name = "通讯录";
+			sourceTree = "<group>";
+		};
+		219D99D313E5169800506FCB /* 备忘录 */ = {
+			isa = PBXGroup;
+			children = (
+				21E7132213E3F5D300BF47E6 /* memoVC.h */,
+				21E7132313E3F5D300BF47E6 /* memoVC.m */,
+				21E7135713E3F8DC00BF47E6 /* memoVC.xib */,
+			);
+			name = "备忘录";
+			sourceTree = "<group>";
+		};
+		219D99D413E516BA00506FCB /* 帐号管理 */ = {
+			isa = PBXGroup;
+			children = (
+				21E7131C13E3F56000BF47E6 /* accountsVC.h */,
+				21E7131D13E3F56000BF47E6 /* accountsVC.m */,
+				21E7135513E3F8DC00BF47E6 /* accountsVC.xib */,
+			);
+			name = "帐号管理";
+			sourceTree = "<group>";
+		};
+		219D99D513E516E400506FCB /* 日期提醒 */ = {
+			isa = PBXGroup;
+			children = (
+				21E7131F13E3F58700BF47E6 /* dateVC.h */,
+				21E7132013E3F58700BF47E6 /* dateVC.m */,
+				21E7135613E3F8DC00BF47E6 /* dateVC.xib */,
+			);
+			name = "日期提醒";
+			sourceTree = "<group>";
+		};
+		219D99D613E5170F00506FCB /* 设置 */ = {
+			isa = PBXGroup;
+			children = (
+				21E7132513E3F5E800BF47E6 /* settingVC.h */,
+				21E7132613E3F5E800BF47E6 /* settingVC.m */,
+				21E7135813E3F8DC00BF47E6 /* settingVC.xib */,
+			);
+			name = "设置";
+			sourceTree = "<group>";
+		};
+		21E712CE13E3EFDF00BF47E6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				219D99D213E5168F00506FCB /* 通讯录 */,
+				219D99D513E516E400506FCB /* 日期提醒 */,
+				219D99D313E5169800506FCB /* 备忘录 */,
+				219D99D613E5170F00506FCB /* 设置 */,
+				219D99D413E516BA00506FCB /* 帐号管理 */,
+				21E7137613E3FBA800BF47E6 /* baseVC.h */,
+				21E7137713E3FBA800BF47E6 /* baseVC.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* AddressBook_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				219D99B913E5163100506FCB /* image */,
+				219D997213E5070A00506FCB /* AddressBook.db */,
+				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				8D1107310486CEB800E47090 /* AddressBook-Info.plist */,
+				21E7127713E3E6E300BF47E6 /* Entitlements.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				219D999613E507B500506FCB /* libsqlite3.0.dylib */,
+				219D999813E507D600506FCB /* libxml2.dylib */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
+				21E712F313E3F3E700BF47E6 /* QuartzCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* AddressBook */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "AddressBook" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AddressBook;
+			productName = AddressBook;
+			productReference = 1D6058910D05DD3D006BFB54 /* AddressBook.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "AddressBook" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* AddressBook */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				21E7132B13E3F60900BF47E6 /* AddressBookVC.xib in Resources */,
+				21E7135913E3F8DC00BF47E6 /* accountsVC.xib in Resources */,
+				21E7135A13E3F8DC00BF47E6 /* dateVC.xib in Resources */,
+				21E7135B13E3F8DC00BF47E6 /* memoVC.xib in Resources */,
+				21E7135C13E3F8DC00BF47E6 /* settingVC.xib in Resources */,
+				219D997313E5070A00506FCB /* AddressBook.db in Resources */,
+				219D99C413E5163100506FCB /* head.png in Resources */,
+				219D99C513E5163100506FCB /* image01_kuang.png in Resources */,
+				219D99C613E5163100506FCB /* image02_kuang.png in Resources */,
+				219D99C713E5163100506FCB /* image03_kuang.png in Resources */,
+				219D99C813E5163100506FCB /* image04_kuang.png in Resources */,
+				219D99C913E5163100506FCB /* image05_kuang.png in Resources */,
+				219D99CA13E5163100506FCB /* image06_kuang.png in Resources */,
+				219D99CB13E5163100506FCB /* image07_kuang.png in Resources */,
+				219D99CC13E5163100506FCB /* image08_kuang.png in Resources */,
+				219D99CD13E5163100506FCB /* image09_kuang.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* AddressBookAppDelegate.m in Sources */,
+				21E712D113E3EFF400BF47E6 /* SwitchViewController.m in Sources */,
+				21E712D913E3F13700BF47E6 /* PublicData.m in Sources */,
+				21E7131B13E3F52900BF47E6 /* AddressBookVC.m in Sources */,
+				21E7131E13E3F56000BF47E6 /* accountsVC.m in Sources */,
+				21E7132113E3F58700BF47E6 /* dateVC.m in Sources */,
+				21E7132413E3F5D300BF47E6 /* memoVC.m in Sources */,
+				21E7132713E3F5E800BF47E6 /* settingVC.m in Sources */,
+				21E7137813E3FBA800BF47E6 /* baseVC.m in Sources */,
+				219D997013E506E900506FCB /* DBConnection.m in Sources */,
+				219D997113E506E900506FCB /* Statement.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/projects/AddressBook/Entitlements.plist";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AddressBook_Prefix.pch;
+				INFOPLIST_FILE = "AddressBook-Info.plist";
+				PRODUCT_NAME = AddressBook;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/projects/AddressBook/Entitlements.plist";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AddressBook_Prefix.pch;
+				INFOPLIST_FILE = "AddressBook-Info.plist";
+				PRODUCT_NAME = AddressBook;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.2;
+				PREBINDING = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.2;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "AddressBook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "AddressBook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
