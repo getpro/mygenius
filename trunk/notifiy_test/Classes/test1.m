@@ -11,6 +11,11 @@
 
 @implementation test1
 
+
+@synthesize eventStore, defaultCalendar;
+
+
+
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -28,12 +33,21 @@
 }
 */
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
+- (void)viewDidLoad 
+{
     [super viewDidLoad];
+	
+	self.eventStore = [[EKEventStore alloc] init];
+	
+	// Get the default calendar from store.
+	self.defaultCalendar = [self.eventStore defaultCalendarForNewEvents];
+
+	
+	
 }
-*/
+
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -57,7 +71,11 @@
 }
 
 
-- (void)dealloc {
+- (void)dealloc 
+{
+	[eventStore      release];
+	[defaultCalendar release];
+	
     [super dealloc];
 }
 
@@ -102,6 +120,26 @@
 	
 	[[UIApplication sharedApplication] scheduleLocalNotification:notification];
 	
+	
+	
+	
+	//event
+	
+	NSError * error     = nil;
+	
+	EKEvent * thisEvent = [EKEvent eventWithEventStore:self.eventStore];
+	
+	thisEvent.calendar  = self.defaultCalendar;
+	
+	thisEvent.title     = @"111111111";
+	
+	thisEvent.startDate = [NSDate date];
+	
+	thisEvent.endDate   = [NSDate date];
+	
+	BOOL pResult = [self.eventStore saveEvent:thisEvent span:EKSpanThisEvent error:&error];
+	
+	pResult = pResult;
 }
 	
 

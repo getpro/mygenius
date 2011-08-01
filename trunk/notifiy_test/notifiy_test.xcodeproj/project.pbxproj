@@ -17,6 +17,7 @@
 		63A6630813D7F883006F1872 /* test1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63A6630713D7F883006F1872 /* test1.xib */; };
 		63C6DFAD13E66B1700966B01 /* 6.wav in Resources */ = {isa = PBXBuildFile; fileRef = 63C6DFAC13E66B1700966B01 /* 6.wav */; };
 		63C6DFE713E673E400966B01 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C6DFE613E673E400966B01 /* EventKitUI.framework */; };
+		63C6E11813E69B8700966B01 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C6E11713E69B8700966B01 /* EventKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		63A6633F13D7FAB0006F1872 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		63C6DFAC13E66B1700966B01 /* 6.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 6.wav; sourceTree = "<group>"; };
 		63C6DFE613E673E400966B01 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		63C6E11713E69B8700966B01 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* notifiy_test-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "notifiy_test-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -47,6 +49,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				63C6DFE713E673E400966B01 /* EventKitUI.framework in Frameworks */,
+				63C6E11813E69B8700966B01 /* EventKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +115,7 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				63C6DFE613E673E400966B01 /* EventKitUI.framework */,
+				63C6E11713E69B8700966B01 /* EventKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
