@@ -34,7 +34,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					947,
+					1048,
 					20,
 					48,
 					43,
@@ -73,8 +73,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 333880143;
-			PBXWorkspaceStateSaveDate = 333880143;
+			PBXPerProjectTemplateStateSaveDate = 333886239;
+			PBXWorkspaceStateSaveDate = 333886239;
 		};
 		perUserProjectItems = {
 			63A6633113D7FA96006F1872 /* PBXTextBookmark */ = 63A6633113D7FA96006F1872 /* PBXTextBookmark */;
@@ -107,11 +107,13 @@
 			63C6E15113E69E4100966B01 /* PBXTextBookmark */ = 63C6E15113E69E4100966B01 /* PBXTextBookmark */;
 			63C6E15613E69EBF00966B01 /* PBXTextBookmark */ = 63C6E15613E69EBF00966B01 /* PBXTextBookmark */;
 			63C6E15813E69EBF00966B01 /* PBXTextBookmark */ = 63C6E15813E69EBF00966B01 /* PBXTextBookmark */;
-			63C6E15913E69EBF00966B01 /* PBXTextBookmark */ = 63C6E15913E69EBF00966B01 /* PBXTextBookmark */;
 			63C6E16113E6A56700966B01 /* PBXTextBookmark */ = 63C6E16113E6A56700966B01 /* PBXTextBookmark */;
-			63C6E17813E6A5F000966B01 /* PBXTextBookmark */ = 63C6E17813E6A5F000966B01 /* PBXTextBookmark */;
 			63C6E17913E6A5F000966B01 /* PBXTextBookmark */ = 63C6E17913E6A5F000966B01 /* PBXTextBookmark */;
-			63C6E17A13E6A5F000966B01 /* PBXTextBookmark */ = 63C6E17A13E6A5F000966B01 /* PBXTextBookmark */;
+			63C6E19413E6AB0A00966B01 /* PBXTextBookmark */ = 63C6E19413E6AB0A00966B01 /* PBXTextBookmark */;
+			63C6E19F13E6AB5800966B01 /* PBXTextBookmark */ = 63C6E19F13E6AB5800966B01 /* PBXTextBookmark */;
+			63C6E1F013E6AE3D00966B01 /* PBXTextBookmark */ = 63C6E1F013E6AE3D00966B01 /* PBXTextBookmark */;
+			63DDBA1B13E6B348009F453C /* PBXTextBookmark */ = 63DDBA1B13E6B348009F453C /* PBXTextBookmark */;
+			63DDBA2713E6B374009F453C /* PBXTextBookmark */ = 63DDBA2713E6B374009F453C /* PBXTextBookmark */;
 		};
 		sourceControlManager = 63A662FC13D7F821006F1872 /* Source Control */;
 		userBuildSettings = {
@@ -138,7 +140,7 @@
 		argumentStrings = (
 		);
 		autoAttachOnCrash = 1;
-		breakpointsEnabled = 1;
+		breakpointsEnabled = 0;
 		configStateDict = {
 		};
 		customDataFormattersEnabled = 1;
@@ -186,9 +188,9 @@
 	};
 	63A6630013D7F847006F1872 /* test1.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {998.159, 3192}}";
-			sepNavSelRange = "{3447, 0}";
-			sepNavVisRange = "{3254, 193}";
+			sepNavIntBoundsRect = "{{0, 0}, {1226, 3024}}";
+			sepNavSelRange = "{2946, 0}";
+			sepNavVisRange = "{2326, 719}";
 		};
 	};
 	63A6633113D7FA96006F1872 /* PBXTextBookmark */ = {
@@ -234,11 +236,6 @@
 		name = NSDate.h;
 		path = /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSDate.h;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1125, 1344}}";
-			sepNavSelRange = "{299, 51}";
-			sepNavVisRange = "{0, 747}";
-		};
 	};
 	63A6634B13D7FBB6006F1872 /* PlistBookmark */ = {
 		isa = PlistBookmark;
@@ -490,11 +487,6 @@
 		name = EventKitUI.h;
 		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/EventKitUI.framework/Headers/EventKitUI.h;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1125, 549}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 221}";
-		};
 	};
 	63C6E04313E6816C00966B01 /* EKEventViewController.h */ = {
 		isa = PBXFileReference;
@@ -502,11 +494,6 @@
 		name = EKEventViewController.h;
 		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/EventKitUI.framework/Headers/EKEventViewController.h;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1745.91, 2436}}";
-			sepNavSelRange = "{456, 0}";
-			sepNavVisRange = "{3492, 1095}";
-		};
 	};
 	63C6E04513E6816C00966B01 /* EKEventEditViewController.h */ = {
 		isa = PBXFileReference;
@@ -514,11 +501,6 @@
 		name = EKEventEditViewController.h;
 		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/EventKitUI.framework/Headers/EKEventEditViewController.h;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1529.17, 2247}}";
-			sepNavSelRange = "{3277, 0}";
-			sepNavVisRange = "{2672, 1381}";
-		};
 	};
 	63C6E04613E6816C00966B01 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -556,23 +538,6 @@
 		name = EKEvent.h;
 		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/EventKit.framework/Headers/EKEvent.h;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1171.55, 5124}}";
-			sepNavSelRange = "{5024, 165}";
-			sepNavVisRange = "{4713, 839}";
-		};
-	};
-	63C6E13213E69D8500966B01 /* EKEventStore.h */ = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.c.h;
-		name = EKEventStore.h;
-		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/EventKit.framework/Headers/EKEventStore.h;
-		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1442.47, 3927}}";
-			sepNavSelRange = "{1880, 0}";
-			sepNavVisRange = "{1649, 811}";
-		};
 	};
 	63C6E13313E69D8500966B01 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -586,6 +551,7 @@
 	};
 	63C6E13413E69D8500966B01 /* EventKit.h */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = EventKit.h;
 		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/EventKit.framework/Headers/EventKit.h;
 		sourceTree = "<absolute>";
@@ -602,20 +568,17 @@
 	};
 	63C6E13613E69D8500966B01 /* EKRecurrenceRule.h */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = EKRecurrenceRule.h;
 		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/EventKit.framework/Headers/EKRecurrenceRule.h;
 		sourceTree = "<absolute>";
 	};
 	63C6E13813E69D8500966B01 /* EKParticipant.h */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = EKParticipant.h;
 		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/EventKit.framework/Headers/EKParticipant.h;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1125, 2499}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{947, 738}";
-		};
 	};
 	63C6E14713E69E4100966B01 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -629,6 +592,7 @@
 	};
 	63C6E14813E69E4100966B01 /* EKCalendar.h */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = EKCalendar.h;
 		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/EventKit.framework/Headers/EKCalendar.h;
 		sourceTree = "<absolute>";
@@ -645,6 +609,7 @@
 	};
 	63C6E14A13E69E4100966B01 /* EKAlarm.h */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = EKAlarm.h;
 		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/EventKit.framework/Headers/EKAlarm.h;
 		sourceTree = "<absolute>";
@@ -661,6 +626,7 @@
 	};
 	63C6E14C13E69E4100966B01 /* EKError.h */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = EKError.h;
 		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/EventKit.framework/Headers/EKError.h;
 		sourceTree = "<absolute>";
@@ -697,6 +663,7 @@
 	};
 	63C6E15713E69EBF00966B01 /* NSError.h */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = NSError.h;
 		path = /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSError.h;
 		sourceTree = "<absolute>";
@@ -710,16 +677,6 @@
 		rType = 0;
 		vrLen = 1095;
 		vrLoc = 3492;
-	};
-	63C6E15913E69EBF00966B01 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 63C6E13213E69D8500966B01 /* EKEventStore.h */;
-		name = "EKEventStore.h: 79";
-		rLen = 0;
-		rLoc = 3123;
-		rType = 0;
-		vrLen = 1541;
-		vrLoc = 2224;
 	};
 	63C6E16113E6A56700966B01 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -749,16 +706,6 @@
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 	};
-	63C6E17813E6A5F000966B01 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 63A6630013D7F847006F1872 /* test1.m */;
-		name = "test1.m: 138";
-		rLen = 0;
-		rLoc = 3333;
-		rType = 0;
-		vrLen = 485;
-		vrLoc = 2972;
-	};
 	63C6E17913E6A5F000966B01 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 63C6E13813E69D8500966B01 /* EKParticipant.h */;
@@ -769,20 +716,80 @@
 		vrLen = 738;
 		vrLoc = 947;
 	};
-	63C6E17A13E6A5F000966B01 /* PBXTextBookmark */ = {
+	63C6E17B13E6A5F000966B01 /* EKEventStore.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = EKEventStore.h;
+		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/EventKit.framework/Headers/EKEventStore.h;
+		sourceTree = "<absolute>";
+	};
+	63C6E19413E6AB0A00966B01 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 63C6E17B13E6A5F000966B01 /* EKEventStore.h */;
 		name = "EKEventStore.h: 48";
 		rLen = 0;
 		rLoc = 1880;
 		rType = 0;
-		vrLen = 811;
-		vrLoc = 1649;
+		vrLen = 1723;
+		vrLoc = 7175;
 	};
-	63C6E17B13E6A5F000966B01 /* EKEventStore.h */ = {
+	63C6E19F13E6AB5800966B01 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 63C6E1A013E6AB5800966B01 /* AKSIPUserAgent.m */;
+		name = "AKSIPUserAgent.m: 1108";
+		rLen = 27;
+		rLoc = 35098;
+		rType = 0;
+		vrLen = 1068;
+		vrLoc = 34204;
+	};
+	63C6E1A013E6AB5800966B01 /* AKSIPUserAgent.m */ = {
 		isa = PBXFileReference;
-		name = EKEventStore.h;
-		path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/EventKit.framework/Headers/EKEventStore.h;
+		lastKnownFileType = sourcecode.c.objc;
+		name = AKSIPUserAgent.m;
+		path = "/Users/unidigital/Iphone学习/iOS-Sourcecode(II)/【应用】★★★★★-Siphon-SIP -VoIP for iPhone and iPod Touch/siphon/Siphon4/Classes/AKSip/AKSIPUserAgent.m";
 		sourceTree = "<absolute>";
+	};
+	63C6E1F013E6AE3D00966B01 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 63A6630013D7F847006F1872 /* test1.m */;
+		name = "test1.m: 121";
+		rLen = 25;
+		rLoc = 2985;
+		rType = 0;
+		vrLen = 744;
+		vrLoc = 2324;
+	};
+	63C6E1F313E6AE3D00966B01 /* UIApplication.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = UIApplication.h;
+		path = /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIApplication.h;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {2992.15, 6279}}";
+			sepNavSelRange = "{10369, 143}";
+			sepNavVisRange = "{10192, 1194}";
+		};
+	};
+	63DDBA1B13E6B348009F453C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 63C6E1F313E6AE3D00966B01 /* UIApplication.h */;
+		name = "UIApplication.h: 217";
+		rLen = 143;
+		rLoc = 10369;
+		rType = 0;
+		vrLen = 1194;
+		vrLoc = 10192;
+	};
+	63DDBA2713E6B374009F453C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 63A6630013D7F847006F1872 /* test1.m */;
+		name = "test1.m: 119";
+		rLen = 0;
+		rLoc = 2946;
+		rType = 0;
+		vrLen = 719;
+		vrLoc = 2326;
 	};
 }
