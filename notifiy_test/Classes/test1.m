@@ -107,9 +107,9 @@
 	
 	notification.alertBody = @"生日快乐";
 	
-	//[notification setSoundName:UILocalNotificationDefaultSoundName];
+	[notification setSoundName:@"sound.caf"];
 	
-	notification.soundName = [[NSBundle mainBundle] pathForResource:@"6" ofType:@"wav"];
+	//notification.soundName = [[NSBundle mainBundle] pathForResource:@"6" ofType:@"wav"];
 	
 	//notification.soundName = [[NSBundle mainBundle] pathForResource:@"Iphone_Alarm" ofType:@"mp3"];
 	

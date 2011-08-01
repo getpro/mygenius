@@ -18,6 +18,7 @@
 		63C6DFAD13E66B1700966B01 /* 6.wav in Resources */ = {isa = PBXBuildFile; fileRef = 63C6DFAC13E66B1700966B01 /* 6.wav */; };
 		63C6DFE713E673E400966B01 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C6DFE613E673E400966B01 /* EventKitUI.framework */; };
 		63C6E11813E69B8700966B01 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C6E11713E69B8700966B01 /* EventKit.framework */; };
+		63DDBA1613E6B329009F453C /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 63DDBA1513E6B329009F453C /* sound.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		63C6DFAC13E66B1700966B01 /* 6.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 6.wav; sourceTree = "<group>"; };
 		63C6DFE613E673E400966B01 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		63C6E11713E69B8700966B01 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		63DDBA1513E6B329009F453C /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.caf; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* notifiy_test-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "notifiy_test-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,6 +102,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				63DDBA1513E6B329009F453C /* sound.caf */,
 				63C6DFAC13E66B1700966B01 /* 6.wav */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* notifiy_test-Info.plist */,
@@ -172,6 +175,7 @@
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				63A6630813D7F883006F1872 /* test1.xib in Resources */,
 				63C6DFAD13E66B1700966B01 /* 6.wav in Resources */,
+				63DDBA1613E6B329009F453C /* sound.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
