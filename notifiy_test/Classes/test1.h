@@ -7,12 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <EventKit/EventKit.h>
+#import <EventKitUI/EventKitUI.h>
 
 @interface test1 : UIViewController 
 {
-
+	EKEventStore * eventStore;
+	EKCalendar   * defaultCalendar;
 }
+
+@property (nonatomic, retain) EKEventStore * eventStore;
+@property (nonatomic, retain) EKCalendar   * defaultCalendar;
 
 - (IBAction) test;
 
