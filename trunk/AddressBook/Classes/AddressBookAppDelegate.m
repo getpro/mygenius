@@ -48,8 +48,48 @@
 		
 		[self GetSysAddressBook];
 		
+		//系统通讯录的数据入库
+		[DBConnection beginTransaction];
+		
+		for (int i = 0; i < [self.m_arrContactsInfo count]; i++)
+		{
+			contactsInfo * pcontactsInfo = (contactsInfo*)[self.m_arrContactsInfo objectAtIndex:i];
+			
+			if (pcontactsInfo)
+			{
+				//新闻条目入库
+				[DataStore insertContactsInfo:pcontactsInfo];
+			}
+		}
+		
+		[DBConnection commitTransaction];
+		
+		//修改Copy_Addressbook = 1
+		[DataStore Set_Copy_Addressbook :1];
+		
+		[DataStore Set_First_Use];
 		
 	}
+	else 
+	{
+		//已经把系统通讯录的数据导入到了库里面
+		NSLog(@"Copy_Addressbook==1");
+		
+		[DataStore getContactsInfo:self.m_arrContactsInfo];
+		
+		/*
+		for (int i = 0; i < [self.m_arrContactsInfo count]; i++)
+		{
+			contactsInfo * pcontactsInfo = (contactsInfo*)[self.m_arrContactsInfo objectAtIndex:i];
+			
+			//新闻条目入库
+			pcontactsInfo.m_ncontactsSex ++;
+		}
+		*/
+		
+		
+	}
+
 	
 	
 	//
@@ -152,10 +192,16 @@
 	
 	CFArrayRef results = ABAddressBookCopyArrayOfAllPeople(addressBook);
 	
+	static int pCONTACTINFO_ID = CONTACTINFO_ID;
+	
 	for(int i = 0; i < CFArrayGetCount(results); i++)
 	{
 		
 		contactsInfo * pcontactsInfo = [[contactsInfo alloc] init];
+		
+		pcontactsInfo.m_strcontactsID = [NSString stringWithFormat:@"%d",pCONTACTINFO_ID];
+		
+		pCONTACTINFO_ID ++ ;
 		
 		ABRecordRef person = CFArrayGetValueAtIndex(results, i);
 		
