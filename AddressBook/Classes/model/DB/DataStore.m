@@ -9,6 +9,10 @@
 #import "DataStore.h"
 #import "DBConnection.h"
 
+
+#define CONFIG_ID @"1001"
+
+
 @implementation DataStore
 
 @end
