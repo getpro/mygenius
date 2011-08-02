@@ -11,8 +11,10 @@
 
 @interface AddressInfoVC : UIViewController 
 {
-
+	IBOutlet UIScrollView * m_pUIScrollView_IB;
 }
+
+@property (retain,nonatomic) IBOutlet UIScrollView * m_pUIScrollView_IB;
 
 -(void)myInit;
 

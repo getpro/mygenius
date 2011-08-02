@@ -161,6 +161,13 @@
 	self.aBPersonNav.navigationBar.tintColor = SETCOLOR(redcolor,greencolor,bluecolor);
 	[self presentModalViewController:aBPersonNav animated:YES];
 	*/
+	
+	rightOrLeft = YES;
+	teXiao      = YES;
+	
+	NSString * ss = [NSString stringWithFormat:@"%d" , 5];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
 }
 
 
