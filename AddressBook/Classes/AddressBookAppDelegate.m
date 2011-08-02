@@ -9,15 +9,16 @@
 #import <AddressBook/AddressBook.h>
 
 #import "AddressBookAppDelegate.h"
+
 #import "PublicData.h"
-#import "DBConnection.h"
-#import "DataStore.h"
+
 
 @implementation AddressBookAppDelegate
 
 @synthesize window;
 @synthesize back;
 @synthesize sceneID;
+@synthesize m_arrContactsInfo;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -30,15 +31,14 @@
 	
 	switchViewController = [[SwitchViewController alloc] init];
 	
-	sceneID = [NSMutableArray arrayWithCapacity :5];
+	sceneID				= [[NSMutableArray alloc] initWithCapacity:10];
+	m_arrContactsInfo   = [[NSMutableArray alloc] initWithCapacity:10];
 	
 	NSNumber * n = [NSNumber numberWithInt:0];
 	
 	[sceneID addObject:n];
 	[sceneID addObject:n];
 	[sceneID addObject:n];
-	
-	[sceneID		 retain];
 	
 	//
 	if([DataStore Get_Copy_Addressbook] == 0)
@@ -47,6 +47,7 @@
 		NSLog(@"Copy_Addressbook==0");
 		
 		[self GetSysAddressBook];
+		
 		
 	}
 	
@@ -118,6 +119,8 @@
     [window				  release];
 	[sceneID			  release];
 	
+	[m_arrContactsInfo    release];
+	
     [super dealloc];
 }
 
@@ -151,22 +154,30 @@
 	
 	for(int i = 0; i < CFArrayGetCount(results); i++)
 	{
+		
+		contactsInfo * pcontactsInfo = [[contactsInfo alloc] init];
+		
 		ABRecordRef person = CFArrayGetValueAtIndex(results, i);
+		
+		NSMutableString * pMutableNameString = [NSMutableString stringWithCapacity:10];
 		
 		//读取firstname
 		NSString *personName = (NSString*)ABRecordCopyValue(person, kABPersonFirstNameProperty);
 		if(personName != nil)
 		{
 			//textView.text = [textView.text stringByAppendingFormat:@"\n姓名：%@\n",personName];
+			[pMutableNameString appendString:personName];
 		}
 		
 		//读取lastname
 		NSString *lastname = (NSString*)ABRecordCopyValue(person, kABPersonLastNameProperty);
 		if(lastname != nil)
 		{
-			
 			//textView.text = [textView.text stringByAppendingFormat:@"%@\n",lastname];
+			[pMutableNameString appendString:lastname];
 		}
+		
+		pcontactsInfo.m_strcontactsName = pMutableNameString;
 		
 		/*
 		 //读取middlename
@@ -205,6 +216,7 @@
 		if(organization != nil)
 		{
 			//textView.text = [textView.text stringByAppendingFormat:@"%@\n",organization];
+			pcontactsInfo.m_strcontactsOrganization = organization;
 		}
 		
 		/*
@@ -236,6 +248,8 @@
 		 NSLog(@"最后一次修改該条记录的时间%@\n",lastknow);
 		 */
 		
+		
+		
 		//获取email多值
 		ABMultiValueRef email = ABRecordCopyValue(person, kABPersonEmailProperty);
 		int emailcount = ABMultiValueGetCount(email);    
@@ -246,6 +260,16 @@
 			//获取email值
 			NSString* emailContent = (NSString*)ABMultiValueCopyValueAtIndex(email, x);
 			//textView.text = [textView.text stringByAppendingFormat:@"%@:%@\n",emailLabel,emailContent];
+			
+			//住宅和工作
+			if([emailLabel isEqual:@"住宅"])
+			{
+				pcontactsInfo.m_strcontactsHomeEmail = emailContent;
+			}
+			else if([emailLabel isEqual:@"工作"])
+			{
+				pcontactsInfo.m_strcontactsWorkEmail = emailContent;
+			}
 		}
 		
 		
@@ -258,46 +282,75 @@
 			//获取地址Label
 			NSString* addressLabel = (NSString*)ABMultiValueCopyLabelAtIndex(address, j);
 			
+			//_$!<Work>!$_
+			//_$!<Home>!$_
+			
 			//textView.text = [textView.text stringByAppendingFormat:@"%@\n",addressLabel];
 			
 			//获取該label下的地址6属性
-			NSDictionary* personaddress =(NSDictionary*) ABMultiValueCopyValueAtIndex(address, j);        
+			NSDictionary* personaddress =(NSDictionary*) ABMultiValueCopyValueAtIndex(address, j);
 			
-			NSString* country = [personaddress valueForKey:(NSString *)kABPersonAddressCountryKey];
-			if(country != nil)
+			NSMutableString * pMutableaddressString = [NSMutableString stringWithCapacity:24];
+			
 			{
-				//textView.text = [textView.text stringByAppendingFormat:@"国家：%@\n",country];
+				
+				
+				/*
+				 NSString* country = [personaddress valueForKey:(NSString *)kABPersonAddressCountryKey];
+				 if(country != nil)
+				 {
+				 //textView.text = [textView.text stringByAppendingFormat:@"国家：%@\n",country];
+				 }
+				 */
+				
+				NSString* city = [personaddress valueForKey:(NSString *)kABPersonAddressCityKey];
+				if(city != nil)
+				{
+					//textView.text = [textView.text stringByAppendingFormat:@"城市：%@\n",city];
+					[pMutableaddressString appendString:city];
+				}
+				
+				NSString* state = [personaddress valueForKey:(NSString *)kABPersonAddressStateKey];
+				if(state != nil)
+				{
+					//textView.text = [textView.text stringByAppendingFormat:@"省：%@\n",state];
+					[pMutableaddressString appendString:state];
+				}
+				
+				NSString* street = [personaddress valueForKey:(NSString *)kABPersonAddressStreetKey];
+				if(street != nil)
+				{
+					//textView.text = [textView.text stringByAppendingFormat:@"街道：%@\n",street];
+					[pMutableaddressString appendString:street];
+				}
+				
+				
+				
+				/*
+				 NSString* zip = [personaddress valueForKey:(NSString *)kABPersonAddressZIPKey];
+				 if(zip != nil)
+				 {
+				 //textView.text = [textView.text stringByAppendingFormat:@"邮编：%@\n",zip];
+				 }
+				 
+				 NSString* coutntrycode = [personaddress valueForKey:(NSString *)kABPersonAddressCountryCodeKey];
+				 if(coutntrycode != nil)
+				 {
+				 //textView.text = [textView.text stringByAppendingFormat:@"国家编号：%@\n",coutntrycode];    
+				 }
+				 */
 			}
 			
-			NSString* city = [personaddress valueForKey:(NSString *)kABPersonAddressCityKey];
-			if(city != nil)
+			if([addressLabel isEqual:@"_$!<Work>!$_"])
 			{
-				//textView.text = [textView.text stringByAppendingFormat:@"城市：%@\n",city];
+				pcontactsInfo.m_strcontactsWorkAddress = pMutableaddressString;
+			}
+			else if([addressLabel isEqual:@"_$!<Home>!$_"])
+			{
+				pcontactsInfo.m_strcontactsHomeAddress = pMutableaddressString;
 			}
 			
-			NSString* state = [personaddress valueForKey:(NSString *)kABPersonAddressStateKey];
-			if(state != nil)
-			{
-				//textView.text = [textView.text stringByAppendingFormat:@"省：%@\n",state];
-			}
 			
-			NSString* street = [personaddress valueForKey:(NSString *)kABPersonAddressStreetKey];
-			if(street != nil)
-			{
-				//textView.text = [textView.text stringByAppendingFormat:@"街道：%@\n",street];
-			}
-			
-			NSString* zip = [personaddress valueForKey:(NSString *)kABPersonAddressZIPKey];
-			if(zip != nil)
-			{
-				//textView.text = [textView.text stringByAppendingFormat:@"邮编：%@\n",zip];
-			}
-			
-			NSString* coutntrycode = [personaddress valueForKey:(NSString *)kABPersonAddressCountryCodeKey];
-			if(coutntrycode != nil)
-			{
-				//textView.text = [textView.text stringByAppendingFormat:@"国家编号：%@\n",coutntrycode];    
-			}
 		}
 		
 		/*
@@ -353,6 +406,18 @@
 			NSString * personPhone = (NSString*)ABMultiValueCopyValueAtIndex(phone, k);
 			
 			//textView.text = [textView.text stringByAppendingFormat:@"%@:%@\n",personPhoneLabel,personPhone];
+			
+			//iPhone和移动电话
+			
+			if([personPhoneLabel isEqual:@"iPhone"])
+			{
+				pcontactsInfo.m_strcontactsIphone = personPhone;
+			}
+			else if([personPhoneLabel isEqual:@"移动电话"])
+			{
+				pcontactsInfo.m_strcontactsMobilePhone = personPhone;
+			}
+			
 		}
 		
 		/*
@@ -380,8 +445,9 @@
 			//[textView addSubview:myImage];
 		}
 		
+		[self.m_arrContactsInfo addObject:pcontactsInfo];
 		
-		
+		[pcontactsInfo release];
 	}
 	
 	CFRelease(results);

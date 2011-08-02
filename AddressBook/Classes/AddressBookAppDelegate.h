@@ -18,15 +18,15 @@
 	//返回
 	NSMutableArray * sceneID;
 	BOOL back;
+	
+	NSMutableArray * m_arrContactsInfo;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) NSMutableArray * sceneID;
+@property (nonatomic, retain) NSMutableArray * m_arrContactsInfo;
 
 @property BOOL back;
-
-@property (nonatomic, retain) NSMutableArray * sceneID;
-
-
 
 
 + (AddressBookAppDelegate * ) getAppDelegate;
