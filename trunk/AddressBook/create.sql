@@ -26,6 +26,7 @@ CREATE TABLE relation (
 );
 
 CREATE TABLE config (
+    'config_id'                 TEXT PRIMARY KEY,
     'config_copy_addressbook'   INTEGER,
     'config_first_use'          DATETIME	 
 );
