@@ -33,5 +33,7 @@
 
 - (void) backScene;
 
+- (void) GetSysAddressBook;
+
 @end
 
