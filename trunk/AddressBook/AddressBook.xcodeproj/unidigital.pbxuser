@@ -9,9 +9,9 @@
 	};
 	1D3623250D0F684500981E51 /* AddressBookAppDelegate.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {3035.5, 10836}}";
-			sepNavSelRange = "{1902, 0}";
-			sepNavVisRange = "{1474, 498}";
+			sepNavIntBoundsRect = "{{0, 0}, {3035.5, 10689}}";
+			sepNavSelRange = "{1910, 0}";
+			sepNavVisRange = "{1836, 795}";
 		};
 	};
 	1D6058900D05DD3D006BFB54 /* AddressBook */ = {
@@ -78,16 +78,16 @@
 	};
 	21E7131913E3F52900BF47E6 /* AddressBookVC.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1196, 617}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1211, 632}}";
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRange = "{0, 704}";
 		};
 	};
 	21E7131A13E3F52900BF47E6 /* AddressBookVC.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1453.31, 6972}}";
-			sepNavSelRange = "{2030, 0}";
-			sepNavVisRange = "{1901, 612}";
+			sepNavIntBoundsRect = "{{0, 0}, {1615.86, 6909}}";
+			sepNavSelRange = "{5871, 0}";
+			sepNavVisRange = "{7090, 771}";
 		};
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
@@ -225,6 +225,7 @@
 			630B903413E7DF9900777BD6 /* PBXTextBookmark */ = 630B903413E7DF9900777BD6 /* PBXTextBookmark */;
 			630B903513E7DF9900777BD6 /* PBXTextBookmark */ = 630B903513E7DF9900777BD6 /* PBXTextBookmark */;
 			630B903A13E7DFCA00777BD6 /* PBXTextBookmark */ = 630B903A13E7DFCA00777BD6 /* PBXTextBookmark */;
+			630B903C13E7E00D00777BD6 /* PBXTextBookmark */ = 630B903C13E7E00D00777BD6 /* PBXTextBookmark */;
 			63458ADE13E79C3500338243 = 63458ADE13E79C3500338243 /* PBXTextBookmark */;
 			63458ADF13E79C3500338243 = 63458ADF13E79C3500338243 /* PBXTextBookmark */;
 			63458AE013E79C3500338243 = 63458AE013E79C3500338243 /* PBXTextBookmark */;
@@ -1146,6 +1147,16 @@
 		name = "AddressBookAppDelegate.m: 90";
 		rLen = 0;
 		rLoc = 1902;
+		rType = 0;
+		vrLen = 498;
+		vrLoc = 1474;
+	};
+	630B903C13E7E00D00777BD6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* AddressBookAppDelegate.m */;
+		name = "AddressBookAppDelegate.m: 79";
+		rLen = 0;
+		rLoc = 1676;
 		rType = 0;
 		vrLen = 498;
 		vrLoc = 1474;
