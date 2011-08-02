@@ -16,6 +16,10 @@
 #define SCREEN_W 320.0f
 #define SCREEN_H 480.0f
 
+
+#define ROW_OFFSET_Y 15
+
+
 //界面切换方向
 
 BOOL rightOrLeft;

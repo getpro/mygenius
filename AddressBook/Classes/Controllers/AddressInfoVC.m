@@ -7,16 +7,34 @@
 //
 
 #import "AddressInfoVC.h"
-
+#import "PublicData.h"
 
 @implementation AddressInfoVC
 
-
+@synthesize m_pUIScrollView_IB;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
+	
+	[m_pUIScrollView_IB setContentSize:CGSizeMake(SCREEN_W, 0)];
+	
+	CGRect frame    = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
+	frame.origin.y += ROW_OFFSET_Y;
+	
+	//头像
+	UIImageView * contentHeadView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 64, 64)];
+	[contentHeadView setImage:[UIImage imageNamed:@"head.png"]];
+	[contentHeadView setUserInteractionEnabled:YES];
+	[m_pUIScrollView_IB addSubview:contentHeadView];
+	[contentHeadView release];
+	
+	
+	
+	
+	frame.origin.y += 64;
+	frame.origin.y += ROW_OFFSET_Y;
 	
 	
 }
@@ -49,7 +67,10 @@
 }
 
 
-- (void)dealloc {
+- (void)dealloc 
+{
+	[m_pUIScrollView_IB release];
+	
     [super dealloc];
 }
 
