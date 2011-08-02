@@ -9,15 +9,18 @@ CREATE TABLE images (
 CREATE TABLE contacts_info(
 'contacts_id'TEXT PRIMARY KEY,
 'contacts_name'TEXT,
+'contacts_organization'TEXT,
 'contacts_sex'INTEGER,
-'contacts_relation_id'TEXT,
-'contacts_relation_name'TEXT,
-'contacts_phone'TEXT,
-'contacts_work_address'TEXT,
+'contacts_homeemail'TEXT,
+'contacts_workemail'TEXT,
 'contacts_home_address'TEXT,
-'contacts_email'TEXT,
+'contacts_work_address'TEXT,
+'contacts_mobilephone'TEXT,
+'contacts_iphone'TEXT,
 'contacts_recommend_id'TEXT,
-'contacts_recommend_name'TEXT
+'contacts_recommend_name'TEXT,
+'contacts_relation_id'TEXT,
+'contacts_relation_name'TEXT
 );
 
 CREATE TABLE relation (
@@ -30,3 +33,6 @@ CREATE TABLE config (
     'config_copy_addressbook'   INTEGER,
     'config_first_use'          DATETIME	 
 );
+
+
+REPLACE INTO config VALUES(1001, 0, DATETIME('now'))
