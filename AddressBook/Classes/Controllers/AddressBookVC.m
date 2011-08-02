@@ -7,6 +7,7 @@
 //
 
 #import "AddressBookVC.h"
+#import "AddressBookAppDelegate.h"
 
 @implementation AddressBookVC
 
@@ -23,7 +24,7 @@
 	m_pUITabBar_IB.selectedItem = m_pUITabBarItem1_IB;
 	
 	// Create a search bar
-	self.m_pSearchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 44.0f)] autorelease];
+	self.m_pSearchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(100.0f, 0.0f, 220.0f, 44.0f)] autorelease];
 	self.m_pSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
 	self.m_pSearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	self.m_pSearchBar.keyboardType = UIKeyboardTypeDefault;
@@ -84,7 +85,7 @@
 {
 	[self.m_pSearchBar setText:@""]; 
 	self.m_pSearchBar.prompt = nil;
-	[self.m_pSearchBar setFrame:CGRectMake(0.0f, 0.0f, 320.0f, 44.0f)];
+	[self.m_pSearchBar setFrame:CGRectMake(100.0f, 0.0f, 220.0f, 44.0f)];
 	self.m_pTableView_IB.tableHeaderView = self.m_pSearchBar;	
 }
 
@@ -96,16 +97,29 @@
 	
 	if (!cell) 
 		cell = [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:@"ContactCell"] autorelease];
-	/*
-	NSString * contactName;
 	
+	NSString * contactName = nil;
+	
+	
+	contactsInfo * pcontactsInfo = (contactsInfo*)[[AddressBookAppDelegate getAppDelegate].m_arrContactsInfo objectAtIndex:indexPath.row];
+	if(pcontactsInfo)
+	{
+		contactName = pcontactsInfo.m_strcontactsName;
+	}
 	// Retrieve the crayon and its color
+	/*
 	if (aTableView == self.DataTable)
 		contactName = [[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	else
 		contactName = [self.filteredArray objectAtIndex:indexPath.row];
-	cell.textLabel.text = [NSString stringWithCString:[contactName UTF8String] encoding:NSUTF8StringEncoding];
+	*/
 	
+	if(contactName)
+	{
+		cell.textLabel.text = [NSString stringWithCString:[contactName UTF8String] encoding:NSUTF8StringEncoding];
+	}
+	
+	/*
 	ABContact *contact = [ContactData byNameToGetContact:contactName];
 	if(contact)
 	{
@@ -120,6 +134,7 @@
 	else
 		cell.detailTextLabel.text = @"";
 	*/
+	
 	return cell;
 }
 
@@ -306,7 +321,8 @@
 	}
 	return self.filteredArray.count;
 	*/
-	return 0 ;
+	
+	return [[AddressBookAppDelegate getAppDelegate].m_arrContactsInfo count];
 }
 
 
