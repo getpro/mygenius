@@ -1,0 +1,188 @@
+#include "PhotonDemo.h"
+#import  "Utils+Internal.h"
+
+@implementation CPhotonLib
+
+- (void) InitCPhotonLib
+{
+	m_currentState = SampleStarted;
+	m_pLitePeer    = NULL;
+}
+
+- (void) dealloc
+{
+	if (m_pLitePeer)
+		[m_pLitePeer release];
+	[super dealloc];
+}
+
+- (int) InitLib:(id<PhotonListener>)listener
+{
+	NSLog(@"Initialize EG library");
+	m_pLitePeer = [[LitePeer alloc] init:listener];
+	m_currentState = PhotonPeerCreated;
+	return SUCCESS;
+}
+
+- (int) CreateConnection
+{
+	//char* server = "udp.exitgames.com:5055";
+	
+	[m_pLitePeer Connect:[NSString stringWithUTF32String:URL_PHOTON_SERVER]];
+	//BOOL pRet = [m_pLitePeer Connect:[NSString stringWithUTF8String:server]];
+	
+	m_currentState = Connecting;
+	return 0;
+}
+
+- (int) CloseConnection
+{
+	[m_pLitePeer Disconnect];
+	m_currentState = Disconnecting;
+	return 0;
+}
+
+- (short) Join:(NSString*)gameId
+{
+	return [m_pLitePeer opJoin:gameId];
+}
+
+- (short) Leave:(NSString*)gameId
+{
+	return [m_pLitePeer opLeave:gameId];
+}
+
+- (int) Run
+{
+	char gameId[] = "demo_photon_game";
+
+	[m_pLitePeer service];
+	switch (m_currentState)
+	{
+		case PhotonPeerCreated:
+			NSLog(@"-------CONNECTING-------");
+			[self CreateConnection];
+			break;
+		case Connecting:
+			// Waiting for callback function
+			break;
+		case ErrorConnecting:
+			// Stop run cycle
+			NSLog(@"ErrorConnecting");
+			return -1;
+			break;
+		case Connected:
+			NSLog(@"-------JOINING-------");
+			m_currentState = Joining;
+			if ([self Join:[NSString stringWithUTF8String:gameId]] == -1)
+				m_currentState = ErrorJoining;
+			break;
+		case Joining :
+			// Waiting for callback function
+			break;
+		case ErrorJoining:
+			// Stop run cycle
+			return -1;
+			NSLog(@"ErrorJoining");
+			break;
+		case Joined :
+			m_currentState = Receiving;
+			NSLog(@"-------SENDING/RECEIVING DATA-------");
+			break;
+		case Receiving:
+			[self sendData];
+			break;
+		case Leaving:
+			// Waiting for callback function
+			break;
+		case ErrorLeaving:
+			// Stop run cycle
+			return -1;
+			NSLog(@"ErrorLeaving");
+			break;
+		case Left :
+			m_currentState = Disconnecting;
+			NSLog(@"-------DISCONNECTING-------");
+			[self CloseConnection];
+			break;
+		case Disconnecting:
+			// Waiting for callback function
+			break;
+		case Disconnected:
+			// Stop run cycle
+			return -1;
+			break;
+		default:
+			break;
+	}
+	return 0;
+}
+
+- (void) SetState:(States) new_state
+{
+	m_currentState = new_state;
+}
+
+- (void) sendData
+{
+	NSMutableDictionary* ev = [[NSMutableDictionary alloc] init];
+
+	// nByte key and int value:
+	nByte POS_X = 101;
+	int x = 10;
+	[ev setObject:[NSValue valueWithBytes:&x objCType:@encode(int)] forKey:[KeyObject withByteValue:POS_X]];
+
+	// NSString key and EGArray of float value:
+	NSValue* valArray[10];
+	float j=0.0f;
+	for(int i=0; i<10; i++, j+=1.1f)
+		valArray[i] = [NSValue valueWithBytes:&j objCType:@encode(float)];
+	[ev setObject:[EGArray arrayWithObjects:valArray count:10] forKey:[KeyObject withStringValue:@"testKey"]];
+
+	// nByte key and NSDictionary value:
+	const nByte POS_Y = 102;
+	const nByte key2 = 103;
+	int y = 20;
+	NSDictionary* testHash = [NSDictionary dictionaryWithObjectsAndKeys:[NSValue valueWithBytes:&x objCType:@encode(int)], [KeyObject withByteValue:POS_X],
+																		[NSValue valueWithBytes:&y objCType:@encode(int)], [KeyObject withByteValue:POS_Y],
+																		nil];
+	[ev setObject:testHash forKey:[KeyObject withByteValue:key2]];
+
+	// NSString key and empty EGArray of int value:
+	[ev setObject:[EGArray arrayWithCType:@encode(int)] forKey:[KeyObject withStringValue:@"emptyArray"]];
+
+	// NSString key and multidimensional EGArray of NSDictionary*
+    EGMutableArray* array = [EGMutableArray arrayWithType:NSStringFromClass([EGArray class])];
+    for(int i=0; i<3; i++)
+    {
+		[array addObject:[EGMutableArray arrayWithType:NSStringFromClass([EGArray class])]];
+		for(int j=0; j<3; j++)
+		{
+			[[array objectAtIndex:i] addObject:[EGMutableArray arrayWithType:NSStringFromClass([NSDictionary class])]];
+			for(int k=0; k<3; k++)
+				[[[array objectAtIndex:i] objectAtIndex:j] addObject:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d", 100*i+10*j+k] forKey:[KeyObject withIntValue:100*i+10*j+k]]];
+		}
+    }
+	[ev setObject:array forKey:[KeyObject withStringValue:@"array3d"]];
+	
+	//NSLog(@"%@",ev);
+
+	[m_pLitePeer opRaiseEvent :false :ev :101];
+	[ev release];
+}
+
+- (States) GetState
+{
+	return m_currentState;
+}
+
+- (void) Stop
+{
+	char gameId[] = "demo_photon_game";
+	m_currentState = Leaving;
+	NSLog(@"-------LEAVING-------");
+	if([self Leave:[NSString stringWithUTF8String:gameId]] == -1)
+		m_currentState = ErrorLeaving;
+}
+
+@end
