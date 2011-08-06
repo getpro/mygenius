@@ -91,6 +91,7 @@
 			break;
 		case Receiving:
 			[self sendData];
+			m_currentState = Sended;
 			break;
 		case Leaving:
 			// Waiting for callback function
