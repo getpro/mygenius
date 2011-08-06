@@ -14,6 +14,7 @@ typedef enum
 	Left,
 	ErrorConnecting,
 	Receiving,
+	Sended,
 	Disconnecting,
 	Disconnected,
 } States;
