@@ -13,6 +13,11 @@
 @synthesize window;
 
 
+- (void) onTime:(NSTimer*)Timer
+{
+	[m_PhotonLib Run];
+}
+
 #pragma mark -
 #pragma mark Application lifecycle
 
@@ -20,7 +25,17 @@
     
     // Override point for customization after application launch.
 	
+	m_PhotonLib = [CPhotonLib alloc];
+	[m_PhotonLib InitCPhotonLib];
+	l = [Listener alloc];
+	[l InitListener:m_PhotonLib];
+	[m_PhotonLib InitLib:l];
+	
+	m_timer = [[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(onTime:) userInfo:nil repeats:YES]retain];
+	
     [window makeKeyAndVisible];
+	
+	bRun = true;
 	
 	return YES;
 }
@@ -74,8 +89,14 @@
 }
 
 
-- (void)dealloc {
+- (void)dealloc 
+{
+	[m_PhotonLib release];
+	[l			 release];
+	[m_timer     release];
+	
     [window release];
+	
     [super dealloc];
 }
 

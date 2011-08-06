@@ -14,6 +14,7 @@
 @interface chatRoomAppDelegate : NSObject <UIApplicationDelegate> 
 {
     UIWindow   * window;
+	
 	CPhotonLib * m_PhotonLib;
 	Listener   * l;
 	NSTimer    * m_timer;

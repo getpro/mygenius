@@ -76,6 +76,7 @@
 		// you do not receive your own events, so you must start 2 clients, to receive the events, you sent
 		case 101:
 		{
+			/*
 			NSDictionary* eventData = nil;
 			static int i = 0;
 			const nByte POS_X = 101, POS_Y = 102, key2 = 103;
@@ -125,6 +126,28 @@
 			}
 
 			//[textView writeToTextView:str];
+			 
+			*/
+			
+			
+			NSDictionary* eventData = nil;
+			//static int i = 0;
+			const nByte POS_X = 101, POS_Y = 102, key2 = 103;
+			//EGArray* ary = nil, *ary2 = nil, *ary3 = nil;
+			int x = 0, y = 0;
+			//NSDictionary* testHash = nil;
+			
+			// first access the inner Hash with your userdata inside the outer hash with general event data
+			if(!(eventData=[photonEvent objectForKey:[KeyObject withByteValue:P_DATA]]))
+				break;
+			
+			// then take your user data from within the inner hash
+			
+			// nByte key and int value:
+			[(NSValue*)[eventData objectForKey:[KeyObject withByteValue:POS_X]] getValue:&x];
+			
+			NSLog(@"get_int[%d]",x);
+			
 		}
 			break;
 		default:
