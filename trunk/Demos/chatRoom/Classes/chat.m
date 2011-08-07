@@ -121,12 +121,12 @@ static const float ROWHEIGHT = 60;
 	if(!(eventData=[photonEvent objectForKey:[KeyObject withByteValue:P_DATA]]))
 		return;
 	
-	//NSLog(@"get_string[%@]",[eventData objectForKey:[KeyObject withStringValue:@"NSString"]]);
+	NSLog(@"MyListener_get_string[%@]",[eventData objectForKey:[KeyObject withStringValue:@"NSString"]]);
 	
 	ChatContent * pChatContent = [[ChatContent alloc]init];
 	
 	pChatContent.direction = 0;
-	pChatContent.labelText = [eventData objectForKey:[KeyObject withStringValue:@"NSString"]];;
+	pChatContent.labelText = [eventData objectForKey:[KeyObject withStringValue:@"NSString"]];
 	
 	[m_pAdArr addObject:pChatContent];
 	

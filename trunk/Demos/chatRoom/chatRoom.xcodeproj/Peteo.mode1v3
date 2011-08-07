@@ -252,7 +252,7 @@
 						<dict>
 							<key>PBXSmartGroupTreeModuleColumnWidthsKey</key>
 							<array>
-								<real>225</real>
+								<real>200</real>
 							</array>
 							<key>PBXSmartGroupTreeModuleColumnsKey_v4</key>
 							<array>
@@ -281,7 +281,7 @@
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {225, 612}}</string>
+							<string>{{0, 0}, {200, 612}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -293,11 +293,11 @@
 					<key>GeometryConfiguration</key>
 					<dict>
 						<key>Frame</key>
-						<string>{{0, 0}, {242, 630}}</string>
+						<string>{{0, 0}, {217, 630}}</string>
 						<key>GroupTreeTableConfiguration</key>
 						<array>
 							<string>MainColumn</string>
-							<real>225</real>
+							<real>200</real>
 						</array>
 						<key>RubberWindowFrame</key>
 						<string>0 107 1280 671 0 0 1280 778 </string>
@@ -305,7 +305,7 @@
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
 					<key>Proportion</key>
-					<string>242pt</string>
+					<string>217pt</string>
 				</dict>
 				<dict>
 					<key>Dock</key>
@@ -330,7 +330,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>2110B0E913EE9B760002644B</string>
+										<string>2110B11F13EEA0F40002644B</string>
 										<key>history</key>
 										<array>
 											<string>2171B03F13ED66320021F16A</string>
@@ -348,12 +348,12 @@
 											<string>2110B0D413EE9AD50002644B</string>
 											<string>2110B0D513EE9AD50002644B</string>
 											<string>2110B0D613EE9AD50002644B</string>
-											<string>2110B0D813EE9AD50002644B</string>
-											<string>2110B0E413EE9B760002644B</string>
 											<string>2110B0E513EE9B760002644B</string>
-											<string>2110B0E613EE9B760002644B</string>
 											<string>2110B0E713EE9B760002644B</string>
-											<string>2110B0E813EE9B760002644B</string>
+											<string>2110B10213EE9FD50002644B</string>
+											<string>2110B11C13EEA0F40002644B</string>
+											<string>2110B11D13EEA0F40002644B</string>
+											<string>2110B11E13EEA0F40002644B</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -365,7 +365,7 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1033, 557}}</string>
+								<string>{{0, 0}, {1058, 557}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 107 1280 671 0 0 1280 778 </string>
 							</dict>
@@ -385,7 +385,7 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 562}, {1033, 68}}</string>
+								<string>{{0, 562}, {1058, 68}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 107 1280 671 0 0 1280 778 </string>
 							</dict>
@@ -396,7 +396,7 @@
 						</dict>
 					</array>
 					<key>Proportion</key>
-					<string>1033pt</string>
+					<string>1058pt</string>
 				</dict>
 			</array>
 			<key>Name</key>
@@ -553,9 +553,9 @@
 	<array>
 		<string>2110B0EA13EE9B760002644B</string>
 		<string>2110B0DF13EE9AD50002644B</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>21ABD6C213EBE82600BF9137</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/Peteo/projects/trunk/Demos/chatRoom/chatRoom.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -930,7 +930,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
