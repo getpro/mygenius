@@ -172,7 +172,7 @@
 	*/
 	
 	//int
-	
+	/*
 	nByte POS_X = 101;
 	
 	int       x = 10;
@@ -180,6 +180,17 @@
 	[ev setObject:[NSValue valueWithBytes:&x objCType:@encode(int)] forKey:[KeyObject withByteValue:POS_X]];
 	
 	NSLog(@"send_int[%d]",x);
+	*/
+	
+	//float
+	
+	float x = 0.001f;
+	
+	[ev setObject:[NSValue valueWithBytes:&x objCType:@encode(float)] forKey:[KeyObject withStringValue:@"float"]];
+	
+	NSLog(@"send_float[%f]",x);
+	
+	//
 	
 	[m_pLitePeer opRaiseEvent :false :ev :101];
 	
