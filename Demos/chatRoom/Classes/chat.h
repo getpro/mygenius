@@ -23,11 +23,15 @@
 
 @interface chat : UIViewController < MyListener,UITextFieldDelegate>
 {
-	IBOutlet UITableView * advTable;
+	//IBOutlet UITableView * advTable;
 	
-	NSMutableArray * m_pAdArr;
+	IBOutlet UIScrollView * m_pScrollView;
+	
+	//NSMutableArray * m_pAdArr;
+	
+	NSInteger     m_nScrollHeight;
 }
 
-@property(retain,nonatomic) IBOutlet UITableView * advTable;
+//@property(retain,nonatomic) IBOutlet UITableView * advTable;
 
 @end
