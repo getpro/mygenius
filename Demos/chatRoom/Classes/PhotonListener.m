@@ -148,9 +148,15 @@
 			
 			
 			//float value
-			float x = 0.0f;
-			[(NSValue*)[eventData objectForKey:[KeyObject withStringValue:@"float"]] getValue:&x];
-			NSLog(@"get_float[%d]",x);
+			//float x = 0.0f;
+			//[(NSValue*)[eventData objectForKey:[KeyObject withStringValue:@"float"]] getValue:&x];
+			//NSLog(@"get_float[%f]",x);
+			
+			//string
+			NSLog(@"get_string[%@]",[eventData objectForKey:[KeyObject withStringValue:@"NSString"]]);
+			
+			
+			
 			
 		}
 			break;

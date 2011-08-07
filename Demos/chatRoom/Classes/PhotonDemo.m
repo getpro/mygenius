@@ -174,23 +174,21 @@
 	//int
 	/*
 	nByte POS_X = 101;
-	
 	int       x = 10;
-	
 	[ev setObject:[NSValue valueWithBytes:&x objCType:@encode(int)] forKey:[KeyObject withByteValue:POS_X]];
-	
 	NSLog(@"send_int[%d]",x);
 	*/
 	
-	//float
+	//float	
+	//float x = 0.001f;
+	//[ev setObject:[NSValue valueWithBytes:&x objCType:@encode(float)] forKey:[KeyObject withStringValue:@"float"]];
+	//NSLog(@"send_float[%f]",x);
 	
-	float x = 0.001f;
+	//string
+	NSString * x = @"测试9C";
+	[ev setObject:x forKey:[KeyObject withStringValue:@"NSString"]];
+	NSLog(@"send_string[%@]",x);
 	
-	[ev setObject:[NSValue valueWithBytes:&x objCType:@encode(float)] forKey:[KeyObject withStringValue:@"float"]];
-	
-	NSLog(@"send_float[%f]",x);
-	
-	//
 	
 	[m_pLitePeer opRaiseEvent :false :ev :101];
 	
