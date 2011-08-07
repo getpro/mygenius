@@ -22,8 +22,12 @@ typedef enum
 @interface CPhotonLib : NSObject
 {
 	States m_currentState;
-	LitePeer* m_pLitePeer;
+	LitePeer * m_pLitePeer;
+	
+	NSString * m_strRoomID;
 }
+
+@property (nonatomic,retain) NSString * m_strRoomID;
 
 - (void) InitCPhotonLib;
 - (int) InitLib:(id<PhotonListener>) listener;

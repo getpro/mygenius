@@ -11,6 +11,11 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		2110AE7213EE70250002644B /* chooiceRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2110AE7113EE70250002644B /* chooiceRoom.m */; };
+		2110AE7613EE70460002644B /* chooiceRoom.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2110AE7513EE70460002644B /* chooiceRoom.xib */; };
+		2110AF0C13EE78090002644B /* chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 2110AF0B13EE78090002644B /* chat.m */; };
+		2110AF1013EE78330002644B /* chat.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2110AF0F13EE78330002644B /* chat.xib */; };
+		2110AF2E13EE79790002644B /* DialogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2110AF2D13EE79790002644B /* DialogView.m */; };
 		2141FDFB13EBEB58000029C9 /* PhotonDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2141FDF813EBEB58000029C9 /* PhotonDemo.m */; };
 		2141FDFC13EBEB58000029C9 /* PhotonListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 2141FDFA13EBEB58000029C9 /* PhotonListener.m */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
@@ -23,6 +28,14 @@
 		1D3623250D0F684500981E51 /* chatRoomAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = chatRoomAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* chatRoom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatRoom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2110AE7013EE70250002644B /* chooiceRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chooiceRoom.h; sourceTree = "<group>"; };
+		2110AE7113EE70250002644B /* chooiceRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = chooiceRoom.m; sourceTree = "<group>"; };
+		2110AE7513EE70460002644B /* chooiceRoom.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = chooiceRoom.xib; sourceTree = "<group>"; };
+		2110AF0A13EE78090002644B /* chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chat.h; sourceTree = "<group>"; };
+		2110AF0B13EE78090002644B /* chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = chat.m; sourceTree = "<group>"; };
+		2110AF0F13EE78330002644B /* chat.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = chat.xib; sourceTree = "<group>"; };
+		2110AF2C13EE79790002644B /* DialogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogView.h; sourceTree = "<group>"; };
+		2110AF2D13EE79790002644B /* DialogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogView.m; sourceTree = "<group>"; };
 		2141FDF713EBEB58000029C9 /* PhotonDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotonDemo.h; sourceTree = "<group>"; };
 		2141FDF813EBEB58000029C9 /* PhotonDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotonDemo.m; sourceTree = "<group>"; };
 		2141FDF913EBEB58000029C9 /* PhotonListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotonListener.h; sourceTree = "<group>"; };
@@ -51,12 +64,20 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2110AF2C13EE79790002644B /* DialogView.h */,
+				2110AF2D13EE79790002644B /* DialogView.m */,
 				1D3623240D0F684500981E51 /* chatRoomAppDelegate.h */,
 				1D3623250D0F684500981E51 /* chatRoomAppDelegate.m */,
 				2141FDF713EBEB58000029C9 /* PhotonDemo.h */,
 				2141FDF813EBEB58000029C9 /* PhotonDemo.m */,
 				2141FDF913EBEB58000029C9 /* PhotonListener.h */,
 				2141FDFA13EBEB58000029C9 /* PhotonListener.m */,
+				2110AE7013EE70250002644B /* chooiceRoom.h */,
+				2110AE7113EE70250002644B /* chooiceRoom.m */,
+				2110AE7513EE70460002644B /* chooiceRoom.xib */,
+				2110AF0A13EE78090002644B /* chat.h */,
+				2110AF0B13EE78090002644B /* chat.m */,
+				2110AF0F13EE78330002644B /* chat.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -162,6 +183,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				2110AE7613EE70460002644B /* chooiceRoom.xib in Resources */,
+				2110AF1013EE78330002644B /* chat.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +199,9 @@
 				1D3623260D0F684500981E51 /* chatRoomAppDelegate.m in Sources */,
 				2141FDFB13EBEB58000029C9 /* PhotonDemo.m in Sources */,
 				2141FDFC13EBEB58000029C9 /* PhotonListener.m in Sources */,
+				2110AE7213EE70250002644B /* chooiceRoom.m in Sources */,
+				2110AF0C13EE78090002644B /* chat.m in Sources */,
+				2110AF2E13EE79790002644B /* DialogView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

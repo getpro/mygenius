@@ -2,6 +2,8 @@
 
 @implementation Listener
 
+@synthesize delegate;
+
 -(void) InitListener:(CPhotonLib*)lib
 {
 	current = lib;
@@ -17,6 +19,12 @@
 			{
 				[current SetState:Joined];
 				NSLog(@"----------JOINED-------");
+				
+				if(delegate)
+				{
+					[delegate MyListenerOperationResult:opCode :returnCode :returnValues:invocID];
+				}
+				
 			}
 			else [current SetState:ErrorJoining];
 			break;
@@ -25,6 +33,12 @@
 			{
 				[current SetState:Left];
 				NSLog(@"----------LEFT-------");
+				
+				if(delegate)
+				{
+					[delegate MyListenerOperationResult:opCode :returnCode :returnValues:invocID];
+				}
+				
 			}
 			else [current SetState:ErrorLeaving];
 			break;
@@ -65,7 +79,7 @@
 {	
 	NSLog(@"-----Listener::EventAction called, eventCode = %d", eventCode);
 	
-	NSString * str = nil;
+	//NSString * str = nil;
 	//[textView writeToTextView:str];
 	//[textView writeToTextView:[Utils hashToString:photonEvent :true]];
 	
@@ -132,7 +146,7 @@
 			
 			NSDictionary* eventData = nil;
 			//static int i = 0;
-			const nByte POS_X = 101, POS_Y = 102, key2 = 103;
+			//const nByte POS_X = 101, POS_Y = 102, key2 = 103;
 	
 			// first access the inner Hash with your userdata inside the outer hash with general event data
 			if(!(eventData=[photonEvent objectForKey:[KeyObject withByteValue:P_DATA]]))
@@ -156,7 +170,10 @@
 			NSLog(@"get_string[%@]",[eventData objectForKey:[KeyObject withStringValue:@"NSString"]]);
 			
 			
-			
+			if(delegate)
+			{
+				[delegate MyListenerEventAction:eventCode :photonEvent];
+			}
 			
 		}
 			break;

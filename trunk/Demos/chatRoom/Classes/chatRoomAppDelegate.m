@@ -8,10 +8,14 @@
 
 #import "chatRoomAppDelegate.h"
 
+#import "chooiceRoom.h"
+
 @implementation chatRoomAppDelegate
 
 @synthesize window;
-
+@synthesize m_PhotonLib;
+@synthesize l;
+@synthesize m_pchat;
 
 - (void) onTime:(NSTimer*)Timer
 {
@@ -25,6 +29,8 @@
     
     // Override point for customization after application launch.
 	
+	m_pchat = [[chat alloc]init];
+	
 	m_PhotonLib = [CPhotonLib alloc];
 	[m_PhotonLib InitCPhotonLib];
 	l = [Listener alloc];
@@ -32,6 +38,11 @@
 	[m_PhotonLib InitLib:l];
 	
 	m_timer = [[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(onTime:) userInfo:nil repeats:YES]retain];
+	
+	
+	chooiceRoom * pchooiceRoom = [[chooiceRoom alloc]init];
+	
+	[window addSubview:pchooiceRoom.view];
 	
     [window makeKeyAndVisible];
 	
@@ -91,6 +102,8 @@
 
 - (void)dealloc 
 {
+	[m_pchat release];
+	
 	[m_PhotonLib release];
 	[l			 release];
 	[m_timer     release];
@@ -100,5 +113,9 @@
     [super dealloc];
 }
 
++(chatRoomAppDelegate*)getAppDelegate
+{
+    return (chatRoomAppDelegate*)[UIApplication sharedApplication].delegate;
+}
 
 @end
