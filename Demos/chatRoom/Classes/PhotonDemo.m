@@ -146,6 +146,19 @@
 	m_currentState = new_state;
 }
 
+- (void) sendData:(NSString*)pStr
+{
+	NSMutableDictionary* ev = [[NSMutableDictionary alloc] init];
+	
+	[ev setObject:pStr forKey:[KeyObject withStringValue:@"NSString"]];
+	NSLog(@"send_string[%@]",pStr);
+	
+	[m_pLitePeer opRaiseEvent :false :ev :101];
+	
+	[ev release];
+}
+
+
 - (void) sendData
 {
 	NSMutableDictionary* ev = [[NSMutableDictionary alloc] init];
