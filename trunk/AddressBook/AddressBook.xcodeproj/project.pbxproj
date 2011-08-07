@@ -86,7 +86,6 @@
 		219D99C113E5163100506FCB /* image07_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image07_kuang.png; sourceTree = "<group>"; };
 		219D99C213E5163100506FCB /* image08_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image08_kuang.png; sourceTree = "<group>"; };
 		219D99C313E5163100506FCB /* image09_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image09_kuang.png; sourceTree = "<group>"; };
-		21E7127713E3E6E300BF47E6 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		21E712CF13E3EFF400BF47E6 /* SwitchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchViewController.h; sourceTree = "<group>"; };
 		21E712D013E3EFF400BF47E6 /* SwitchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchViewController.m; sourceTree = "<group>"; };
 		21E712D713E3F13700BF47E6 /* PublicData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicData.h; sourceTree = "<group>"; };
@@ -302,7 +301,6 @@
 				219D997213E5070A00506FCB /* AddressBook.db */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* AddressBook-Info.plist */,
-				21E7127713E3E6E300BF47E6 /* Entitlements.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -427,7 +425,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/projects/AddressBook/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -456,12 +454,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yi Yang (3P2MDK6FQX)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.2;
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EFF5D949-CD32-4D88-BA55-28D957BFA267";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
