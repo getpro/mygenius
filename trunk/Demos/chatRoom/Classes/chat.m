@@ -171,7 +171,7 @@ static const float ROWHEIGHT = 60;
 		
 		
 		//发送数据
-		
+		[[chatRoomAppDelegate getAppDelegate].m_PhotonLib sendData:textField.text];
 		
 	}
 	

@@ -37,6 +37,7 @@ typedef enum
 - (short) Join:(NSString*)gameId;
 - (short) Leave:(NSString*)gameId;
 - (void) sendData;
+- (void) sendData:(NSString*)pStr;
 - (void) SetState:(States) new_state;
 - (States) GetState;
 - (void) Stop;
