@@ -25,6 +25,8 @@ static const float ROWHEIGHT = 60;
 
 @implementation chat
 
+@synthesize advTable;
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
 {
@@ -92,6 +94,8 @@ static const float ROWHEIGHT = 60;
 		
 		ChatContent * pChatContent = (ChatContent*)[m_pAdArr objectAtIndex:[indexPath row]];
 		
+		//NSLog(@"ChatContent[%@]",pChatContent.labelText);
+		
 		//NSString *text = [m_pAdArr objectAtIndex:[indexPath row]];
 		
 		if(![pChatContent.labelText isEqualToString:@""])
@@ -126,14 +130,13 @@ static const float ROWHEIGHT = 60;
 	ChatContent * pChatContent = [[ChatContent alloc]init];
 	
 	pChatContent.direction = 0;
-	pChatContent.labelText = [eventData objectForKey:[KeyObject withStringValue:@"NSString"]];
+	pChatContent.labelText = [NSString stringWithFormat:@"%@",[eventData objectForKey:[KeyObject withStringValue:@"NSString"]]];
 	
 	[m_pAdArr addObject:pChatContent];
 	
-	[pChatContent release];
-	
 	[advTable reloadData];
 	
+	[pChatContent release];
 }
 
 - (void) MyListenerStatus:(int)statusCode
@@ -168,7 +171,6 @@ static const float ROWHEIGHT = 60;
 		[pChatContent release];
 		
 		[advTable reloadData];
-		
 		
 		//发送数据
 		[[chatRoomAppDelegate getAppDelegate].m_PhotonLib sendData:textField.text];

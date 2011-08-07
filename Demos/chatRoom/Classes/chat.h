@@ -28,4 +28,6 @@
 	NSMutableArray * m_pAdArr;
 }
 
+@property(retain,nonatomic) IBOutlet UITableView * advTable;
+
 @end
