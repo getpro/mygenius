@@ -133,20 +133,24 @@
 			NSDictionary* eventData = nil;
 			//static int i = 0;
 			const nByte POS_X = 101, POS_Y = 102, key2 = 103;
-			//EGArray* ary = nil, *ary2 = nil, *ary3 = nil;
-			int x = 0, y = 0;
-			//NSDictionary* testHash = nil;
-			
+	
 			// first access the inner Hash with your userdata inside the outer hash with general event data
 			if(!(eventData=[photonEvent objectForKey:[KeyObject withByteValue:P_DATA]]))
 				break;
 			
 			// then take your user data from within the inner hash
 			
-			// nByte key and int value:
-			[(NSValue*)[eventData objectForKey:[KeyObject withByteValue:POS_X]] getValue:&x];
 			
-			NSLog(@"get_int[%d]",x);
+			//int value:
+			//int x = 0;
+			//[(NSValue*)[eventData objectForKey:[KeyObject withByteValue:POS_X]] getValue:&x];
+			//NSLog(@"get_int[%d]",x);
+			
+			
+			//float value
+			float x = 0.0f;
+			[(NSValue*)[eventData objectForKey:[KeyObject withStringValue:@"float"]] getValue:&x];
+			NSLog(@"get_float[%d]",x);
 			
 		}
 			break;
