@@ -25,19 +25,23 @@ static const float ROWHEIGHT = 60;
 
 @implementation chat
 
-@synthesize advTable;
+//@synthesize advTable;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
 	
-	m_pAdArr = [[NSMutableArray alloc] initWithCapacity:10];
+	//m_pAdArr = [[NSMutableArray alloc] initWithCapacity:10];
 	
-	advTable.backgroundColor = [UIColor clearColor];
-	advTable.separatorStyle  = UITableViewCellSeparatorStyleNone;
+	//advTable.backgroundColor = [UIColor clearColor];
+	//advTable.separatorStyle  = UITableViewCellSeparatorStyleNone;
 	
 	[chatRoomAppDelegate getAppDelegate].l.delegate = self;
+	
+	m_nScrollHeight = 0;
+	
+	[m_pScrollView setContentSize:CGSizeMake(320, m_nScrollHeight)];
 	
 }
 
@@ -66,11 +70,12 @@ static const float ROWHEIGHT = 60;
 
 - (void)dealloc 
 {
-	[m_pAdArr release];
+	//[m_pAdArr release];
 	
     [super dealloc];
 }
 
+/*
 #pragma make -
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
@@ -114,6 +119,7 @@ static const float ROWHEIGHT = 60;
 	}
 	return cell;
 }
+*/
 
 - (void) MyListenerEventAction:(nByte)eventCode :(NSDictionary*)photonEvent
 {
@@ -127,16 +133,27 @@ static const float ROWHEIGHT = 60;
 	
 	NSLog(@"MyListener_get_string[%@]",[eventData objectForKey:[KeyObject withStringValue:@"NSString"]]);
 	
-	ChatContent * pChatContent = [[ChatContent alloc]init];
+	//ChatContent * pChatContent = [[ChatContent alloc]init];
 	
-	pChatContent.direction = 0;
-	pChatContent.labelText = [NSString stringWithFormat:@"%@",[eventData objectForKey:[KeyObject withStringValue:@"NSString"]]];
+	//pChatContent.direction = 0;
+	//pChatContent.labelText = [NSString stringWithFormat:@"%@",[eventData objectForKey:[KeyObject withStringValue:@"NSString"]]];
 	
-	[m_pAdArr addObject:pChatContent];
+	//[m_pAdArr addObject:pChatContent];
 	
-	[advTable reloadData];
+	//[advTable reloadData];
 	
-	[pChatContent release];
+	//[pChatContent release];
+	
+	UILabel * pUILabel = [[UILabel alloc] initWithFrame:CGRectMake(0, m_nScrollHeight, 320, ROWHEIGHT)];
+	
+	pUILabel.text = [NSString stringWithFormat:@"%@",[eventData objectForKey:[KeyObject withStringValue:@"NSString"]]];
+	
+	[m_pScrollView addSubview:pUILabel];
+	
+	m_nScrollHeight += ROWHEIGHT;
+	
+	[m_pScrollView setContentSize:CGSizeMake(320, m_nScrollHeight)];
+	
 }
 
 - (void) MyListenerStatus:(int)statusCode
@@ -157,23 +174,36 @@ static const float ROWHEIGHT = 60;
 {
 	[textField resignFirstResponder];
 	
-	
 	if(![textField.text isEqualToString:@""])
 	{
 		
-		ChatContent * pChatContent = [[ChatContent alloc]init];
+		//ChatContent * pChatContent = [[ChatContent alloc]init];
 		
-		pChatContent.direction = 1;
-		pChatContent.labelText = textField.text;
+		//pChatContent.direction = 1;
+		//pChatContent.labelText = textField.text;
 		
-		[m_pAdArr addObject:pChatContent];
+		//[m_pAdArr addObject:pChatContent];
 		
-		[pChatContent release];
+		//[advTable reloadData];
 		
-		[advTable reloadData];
+		
+		UILabel * pUILabel = [[UILabel alloc] initWithFrame:CGRectMake(0, m_nScrollHeight, 320, ROWHEIGHT)];
+		
+		pUILabel.text = textField.text;
+		
+		[m_pScrollView addSubview:pUILabel];
+		
+		m_nScrollHeight += ROWHEIGHT;
+		
+		[m_pScrollView setContentSize:CGSizeMake(320, m_nScrollHeight)];
 		
 		//发送数据
 		[[chatRoomAppDelegate getAppDelegate].m_PhotonLib sendData:textField.text];
+		
+		
+		[pUILabel release];
+		
+		//[pChatContent release];
 		
 	}
 	
