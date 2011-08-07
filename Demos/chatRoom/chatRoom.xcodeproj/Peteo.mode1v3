@@ -252,7 +252,7 @@
 						<dict>
 							<key>PBXSmartGroupTreeModuleColumnWidthsKey</key>
 							<array>
-								<real>164</real>
+								<real>202</real>
 							</array>
 							<key>PBXSmartGroupTreeModuleColumnsKey_v4</key>
 							<array>
@@ -265,19 +265,23 @@
 							<array>
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>080E96DDFE201D6D7F000001</string>
+								<string>29B97315FDCFA39411CA2CEA</string>
+								<string>29B97317FDCFA39411CA2CEA</string>
+								<string>29B97323FDCFA39411CA2CEA</string>
+								<string>19C28FACFE9D520D11CA2CBB</string>
 								<string>1C37FBAC04509CD000000102</string>
 								<string>1C37FABC05509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>7</integer>
+									<integer>14</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {164, 612}}</string>
+							<string>{{0, 0}, {202, 612}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -289,19 +293,19 @@
 					<key>GeometryConfiguration</key>
 					<dict>
 						<key>Frame</key>
-						<string>{{0, 0}, {181, 630}}</string>
+						<string>{{0, 0}, {219, 630}}</string>
 						<key>GroupTreeTableConfiguration</key>
 						<array>
 							<string>MainColumn</string>
-							<real>164</real>
+							<real>202</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>0 107 1280 671 0 0 1280 778 </string>
+						<string>17 80 1280 671 0 0 1280 778 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
 					<key>Proportion</key>
-					<string>181pt</string>
+					<string>219pt</string>
 				</dict>
 				<dict>
 					<key>Dock</key>
@@ -314,7 +318,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>PhotonListener.m</string>
+								<string>chat.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -322,24 +326,34 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>PhotonListener.m</string>
+										<string>chat.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>2110AE6013EE6C1A0002644B</string>
+										<string>2110B08C13EE93E70002644B</string>
 										<key>history</key>
 										<array>
-											<string>2141FE6613EBF05D000029C9</string>
-											<string>2171B03913ED66320021F16A</string>
-											<string>2171B03A13ED66320021F16A</string>
 											<string>2171B03F13ED66320021F16A</string>
 											<string>2171B04213ED66320021F16A</string>
-											<string>2171B05113ED6EF30021F16A</string>
 											<string>2110AE4313EE64090002644B</string>
 											<string>2110AE4413EE64090002644B</string>
-											<string>2110AE5B13EE6C0C0002644B</string>
-											<string>2110AE5D13EE6C0C0002644B</string>
-											<string>2110AE5E13EE6C0C0002644B</string>
+											<string>2110AE9113EE72320002644B</string>
+											<string>2110AF0213EE777C0002644B</string>
+											<string>2110AFA613EE8AE30002644B</string>
+											<string>2110AFA713EE8AE30002644B</string>
+											<string>2110AFA813EE8AE30002644B</string>
+											<string>2110AFE713EE8C690002644B</string>
+											<string>2110AFE813EE8C690002644B</string>
+											<string>2110AFE913EE8C690002644B</string>
+											<string>2110B02113EE8D690002644B</string>
+											<string>2110B03013EE8DE20002644B</string>
+											<string>2110B03C13EE8E350002644B</string>
+											<string>2110B03E13EE8E350002644B</string>
+											<string>2110B04C13EE8E940002644B</string>
+											<string>2110B06D13EE8F5E0002644B</string>
+											<string>2110B08713EE92A60002644B</string>
+											<string>2110B08913EE92A60002644B</string>
+											<string>2110B08A13EE92A60002644B</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -351,9 +365,9 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1094, 559}}</string>
+								<string>{{0, 0}, {1056, 559}}</string>
 								<key>RubberWindowFrame</key>
-								<string>0 107 1280 671 0 0 1280 778 </string>
+								<string>17 80 1280 671 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -371,9 +385,9 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 564}, {1094, 66}}</string>
+								<string>{{0, 564}, {1056, 66}}</string>
 								<key>RubberWindowFrame</key>
-								<string>0 107 1280 671 0 0 1280 778 </string>
+								<string>17 80 1280 671 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -382,7 +396,7 @@
 						</dict>
 					</array>
 					<key>Proportion</key>
-					<string>1094pt</string>
+					<string>1056pt</string>
 				</dict>
 			</array>
 			<key>Name</key>
@@ -537,13 +551,15 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>2110AFEC13EE8C690002644B</string>
+		<string>2110AFCC13EE8B980002644B</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>21ABD6C213EBE82600BF9137</string>
 		<string>/Users/Peteo/projects/trunk/Demos/chatRoom/chatRoom.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>0 107 1280 671 0 0 1280 778 </string>
+	<string>17 80 1280 671 0 0 1280 778 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -564,7 +580,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>chat.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -581,6 +597,8 @@
 							<string>272pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>

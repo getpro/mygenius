@@ -3,6 +3,8 @@
 
 @implementation CPhotonLib
 
+@synthesize m_strRoomID;
+
 - (void) InitCPhotonLib
 {
 	m_currentState = SampleStarted;
@@ -13,14 +15,20 @@
 {
 	if (m_pLitePeer)
 		[m_pLitePeer release];
+	
+	[m_strRoomID release];
+	
 	[super dealloc];
 }
 
 - (int) InitLib:(id<PhotonListener>)listener
 {
 	NSLog(@"Initialize EG library");
+	
 	m_pLitePeer = [[LitePeer alloc] init:listener];
-	m_currentState = PhotonPeerCreated;
+	
+	//m_currentState = PhotonPeerCreated;
+	
 	return SUCCESS;
 }
 
@@ -54,13 +62,13 @@
 
 - (int) Run
 {
-	char gameId[] = "demo_photon_game";
+	//char gameId[] = "demo_photon_game";
 
 	[m_pLitePeer service];
 	switch (m_currentState)
 	{
 		case PhotonPeerCreated:
-			NSLog(@"-------CONNECTING-------");
+			NSLog(@"-------Connection-------");
 			[self CreateConnection];
 			break;
 		case Connecting:
@@ -74,8 +82,18 @@
 		case Connected:
 			NSLog(@"-------JOINING-------");
 			m_currentState = Joining;
-			if ([self Join:[NSString stringWithUTF8String:gameId]] == -1)
-				m_currentState = ErrorJoining;
+			
+			if(m_strRoomID != nil)
+			{
+				if ([self Join:m_strRoomID] == -1)
+					m_currentState = ErrorJoining;
+			}
+			else
+			{
+				if ([self Join:[NSString stringWithUTF8String:"demo_photon_game"]] == -1)
+					m_currentState = ErrorJoining;
+			}
+			
 			break;
 		case Joining :
 			// Waiting for callback function
@@ -86,8 +104,12 @@
 			NSLog(@"ErrorJoining");
 			break;
 		case Joined :
-			m_currentState = Receiving;
-			NSLog(@"-------SENDING/RECEIVING DATA-------");
+			m_currentState = Joined;
+			
+			//NSLog(@"-------Joined-------");
+			//通知当前的界面已经加入成功
+			
+			
 			break;
 		case Receiving:
 			[self sendData];
