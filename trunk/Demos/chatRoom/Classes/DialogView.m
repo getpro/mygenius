@@ -70,12 +70,6 @@
 }
 - (void)drawRect:(CGRect)rect 
 {
-    // Drawing code
-//	CGRect rect = [[UIScreen mainScreen] applicationFrame];
-//	CGRect rectLeft = rect;
-//	rectLeft.size.width = rect.size.width/kLeftDiv;
-//	rectLeft.size.height = kLeftHeight;
-	
 	CGFloat minx = CGRectGetMinX(rect);
 	//,maxx = CGRectGetMaxX(rect)-kAngle;
 	
@@ -88,25 +82,26 @@
 	
 	CGContextMoveToPoint(c, minx, miny);
 	
-	if(self.direction == 1){
+	if(self.direction == 1)
+	{
 		//left rect
 		[self drawAsHeaderLeft:c rect:rect];
-	}else {
+	}else 
+	{
 		//right rect
 		[self drawASHeaderRight:c rect:rect];
 	}
-//	CGContextSaveGState(c);
+
 	CGSize size = CGSizeMake (1,  1);
-	if(self.direction == 1){
+	if(self.direction == 1)
+	{
 		size = CGSizeMake(-2,-1);
 	}
 	CGContextSetShadowWithColor(c, size, 1.0, [UIColor grayColor].CGColor);
-//	CGContextRestoreGState(c);
-	
+
 	CGContextFillPath(c);
 	
 	[self addLabelView:rect];
-	
 	
 }
 

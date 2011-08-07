@@ -20,6 +20,11 @@
 - (void) onTime:(NSTimer*)Timer
 {
 	[m_PhotonLib Run];
+	
+	if(m_pchat && m_pchat.advTable)
+	{
+		[m_pchat.advTable reloadData];
+	}
 }
 
 #pragma mark -

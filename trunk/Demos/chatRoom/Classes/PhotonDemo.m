@@ -157,7 +157,9 @@
 	[ev setObject:pStr forKey:[KeyObject withStringValue:@"NSString"]];
 	NSLog(@"send_string[%@]",pStr);
 	
-	[m_pLitePeer opRaiseEvent :false :ev :101];
+	//[m_pLitePeer opRaiseEvent :false :ev :101];
+	
+	[m_pLitePeer opRaiseEvent :true :ev :101];
 	
 	[ev release];
 }
