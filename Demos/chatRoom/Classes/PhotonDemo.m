@@ -87,11 +87,15 @@
 			{
 				if ([self Join:m_strRoomID] == -1)
 					m_currentState = ErrorJoining;
+				
+				NSLog(@"RoomID[%@]",m_strRoomID);
 			}
 			else
 			{
 				if ([self Join:[NSString stringWithUTF8String:"demo_photon_game"]] == -1)
 					m_currentState = ErrorJoining;
+				
+				NSLog(@"RoomID[demo_photon_game]");
 			}
 			
 			break;
