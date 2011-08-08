@@ -85,8 +85,15 @@
 			
 			if(m_strRoomID != nil)
 			{
-				if ([self Join:m_strRoomID] == -1)
+				short pJoinID = 0;
+				pJoinID = [self Join:m_strRoomID];
+				
+				NSLog(@"pJoinID[%d]",pJoinID);
+				
+				if ( pJoinID == -1)
+				{
 					m_currentState = ErrorJoining;
+				}
 				
 				NSLog(@"RoomID[%@]",m_strRoomID);
 			}
