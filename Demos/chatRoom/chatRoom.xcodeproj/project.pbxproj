@@ -274,7 +274,7 @@
 				MACH_O_TYPE = mh_execute;
 				OTHER_LDFLAGS = "";
 				PREBINDING = YES;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F6D028C1-B9BA-4EDA-8119-12AD844EE3B5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EFF5D949-CD32-4D88-BA55-28D957BFA267";
 				SDKROOT = iphoneos;
 			};
 			name = debug;

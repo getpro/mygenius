@@ -3,31 +3,27 @@
 
 @implementation CPhotonLib
 
-@synthesize m_strRoomID;
-
-- (void) InitCPhotonLib
+- (void) InitCPhotonLib:(iTestTextView*)txtView
 {
+	textView = txtView;
 	m_currentState = SampleStarted;
-	m_pLitePeer    = NULL;
+	m_pLitePeer = NULL;
 }
 
 - (void) dealloc
 {
 	if (m_pLitePeer)
 		[m_pLitePeer release];
-	
-	[m_strRoomID release];
-	
 	[super dealloc];
 }
 
 - (int) InitLib:(id<PhotonListener>)listener
 {
-	NSLog(@"Initialize EG library");
-	
+	[textView writeToTextView:@"Initialize EG library"];
 	m_pLitePeer = [[LitePeer alloc] init:listener];
+	m_currentState = PhotonPeerCreated;
 	
-	//m_currentState = PhotonPeerCreated;
+	//m_pLitePeer.DebugOutputLevel = DEBUG_LEVEL_INFO;
 	
 	return SUCCESS;
 }
@@ -63,12 +59,14 @@
 - (int) Run
 {
 	//char gameId[] = "demo_photon_game";
+	
+	char gameId[] = "demo_the9_game_001";
 
 	[m_pLitePeer service];
 	switch (m_currentState)
 	{
 		case PhotonPeerCreated:
-			NSLog(@"-------Connection-------");
+			[textView writeToTextView:@"-------CONNECTING-------"];
 			[self CreateConnection];
 			break;
 		case Connecting:
@@ -76,35 +74,14 @@
 			break;
 		case ErrorConnecting:
 			// Stop run cycle
-			NSLog(@"ErrorConnecting");
+			[textView writeToTextView:@"ErrorConnecting"];
 			return -1;
 			break;
 		case Connected:
-			NSLog(@"-------JOINING-------");
+			[textView writeToTextView:@"-------JOINING-------"];
 			m_currentState = Joining;
-			
-			if(m_strRoomID != nil)
-			{
-				short pJoinID = 0;
-				pJoinID = [self Join:m_strRoomID];
-				
-				NSLog(@"pJoinID[%d]",pJoinID);
-				
-				if ( pJoinID == -1)
-				{
-					m_currentState = ErrorJoining;
-				}
-				
-				NSLog(@"RoomID[%@]",m_strRoomID);
-			}
-			else
-			{
-				if ([self Join:[NSString stringWithUTF8String:"demo_photon_game"]] == -1)
-					m_currentState = ErrorJoining;
-				
-				NSLog(@"RoomID[demo_photon_game]");
-			}
-			
+			if ([self Join:[NSString stringWithUTF8String:gameId]] == -1)
+				m_currentState = ErrorJoining;
 			break;
 		case Joining :
 			// Waiting for callback function
@@ -112,19 +89,14 @@
 		case ErrorJoining:
 			// Stop run cycle
 			return -1;
-			NSLog(@"ErrorJoining");
+			[textView writeToTextView:@"ErrorJoining"];
 			break;
 		case Joined :
-			m_currentState = Joined;
-			
-			//NSLog(@"-------Joined-------");
-			//通知当前的界面已经加入成功
-			
-			
+			m_currentState = Receiving;
+			[textView writeToTextView:@"-------SENDING/RECEIVING DATA-------"];
 			break;
 		case Receiving:
 			[self sendData];
-			m_currentState = Sended;
 			break;
 		case Leaving:
 			// Waiting for callback function
@@ -132,11 +104,11 @@
 		case ErrorLeaving:
 			// Stop run cycle
 			return -1;
-			NSLog(@"ErrorLeaving");
+			[textView writeToTextView:@"ErrorLeaving"];
 			break;
 		case Left :
 			m_currentState = Disconnecting;
-			NSLog(@"-------DISCONNECTING-------");
+			[textView writeToTextView:@"-------DISCONNECTING-------"];
 			[self CloseConnection];
 			break;
 		case Disconnecting:
@@ -157,25 +129,12 @@
 	m_currentState = new_state;
 }
 
-- (void) sendData:(NSString*)pStr
-{
-	NSMutableDictionary* ev = [[NSMutableDictionary alloc] init];
-	
-	[ev setObject:pStr forKey:[KeyObject withStringValue:@"NSString"]];
-	NSLog(@"send_string[%@]",pStr);
-	
-	[m_pLitePeer opRaiseEvent :true :ev :101];
-	
-	[ev release];
-}
-
-
 - (void) sendData
 {
 	NSMutableDictionary* ev = [[NSMutableDictionary alloc] init];
 
-	// nByte key and int value:
 	/*
+	// nByte key and int value:
 	nByte POS_X = 101;
 	int x = 10;
 	[ev setObject:[NSValue valueWithBytes:&x objCType:@encode(int)] forKey:[KeyObject withByteValue:POS_X]];
@@ -214,29 +173,45 @@
 	[ev setObject:array forKey:[KeyObject withStringValue:@"array3d"]];
 	
 	//NSLog(@"%@",ev);
-	 
+
 	*/
 	
-	//int
-	/*
-	nByte POS_X = 101;
-	int       x = 10;
-	[ev setObject:[NSValue valueWithBytes:&x objCType:@encode(int)] forKey:[KeyObject withByteValue:POS_X]];
-	NSLog(@"send_int[%d]",x);
-	*/
+	//int	uniqueID = -225234623;
 	
-	//float	
-	//float x = 0.001f;
-	//[ev setObject:[NSValue valueWithBytes:&x objCType:@encode(float)] forKey:[KeyObject withStringValue:@"float"]];
-	//NSLog(@"send_float[%f]",x);
+	int	uniqueID = 2;
 	
-	//string
-	NSString * x = @"测试9C";
-	[ev setObject:x forKey:[KeyObject withStringValue:@"NSString"]];
-	NSLog(@"send_string[%@]",x);
+	static unsigned char networkPacket[MAX_PACKET_SIZE];
+	const unsigned int packetHeaderSize = 3 * sizeof(int); // we have two "ints" for our header	
+	
+	if(4 < (MAX_PACKET_SIZE - packetHeaderSize)) 
+	{
+		int *pIntData = (int *)&networkPacket[0];
+		// header info
+		pIntData[0] = 1;
+		pIntData[1] = 1;
+		pIntData[2] = 1;
+		
+		// copy data in after the header
+		memcpy( &networkPacket[packetHeaderSize], &uniqueID, 4 );
+		
+		NSData * packet = [NSData dataWithBytes: networkPacket length: (4+packetHeaderSize)];
+		
+		
+		NSString * pStr = [[NSString alloc]  initWithBytes:[packet bytes] 
+													  length:[packet length] encoding: NSUTF8StringEncoding]; 
+		
+		
+		//NSString * pStr = [NSString stringWithUTF8String:[packet bytes]];
+		
+		int pLength = [pStr length];
+		
+		//char * p = [pStr UTF8String];
+		
+		[ev setObject: pStr forKey:[KeyObject withByteValue:88]];
+	}
 	
 	
-	[m_pLitePeer opRaiseEvent :false :ev :101];
+	[m_pLitePeer opRaiseEvent :true :ev :101];
 	
 	[ev release];
 }
@@ -250,7 +225,7 @@
 {
 	char gameId[] = "demo_photon_game";
 	m_currentState = Leaving;
-	NSLog(@"-------LEAVING-------");
+	[textView writeToTextView:@"-------LEAVING-------"];
 	if([self Leave:[NSString stringWithUTF8String:gameId]] == -1)
 		m_currentState = ErrorLeaving;
 }
