@@ -85,7 +85,9 @@
 - (void)layerReplaced
 {
 	[super layerReplaced];
-	if (localPlayer == leftPlayer) {
+	
+	if (localPlayer == leftPlayer) 
+	{
 		// fire up syncing
 		[self syncState];
 	}
@@ -237,14 +239,16 @@
 
 
 
--(void) syncState {
+-(void) syncState 
+{
 	static PlayerInfo playerInfo;
-	playerInfo.headP = localPlayer.headBody->p;
+	playerInfo.headP  = localPlayer.headBody->p;
 	playerInfo.gloveV = localPlayer.gloveBody->v;
-	playerInfo.headV = localPlayer.headBody->v;
-	playerInfo.headA = localPlayer.headBody->a;
+	playerInfo.headV  = localPlayer.headBody->v;
+	playerInfo.headA  = localPlayer.headBody->a;
 	
 	playerInfo.opponentHealth = remotePlayer.health;
+	
 	[link sendPacket:NETWORK_POS objectIndex:0 data:&playerInfo length:sizeof(playerInfo) reliable:YES];
 }
 

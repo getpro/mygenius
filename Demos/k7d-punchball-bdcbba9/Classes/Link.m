@@ -31,9 +31,8 @@ typedef enum {
 
 @synthesize state, role, name, sessionID, peerID, peerName, connectionAlert, dataReceiver, uniqueID, peerUniqueID;
 
-
-
-- (id)initWithID:(NSString*)_sessionID name:(NSString*)_name delegate:(id<LinkDelegate>)_delegate {
+- (id)initWithID:(NSString*)_sessionID name:(NSString*)_name delegate:(id<LinkDelegate>)_delegate 
+{
 	[super init];
 	
 	self.sessionID = _sessionID;

@@ -78,9 +78,9 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 140;
-		modificationTime = 334638626.525612;
+		modificationTime = 334647933.540649;
 		originalNumberOfMultipleMatches = 1;
-		state = 0;
+		state = 1;
 	};
 	218286C913F13629007E3530 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -482,11 +482,6 @@
 		name = PhotonConstants.h;
 		path = "/Users/Peteo/projects/trunk/Photon-c/inc/PhotonConstants.h";
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1453.31, 4431}}";
-			sepNavSelRange = "{617, 0}";
-			sepNavVisRange = "{175, 830}";
-		};
 	};
 	2194344613F115B600C99133 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -589,17 +584,17 @@
 		vrLen = 830;
 		vrLoc = 175;
 	};
-	21B12BA513F24818005B9107 /* PBXTextBookmark */ = {
+	21B12BA813F2483F005B9107 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = B33B2D101157AEB8007F2607 /* PhotonDemo.m */;
-		name = "PhotonDemo.m: 144";
-		rLen = 13;
-		rLoc = 3133;
+		name = "PhotonDemo.m: 124";
+		rLen = 0;
+		rLoc = 2711;
 		rType = 0;
 		vrLen = 433;
 		vrLoc = 2626;
 	};
-	21B12BA813F2483F005B9107 /* PBXTextBookmark */ = {
+	21B12C4913F25503005B9107 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = B33B2D101157AEB8007F2607 /* PhotonDemo.m */;
 		name = "PhotonDemo.m: 124";
@@ -770,9 +765,9 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 110;
-		modificationTime = 334638626.525547;
+		modificationTime = 334647933.540539;
 		originalNumberOfMultipleMatches = 1;
-		state = 0;
+		state = 1;
 	};
 	21CA9BD613EA823A00B3E536 /* PhotonPeer.h */ = {
 		isa = PBXFileReference;
@@ -800,7 +795,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					827,
+					101,
 					20,
 					48,
 					43,
@@ -834,7 +829,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					727,
+					61,
 					60,
 					20,
 					48,
@@ -851,8 +846,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 334633966;
-			PBXWorkspaceStateSaveDate = 334633966;
+			PBXPerProjectTemplateStateSaveDate = 334647443;
+			PBXWorkspaceStateSaveDate = 334647443;
 		};
 		perUserProjectItems = {
 			213BA3B113EB8D05000A897E /* PBXTextBookmark */ = 213BA3B113EB8D05000A897E /* PBXTextBookmark */;
@@ -892,8 +887,8 @@
 			21ABD65513EBD20A00BF9137 /* PBXTextBookmark */ = 21ABD65513EBD20A00BF9137 /* PBXTextBookmark */;
 			21B12B7A13F22E20005B9107 /* PBXTextBookmark */ = 21B12B7A13F22E20005B9107 /* PBXTextBookmark */;
 			21B12BA413F24818005B9107 /* PBXTextBookmark */ = 21B12BA413F24818005B9107 /* PBXTextBookmark */;
-			21B12BA513F24818005B9107 /* PBXTextBookmark */ = 21B12BA513F24818005B9107 /* PBXTextBookmark */;
 			21B12BA813F2483F005B9107 /* PBXTextBookmark */ = 21B12BA813F2483F005B9107 /* PBXTextBookmark */;
+			21B12C4913F25503005B9107 /* PBXTextBookmark */ = 21B12C4913F25503005B9107 /* PBXTextBookmark */;
 			21B8D64B13EB984100ACE920 /* PBXTextBookmark */ = 21B8D64B13EB984100ACE920 /* PBXTextBookmark */;
 			21B8D64C13EB984100ACE920 /* PBXTextBookmark */ = 21B8D64C13EB984100ACE920 /* PBXTextBookmark */;
 			21B8D64D13EB984100ACE920 /* PBXTextBookmark */ = 21B8D64D13EB984100ACE920 /* PBXTextBookmark */;
@@ -956,7 +951,7 @@
 	};
 	B33B2D101157AEB8007F2607 /* PhotonDemo.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1204.06, 4977}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1182.39, 5040}}";
 			sepNavSelRange = "{2711, 0}";
 			sepNavVisRange = "{2626, 433}";
 		};
