@@ -93,46 +93,132 @@
 
 
 
-- (void)receivePacket:(int)packetID objectIndex:(int)objectIndex data:(void*)data {
-	switch (packetID) {
-		case NETWORK_UPDATE_DIR: {
+- (void)receivePacket:(int)packetID objectIndex:(int)objectIndex data:(NSDictionary*)returnValues
+{
+	NSDictionary * pHash = nil;
+	
+	pHash = [returnValues objectForKey:[KeyObject withByteValue:STATUS_DATA]];
+	
+	if(pHash == nil)
+		return;
+	
+	switch (packetID) 
+	{
+		case NETWORK_UPDATE_DIR: 
+		{
 			break;
 		}
-		case NETWORK_PUNCH: {
-			CGPoint *aim = (CGPoint*)data;
-			[remotePlayer punch:*aim];
+		case NETWORK_PUNCH: 
+		{
+			//CGPoint *aim = (CGPoint*)data;
+			
+			CGPoint aim;
+			
+			NSDictionary * pAimHash = nil;
+			
+			pAimHash = [pHash objectForKey:[KeyObject withByteValue:POS_NETWORK_PUNCH]];
+			
+			if(pAimHash == nil)
+				return;
+			
+			[((NSValue*)[pAimHash objectForKey:[KeyObject withByteValue:POS_CGPoint_X]])getValue:&aim.x];
+			[((NSValue*)[pAimHash objectForKey:[KeyObject withByteValue:POS_CGPoint_Y]])getValue:&aim.y];
+			
+			[remotePlayer punch:aim];
+			
 			break;
 		}
-		case NETWORK_TURN: {
-			CGPoint *aim = (CGPoint*)data;
-			[remotePlayer turn:*aim];
+		case NETWORK_TURN: 
+		{
+			//CGPoint *aim = (CGPoint*)data;
+			
+			CGPoint aim;
+			
+			NSDictionary * pAimHash = nil;
+			
+			pAimHash = [pHash objectForKey:[KeyObject withByteValue:POS_NETWORK_TURN]];
+			
+			if(pAimHash == nil)
+				return;
+			
+			[((NSValue*)[pAimHash objectForKey:[KeyObject withByteValue:POS_CGPoint_X]])getValue:&aim.x];
+			[((NSValue*)[pAimHash objectForKey:[KeyObject withByteValue:POS_CGPoint_Y]])getValue:&aim.y];
+			
+			[remotePlayer turn:aim];
+			
 			break;
 		}
-		case NETWORK_POS: {
-			PlayerInfo *pi = (PlayerInfo*)data;
-			[remotePlayer correctPos:pi];
-			localPlayer.health = pi->opponentHealth;
+		case NETWORK_POS: 
+		{
+			//PlayerInfo *pi = (PlayerInfo*)data;
+			
+			PlayerInfo pi;
+			
+			NSDictionary * pPlayerInfoHash = nil;
+			
+			pPlayerInfoHash = [pHash objectForKey:[KeyObject withByteValue:POS_NETWORK_POS]];
+			
+			if(pPlayerInfoHash == nil)
+				return;
+			
+			
+			[((NSValue*)[pPlayerInfoHash objectForKey:[KeyObject withByteValue:POS_PlayerInfo_headP_X]])	        getValue:&pi.headP.x];
+			[((NSValue*)[pPlayerInfoHash objectForKey:[KeyObject withByteValue:POS_PlayerInfo_headP_Y]])			getValue:&pi.headP.y];
+			
+			[((NSValue*)[pPlayerInfoHash objectForKey:[KeyObject withByteValue:POS_PlayerInfo_headV_X]])			getValue:&pi.headV.x];
+			[((NSValue*)[pPlayerInfoHash objectForKey:[KeyObject withByteValue:POS_PlayerInfo_headV_Y]])	        getValue:&pi.headV.y];
+			
+			[((NSValue*)[pPlayerInfoHash objectForKey:[KeyObject withByteValue:POS_PlayerInfo_headA]])				getValue:&pi.headA];
+			
+			[((NSValue*)[pPlayerInfoHash objectForKey:[KeyObject withByteValue:POS_PlayerInfo_gloveV_X]])			getValue:&pi.gloveV.x];
+			[((NSValue*)[pPlayerInfoHash objectForKey:[KeyObject withByteValue:POS_PlayerInfo_gloveV_Y]])			getValue:&pi.gloveV.y];
+			
+			[((NSValue*)[pPlayerInfoHash objectForKey:[KeyObject withByteValue:POS_PlayerInfo_opponentHealth]])		getValue:&pi.opponentHealth];
+						
+			[remotePlayer correctPos:&pi];
+			localPlayer.health = pi.opponentHealth;
 			[self updateScores];
-
 			[NSTimer scheduledTimerWithTimeInterval:NETWORK_SYNC_DELAY target:self selector:@selector(syncState) userInfo:nil repeats:NO];
+			
 			break;
 		}
 			
-		case NETWORK_SLIDE: {
-			SlideInfo *slideInfo = (SlideInfo*)data;
-			[remotePlayer slideTo: &slideInfo->slideTo final:slideInfo->finalSlide];
+		case NETWORK_SLIDE: 
+		{
+			//SlideInfo *slideInfo = (SlideInfo*)data;
+			
+			SlideInfo slideInfo;
+			
+			NSDictionary * pslideInfoHash = nil;
+			
+			pslideInfoHash = [pHash objectForKey:[KeyObject withByteValue:POS_NETWORK_SLIDE]];
+			
+			if(pslideInfoHash == nil)
+				return;
+			
+			[((NSValue*)[pslideInfoHash objectForKey:[KeyObject withByteValue:POS_SlideTo_X]])	        getValue:&slideInfo.slideTo.x];
+			[((NSValue*)[pslideInfoHash objectForKey:[KeyObject withByteValue:POS_SlideTo_Y]])			getValue:&slideInfo.slideTo.y];
+			[((NSValue*)[pslideInfoHash objectForKey:[KeyObject withByteValue:POS_SlideTo_FinalSlide]]) getValue:&slideInfo.finalSlide];
+			
+			//[remotePlayer slideTo: &slideInfo->slideTo final:slideInfo->finalSlide];
+			
+			[remotePlayer slideTo: &slideInfo.slideTo final:slideInfo.finalSlide];
+			
 			break;
 		}
 			
-		case NETWORK_PAUSE: {
+		case NETWORK_PAUSE: 
+		{
 			[super pause];
 			break;
 		}
 			
-		case NETWORK_RESUME: {
+		case NETWORK_RESUME: 
+		{
 			NSLog(@"NETWORK_RESUME received");
 			
-			if (pausePopup) {
+			if (pausePopup) 
+			{
 				[pausePopup dismissWithClickedButtonIndex:0 animated:YES];
 			}
 			
@@ -141,7 +227,8 @@
 			break;
 		}
 			
-		default: {
+		default: 
+		{
 			NSLog(@" >>> receivePacket: invalid packeID %d", packetID);
 			break;
 		}

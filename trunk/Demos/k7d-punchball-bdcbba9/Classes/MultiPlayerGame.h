@@ -49,7 +49,7 @@ typedef struct {
 
 -(id) initWithDelegate: (id<GameDelegate>)_delegate link:(Link*)_link left:(bool)left;
 
-- (void)receivePacket:(int)packetID objectIndex:(int)objectIndex data:(void*)data;
+- (void)receivePacket:(int)packetID objectIndex:(int)objectIndex data:(NSDictionary*)returnValues;
 
 - (void)syncState;
 

@@ -22,6 +22,42 @@
 
 #define MAX_PACKET_SIZE 1024
 
+#define  EV_DATA ((char)101)
+
+#define  STATUS_DATA ((char)43)
+
+
+#define  POS_PacketNumber ((nByte)102)
+#define  POS_PacketID     ((nByte)103)
+#define  POS_ObjectIndex  ((nByte)104)
+
+#define  POS_PACKET_COINTOSS      ((nByte)105)
+#define  POS_NETWORK_UPDATE_DIR   ((nByte)106)
+#define  POS_NETWORK_PUNCH		  ((nByte)107)
+#define  POS_NETWORK_SLIDE		  ((nByte)108)
+#define  POS_NETWORK_TURN		  ((nByte)109)
+#define  POS_NETWORK_POS		  ((nByte)110)
+#define  POS_NETWORK_PAUSE		  ((nByte)111)
+#define  POS_NETWORK_RESUME	      ((nByte)112)
+
+#define  POS_CGPoint_X			  ((nByte)113)
+#define  POS_CGPoint_Y			  ((nByte)114)
+
+#define  POS_SlideTo_X			  ((nByte)115)
+#define  POS_SlideTo_Y			  ((nByte)116)
+#define  POS_SlideTo_FinalSlide	  ((nByte)117)
+
+
+#define  POS_PlayerInfo_headP_X			((nByte)118)
+#define  POS_PlayerInfo_headP_Y			((nByte)119)
+#define  POS_PlayerInfo_headV_X			((nByte)120)
+#define  POS_PlayerInfo_headV_Y			((nByte)121)
+#define  POS_PlayerInfo_headA			((nByte)122)
+#define  POS_PlayerInfo_gloveV_X		((nByte)123)
+#define  POS_PlayerInfo_gloveV_Y		((nByte)124)
+#define  POS_PlayerInfo_opponentHealth	((nByte)125)
+
+
 typedef enum 
 {
 	RoleServer,
@@ -57,7 +93,7 @@ typedef enum States
 
 @protocol DataReceiver
 
-- (void)receivePacket:(int)packetID objectIndex:(int)objectIndex data:(void*)data;
+- (void)receivePacket:(int)packetID objectIndex:(int)objectIndex data:(NSDictionary*)returnValues;
 
 @end
 
@@ -123,7 +159,6 @@ typedef enum States
 - (void)sendPacket:(int)packetID objectIndex:(int)objectIndex data:(void *)data length:(int)length reliable:(bool)howtosend;
 
 - (void)invalidateSession;
-
 
 
 //Photon
