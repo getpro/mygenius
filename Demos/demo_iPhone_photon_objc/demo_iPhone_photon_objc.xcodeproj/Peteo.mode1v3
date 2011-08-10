@@ -252,7 +252,7 @@
 						<dict>
 							<key>PBXSmartGroupTreeModuleColumnWidthsKey</key>
 							<array>
-								<real>302</real>
+								<real>192</real>
 							</array>
 							<key>PBXSmartGroupTreeModuleColumnsKey_v4</key>
 							<array>
@@ -281,7 +281,7 @@
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {302, 612}}</string>
+							<string>{{0, 0}, {192, 612}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -293,11 +293,11 @@
 					<key>GeometryConfiguration</key>
 					<dict>
 						<key>Frame</key>
-						<string>{{0, 0}, {319, 630}}</string>
+						<string>{{0, 0}, {209, 630}}</string>
 						<key>GroupTreeTableConfiguration</key>
 						<array>
 							<string>MainColumn</string>
-							<real>302</real>
+							<real>192</real>
 						</array>
 						<key>RubberWindowFrame</key>
 						<string>0 107 1280 671 0 0 1280 778 </string>
@@ -305,7 +305,7 @@
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
 					<key>Proportion</key>
-					<string>319pt</string>
+					<string>209pt</string>
 				</dict>
 				<dict>
 					<key>Dock</key>
@@ -330,7 +330,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>2182872813F14A21007E3530</string>
+										<string>21B12BA813F2483F005B9107</string>
 										<key>history</key>
 										<array>
 											<string>218B23E113EA8B9300FB2CC2</string>
@@ -368,15 +368,15 @@
 											<string>219433F513F113A500C99133</string>
 											<string>2194341013F1148A00C99133</string>
 											<string>2194341113F1148A00C99133</string>
-											<string>2194341D13F114AE00C99133</string>
 											<string>2194344613F115B600C99133</string>
 											<string>2194349913F11B6600C99133</string>
 											<string>2182865113F12633007E3530</string>
 											<string>218286C913F13629007E3530</string>
 											<string>218286CA13F13629007E3530</string>
 											<string>218286CB13F13629007E3530</string>
-											<string>218286D313F1371B007E3530</string>
-											<string>2182872713F14A21007E3530</string>
+											<string>21B12B7A13F22E20005B9107</string>
+											<string>21B12BA413F24818005B9107</string>
+											<string>21B12BA513F24818005B9107</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -388,14 +388,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {956, 519}}</string>
+								<string>{{0, 0}, {1066, 515}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 107 1280 671 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>519pt</string>
+							<string>515pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -408,18 +408,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 524}, {956, 106}}</string>
+								<string>{{0, 520}, {1066, 110}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 107 1280 671 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>106pt</string>
+							<string>110pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
-					<string>956pt</string>
+					<string>1066pt</string>
 				</dict>
 			</array>
 			<key>Name</key>
@@ -434,9 +434,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>2182872913F14A21007E3530</string>
+				<string>21B12B2013F22323005B9107</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>2182872A13F14A21007E3530</string>
+				<string>21B12B2113F22323005B9107</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -575,6 +575,7 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>21C6F92413EA810B0047587B</string>
+		<string>/Users/Peteo/projects/trunk/Demos/demo_iPhone_photon_objc/demo_iPhone_photon_objc.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 107 1280 671 0 0 1280 778 </string>
@@ -654,7 +655,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>21C6F92413EA810B0047587B</string>
-				<string>2182872B13F14A21007E3530</string>
+				<string>21B12B2213F22323005B9107</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

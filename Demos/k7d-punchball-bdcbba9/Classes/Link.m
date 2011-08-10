@@ -15,10 +15,8 @@
  */
 
 #import "Link.h"
+#import "MultiPlayerGame.h"
 
-const char EV_DATA = 101;
-
-const char STATUS_DATA = 43;
 
 typedef enum {
 	StateDisconnected,
@@ -207,39 +205,191 @@ typedef enum {
 - (void)sendPacket:(int)packetID objectIndex:(int)objectIndex data:(void *)data length:(int)length reliable:(bool)howtosend 
 {	
 	// the packet we'll send is resued
-	static unsigned char networkPacket[MAX_PACKET_SIZE];
+	//static unsigned char networkPacket[MAX_PACKET_SIZE];
 	const unsigned int packetHeaderSize = 3 * sizeof(int); // we have two "ints" for our header	
 	
 	if(length < (MAX_PACKET_SIZE - packetHeaderSize)) 
 	{ 
 		// our networkPacket buffer size minus the size of the header info
-		int *pIntData = (int *)&networkPacket[0];
+		//int *pIntData = (int *)&networkPacket[0];
 		
 		// header info
-		pIntData[0] = packetNumber++;
-		pIntData[1] = packetID;
-		pIntData[2] = objectIndex;
+		//pIntData[0] = packetNumber++;
+		//pIntData[1] = packetID;
+		//pIntData[2] = objectIndex;
 		
+		int pIntData_packetNumber = packetNumber++;
+		int pIntData_packetID	  = packetID;
+		int pIntData_objectIndex  = objectIndex;
 		
-		NSDictionary* pHash = [NSDictionary dictionaryWithObjectsAndKeys:
-							[NSValue valueWithBytes:&x objCType:@encode(int)], [KeyObject withByteValue:POS_X],
-							[NSValue valueWithBytes:&y objCType:@encode(int)], [KeyObject withByteValue:POS_Y],
-								  nil];
+		NSDictionary* pHash = nil;
 		
-		
-		
+		switch( packetID ) 
+		{
+			case PACKET_COINTOSS:
+			{
+				int * puniqueID = (int*)data;
+				
+				pHash = [NSDictionary dictionaryWithObjectsAndKeys:
+						 
+						 [NSValue valueWithBytes:&pIntData_packetNumber objCType:@encode(int)], [KeyObject withByteValue:POS_PacketNumber],
+						 [NSValue valueWithBytes:&pIntData_packetID objCType:@encode(int)], [KeyObject withByteValue:POS_PacketID],
+						 [NSValue valueWithBytes:&pIntData_objectIndex objCType:@encode(int)], [KeyObject withByteValue:POS_ObjectIndex],
+						 
+						 [NSValue valueWithBytes:puniqueID objCType:@encode(int)], [KeyObject withByteValue:POS_PACKET_COINTOSS],
+						 
+						 nil];
+				
+				break;
+			}
+			case NETWORK_PUNCH: 
+			{
+				CGPoint *aim = (CGPoint*)data;
+				
+				float aim_x = (*aim).x;
+				float aim_y = (*aim).y;
+				
+				NSDictionary* pAimHash = [NSDictionary dictionaryWithObjectsAndKeys:
+									   
+									   [NSValue valueWithBytes:&aim_x objCType:@encode(float)], [KeyObject withByteValue:POS_CGPoint_X],
+									   [NSValue valueWithBytes:&aim_y objCType:@encode(float)], [KeyObject withByteValue:POS_CGPoint_Y],
+									   
+									   nil];
+				
+				pHash = [NSDictionary dictionaryWithObjectsAndKeys:
+						 
+						 [NSValue valueWithBytes:&pIntData_packetNumber objCType:@encode(int)], [KeyObject withByteValue:POS_PacketNumber],
+						 [NSValue valueWithBytes:&pIntData_packetID objCType:@encode(int)], [KeyObject withByteValue:POS_PacketID],
+						 [NSValue valueWithBytes:&pIntData_objectIndex objCType:@encode(int)], [KeyObject withByteValue:POS_ObjectIndex],
+						 
+						 pAimHash,[KeyObject withByteValue:POS_NETWORK_PUNCH],
+						 
+						 nil];
+				
+				break;
+			}
+			case NETWORK_TURN: 
+			{
+				CGPoint *aim = (CGPoint*)data;
+				
+				float aim_x = (*aim).x;
+				float aim_y = (*aim).y;
+				
+				NSDictionary* pAimHash = [NSDictionary dictionaryWithObjectsAndKeys:
+										  
+										  [NSValue valueWithBytes:&aim_x objCType:@encode(float)], [KeyObject withByteValue:POS_CGPoint_X],
+										  [NSValue valueWithBytes:&aim_y objCType:@encode(float)], [KeyObject withByteValue:POS_CGPoint_Y],
+										  
+										  nil];
+				
+				pHash = [NSDictionary dictionaryWithObjectsAndKeys:
+						 
+						 [NSValue valueWithBytes:&pIntData_packetNumber objCType:@encode(int)], [KeyObject withByteValue:POS_PacketNumber],
+						 [NSValue valueWithBytes:&pIntData_packetID objCType:@encode(int)], [KeyObject withByteValue:POS_PacketID],
+						 [NSValue valueWithBytes:&pIntData_objectIndex objCType:@encode(int)], [KeyObject withByteValue:POS_ObjectIndex],
+						 
+						 pAimHash,[KeyObject withByteValue:POS_NETWORK_TURN],
+						 
+						 nil];
+				
+				break;
+			}
+			case NETWORK_POS: 
+			{
+				PlayerInfo *pi = (PlayerInfo*)data;
+				
+				float playerInfo_headP_X = pi->headP.x;
+				float playerInfo_headP_Y = pi->headP.y;
+				
+				float playerInfo_headV_X = pi->headV.x;
+				float playerInfo_headV_Y = pi->headV.y;
+				
+				float playerInfo_headA	 = pi->headA;
+				
+				float playerInfo_gloveV_X= pi->gloveV.x;
+				float playerInfo_gloveV_Y= pi->gloveV.y;
+				
+				float playerInfo_opponentHealth = pi->opponentHealth;
+				
+				NSDictionary* pPlayerInfoHash = [NSDictionary dictionaryWithObjectsAndKeys:
+										  
+										  [NSValue valueWithBytes:&playerInfo_headP_X objCType:@encode(float)], [KeyObject withByteValue:POS_PlayerInfo_headP_X],
+										  [NSValue valueWithBytes:&playerInfo_headP_Y objCType:@encode(float)], [KeyObject withByteValue:POS_PlayerInfo_headP_Y],
+												 
+										  [NSValue valueWithBytes:&playerInfo_headV_X objCType:@encode(float)], [KeyObject withByteValue:POS_PlayerInfo_headV_X],
+										  [NSValue valueWithBytes:&playerInfo_headV_Y objCType:@encode(float)], [KeyObject withByteValue:POS_PlayerInfo_headV_Y],
+												 
+										  [NSValue valueWithBytes:&playerInfo_headA objCType:@encode(float)], [KeyObject withByteValue:POS_PlayerInfo_headA],
+												 
+										  [NSValue valueWithBytes:&playerInfo_gloveV_X objCType:@encode(float)], [KeyObject withByteValue:POS_PlayerInfo_gloveV_X],
+										  [NSValue valueWithBytes:&playerInfo_gloveV_Y objCType:@encode(float)], [KeyObject withByteValue:POS_PlayerInfo_gloveV_Y],
+												 
+									      [NSValue valueWithBytes:&playerInfo_opponentHealth objCType:@encode(float)], [KeyObject withByteValue:POS_PlayerInfo_opponentHealth],
+										
+										  nil];
+				
+
+
+				pHash = [NSDictionary dictionaryWithObjectsAndKeys:
+						 
+						 [NSValue valueWithBytes:&pIntData_packetNumber objCType:@encode(int)], [KeyObject withByteValue:POS_PacketNumber],
+						 [NSValue valueWithBytes:&pIntData_packetID objCType:@encode(int)], [KeyObject withByteValue:POS_PacketID],
+						 [NSValue valueWithBytes:&pIntData_objectIndex objCType:@encode(int)], [KeyObject withByteValue:POS_ObjectIndex],
+						 
+						 pPlayerInfoHash,[KeyObject withByteValue:POS_NETWORK_POS],
+						 
+						 nil];
+				
+				break;
+			}
+				
+			case NETWORK_SLIDE: 
+			{
+				SlideInfo *slideInfo = (SlideInfo*)data;
+				
+				float slideToX = slideInfo->slideTo.x;
+				float slideToY = slideInfo->slideTo.y;
+				bool  pfinalSlide = slideInfo->finalSlide;
+				
+				NSDictionary* pslideInfoHash = [NSDictionary dictionaryWithObjectsAndKeys:
+										  
+										  [NSValue valueWithBytes:&slideToX    objCType:@encode(float)], [KeyObject withByteValue:POS_SlideTo_X],
+										  [NSValue valueWithBytes:&slideToY    objCType:@encode(float)], [KeyObject withByteValue:POS_SlideTo_Y],
+										  [NSValue valueWithBytes:&pfinalSlide objCType:@encode(bool)],  [KeyObject withByteValue:POS_SlideTo_FinalSlide],
+												
+										  nil];
+				
+				pHash = [NSDictionary dictionaryWithObjectsAndKeys:
+						 
+						 [NSValue valueWithBytes:&pIntData_packetNumber objCType:@encode(int)], [KeyObject withByteValue:POS_PacketNumber],
+						 [NSValue valueWithBytes:&pIntData_packetID objCType:@encode(int)], [KeyObject withByteValue:POS_PacketID],
+						 [NSValue valueWithBytes:&pIntData_objectIndex objCType:@encode(int)], [KeyObject withByteValue:POS_ObjectIndex],
+						 
+						 pslideInfoHash,[KeyObject withByteValue:POS_NETWORK_SLIDE],
+						 
+						 nil];
+				
+				break;
+			}
+				
+			default:
+				break;
+		}
 		
 		
 		// copy data in after the header
-		memcpy( &networkPacket[packetHeaderSize], data, length ); 
+		//memcpy( &networkPacket[packetHeaderSize], data, length ); 
 		
-		NSData * packet = [NSData dataWithBytes: networkPacket length: (length+packetHeaderSize)];
+		//NSData * packet = [NSData dataWithBytes: networkPacket length: (length+packetHeaderSize)];
 		
-		NSString * pStr = [NSString stringWithUTF8String:[packet bytes]];
+		//NSString * pStr = [NSString stringWithUTF8String:[packet bytes]];
 		
 		NSMutableDictionary * ev = [[NSMutableDictionary alloc] init];
 		
-		[ev setObject: pStr forKey:[KeyObject withByteValue:STATUS_DATA]];
+		if(pHash)
+		{
+			[ev setObject: pHash forKey:[KeyObject withByteValue:STATUS_DATA]];
+		}
 		
 		if(howtosend == YES)
 		{
@@ -480,22 +630,37 @@ typedef enum {
 		if(!(eventData = [photonEvent objectForKey:[KeyObject withByteValue:P_DATA]]))
 			return;
 		
-		const unsigned int packetHeaderSize = 3 * sizeof(int); // we have two "ints" for our header	
+		//const unsigned int packetHeaderSize = 3 * sizeof(int); // we have two "ints" for our header	
 		
 		static int lastPacketTime     = -1;
 		
-		NSString * pStr = (NSString * )[eventData objectForKey:[KeyObject withByteValue:STATUS_DATA]];
+		//NSString * pStr = (NSString * )[eventData objectForKey:[KeyObject withByteValue:STATUS_DATA]];
 		
-		NSData * pData =[pStr dataUsingEncoding:NSUTF8StringEncoding];
+		//NSData * pData =[pStr dataUsingEncoding:NSUTF8StringEncoding];
 		
-		unsigned char *incomingPacket = (unsigned char *)[pData bytes];
+		//unsigned char *incomingPacket = (unsigned char *)[pData bytes];
 		
-		int *pIntData = (int *)&incomingPacket[0];
+		//int *pIntData = (int *)&incomingPacket[0];
 		
 		// check the network time and make sure packers are in order
-		int packetTime  = pIntData[0];
-		int packetID    = pIntData[1];
-		int objectIndex = pIntData[2];
+		//int packetTime  = pIntData[0];
+		//int packetID    = pIntData[1];
+		//int objectIndex = pIntData[2];
+		
+		int packetTime  = 0;
+		int packetID    = 0; 
+		int objectIndex = 0;
+		
+		NSDictionary * pHash = nil;
+		
+		pHash = [eventData objectForKey:[KeyObject withByteValue:STATUS_DATA]];
+		
+		if(pHash == nil)
+			return;
+		
+		[((NSValue*)[pHash objectForKey:[KeyObject withByteValue:POS_PacketNumber]])getValue:&packetTime];
+		[((NSValue*)[pHash objectForKey:[KeyObject withByteValue:POS_PacketID]])getValue:&packetID];
+		[((NSValue*)[pHash objectForKey:[KeyObject withByteValue:POS_ObjectIndex]])getValue:&objectIndex];
 		
 		lastPacketTime = packetTime;
 		
@@ -504,7 +669,9 @@ typedef enum {
 			case PACKET_COINTOSS:
 			{
 				// coin toss to determine roles of the two players
-				peerUniqueID = pIntData[3];
+				//peerUniqueID = pIntData[3];
+				
+				[((NSValue*)[pHash objectForKey:[KeyObject withByteValue:POS_PACKET_COINTOSS]])getValue:&peerUniqueID];
 				
 				// if other player's coin is higher than ours then that player is the server
 				if(peerUniqueID > uniqueID) 
@@ -528,9 +695,9 @@ typedef enum {
 			default:
 				if (dataReceiver) 
 				{
-					[dataReceiver receivePacket:packetID objectIndex:objectIndex data:&incomingPacket[packetHeaderSize]];
-				} 
-				else 
+					[dataReceiver receivePacket:packetID objectIndex:objectIndex data:eventData];
+				}
+				else
 				{
 					NSLog(@" !!! receiveData PACKET BEFORE COINTOSS: %d", packetID);
 				}
