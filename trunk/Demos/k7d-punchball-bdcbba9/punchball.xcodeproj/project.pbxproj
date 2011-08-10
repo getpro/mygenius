@@ -1592,21 +1592,39 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yi Yang (3P2MDK6FQX)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = punchball_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = _EG_IPHONE_PLATFORM;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
-				HEADER_SEARCH_PATHS = libs;
+				HEADER_SEARCH_PATHS = (
+					libs,
+					"../../Common-c/inc/**",
+					"../../Common-objc/inc/**",
+					"../../Photon-objc/inc/**",
+					"../../Photon-c/inc/**",
+				);
 				INFOPLIST_FILE = Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.2;
+				LIBRARY_SEARCH_PATHS = (
+					"../../Common-objc/lib/**",
+					"../../Photon-objc/lib/**",
+				);
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
+					"../../Common-objc/lib/libCommon-objc_$(CONFIGURATION)_$(PLATFORM_NAME).a",
+					"-lPhoton-objc_$(CONFIGURATION)_$(PLATFORM_NAME)",
+					"-lCommon-objc_$(CONFIGURATION)_$(PLATFORM_NAME)",
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = punchball;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EFF5D949-CD32-4D88-BA55-28D957BFA267";
+				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = release;
