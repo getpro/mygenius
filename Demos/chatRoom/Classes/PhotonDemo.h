@@ -6,6 +6,7 @@ typedef enum
 	PhotonPeerCreated,
 	Connecting,
 	Connected,
+	GetProperying,
 	Joining,
 	ErrorJoining,
 	Joined,
@@ -17,6 +18,10 @@ typedef enum
 	Sended,
 	Disconnecting,
 	Disconnected,
+	
+	KeysExchanging,
+	KeysExchanged,
+	
 } States;
 
 @interface CPhotonLib : NSObject
@@ -41,5 +46,10 @@ typedef enum
 - (void) SetState:(States) new_state;
 - (States) GetState;
 - (void) Stop;
+- (void) ExchangeKeys;
+
+- (void) DeriveSharedKey :(nByte*)serverPublicKey;
+
+- (void) EnterRoom;
 
 @end

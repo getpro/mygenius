@@ -55,9 +55,17 @@
 
 -(void) JoinIntoRoom:(NSString *) pRoomNo
 {
+	
+	if([[chatRoomAppDelegate getAppDelegate].m_PhotonLib GetState] != KeysExchanged)
+	{
+		return;
+	}
+	
 	[chatRoomAppDelegate getAppDelegate].m_PhotonLib.m_strRoomID = pRoomNo;
 	
-	[[chatRoomAppDelegate getAppDelegate].m_PhotonLib SetState:PhotonPeerCreated];
+	[[chatRoomAppDelegate getAppDelegate].m_PhotonLib SetState:Joining];
+	
+	[[chatRoomAppDelegate getAppDelegate].m_PhotonLib EnterRoom];
 	
 	//连接和加入中⋯⋯⋯⋯⋯⋯
 	UIView * pWaitView = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,480)];
@@ -141,6 +149,39 @@
 	}
 }
 
+- (void) StartConnect
+{
+	//连接和加入中⋯⋯⋯⋯⋯⋯
+	UIView * pWaitView = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,480)];
+	
+	[pWaitView setBackgroundColor:[UIColor blackColor]];
+	[pWaitView setTag:1001];
+	[pWaitView setAlpha:0.8f];
+	
+	[self.view addSubview:pWaitView];
+	
+	if(m_pActivity == nil)
+	{
+		m_pActivity = [[UIActivityIndicatorView alloc] 
+					   initWithFrame:CGRectMake( 0, 0, 32.0f , 32.0f )] ;
+	}
+	
+	[self.view addSubview:m_pActivity];
+	
+	m_pActivity.center = self.view.center;
+	
+	[m_pActivity startAnimating];
+	
+	[pWaitView release];
+}
 
+- (void) FinishConnect
+{
+	//推出wait界面
+	[m_pActivity stopAnimating];
+	
+	UIView * temp = [self.view viewWithTag:1001];
+	[temp removeFromSuperview];
+}
 
 @end

@@ -12,6 +12,9 @@
 - (void) PhotonPeerOperationResult:(nByte)opCode :(int)returnCode :(NSDictionary*)returnValues :(short)invocID
 {
 	NSLog(@"OperationResult called, opCode = %d , returnCode = %d",opCode, returnCode);
+	
+	NSLog(@"%@", [Utils hashToString:returnValues :true]);
+	
 	switch([current GetState])
 	{
 		case Joining :
@@ -42,8 +45,18 @@
 			}
 			else [current SetState:ErrorLeaving];
 			break;
+		
 		default:
 			break;
+	}
+	
+	if(opCode == OPC_RT_EXCHANGEKEYSFORENCRYPTION)
+	{
+		[current DeriveSharedKey:(nByte*)((EGArray*)[returnValues objectForKey:[KeyObject withByteValue:P_SERVER_KEY]]).CArray];
+		
+		[current SetState:KeysExchanged];
+		
+		NSLog(@"KeysExchanged");
 	}
 }
 
@@ -79,9 +92,24 @@
 {	
 	NSLog(@"-----Listener::EventAction called, eventCode = %d", eventCode);
 	
+	NSLog(@"%@",[Utils hashToString:photonEvent :true]);
+	
 	//NSString * str = nil;
 	//[textView writeToTextView:str];
 	//[textView writeToTextView:[Utils hashToString:photonEvent :true]];
+	
+	if(eventCode == EV_RT_JOIN)
+	{
+		/*
+		[current SetState:Joined];
+		NSLog(@"----------JOINED-------");
+		
+		if(delegate)
+		{
+			[delegate MyListenerOperationResult:OPC_RT_JOIN :0 :photonEvent:-1];
+		}
+		*/
+	}
 	
 	if(!photonEvent)
 		return;

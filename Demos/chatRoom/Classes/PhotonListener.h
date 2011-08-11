@@ -9,6 +9,10 @@
 
 - (void) MyListenerOperationResult:(nByte)opCode :(int)returnCode :(NSDictionary*)returnValues :(short)invocID;
 
+- (void) StartConnect;
+
+- (void) FinishConnect;
+
 @end
 
 
