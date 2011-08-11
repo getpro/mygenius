@@ -166,6 +166,16 @@ static const float ROWHEIGHT = 60;
 	
 }
 
+- (void) StartConnect
+{
+	
+}
+
+- (void) FinishConnect
+{
+	
+}
+
 
 #pragma mark -
 #pragma mark 委托方法实现

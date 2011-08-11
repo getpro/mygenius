@@ -27,19 +27,28 @@
 	
 	m_pLitePeer = [[LitePeer alloc] init:listener];
 	
-	//m_currentState = PhotonPeerCreated;
+	m_currentState = PhotonPeerCreated;
+	
+	
 	
 	return SUCCESS;
 }
+
+#define URL_TEST_SERVER		L"172.18.66.36:5055"
 
 - (int) CreateConnection
 {
 	//char* server = "udp.exitgames.com:5055";
 	
-	[m_pLitePeer Connect:[NSString stringWithUTF32String:URL_PHOTON_SERVER]];
+	nByte * pAppName = (nByte *)"LiteLobby";
+	
+	//[m_pLitePeer Connect:[NSString stringWithUTF32String:URL_PHOTON_SERVER]];
 	//BOOL pRet = [m_pLitePeer Connect:[NSString stringWithUTF8String:server]];
 	
+	[m_pLitePeer Connect:[NSString stringWithUTF32String:URL_TEST_SERVER]:pAppName];
+	
 	m_currentState = Connecting;
+	
 	return 0;
 }
 
@@ -50,9 +59,65 @@
 	return 0;
 }
 
+-(void) ExchangeKeys
+{
+	[m_pLitePeer opExchangeKeysForEncryption];
+}
+
+- (void) DeriveSharedKey :(nByte*)serverPublicKey
+{
+	[m_pLitePeer deriveSharedKey:serverPublicKey];
+}
+
 - (short) Join:(NSString*)gameId
 {
-	return [m_pLitePeer opJoin:gameId];
+	//return [m_pLitePeer opJoin:gameId];
+	
+	//return [m_pLitePeer opJoin:@"chat_lobby"];
+	
+	
+	
+	
+	NSDictionary * pDic = [NSDictionary dictionaryWithObjectsAndKeys:
+						   
+						   @"chat_lobby" ,[KeyObject withByteValue:P_GAMEID],
+						   @"chat_lobby" ,[KeyObject withByteValue:((nByte)5)],
+						   
+						   
+						   nil];
+	
+	return [m_pLitePeer opCustom:OPC_RT_JOIN : pDic :true];
+	 
+	
+	
+}
+
+- (void) EnterRoom
+{
+	
+	if(m_strRoomID != nil)
+	{
+		short pJoinID = 0;
+		pJoinID = [self Join:m_strRoomID];
+		
+		NSLog(@"pJoinID[%d]",pJoinID);
+		
+		if ( pJoinID == -1)
+		{
+			m_currentState = ErrorJoining;
+		}
+		
+		NSLog(@"RoomID[%@]",m_strRoomID);
+	}
+	else
+	{
+		if ([self Join:[NSString stringWithUTF8String:"demo_photon_game"]] == -1)
+			m_currentState = ErrorJoining;
+		
+		NSLog(@"RoomID[demo_photon_game]");
+	}
+	
+	
 }
 
 - (short) Leave:(NSString*)gameId
@@ -63,6 +128,7 @@
 - (int) Run
 {
 	//char gameId[] = "demo_photon_game";
+	static short pRet;
 
 	[m_pLitePeer service];
 	switch (m_currentState)
@@ -80,35 +146,43 @@
 			return -1;
 			break;
 		case Connected:
-			NSLog(@"-------JOINING-------");
-			m_currentState = Joining;
 			
-			if(m_strRoomID != nil)
-			{
-				short pJoinID = 0;
-				pJoinID = [self Join:m_strRoomID];
-				
-				NSLog(@"pJoinID[%d]",pJoinID);
-				
-				if ( pJoinID == -1)
-				{
-					m_currentState = ErrorJoining;
-				}
-				
-				NSLog(@"RoomID[%@]",m_strRoomID);
-			}
-			else
-			{
-				if ([self Join:[NSString stringWithUTF8String:"demo_photon_game"]] == -1)
-					m_currentState = ErrorJoining;
-				
-				NSLog(@"RoomID[demo_photon_game]");
-			}
+			NSLog(@"-------Connected-------");
+			
+			[self ExchangeKeys];
+			
+			m_currentState = KeysExchanging;
+			
+			//m_currentState = Joining;
 			
 			break;
+			
+			
+		case KeysExchanging:
+			
+			break;
+			
+			
+		case KeysExchanged:
+			
+			//test
+			
+			//[m_pLitePeer opGetProperties];
+			
+			//pRet = [m_pLitePeer opCustom:OPC_RT_GETPROPERTIES :[NSDictionary dictionaryWithObject:@"demo_photon_game_room1" forKey:[KeyObject withByteValue:P_GAMEID]] :true :0 :true];
+			
+			//m_currentState = GetProperying;
+
+			break;
+			
+			
 		case Joining :
 			// Waiting for callback function
 			break;
+		
+		case GetProperying:
+			break;
+
 		case ErrorJoining:
 			// Stop run cycle
 			return -1;
