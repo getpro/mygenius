@@ -72,9 +72,12 @@
 
 - (void)dealloc
 {
-	if (pausePopup) {
+	if (pausePopup) 
+	{
 		[pausePopup	dismissWithClickedButtonIndex:-1 animated:NO];
 	}
+	
+	
 	
 	self.link = nil;
 	[super dealloc];

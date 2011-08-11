@@ -410,7 +410,7 @@ typedef enum {
 // Called when an alert button is tapped.
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	// 0 index is "End Game" button
-	if(buttonIndex == 0) 
+	if(buttonIndex == 0)
 	{
 		if (self.state == StateCointoss) 
 		{
@@ -459,9 +459,11 @@ typedef enum {
 			break;
 		case SC_DISCONNECT:
 			m_currentState = stateDisconnected;
+			
 			NSLog(@"-------DISCONNECTED-------");
 			
-			if(self.state == StatePicker) {
+			if(self.state == StatePicker) 
+			{
 				return;				// only do stuff if we're in multiplayer, otherwise it is probably for Picker
 			}
 			
@@ -608,6 +610,41 @@ typedef enum {
 	{
 		int n = 0;
 		[(NSValue*)[photonEvent objectForKey:[KeyObject withByteValue:P_ACTORNR]] getValue:&n];
+		
+		m_currentState = stateDisconnected;
+		
+		NSLog(@"-------DISCONNECTED-------");
+		
+		if(self.state == StatePicker) 
+		{
+			return;				// only do stuff if we're in multiplayer, otherwise it is probably for Picker
+		}
+		
+		//if(_state == GKPeerStateDisconnected) 
+		{
+			// We've been disconnected from the other peer.
+			
+			// Update user alert or throw alert if it isn't already up
+			
+			NSString *message = [NSString stringWithFormat:@"The peer has disconnected." /* , [_session displayNameForPeer:_peerID] */ ];
+			if ((self.state == StateCointoss) && self.connectionAlert && self.connectionAlert.visible) 
+			{
+				self.connectionAlert.message = message;
+			}
+			else 
+			{
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Lost Connection" message:message delegate:self cancelButtonTitle:@"End Game" otherButtonTitles:nil];
+				self.connectionAlert = alert;
+				[alert show];
+				[alert release];
+			}
+			
+			self.state = StateDisconnected;
+			
+			[self leaveGame];
+			
+			//[delegate linkDisconnected];
+		}
 		
 		/*
 		int current = mGame.CurrentPlayers;
@@ -777,7 +814,9 @@ typedef enum {
 
 -(void) CreateConnection
 {
-	char* server = "udp.exitgames.com:5055";
+	//char* server = "udp.exitgames.com:5055";
+	
+	char* server = "172.18.66.36:5055";
 	
 	[m_pLitePeer Connect:[NSString stringWithUTF8String:server]];
 	
