@@ -16,12 +16,12 @@
 
 #import "Game.h"
 #import "Link.h"
+
 #import <GameKit/GameKit.h>
 
 
-
-
-typedef enum {	
+typedef enum 
+{	
 	NETWORK_UPDATE_DIR, 
 	NETWORK_PUNCH,		
 	NETWORK_SLIDE,		
@@ -32,13 +32,15 @@ typedef enum {
 } PacketCodes;
 
 
-typedef struct {
+typedef struct 
+{
 	cpVect slideTo;
 	bool finalSlide;
 } SlideInfo;
 
 
-@interface MultiPlayerGame : Game<DataReceiver> {
+@interface MultiPlayerGame : Game < DataReceiver >
+{
 	Link *link;
 	int gamePacketNumber;
 	Player *remotePlayer;

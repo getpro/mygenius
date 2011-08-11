@@ -243,13 +243,15 @@ void drawCollisions(void *ptr, void *data)
 
 -(void) updateScores 
 {
-	if (gameInProgress) {
-		if (leftPlayer.health <= 0.0f || rightPlayer.health <= 0.0f) {
+	if (gameInProgress) 
+	{
+		if (leftPlayer.health <= 0.0f || rightPlayer.health <= 0.0f) 
+		{
 			gameInProgress = false;
 			[NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(gameOver) userInfo:nil repeats:NO];
 		}
 				
-		leftScore.textureRect = CGRectMake(leftPlayer.color * 15, 0, 15, (leftPlayer.health / MAX_HEALTH) * 300.0f);
+		leftScore.textureRect  = CGRectMake(leftPlayer.color * 15, 0, 15, (leftPlayer.health / MAX_HEALTH) * 300.0f);
 		rightScore.textureRect = CGRectMake(rightPlayer.color * 15, 0, 15, (rightPlayer.health / MAX_HEALTH) * 300.0f);		
 	}
 	
@@ -258,10 +260,14 @@ void drawCollisions(void *ptr, void *data)
 
 
 
-- (void)gameOver {
-	if (leftPlayer.health <= 0.0f) {
+- (void)gameOver 
+{
+	if (leftPlayer.health <= 0.0f) 
+	{
 		[delegate gameOver:leftPlayer != localPlayer score:[localPlayer getTotalScore] opponentName:opponentName];
-	} else if (rightPlayer.health <= 0.0f) {
+	} 
+	else if (rightPlayer.health <= 0.0f) 
+	{
 		[delegate gameOver:rightPlayer != localPlayer score:[localPlayer getTotalScore] opponentName:opponentName];
 	}	
 }
