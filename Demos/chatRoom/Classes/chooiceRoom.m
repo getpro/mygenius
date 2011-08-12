@@ -71,8 +71,9 @@
 
 -(void) JoinIntoRoom:(NSString *) pRoomNo
 {
+	States pStates = [[chatRoomAppDelegate getAppDelegate].m_PhotonLib GetState];
 	
-	if([[chatRoomAppDelegate getAppDelegate].m_PhotonLib GetState] != EnterLobbyed)
+	if( pStates == Leaving || pStates == Connecting || pStates == Joining || pStates == EnterLobbying || pStates == KeysExchanging)
 	{
 		return;
 	}
@@ -147,12 +148,20 @@
 				NSLog(@"room1[%@]",pRet);
 				m_nRoom1 = [pRet intValue];
 			}
+			else
+			{
+				m_nRoom1 = 0;
+			}
 			
 			pRet = (NSString*)[eventData objectForKey:[KeyObject withStringValue:@"demo_photon_game_room2"]];
 			if(pRet)
 			{
 				NSLog(@"room2[%@]",pRet);
 				m_nRoom2 = [pRet intValue];
+			}
+			else
+			{
+				m_nRoom2 = 0;
 			}
 			
 			pRet = (NSString*)[eventData objectForKey:[KeyObject withStringValue:@"demo_photon_game_room3"]];
@@ -161,12 +170,20 @@
 				NSLog(@"room3[%@]",pRet);
 				m_nRoom3 = [pRet intValue];
 			}
+			else
+			{
+				m_nRoom3 = 0;
+			}
 			
 			pRet = (NSString*)[eventData objectForKey:[KeyObject withStringValue:@"demo_photon_game_room4"]];
 			if(pRet)
 			{
 				NSLog(@"room4[%@]",pRet);
 				m_nRoom4 = [pRet intValue];
+			}
+			else
+			{
+				m_nRoom4 = 0;
 			}
 			
 			[self UpDateRoomNum];
@@ -321,7 +338,7 @@
 	
 	//[[chatRoomAppDelegate getAppDelegate].m_PhotonLib GetProperties];
 	
-	//[[chatRoomAppDelegate getAppDelegate].m_PhotonLib EnterLobby];
+	[[chatRoomAppDelegate getAppDelegate].m_PhotonLib EnterLobby];
 	
 }
 

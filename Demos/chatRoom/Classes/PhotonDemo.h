@@ -61,7 +61,9 @@ typedef enum
 - (void) DeriveSharedKey :(nByte*)serverPublicKey;
 
 - (void) EnterLobby;
+
 - (void) EnterRoom;
+- (void) LeaveRoom;
 
 - (void) GetProperties;
 

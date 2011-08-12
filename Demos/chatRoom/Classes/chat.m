@@ -224,7 +224,11 @@ static const float ROWHEIGHT = 60;
 {
 	[chatRoomAppDelegate getAppDelegate].l.delegate = [chatRoomAppDelegate getAppDelegate].m_pchooiceRoom;
 	
-	[[chatRoomAppDelegate getAppDelegate].m_PhotonLib SetState:EnterLobbyed];
+	//[[chatRoomAppDelegate getAppDelegate].m_PhotonLib SetState:EnterLobbyed];
+	
+	[[chatRoomAppDelegate getAppDelegate].m_PhotonLib SetState:Leaving];
+	
+	[[chatRoomAppDelegate getAppDelegate].m_PhotonLib LeaveRoom];
 	
 	[self.view removeFromSuperview];
 }

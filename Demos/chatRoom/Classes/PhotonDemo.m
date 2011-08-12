@@ -48,6 +48,8 @@
 	
 	//BOOL pRet = [m_pLitePeer Connect:[NSString stringWithUTF8String:server]];
 	
+	//URL_PHOTON_SERVER
+	
 	[m_pLitePeer Connect:[NSString stringWithUTF32String:URL_TEST_SERVER]:pAppName];
 	
 	m_currentState = Connecting;
@@ -107,9 +109,33 @@
 	
 }
 
+- (void) LeaveRoom
+{
+	if(m_strRoomID != nil)
+	{
+		short pLeaveID = 0;
+		pLeaveID = [self Leave:m_strRoomID];
+		
+		NSLog(@"pLeaveID[%d]",pLeaveID);
+		
+		if ( pLeaveID == -1)
+		{
+			m_currentState = ErrorLeaving;
+		}
+		
+		NSLog(@"RoomID[%@]",m_strRoomID);
+	}
+	else
+	{
+		if ([self Leave:[NSString stringWithUTF8String:"demo_photon_game"]] == -1)
+			m_currentState = ErrorLeaving;
+		
+		NSLog(@"RoomID[demo_photon_game]");
+	}
+}
+
 - (void) EnterRoom
 {
-	
 	if(m_strRoomID != nil)
 	{
 		short pJoinID = 0;
@@ -137,7 +163,21 @@
 
 - (short) Leave:(NSString*)gameId
 {
-	return [m_pLitePeer opLeave:gameId];
+	return [m_pLitePeer opLeave:@""];
+	
+	/*
+	NSDictionary * pDic = [NSDictionary dictionaryWithObjectsAndKeys:
+						   
+						   gameId ,[KeyObject withByteValue:P_GAMEID],
+						   @"chat_lobby" ,[KeyObject withByteValue:((nByte)5)],
+						   
+						   
+						   nil];
+	
+	return [m_pLitePeer opCustom:OPC_RT_LEAVE : pDic :true];
+	 
+	*/
+	
 }
 
 - (int) Run
@@ -212,9 +252,9 @@
 			NSLog(@"ErrorLeaving");
 			break;
 		case Left :
-			m_currentState = Disconnecting;
-			NSLog(@"-------DISCONNECTING-------");
-			[self CloseConnection];
+			//m_currentState = Disconnecting;
+			//NSLog(@"-------Left-------");
+			//[self CloseConnection];
 			break;
 		case Disconnecting:
 			// Waiting for callback function
