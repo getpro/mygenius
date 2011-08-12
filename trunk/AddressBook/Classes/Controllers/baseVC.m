@@ -76,7 +76,7 @@
 		rightOrLeft = NO;
 		teXiao      = NO;
 		
-		NSString * ss = [NSString stringWithFormat:@"%d" , 0];
+		NSString * ss = [NSString stringWithFormat:@"%d" , EViewAddressBook];
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
 		
@@ -86,7 +86,7 @@
 		rightOrLeft = NO;
 		teXiao      = NO;
 		
-		NSString * ss = [NSString stringWithFormat:@"%d" , 1];
+		NSString * ss = [NSString stringWithFormat:@"%d" , EViewAccounts];
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
 		
@@ -96,7 +96,7 @@
 		rightOrLeft = NO;
 		teXiao      = NO;
 		
-		NSString * ss = [NSString stringWithFormat:@"%d" , 2];
+		NSString * ss = [NSString stringWithFormat:@"%d" , EViewDate];
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
 		
@@ -106,7 +106,7 @@
 		rightOrLeft = NO;
 		teXiao      = NO;
 		
-		NSString * ss = [NSString stringWithFormat:@"%d" , 3];
+		NSString * ss = [NSString stringWithFormat:@"%d" , EViewMemo];
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
 		
@@ -116,7 +116,7 @@
 		rightOrLeft = NO;
 		teXiao      = NO;
 		
-		NSString * ss = [NSString stringWithFormat:@"%d" , 4];
+		NSString * ss = [NSString stringWithFormat:@"%d" , EViewSetting];
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
 		
