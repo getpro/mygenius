@@ -4,23 +4,33 @@ typedef enum
 {
 	SampleStarted		= 0,
 	PhotonPeerCreated,
+	
 	Connecting,
 	Connected,
+	
 	GetProperying,
+	
 	Joining,
-	ErrorJoining,
 	Joined,
+	
 	Leaving,
-	ErrorLeaving,
 	Left,
+	
+	ErrorJoining,
+	ErrorLeaving,
 	ErrorConnecting,
+	
 	Receiving,
 	Sended,
+	
 	Disconnecting,
 	Disconnected,
 	
 	KeysExchanging,
 	KeysExchanged,
+	
+	EnterLobbying,
+	EnterLobbyed,
 	
 } States;
 
@@ -50,6 +60,9 @@ typedef enum
 
 - (void) DeriveSharedKey :(nByte*)serverPublicKey;
 
+- (void) EnterLobby;
 - (void) EnterRoom;
+
+- (void) GetProperties;
 
 @end

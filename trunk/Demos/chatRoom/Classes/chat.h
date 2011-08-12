@@ -34,4 +34,6 @@
 
 //@property(retain,nonatomic) IBOutlet UITableView * advTable;
 
+-(IBAction) Return;
+
 @end
