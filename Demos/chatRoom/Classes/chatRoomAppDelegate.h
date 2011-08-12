@@ -12,12 +12,14 @@
 #import "PhotonListener.h"
 
 #import "chat.h"
+#import "chooiceRoom.h"
 
 @interface chatRoomAppDelegate : NSObject <UIApplicationDelegate> 
 {
     UIWindow   * window;
 	
 	chat       * m_pchat;
+	chooiceRoom* m_pchooiceRoom;
 	
 	CPhotonLib * m_PhotonLib;
 	Listener   * l;
@@ -25,6 +27,8 @@
 	
 	bool bRun;
 }
+
+@property (nonatomic, retain) chooiceRoom  * m_pchooiceRoom;
 
 @property (nonatomic, retain) chat  * m_pchat;
 

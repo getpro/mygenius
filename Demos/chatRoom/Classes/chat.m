@@ -220,4 +220,13 @@ static const float ROWHEIGHT = 60;
 	return YES;
 }
 
+-(IBAction) Return
+{
+	[chatRoomAppDelegate getAppDelegate].l.delegate = [chatRoomAppDelegate getAppDelegate].m_pchooiceRoom;
+	
+	[[chatRoomAppDelegate getAppDelegate].m_PhotonLib SetState:EnterLobbyed];
+	
+	[self.view removeFromSuperview];
+}
+
 @end

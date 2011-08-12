@@ -79,6 +79,22 @@
 	
 	//return [m_pLitePeer opJoin:@"chat_lobby"];
 	
+	//加入room
+	
+	NSDictionary * pDic = [NSDictionary dictionaryWithObjectsAndKeys:
+						   
+						   gameId ,[KeyObject withByteValue:P_GAMEID],
+						   @"chat_lobby" ,[KeyObject withByteValue:((nByte)5)],
+						   
+						   
+						   nil];
+	
+	return [m_pLitePeer opCustom:OPC_RT_JOIN : pDic :true];
+	
+}
+
+- (void) EnterLobby
+{
 	//加入一个lobby
 	
 	NSDictionary * pDic = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -87,22 +103,7 @@
 						   
 						   nil];
 	
-	
-	//加入room
-	
-	NSDictionary * pDic2 = [NSDictionary dictionaryWithObjectsAndKeys:
-						   
-						   gameId ,[KeyObject withByteValue:P_GAMEID],
-						   @"chat_lobby" ,[KeyObject withByteValue:((nByte)5)],
-						   
-						   
-						   nil];
-	 
-	
-	
-	return [m_pLitePeer opCustom:OPC_RT_JOIN : pDic :true];
-	 
-	//return [m_pLitePeer opCustom:OPC_RT_JOIN : pDic2 :true];
+	[m_pLitePeer opCustom:OPC_RT_JOIN : pDic :true];
 	
 }
 
@@ -160,35 +161,23 @@
 			return -1;
 			break;
 		case Connected:
-			
 			NSLog(@"-------Connected-------");
-			
 			[self ExchangeKeys];
-			
 			m_currentState = KeysExchanging;
-			
-			//m_currentState = Joining;
-			
 			break;
-			
-			
 		case KeysExchanging:
-			
 			break;
-			
-			
 		case KeysExchanged:
-			
-			//test
-			
-			//[m_pLitePeer opGetProperties];
-			
-			//pRet = [m_pLitePeer opCustom:OPC_RT_GETPROPERTIES :[NSDictionary dictionaryWithObject:@"demo_photon_game_room1" forKey:[KeyObject withByteValue:P_GAMEID]] :true :0 :true];
-			
-			//m_currentState = GetProperying;
-
+			NSLog(@"-------KeysExchanged-------");
+			[self EnterLobby];
+			m_currentState = EnterLobbying;
 			break;
 			
+		case EnterLobbying:
+			break;
+			
+		case EnterLobbyed:
+			break;
 			
 		case Joining :
 			// Waiting for callback function
@@ -341,6 +330,11 @@
 	NSLog(@"-------LEAVING-------");
 	if([self Leave:[NSString stringWithUTF8String:gameId]] == -1)
 		m_currentState = ErrorLeaving;
+}
+
+- (void) GetProperties
+{
+	[m_pLitePeer opGetProperties];
 }
 
 @end

@@ -58,6 +58,16 @@
 		
 		NSLog(@"KeysExchanged");
 	}
+	else if(opCode == OPC_RT_GETPROPERTIES)
+	{
+		//刷新
+		
+		if(delegate)
+		{
+			[delegate MyListenerOperationResult:opCode :returnCode :returnValues:invocID];
+		}
+	}
+	
 }
 
 - (void) PhotonPeerStatus:(int)statusCode
@@ -86,7 +96,7 @@
 		default:
 			break;
 	}
-}	
+}
 
 - (void) PhotonPeerEventAction:(nByte)eventCode :(NSDictionary*)photonEvent
 {	
@@ -113,6 +123,7 @@
 	
 	if(!photonEvent)
 		return;
+	
 	switch(eventCode)
 	{
 		// you do not receive your own events, so you must start 2 clients, to receive the events, you sent
@@ -173,9 +184,7 @@
 			
 			
 			NSDictionary* eventData = nil;
-			//static int i = 0;
-			//const nByte POS_X = 101, POS_Y = 102, key2 = 103;
-	
+			
 			// first access the inner Hash with your userdata inside the outer hash with general event data
 			if(!(eventData=[photonEvent objectForKey:[KeyObject withByteValue:P_DATA]]))
 				break;
@@ -205,6 +214,45 @@
 			
 		}
 			break;
+			
+		case 1:
+		{
+			//进入Lobby后获取LobbyRomm的信息
+			
+			/*
+			NSDictionary* eventData = nil;
+			
+			if(!(eventData = [photonEvent objectForKey:[KeyObject withByteValue:P_DATA]]))
+				break;
+			
+			int roomCount = [eventData count];
+			
+			roomCount ++;
+			 
+			*/
+			
+			if(delegate)
+			{
+				[delegate MyListenerEventAction:eventCode :photonEvent];
+			}
+			
+			[current SetState:EnterLobbyed];
+			
+		}
+			break;
+			
+		case 2:
+		{
+			//Lobby change 
+			
+			if(delegate)
+			{
+				[delegate MyListenerEventAction:eventCode :photonEvent];
+			}
+			
+			break;
+		}
+			
 		default:
 			break;
 	}
