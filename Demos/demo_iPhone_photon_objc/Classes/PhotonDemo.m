@@ -28,14 +28,20 @@
 	return SUCCESS;
 }
 
+#define URL_TEST_SERVER		L"172.18.66.36:5055"
+
 - (int) CreateConnection
 {
 	//char* server = "udp.exitgames.com:5055";
 	
-	[m_pLitePeer Connect:[NSString stringWithUTF32String:URL_PHOTON_SERVER]];
-	//BOOL pRet = [m_pLitePeer Connect:[NSString stringWithUTF8String:server]];
+	nByte * pAppName = (nByte *)"LiteLobby";
+	
+	//[m_pLitePeer Connect:[NSString stringWithUTF32String:URL_PHOTON_SERVER]];
+	
+	bool pRet = [m_pLitePeer Connect:[NSString stringWithUTF32String:URL_TEST_SERVER] : pAppName];
 	
 	m_currentState = Connecting;
+	
 	return 0;
 }
 
