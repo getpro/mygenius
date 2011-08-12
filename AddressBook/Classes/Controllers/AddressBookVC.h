@@ -8,9 +8,15 @@
 //  通讯录首页
 
 #import <UIKit/UIKit.h>
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
+
 #import "baseVC.h"
 
-@interface AddressBookVC : baseVC  <UISearchBarDelegate,UITableViewDelegate, UITableViewDataSource>
+@interface AddressBookVC : baseVC  <UISearchBarDelegate,
+					UITableViewDelegate, UITableViewDataSource,
+					ABNewPersonViewControllerDelegate
+					>
 {
 	UISearchDisplayController * m_pSearchDC;
 	UISearchBar				  * m_pSearchBar;

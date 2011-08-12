@@ -165,7 +165,7 @@
 	rightOrLeft = YES;
 	teXiao      = YES;
 	
-	NSString * ss = [NSString stringWithFormat:@"%d" , 5];
+	NSString * ss = [NSString stringWithFormat:@"%d" , EViewAddressInfo];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
 }
@@ -341,14 +341,48 @@
 
 -(IBAction)addItemBtn: (id)sender
 {
+	/*
 	rightOrLeft = YES;
 	teXiao      = YES;
 	
-	NSString * ss = [NSString stringWithFormat:@"%d" , 6];
+	NSString * ss = [NSString stringWithFormat:@"%d" , EViewAddressAddMore];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
+	*/
+	
+	//调用系统的添加联系人界面
+	
+	
+	ABNewPersonViewController *picker = [[ABNewPersonViewController alloc] init];
+	picker.newPersonViewDelegate = self;
+	
+	UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:picker];
+	[self presentModalViewController:navigation animated:YES];
+	
+	[picker release];
+	[navigation release];
+	 
+	
+	
+}
+
+
+#pragma mark ABNewPersonViewControllerDelegate methods
+// Dismisses the new-person view controller. 
+- (void)newPersonViewController:(ABNewPersonViewController *)newPersonViewController didCompleteWithNewPerson:(ABRecordRef)person
+{
+	[self dismissModalViewControllerAnimated:NO];
+	
+	[self.view setFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
+	
+	//设置更多的属性
+	rightOrLeft = YES;
+	teXiao      = YES;
+	
+	NSString * ss = [NSString stringWithFormat:@"%d" , EViewAddressAddMore];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
 	
 }
-
 
 @end

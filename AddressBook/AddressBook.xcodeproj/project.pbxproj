@@ -11,6 +11,9 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		211A09B613F57A99001CDC70 /* CustomItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A09B513F57A99001CDC70 /* CustomItemView.m */; };
+		211A09D913F57F8B001CDC70 /* AddressAddMoreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A09D813F57F8B001CDC70 /* AddressAddMoreVC.m */; };
+		211A09DD13F57FD0001CDC70 /* AddressAddMoreVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 211A09DC13F57FD0001CDC70 /* AddressAddMoreVC.xib */; };
 		216525F913E52F8F0075F387 /* AddressInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 216525F813E52F8F0075F387 /* AddressInfoVC.m */; };
 		216525FC13E52FA30075F387 /* AddressEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 216525FB13E52FA30075F387 /* AddressEditVC.m */; };
 		2165260E13E531BA0075F387 /* AddressInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2165260D13E531BA0075F387 /* AddressInfoVC.xib */; };
@@ -59,6 +62,11 @@
 		1D3623250D0F684500981E51 /* AddressBookAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* AddressBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddressBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		211A09B413F57A99001CDC70 /* CustomItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomItemView.h; sourceTree = "<group>"; };
+		211A09B513F57A99001CDC70 /* CustomItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomItemView.m; sourceTree = "<group>"; };
+		211A09D713F57F8B001CDC70 /* AddressAddMoreVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressAddMoreVC.h; sourceTree = "<group>"; };
+		211A09D813F57F8B001CDC70 /* AddressAddMoreVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressAddMoreVC.m; sourceTree = "<group>"; };
+		211A09DC13F57FD0001CDC70 /* AddressAddMoreVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressAddMoreVC.xib; sourceTree = "<group>"; };
 		216525F713E52F8F0075F387 /* AddressInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressInfoVC.h; sourceTree = "<group>"; };
 		216525F813E52F8F0075F387 /* AddressInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressInfoVC.m; sourceTree = "<group>"; };
 		216525FA13E52FA30075F387 /* AddressEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressEditVC.h; sourceTree = "<group>"; };
@@ -167,6 +175,8 @@
 				219D996B13E506E900506FCB /* DB */,
 				63458B5713E7B73D00338243 /* contactsInfo.h */,
 				63458B5813E7B73D00338243 /* contactsInfo.m */,
+				211A09B413F57A99001CDC70 /* CustomItemView.h */,
+				211A09B513F57A99001CDC70 /* CustomItemView.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -215,6 +225,9 @@
 				216525FA13E52FA30075F387 /* AddressEditVC.h */,
 				216525FB13E52FA30075F387 /* AddressEditVC.m */,
 				2165260F13E531D10075F387 /* AddressEditVC.xib */,
+				211A09D713F57F8B001CDC70 /* AddressAddMoreVC.h */,
+				211A09D813F57F8B001CDC70 /* AddressAddMoreVC.m */,
+				211A09DC13F57FD0001CDC70 /* AddressAddMoreVC.xib */,
 			);
 			name = "通讯录";
 			sourceTree = "<group>";
@@ -388,6 +401,7 @@
 				219D99CD13E5163100506FCB /* image09_kuang.png in Resources */,
 				2165260E13E531BA0075F387 /* AddressInfoVC.xib in Resources */,
 				2165261013E531D10075F387 /* AddressEditVC.xib in Resources */,
+				211A09DD13F57FD0001CDC70 /* AddressAddMoreVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +429,8 @@
 				2176A7EF13E5705700944254 /* ImageStore.m in Sources */,
 				2176A7F213E5708500944254 /* DataStore.m in Sources */,
 				63458B5913E7B73D00338243 /* contactsInfo.m in Sources */,
+				211A09B613F57A99001CDC70 /* CustomItemView.m in Sources */,
+				211A09D913F57F8B001CDC70 /* AddressAddMoreVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,13 +485,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yi Yang (3P2MDK6FQX)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EFF5D949-CD32-4D88-BA55-28D957BFA267";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

@@ -12,7 +12,7 @@
 
 @implementation SwitchViewController
 
-@synthesize m_pAddressBookVC,m_paccountsVC,m_pdateVC,m_pmemoVC,m_psettingVC,m_pAddressInfoVC,m_pAddressEditVC;
+@synthesize m_pAddressBookVC,m_paccountsVC,m_pdateVC,m_pmemoVC,m_psettingVC,m_pAddressInfoVC,m_pAddressEditVC,m_pAddressAddMoreVC;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
@@ -57,24 +57,14 @@
 	else if(self.m_pAddressEditVC.view.superview != nil)
 		return self.m_pAddressEditVC;
 	
+	else if(self.m_pAddressAddMoreVC.view.superview != nil)
+		return self.m_pAddressAddMoreVC;
+	
 	return nil;
 }
 
 -(void)changScene:(NSNotification*)notification
 {
-	 /*
-	  
-	 0 m_pAddressBookVC 通讯录
-	 1 m_paccountsVC    帐号管理
-	 2 m_pdateVC;       日期提醒
-	 3 m_pmemoVC;       备忘录
-	 4 m_psettingVC;    设置
-	 5 m_pAddressInfoVC 通讯录介绍
-	 6 m_pAddressEditVC 通讯录编辑
-	  
-	 */
-	
-	
 	NSString * ss = nil;
 	
 	if([[notification object] isKindOfClass:[NSString class]])
@@ -82,7 +72,7 @@
 		ss = [notification object];
 	}
 	
-	int index = [ss intValue];
+	EViewIndex index = (EViewIndex)[ss intValue];
 	
 	CATransition *animation = [CATransition animation];
     animation.duration = 0.1f;
@@ -96,11 +86,10 @@
 		animation.subtype = kCATransitionFromLeft;
 	
 	
-	
 	UIViewController *coming = nil;
 	UIViewController *going  = nil;
 	
-	if(index == 0)
+	if(index == EViewAddressBook)
 	{
 		if (self.m_pAddressBookVC == nil)
 		{
@@ -118,7 +107,7 @@
 		
 	}
 	
-	else if(index == 1)
+	else if(index == EViewAccounts)
 	{
 		if (self.m_paccountsVC == nil)
 		{
@@ -135,7 +124,7 @@
 		
 	}
 	
-	else if(index == 2)
+	else if(index == EViewDate)
 	{
 		if (self.m_pdateVC == nil)
 		{
@@ -152,7 +141,7 @@
 		
 	}
 	
-	else if(index == 3)
+	else if(index == EViewMemo)
 	{
 		if (self.m_pmemoVC == nil)
 		{
@@ -169,7 +158,7 @@
 		
 	}
 	
-	else if(index == 4)
+	else if(index == EViewSetting)
 	{
 		if (self.m_psettingVC == nil)
 		{
@@ -186,7 +175,7 @@
 		
 	}
 	
-	else if(index == 5)
+	else if(index == EViewAddressInfo)
 	{
 		if (self.m_pAddressInfoVC == nil)
 		{
@@ -203,7 +192,7 @@
 		
 	}
 	
-	else if(index == 6)
+	else if(index == EViewAddressEdit)
 	{
 		if (self.m_pAddressEditVC == nil)
 		{
@@ -216,6 +205,23 @@
 			[self.m_pAddressEditVC myInit];
 		
 		coming = self.m_pAddressEditVC;
+		going  = [self checkGoingView];
+		
+	}
+	
+	else if(index == EViewAddressAddMore)
+	{
+		if (self.m_pAddressAddMoreVC == nil)
+		{
+			AddressAddMoreVC * pAddressAddMoreVC = [[AddressAddMoreVC alloc] init];
+			self.m_pAddressAddMoreVC = pAddressAddMoreVC;
+			[pAddressAddMoreVC release];
+		}
+		
+		if(![AddressBookAppDelegate getAppDelegate].back)
+			[self.m_pAddressAddMoreVC myInit];
+		
+		coming = self.m_pAddressAddMoreVC;
 		going  = [self checkGoingView];
 		
 	}
@@ -272,9 +278,9 @@
 	[m_pmemoVC		  release];
 	[m_psettingVC     release];
 	
-	[m_pAddressInfoVC release];
-	[m_pAddressEditVC release];
-	
+	[m_pAddressInfoVC    release];
+	[m_pAddressEditVC    release];
+	[m_pAddressAddMoreVC release];
 	
     [super dealloc];
 }

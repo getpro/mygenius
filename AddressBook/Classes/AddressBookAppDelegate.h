@@ -28,7 +28,11 @@
 
 @property BOOL back;
 
-
+/*
+ *
+ * Makes an intl.uploadNativeStrings request.
+ * @param NSDictionary * params parameters for the API call
+*/
 + (AddressBookAppDelegate * ) getAppDelegate;
 
 - (void) backScene;
