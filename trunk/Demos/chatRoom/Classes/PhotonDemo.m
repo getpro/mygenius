@@ -34,7 +34,9 @@
 	return SUCCESS;
 }
 
-#define URL_TEST_SERVER		L"172.18.66.36:5055"
+#define URL_TEST_SERVER					L"172.18.66.36:5055"
+
+#define URL_TEST_LITELOBBY_SERVER		L"172.18.66.36:4530"
 
 - (int) CreateConnection
 {
@@ -42,7 +44,8 @@
 	
 	nByte * pAppName = (nByte *)"LiteLobby";
 	
-	//[m_pLitePeer Connect:[NSString stringWithUTF32String:URL_PHOTON_SERVER]];
+	//[m_pLitePeer Connect:[NSString stringWithUTF32String:URL_TEST_SERVER]];
+	
 	//BOOL pRet = [m_pLitePeer Connect:[NSString stringWithUTF8String:server]];
 	
 	[m_pLitePeer Connect:[NSString stringWithUTF32String:URL_TEST_SERVER]:pAppName];
@@ -71,24 +74,35 @@
 
 - (short) Join:(NSString*)gameId
 {
+	
 	//return [m_pLitePeer opJoin:gameId];
 	
 	//return [m_pLitePeer opJoin:@"chat_lobby"];
 	
-	
-	
+	//加入一个lobby
 	
 	NSDictionary * pDic = [NSDictionary dictionaryWithObjectsAndKeys:
 						   
 						   @"chat_lobby" ,[KeyObject withByteValue:P_GAMEID],
+						   
+						   nil];
+	
+	
+	//加入room
+	
+	NSDictionary * pDic2 = [NSDictionary dictionaryWithObjectsAndKeys:
+						   
+						   gameId ,[KeyObject withByteValue:P_GAMEID],
 						   @"chat_lobby" ,[KeyObject withByteValue:((nByte)5)],
 						   
 						   
 						   nil];
+	 
+	
 	
 	return [m_pLitePeer opCustom:OPC_RT_JOIN : pDic :true];
 	 
-	
+	//return [m_pLitePeer opCustom:OPC_RT_JOIN : pDic2 :true];
 	
 }
 
@@ -128,7 +142,7 @@
 - (int) Run
 {
 	//char gameId[] = "demo_photon_game";
-	static short pRet;
+	//static short pRet;
 
 	[m_pLitePeer service];
 	switch (m_currentState)
