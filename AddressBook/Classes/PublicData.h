@@ -17,7 +17,8 @@
 #define SCREEN_H 480.0f
 
 #define ROW_OFFSET_Y 15
-
+#define ROW_WIDTH	 302
+#define ROW_HEIGHT   52
 
 /*
  

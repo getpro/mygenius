@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface CustomItemView : UIView 
+@interface CustomItemView : UIView < UITextFieldDelegate >
 {
 	UIImageView * m_pBorder; //边框
 	UILabel     * m_pTitle;  //标签
@@ -27,5 +27,7 @@
 @property (nonatomic, retain) UITextField * m_pTextFieldContent;
 
 @property BOOL b_IsEdit;
+
+- (id)initWithFrame:(CGRect)frame IsEdit:(BOOL)pIsEdit;
 
 @end
