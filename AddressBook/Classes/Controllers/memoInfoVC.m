@@ -8,10 +8,10 @@
 
 #import "memoInfoVC.h"
 #import "AddressBookAppDelegate.h"
-#import "CustomItemView.h"
-#import "CustomButtonView.h"
 
 @implementation memoInfoVC
+
+@synthesize m_pCustomDatePicker;
 
 typedef enum
 {
@@ -22,33 +22,29 @@ typedef enum
 	EViewInMemo_Count
 }EViewInMemo;
 
-@synthesize m_pUIScrollView_IB,m_pDatePicker;
+@synthesize m_pUIScrollView_IB;
 
 -(void)myInit
 {
-	if(m_pDatePicker)
-	{
-		[m_pDatePicker setHidden:YES];
-	}
+	
 }
 
 //响应UIDatePicker事件
--(void)changePressed:(id)sender
+-(void)DonePressed:(id)sender
 {
 	[self SetDat];
+	[m_pCustomDatePicker setHidden:YES];
 }
-
--(IBAction)disappearKeyboard;
+-(void)CancelPressed:(id)sender
 {
-	[m_pDatePicker setHidden:YES];
+	[m_pCustomDatePicker setHidden:YES];
 }
-
 
 
 //响应日期Pressed事件
 -(void)DatePressed:(id)sender
 {
-	[m_pDatePicker setHidden:NO];
+	[m_pCustomDatePicker setHidden:NO];
 }
 
 //响应提醒Pressed事件
@@ -107,27 +103,13 @@ typedef enum
 	/////
 	[m_pUIScrollView_IB setContentSize:CGSizeMake(SCREEN_W, frame.origin.y)];
 	
+	CGRect pRectCustomDatePicker = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
+	m_pCustomDatePicker = [[CustomDatePicker alloc]initWithFrame:pRectCustomDatePicker target:self actionCancel:@selector(CancelPressed:) actionDone:@selector(DonePressed:)];
 	
-	CGRect pDatePicker = CGRectMake(0, 264, SCREEN_W, 216);
+	[m_pCustomDatePicker setHidden:YES];
 	
-	m_pDatePicker = [[UIDatePicker alloc]initWithFrame:pDatePicker];
+	[self.view addSubview:m_pCustomDatePicker];
 	
-	[m_pDatePicker setHidden:YES];
-	m_pDatePicker.datePickerMode    = UIDatePickerModeDateAndTime;
-	m_pDatePicker.minuteInterval    = 5;
-	
-	[m_pDatePicker addTarget:self action:@selector(changePressed:)
-		forControlEvents:UIControlEventValueChanged];
-	
-	[m_pDatePicker addTarget:self action:@selector(touchUpOutside:)
-			forControlEvents:UIControlEventTouchUpOutside];
-	
-	NSLocale * pLocale   = [[NSLocale alloc] initWithLocaleIdentifier:@"China"];
-	m_pDatePicker.locale = pLocale;
-	
-	[pLocale release];
-	
-	[self.view addSubview:m_pDatePicker];
 }
 
 
@@ -155,8 +137,8 @@ typedef enum
 
 - (void)dealloc 
 {
-	[m_pUIScrollView_IB release];
-	[m_pDatePicker      release];
+	[m_pUIScrollView_IB  release];
+	[m_pCustomDatePicker release];
 	
     [super dealloc];
 }
@@ -175,7 +157,7 @@ typedef enum
 
 -(void)SetDat
 {
-	m_pDatePicker.hidden = NO;
+	//m_pDatePicker.hidden = NO;
 	
 	//datepicker.date = [NSDate date];//显示默认当前时间
 	
@@ -184,7 +166,8 @@ typedef enum
 	[conversion1 setDateFormat: @"yyyy-MM-dd HH:mm"];//设置时间格式
 	
 	CustomButtonView * pDate   = (CustomButtonView*)[self.m_pUIScrollView_IB viewWithTag:EViewInMemo_Date];
-	pDate.m_pLabelContent.text = [conversion1 stringFromDate: [m_pDatePicker date]];
+	
+	pDate.m_pLabelContent.text = [conversion1 stringFromDate: [m_pCustomDatePicker.m_pDatePicker date]];
 	
 	[conversion1 release];
 	

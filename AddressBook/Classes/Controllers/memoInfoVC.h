@@ -8,17 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+#import "CustomItemView.h"
+#import "CustomButtonView.h"
+#import "CustomDatePicker.h"
 
 @interface memoInfoVC : UIViewController 
 {
 	IBOutlet UIScrollView * m_pUIScrollView_IB;
 	
-	UIDatePicker * m_pDatePicker;
+	CustomDatePicker * m_pCustomDatePicker;
 }
 
 @property (retain,nonatomic) IBOutlet UIScrollView * m_pUIScrollView_IB;
 
-@property (retain,nonatomic) UIDatePicker * m_pDatePicker;
+@property (retain,nonatomic) CustomDatePicker * m_pCustomDatePicker;
 
 -(void)myInit;
 
@@ -32,11 +35,6 @@
 -(IBAction)returnItemBtn: (id)sender;
 -(IBAction)editItemBtn:   (id)sender;
 
-/*
- * 点击空白处
- * @param  nil
- * @return nil
- */
--(IBAction)disappearKeyboard;
+
 
 @end
