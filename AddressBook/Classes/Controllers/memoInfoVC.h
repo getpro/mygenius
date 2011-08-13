@@ -32,6 +32,14 @@
  */
 -(void)SetDat;
 
+/*
+ * 保存纪念日的信息
+ * @param  nil
+ * @return BOOL YES:保存成功 NO:保存未成功
+ */
+-(BOOL)SaveMemoInfo;
+
+
 -(IBAction)returnItemBtn: (id)sender;
 -(IBAction)editItemBtn:   (id)sender;
 
