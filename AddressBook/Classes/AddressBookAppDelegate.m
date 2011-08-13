@@ -18,7 +18,10 @@
 @synthesize window;
 @synthesize back;
 @synthesize sceneID;
+
 @synthesize m_arrContactsInfo;
+@synthesize m_arrDateInfo;
+@synthesize m_arrMemoInfo;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -32,7 +35,10 @@
 	switchViewController = [[SwitchViewController alloc] init];
 	
 	sceneID				= [[NSMutableArray alloc] initWithCapacity:10];
+	
 	m_arrContactsInfo   = [[NSMutableArray alloc] initWithCapacity:10];
+	m_arrDateInfo       = [[NSMutableArray alloc] initWithCapacity:10];
+	m_arrMemoInfo       = [[NSMutableArray alloc] initWithCapacity:10];
 	
 	NSNumber * n = [NSNumber numberWithInt:0];
 	
@@ -160,6 +166,8 @@
 	[sceneID			  release];
 	
 	[m_arrContactsInfo    release];
+	[m_arrDateInfo		  release];
+	[m_arrMemoInfo		  release];
 	
     [super dealloc];
 }

@@ -151,7 +151,12 @@ typedef enum
 
 -(IBAction)editItemBtn:   (id)sender
 {
+	rightOrLeft = YES;
+	teXiao      = YES;
 	
+	NSString * ss = [NSString stringWithFormat:@"%d" , EViewMemo];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
 }
 
 
