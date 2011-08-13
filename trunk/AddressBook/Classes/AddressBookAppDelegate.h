@@ -19,12 +19,17 @@
 	NSMutableArray * sceneID;
 	BOOL back;
 	
-	NSMutableArray * m_arrContactsInfo;
+	NSMutableArray * m_arrContactsInfo; //通讯录数据
+	NSMutableArray * m_arrMemoInfo;     //备忘录数据
+	NSMutableArray * m_arrDateInfo;     //纪念日数据
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) NSMutableArray * sceneID;
+
 @property (nonatomic, retain) NSMutableArray * m_arrContactsInfo;
+@property (nonatomic, retain) NSMutableArray * m_arrMemoInfo;
+@property (nonatomic, retain) NSMutableArray * m_arrDateInfo;
 
 @property BOOL back;
 

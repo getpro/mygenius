@@ -38,8 +38,22 @@ CREATE TABLE memo_info(
 'memo_id'TEXT PRIMARY KEY,
 'memo_subject'TEXT,
 'memo_des'TEXT,
-'memo_date'DATETIME,
+'memo_date'TEXT,
 'memo_remind'INTEGER
+);
+
+CREATE TABLE date_info(
+'date_id'TEXT PRIMARY KEY,
+'date_type_id'TEXT,
+'date_type_name'TEXT,
+'date_des'TEXT,
+'date_date'TEXT,
+'date_remind'INTEGER
+);
+
+CREATE TABLE date_type(
+'date_type_id'TEXT PRIMARY KEY,
+'date_type_name'TEXT	 
 );
 
 
