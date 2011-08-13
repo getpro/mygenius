@@ -35,6 +35,7 @@
 		219D99CB13E5163100506FCB /* image07_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99C113E5163100506FCB /* image07_kuang.png */; };
 		219D99CC13E5163100506FCB /* image08_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99C213E5163100506FCB /* image08_kuang.png */; };
 		219D99CD13E5163100506FCB /* image09_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99C313E5163100506FCB /* image09_kuang.png */; };
+		21A2AC7B13F635B10051F3D7 /* CustomButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A2AC7A13F635B10051F3D7 /* CustomButtonView.m */; };
 		21E712D113E3EFF400BF47E6 /* SwitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E712D013E3EFF400BF47E6 /* SwitchViewController.m */; };
 		21E712D913E3F13700BF47E6 /* PublicData.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E712D813E3F13700BF47E6 /* PublicData.m */; };
 		21E712F413E3F3E700BF47E6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21E712F313E3F3E700BF47E6 /* QuartzCore.framework */; };
@@ -94,6 +95,8 @@
 		219D99C113E5163100506FCB /* image07_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image07_kuang.png; sourceTree = "<group>"; };
 		219D99C213E5163100506FCB /* image08_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image08_kuang.png; sourceTree = "<group>"; };
 		219D99C313E5163100506FCB /* image09_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image09_kuang.png; sourceTree = "<group>"; };
+		21A2AC7913F635B10051F3D7 /* CustomButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButtonView.h; sourceTree = "<group>"; };
+		21A2AC7A13F635B10051F3D7 /* CustomButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButtonView.m; sourceTree = "<group>"; };
 		21E712CF13E3EFF400BF47E6 /* SwitchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchViewController.h; sourceTree = "<group>"; };
 		21E712D013E3EFF400BF47E6 /* SwitchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchViewController.m; sourceTree = "<group>"; };
 		21E712D713E3F13700BF47E6 /* PublicData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicData.h; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 				63458B5813E7B73D00338243 /* contactsInfo.m */,
 				211A09B413F57A99001CDC70 /* CustomItemView.h */,
 				211A09B513F57A99001CDC70 /* CustomItemView.m */,
+				21A2AC7913F635B10051F3D7 /* CustomButtonView.h */,
+				21A2AC7A13F635B10051F3D7 /* CustomButtonView.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -431,6 +436,7 @@
 				63458B5913E7B73D00338243 /* contactsInfo.m in Sources */,
 				211A09B613F57A99001CDC70 /* CustomItemView.m in Sources */,
 				211A09D913F57F8B001CDC70 /* AddressAddMoreVC.m in Sources */,
+				21A2AC7B13F635B10051F3D7 /* CustomButtonView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
