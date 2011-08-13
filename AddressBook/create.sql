@@ -34,5 +34,13 @@ CREATE TABLE config (
     'config_first_use'          DATETIME	 
 );
 
+CREATE TABLE memo_info(
+'memo_id'TEXT PRIMARY KEY,
+'memo_subject'TEXT,
+'memo_des'TEXT,
+'memo_date'DATETIME,
+'memo_remind'INTEGER
+);
+
 
 REPLACE INTO config VALUES(1001, 0, DATETIME('now'))

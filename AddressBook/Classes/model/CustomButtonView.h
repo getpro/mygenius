@@ -22,4 +22,6 @@
 @property (nonatomic, retain) UIButton    * m_pButton;
 
 
+- (id)initWithFrame:(CGRect)frame target:(id)target action:(SEL)action;
+
 @end

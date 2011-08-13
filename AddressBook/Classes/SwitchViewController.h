@@ -19,6 +19,8 @@
 #import "AddressEditVC.h"
 #import "AddressAddMoreVC.h"
 
+#import "memoInfoVC.h"
+
 @interface SwitchViewController : UIViewController 
 {
 	AddressBookVC * m_pAddressBookVC;
@@ -30,6 +32,8 @@
 	AddressInfoVC	  * m_pAddressInfoVC;
 	AddressEditVC	  * m_pAddressEditVC;
 	AddressAddMoreVC  * m_pAddressAddMoreVC;
+	
+	memoInfoVC        * m_pmemoInfoVC;
 }
 
 @property (nonatomic, retain) AddressBookVC * m_pAddressBookVC;
@@ -41,5 +45,7 @@
 @property (nonatomic, retain) AddressInfoVC    * m_pAddressInfoVC;
 @property (nonatomic, retain) AddressEditVC    * m_pAddressEditVC;
 @property (nonatomic, retain) AddressAddMoreVC * m_pAddressAddMoreVC;
+
+@property (nonatomic, retain) memoInfoVC * m_pmemoInfoVC;
 
 @end
