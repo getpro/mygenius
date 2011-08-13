@@ -12,13 +12,8 @@
 
 @synthesize m_pTitle,m_pLabelContent,m_pButton;
 
-//响应按钮事件
--(void)btnPressed:(id)sender
-{
-	
-}
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame target:(id)target action:(SEL)action
 {
 	if (self=[super initWithFrame:frame])
 	{
@@ -35,7 +30,7 @@
 		
 		[m_pButton setImage:[UIImage imageNamed:@"image08_kuang.png"] forState:UIControlStateNormal];  
 		
-		[m_pButton addTarget:self action:@selector(btnPressed:)
+		[m_pButton addTarget:target action:action
 			 forControlEvents:UIControlEventTouchUpInside];
 		
 		

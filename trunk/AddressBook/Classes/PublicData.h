@@ -42,8 +42,8 @@ typedef enum
 	EViewSetting,
 	EViewAddressInfo,
 	EViewAddressEdit,
-	EViewAddressAddMore
-	
+	EViewAddressAddMore,
+	EViewmemoInfoVC
 }EViewIndex;
 
 

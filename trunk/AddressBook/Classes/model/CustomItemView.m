@@ -44,7 +44,7 @@
 			m_pTextFieldContent.delegate = self;
 			m_pTextFieldContent.borderStyle = UITextBorderStyleNone;
 			//m_pTextFieldContent.textColor = [UIColor whiteColor];
-			m_pTextFieldContent.textAlignment = UITextAlignmentCenter;
+			m_pTextFieldContent.textAlignment = UITextAlignmentLeft;
 			m_pTextFieldContent.autocorrectionType = UITextAutocorrectionTypeNo;	// no auto correction support
 			m_pTextFieldContent.keyboardType = UIKeyboardTypeDefault;
 			m_pTextFieldContent.returnKeyType = UIReturnKeyDone;

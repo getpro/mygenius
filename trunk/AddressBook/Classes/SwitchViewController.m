@@ -13,6 +13,7 @@
 @implementation SwitchViewController
 
 @synthesize m_pAddressBookVC,m_paccountsVC,m_pdateVC,m_pmemoVC,m_psettingVC,m_pAddressInfoVC,m_pAddressEditVC,m_pAddressAddMoreVC;
+@synthesize m_pmemoInfoVC;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
@@ -59,6 +60,9 @@
 	
 	else if(self.m_pAddressAddMoreVC.view.superview != nil)
 		return self.m_pAddressAddMoreVC;
+	
+	else if(self.m_pmemoInfoVC.view.superview != nil)
+		return self.m_pmemoInfoVC;
 	
 	return nil;
 }
@@ -226,6 +230,25 @@
 		
 	}
 	
+	else if(index == EViewmemoInfoVC)
+	{
+		if (self.m_pmemoInfoVC == nil)
+		{
+			memoInfoVC * pmemoInfoVC = [[memoInfoVC alloc] init];
+			self.m_pmemoInfoVC = pmemoInfoVC;
+			[pmemoInfoVC release];
+		}
+		
+		if(![AddressBookAppDelegate getAppDelegate].back)
+			[self.m_pmemoInfoVC myInit];
+		
+		coming = self.m_pmemoInfoVC;
+		going  = [self checkGoingView];
+		
+	}
+	
+	
+	
 	[coming viewWillAppear:YES];
 	[going viewWillDisappear:YES];
 	[going.view removeFromSuperview];
@@ -281,6 +304,8 @@
 	[m_pAddressInfoVC    release];
 	[m_pAddressEditVC    release];
 	[m_pAddressAddMoreVC release];
+	
+	[m_pmemoInfoVC release];
 	
     [super dealloc];
 }
