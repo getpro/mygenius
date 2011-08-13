@@ -15,7 +15,7 @@
 
 typedef enum
 {
-	EViewInMemo_Subject,
+	EViewInMemo_Subject = 1,
 	EViewInMemo_Des,
 	EViewInMemo_Date,
 	EViewInMemo_Remind,
@@ -151,12 +151,15 @@ typedef enum
 
 -(IBAction)editItemBtn:   (id)sender
 {
-	rightOrLeft = YES;
-	teXiao      = YES;
+	if([self SaveMemoInfo])
+	{
+		rightOrLeft = YES;
+		teXiao      = YES;
 	
-	NSString * ss = [NSString stringWithFormat:@"%d" , EViewMemo];
+		NSString * ss = [NSString stringWithFormat:@"%d" , EViewMemo];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
+	}
 }
 
 
@@ -172,9 +175,58 @@ typedef enum
 	
 	CustomButtonView * pDate   = (CustomButtonView*)[self.m_pUIScrollView_IB viewWithTag:EViewInMemo_Date];
 	
-	pDate.m_pLabelContent.text = [conversion1 stringFromDate: [m_pCustomDatePicker.m_pDatePicker date]];
+	if(pDate)
+	{
+		pDate.m_pLabelContent.text = [conversion1 stringFromDate: [m_pCustomDatePicker.m_pDatePicker date]];
+	}
 	
 	[conversion1 release];
+	
+}
+
+-(BOOL)SaveMemoInfo
+{
+	CustomItemView * pSubject  = (CustomItemView*)[self.m_pUIScrollView_IB viewWithTag:EViewInMemo_Subject];
+	if(pSubject)
+	{
+		if(pSubject.m_pTextFieldContent.text == nil  || [pSubject.m_pTextFieldContent.text isEqual:@""])
+		{
+			//主题未填写
+			UIAlertView * pAlert = [[UIAlertView alloc] initWithTitle:@"提示!"
+												message:@"请填写主题!"
+											   delegate:nil
+									  cancelButtonTitle:@"确定"
+									  otherButtonTitles:nil];
+			[pAlert show];
+			[pAlert release];
+			
+			return NO;
+		}
+	}
+	
+	CustomButtonView * pDate     = (CustomButtonView*)[self.m_pUIScrollView_IB viewWithTag:EViewInMemo_Date];
+	if(pDate)
+	{
+		if(pDate.m_pLabelContent.text == nil)
+		{
+			//时间未选着
+			UIAlertView * pAlert = [[UIAlertView alloc] initWithTitle:@"提示!"
+															  message:@"请选择时间!"
+															 delegate:nil
+													cancelButtonTitle:@"确定"
+													otherButtonTitles:nil];
+			[pAlert show];
+			[pAlert release];
+			
+			return NO;
+		}
+	}
+	
+	CustomItemView * pDes        = (CustomItemView*)[self.m_pUIScrollView_IB viewWithTag:EViewInMemo_Des];
+	
+	CustomButtonView * pRemind   = (CustomButtonView*)[self.m_pUIScrollView_IB viewWithTag:EViewInMemo_Remind];
+	
+	return YES;
 	
 }
 
