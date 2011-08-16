@@ -69,21 +69,30 @@ typedef enum
 typedef enum States
 {
 	statePhotonPeerCreated,
+	
 	stateConnecting,
 	stateConnected,
+	stateErrorConnecting,
+	
 	stateKeysExchanging,
 	stateKeysExchanged,
+	
 	stateJoining,
 	stateErrorJoining,
 	stateJoined,
+	
 	stateLeaving,
 	stateErrorLeaving,
 	stateLeft,
-	stateErrorConnecting,
+	
 	stateReceiving,
 	stateDisconnecting,
 	stateDisconnected,
-} States;
+	
+	stateLobbying,
+	stateLobbyed
+	
+}States;
 
 
 
