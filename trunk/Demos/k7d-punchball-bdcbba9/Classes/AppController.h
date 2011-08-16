@@ -24,6 +24,7 @@
 #import "TwiztLeague.h"
 #import "LeaguePlayers.h"
 #import "LeagueLeaderboard.h"
+#import "ChoiceRoom.h"
 
 @interface AppController : NSObject 
 	<
@@ -35,7 +36,8 @@
 	OpponentDelegate,
 	EnterNameDelegate,
 	LeaguePlayersDelegate,
-	LeagueLeaderboardDelegate
+	LeagueLeaderboardDelegate,
+	ChoiceRoomDelegate
 	> 
 {
 	UIWindow	*window;

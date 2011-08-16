@@ -22,6 +22,7 @@
 #import "Empty.h"
 #import "Splash.h"
 
+
 typedef enum {
 	StateNone,
 	StateMenu,
@@ -189,12 +190,17 @@ typedef enum {
 		link = [[Link alloc] initWithID:@"Punchball" name:state.name delegate:self];
 	}
 	
-	Empty *l = [[[Empty alloc] init] autorelease];
+	//Empty *l = [[[Empty alloc] init] autorelease];
+	//ReplaceLayerAction *replaceScreen = [[[ReplaceLayerAction alloc] initWithScene: scene layer:l replaceLayer:currentLayer] autorelease];
+	//[scene runAction: replaceScreen];
+	
+	ChoiceRoom *l = [[[ChoiceRoom alloc] init:self] autorelease];
 	ReplaceLayerAction *replaceScreen = [[[ReplaceLayerAction alloc] initWithScene: scene layer:l replaceLayer:currentLayer] autorelease];
 	[scene runAction: replaceScreen];
-	currentLayer = l;	
+	
+	currentLayer = l;
 
-	[link startPicker];
+	//[link startPicker];
 }
 
 
@@ -360,6 +366,11 @@ typedef enum {
 		currentLayer = go;
 		
 	}
+}
+
+-(void) EnterRoom:(NSInteger) pIndex
+{
+	
 }
 
 @end
