@@ -53,6 +53,76 @@
 		vrLen = 1232;
 		vrLoc = 2768;
 	};
+	21610EFA13F9154000765144 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B33B2D0F1157AEB8007F2607 /* PhotonDemo.h */;
+		name = "PhotonDemo.h: 27";
+		rLen = 8;
+		rLoc = 384;
+		rType = 0;
+		vrLen = 499;
+		vrLoc = 235;
+	};
+	21610EFB13F9154000765144 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2179256C13F3C5B60029FE65 /* LitePeer.h */;
+		name = "LitePeer.h: 83";
+		rLen = 0;
+		rLoc = 3142;
+		rType = 0;
+		vrLen = 1297;
+		vrLoc = 2243;
+	};
+	21610EFC13F9154000765144 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B33B2D071157AEAD007F2607 /* demo_iPhone_Photon_objC.m */;
+		name = "demo_iPhone_Photon_objC.m: 19";
+		rLen = 0;
+		rLoc = 492;
+		rType = 0;
+		vrLen = 632;
+		vrLoc = 39;
+	};
+	21610EFD13F9154000765144 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B33B2D091157AEAD007F2607 /* demo_iPhone_Photon_objCAppDelegate.m */;
+		name = "demo_iPhone_Photon_objCAppDelegate.m: 63";
+		rLen = 29;
+		rLoc = 1430;
+		rType = 0;
+		vrLen = 560;
+		vrLoc = 946;
+	};
+	21610EFE13F9154000765144 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2194341413F1148A00C99133 /* PhotonConstants.h */;
+		name = "PhotonConstants.h: 14";
+		rLen = 0;
+		rLoc = 496;
+		rType = 0;
+		vrLen = 789;
+		vrLoc = 0;
+	};
+	21610EFF13F9154000765144 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B33B2D101157AEB8007F2607 /* PhotonDemo.m */;
+		name = "PhotonDemo.m: 41";
+		rLen = 15;
+		rLoc = 904;
+		rType = 0;
+		vrLen = 485;
+		vrLoc = 562;
+	};
+	21610F0113F9163300765144 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B33B2D101157AEB8007F2607 /* PhotonDemo.m */;
+		name = "PhotonDemo.m: 39";
+		rLen = 0;
+		rLoc = 833;
+		rType = 0;
+		vrLen = 483;
+		vrLoc = 562;
+	};
 	2171B09E13ED99CA0021F16A /* PlistBookmark */ = {
 		isa = PlistBookmark;
 		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
@@ -95,6 +165,7 @@
 	};
 	2179256613F3C5B60029FE65 /* PhotonListener.h */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = PhotonListener.h;
 		path = "/Users/Peteo/projects/trunk/Photon-objc/inc/PhotonListener.h";
 		sourceTree = "<absolute>";
@@ -121,6 +192,7 @@
 	};
 	2179256A13F3C5B60029FE65 /* Constants.h */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
 		name = Constants.h;
 		path = "/Users/Peteo/projects/trunk/Common-c/inc/Constants.h";
 		sourceTree = "<absolute>";
@@ -133,19 +205,9 @@
 		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1594.19, 2079}}";
-			sepNavSelRange = "{3550, 15}";
-			sepNavVisRange = "{2519, 2063}";
+			sepNavSelRange = "{3142, 0}";
+			sepNavVisRange = "{2243, 1297}";
 		};
-	};
-	2179256D13F3C5B60029FE65 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 2194341413F1148A00C99133 /* PhotonConstants.h */;
-		name = "PhotonConstants.h: 66";
-		rLen = 64;
-		rLoc = 1888;
-		rType = 0;
-		vrLen = 2038;
-		vrLoc = 1809;
 	};
 	2179258413F3CB7A0029FE65 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -156,56 +218,6 @@
 		rType = 0;
 		vrLen = 1124;
 		vrLoc = 3224;
-	};
-	2179258513F3CB7A0029FE65 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B33B2D0F1157AEB8007F2607 /* PhotonDemo.h */;
-		name = "PhotonDemo.h: 27";
-		rLen = 8;
-		rLoc = 384;
-		rType = 0;
-		vrLen = 521;
-		vrLoc = 235;
-	};
-	2179258613F3CB7A0029FE65 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 2179256C13F3C5B60029FE65 /* LitePeer.h */;
-		name = "LitePeer.h: 88";
-		rLen = 15;
-		rLoc = 3550;
-		rType = 0;
-		vrLen = 2063;
-		vrLoc = 2519;
-	};
-	2179258713F3CB7A0029FE65 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B33B2D071157AEAD007F2607 /* demo_iPhone_Photon_objC.m */;
-		name = "demo_iPhone_Photon_objC.m: 19";
-		rLen = 0;
-		rLoc = 492;
-		rType = 0;
-		vrLen = 517;
-		vrLoc = 432;
-	};
-	2179258813F3CB7A0029FE65 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B33B2D101157AEB8007F2607 /* PhotonDemo.m */;
-		name = "PhotonDemo.m: 43";
-		rLen = 0;
-		rLoc = 967;
-		rType = 0;
-		vrLen = 508;
-		vrLoc = 583;
-	};
-	2179258913F3CB7A0029FE65 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B33B2D101157AEB8007F2607 /* PhotonDemo.m */;
-		name = "PhotonDemo.m: 37";
-		rLen = 40;
-		rLoc = 712;
-		rType = 0;
-		vrLen = 508;
-		vrLoc = 583;
 	};
 	2182865113F12633007E3530 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -231,19 +243,9 @@
 		ignoreCount = 0;
 		lineNumber = 140;
 		location = demo_iPhone_photon_objc;
-		modificationTime = 334742971.075095;
+		modificationTime = 334742971.0750951;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
-	};
-	218286CB13F13629007E3530 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = B33B2D091157AEAD007F2607 /* demo_iPhone_Photon_objCAppDelegate.m */;
-		name = "demo_iPhone_Photon_objCAppDelegate.m: 63";
-		rLen = 29;
-		rLoc = 1430;
-		rType = 0;
-		vrLen = 580;
-		vrLoc = 926;
 	};
 	218B234E13EA83F500FB2CC2 /* PhotonListener.h */ = {
 		isa = PBXFileReference;
@@ -588,11 +590,6 @@
 		name = PhotonPeer.h;
 		path = "/Users/Peteo/projects/trunk/Photon-objc/inc/PhotonPeer.h";
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1388.29, 2457}}";
-			sepNavSelRange = "{4193, 0}";
-			sepNavVisRange = "{3224, 1124}";
-		};
 	};
 	2194341413F1148A00C99133 /* PhotonConstants.h */ = {
 		isa = PBXFileReference;
@@ -601,9 +598,9 @@
 		path = "/Users/Peteo/projects/trunk/Photon-c/inc/PhotonConstants.h";
 		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {2049.34, 4074}}";
-			sepNavSelRange = "{1888, 64}";
-			sepNavVisRange = "{1809, 2038}";
+			sepNavIntBoundsRect = "{{0, 0}, {1453.31, 4347}}";
+			sepNavSelRange = "{496, 0}";
+			sepNavVisRange = "{0, 789}";
 		};
 	};
 	2194344613F115B600C99133 /* PBXTextBookmark */ = {
@@ -796,7 +793,7 @@
 		argumentStrings = (
 		);
 		autoAttachOnCrash = 1;
-		breakpointsEnabled = 1;
+		breakpointsEnabled = 0;
 		configStateDict = {
 		};
 		customDataFormattersEnabled = 1;
@@ -880,7 +877,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					781,
+					807,
 					20,
 					48,
 					43,
@@ -931,27 +928,27 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 334741810;
-			PBXWorkspaceStateSaveDate = 334741810;
+			PBXPerProjectTemplateStateSaveDate = 335090931;
+			PBXWorkspaceStateSaveDate = 335090931;
 		};
 		perUserProjectItems = {
 			212A1EA113F38757000A28A0 /* PBXTextBookmark */ = 212A1EA113F38757000A28A0 /* PBXTextBookmark */;
 			213BA3B113EB8D05000A897E /* PBXTextBookmark */ = 213BA3B113EB8D05000A897E /* PBXTextBookmark */;
 			2141FE6A13EBF068000029C9 /* PBXTextBookmark */ = 2141FE6A13EBF068000029C9 /* PBXTextBookmark */;
 			2157E2FF13EC4340004C3D0D /* PBXTextBookmark */ = 2157E2FF13EC4340004C3D0D /* PBXTextBookmark */;
+			21610EFA13F9154000765144 /* PBXTextBookmark */ = 21610EFA13F9154000765144 /* PBXTextBookmark */;
+			21610EFB13F9154000765144 /* PBXTextBookmark */ = 21610EFB13F9154000765144 /* PBXTextBookmark */;
+			21610EFC13F9154000765144 /* PBXTextBookmark */ = 21610EFC13F9154000765144 /* PBXTextBookmark */;
+			21610EFD13F9154000765144 /* PBXTextBookmark */ = 21610EFD13F9154000765144 /* PBXTextBookmark */;
+			21610EFE13F9154000765144 /* PBXTextBookmark */ = 21610EFE13F9154000765144 /* PBXTextBookmark */;
+			21610EFF13F9154000765144 /* PBXTextBookmark */ = 21610EFF13F9154000765144 /* PBXTextBookmark */;
+			21610F0113F9163300765144 /* PBXTextBookmark */ = 21610F0113F9163300765144 /* PBXTextBookmark */;
 			2171B09E13ED99CA0021F16A /* PlistBookmark */ = 2171B09E13ED99CA0021F16A /* PlistBookmark */;
 			2179256513F3C5B60029FE65 /* PBXTextBookmark */ = 2179256513F3C5B60029FE65 /* PBXTextBookmark */;
 			2179256713F3C5B60029FE65 /* PBXTextBookmark */ = 2179256713F3C5B60029FE65 /* PBXTextBookmark */;
 			2179256913F3C5B60029FE65 /* PBXTextBookmark */ = 2179256913F3C5B60029FE65 /* PBXTextBookmark */;
-			2179256D13F3C5B60029FE65 /* PBXTextBookmark */ = 2179256D13F3C5B60029FE65 /* PBXTextBookmark */;
 			2179258413F3CB7A0029FE65 /* PBXTextBookmark */ = 2179258413F3CB7A0029FE65 /* PBXTextBookmark */;
-			2179258513F3CB7A0029FE65 /* PBXTextBookmark */ = 2179258513F3CB7A0029FE65 /* PBXTextBookmark */;
-			2179258613F3CB7A0029FE65 /* PBXTextBookmark */ = 2179258613F3CB7A0029FE65 /* PBXTextBookmark */;
-			2179258713F3CB7A0029FE65 /* PBXTextBookmark */ = 2179258713F3CB7A0029FE65 /* PBXTextBookmark */;
-			2179258813F3CB7A0029FE65 /* PBXTextBookmark */ = 2179258813F3CB7A0029FE65 /* PBXTextBookmark */;
-			2179258913F3CB7A0029FE65 /* PBXTextBookmark */ = 2179258913F3CB7A0029FE65 /* PBXTextBookmark */;
 			2182865113F12633007E3530 /* PBXTextBookmark */ = 2182865113F12633007E3530 /* PBXTextBookmark */;
-			218286CB13F13629007E3530 /* PBXTextBookmark */ = 218286CB13F13629007E3530 /* PBXTextBookmark */;
 			218B23E113EA8B9300FB2CC2 /* PBXTextBookmark */ = 218B23E113EA8B9300FB2CC2 /* PBXTextBookmark */;
 			218B23E313EA8B9300FB2CC2 /* PBXTextBookmark */ = 218B23E313EA8B9300FB2CC2 /* PBXTextBookmark */;
 			218B23E713EA8B9300FB2CC2 /* PBXTextBookmark */ = 218B23E713EA8B9300FB2CC2 /* PBXTextBookmark */;
@@ -997,9 +994,9 @@
 	};
 	B33B2D071157AEAD007F2607 /* demo_iPhone_Photon_objC.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1485.82, 4242}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1485.82, 4137}}";
 			sepNavSelRange = "{492, 0}";
-			sepNavVisRange = "{432, 517}";
+			sepNavVisRange = "{39, 632}";
 		};
 	};
 	B33B2D081157AEAD007F2607 /* demo_iPhone_Photon_objCAppDelegate.h */ = {
@@ -1011,9 +1008,9 @@
 	};
 	B33B2D091157AEAD007F2607 /* demo_iPhone_Photon_objCAppDelegate.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1182.39, 2541}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1182.39, 2373}}";
 			sepNavSelRange = "{1430, 29}";
-			sepNavVisRange = "{926, 580}";
+			sepNavVisRange = "{946, 560}";
 		};
 	};
 	B33B2D0A1157AEAD007F2607 /* demo_iPhone_Photon_objCViewController.h */ = {
@@ -1032,16 +1029,16 @@
 	};
 	B33B2D0F1157AEB8007F2607 /* PhotonDemo.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {959, 882}}";
+			sepNavIntBoundsRect = "{{0, 0}, {959, 861}}";
 			sepNavSelRange = "{384, 8}";
-			sepNavVisRange = "{235, 521}";
+			sepNavVisRange = "{235, 499}";
 		};
 	};
 	B33B2D101157AEB8007F2607 /* PhotonDemo.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1204.06, 5019}}";
-			sepNavSelRange = "{5669, 0}";
-			sepNavVisRange = "{5538, 234}";
+			sepNavIntBoundsRect = "{{0, 0}, {1074.02, 5355}}";
+			sepNavSelRange = "{833, 0}";
+			sepNavVisRange = "{562, 483}";
 		};
 	};
 	EB93753D0E6ED602000BD794 /* iTestTextView.m */ = {

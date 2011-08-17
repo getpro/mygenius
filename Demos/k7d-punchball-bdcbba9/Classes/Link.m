@@ -29,7 +29,7 @@ typedef enum {
 
 @implementation Link
 
-@synthesize state, role, name, sessionID, peerID, peerName, connectionAlert, dataReceiver, uniqueID, peerUniqueID;
+@synthesize b_IsWaiting, state, role, name, sessionID, peerID, peerName, connectionAlert, dataReceiver, uniqueID, peerUniqueID ,m_strRoomID;
 
 - (id)initWithID:(NSString*)_sessionID name:(NSString*)_name delegate:(id<LinkDelegate>)_delegate 
 {
@@ -80,6 +80,7 @@ typedef enum {
 	//Photon
 	[m_pLitePeer release];
 	[m_timer     release];
+	[m_strRoomID release];
 	
 	[super dealloc];
 }
@@ -513,37 +514,6 @@ typedef enum {
 	
 	NSMutableDictionary * eventData = nil;
 	
-	/*
-	if(eventCode == EV_MOVE)
-	{
-		receivedCount++;
-		int n = 0;
-		[(NSValue*)[photonEvent objectForKey:[KeyObject withByteValue:P_ACTORNR]] getValue:&n];
-		char x = 0;
-		[(NSValue*)[eventData objectForKey:[KeyObject withByteValue:STATUS_PLAYER_POS_X]] getValue:&x];
-		char y = 0;
-		[(NSValue*)[eventData objectForKey:[KeyObject withByteValue:STATUS_PLAYER_POS_Y]] getValue:&y];
-		
-		for(int i=0; i<MAXPLAYERS; i++)
-			if(mPlayer[i].Number == n)
-				[mPlayer[i] move :x :y];
-	}
-	else if(eventCode == EV_PLAYER_INFO)
-	{
-		int n = 0;
-		[(NSValue*)[photonEvent objectForKey:[KeyObject withByteValue:P_ACTORNR]] getValue:&n];
-		NSString* name = (NSString*)[eventData objectForKey:[KeyObject withByteValue:STATUS_PLAYER_NAME]];
-		int color = 0;
-		[(NSValue*)[eventData objectForKey:[KeyObject withByteValue:STATUS_PLAYER_COLOR]] getValue:&color];
-		
-		for(int i=0; i<MAXPLAYERS; i++)
-			if(mPlayer[i].Number == n)
-				[mPlayer[i] setInfo :name :color];
-	}
-	else
-	
-	*/
-	 
 	if(eventCode == EV_RT_JOIN)
 	{
 		int n = 0;
@@ -561,7 +531,7 @@ typedef enum {
 			//自己创建房间
 			
 		}
-		else if(n == 2)
+		else if(n >= 2)
 		{
 			int pPeerID = 0;
 			
@@ -577,34 +547,6 @@ typedef enum {
 			self.state = StateCointoss;
 			[NSTimer scheduledTimerWithTimeInterval:0.033 target:self selector:@selector(cointoss) userInfo:nil repeats:NO];
 		}
-		
-		
-		
-		
-		/*
-		if(mPlayer[0].Number == -1) // if local player is the joining player
-		{
-			mPlayer[0].Number = n;
-			for(int i=0; i<amountOfActors; i++)
-			{
-				int temp;
-				[[actors objectAtIndex:i] getValue:&temp];
-				if (temp != mPlayer[0].Number) // for every existing player except local player
-				{
-					mPlayer[mGame.CurrentPlayers].Number = temp;
-					[mGame increaseCurrentPlayers];
-				}
-			}
-		}
-		else
-		{
-			mPlayer[mGame.CurrentPlayers].Number = n;
-			[mGame increaseCurrentPlayers];
-		}
-		[self sendPlayerInfo:true :mPlayer[0].Name :mPlayer[0].Color];
-		 
-		*/
-		
 	}
 	else if(eventCode == EV_RT_LEAVE)
 	{
@@ -645,20 +587,6 @@ typedef enum {
 			
 			//[delegate linkDisconnected];
 		}
-		
-		/*
-		int current = mGame.CurrentPlayers;
-		for(int i=0; i<current; i++)
-		{
-			if (mPlayer[i].Number == n)
-			{
-				if(i != current-1)
-					mPlayer[i] = mPlayer[current-1];
-				[mGame decreaseCurrentPlayers];
-				current = 0;
-			}
-		}
-		*/
 	}
 	else if(eventCode == EV_DATA)
 	{
@@ -729,15 +657,26 @@ typedef enum {
 			}
 				break;	
 			default:
-				if (dataReceiver) 
-				{
-					[dataReceiver receivePacket:packetID objectIndex:objectIndex data:eventData];
-				}
-				else
-				{
-					NSLog(@" !!! receiveData PACKET BEFORE COINTOSS: %d", packetID);
-				}
+			if (dataReceiver) 
+			{
+				[dataReceiver receivePacket:packetID objectIndex:objectIndex data:eventData];
+			}
+			else
+			{
+				NSLog(@" !!! receiveData PACKET BEFORE COINTOSS: %d", packetID);
+			}
 		}
+	}
+	else if(eventCode == 1)
+	{
+		//进入Lobby后获取LobbyRomm的信息
+		m_currentState = stateEnterLobbyed;
+		NSLog(@"stateEnterLobbyed");
+		b_IsWaiting = NO;
+	}
+	else if(eventCode == 2)
+	{
+		//Lobby change
 		
 	}
 }
@@ -777,12 +716,14 @@ typedef enum {
 	{
 		case statePhotonPeerCreated:
 			[self CreateConnection];
+			b_IsWaiting = YES;
 			break;
 		case stateConnecting:
 			// Waiting callback function
 			break;
 		case stateConnected:
 			// exchanging keys
+			NSLog(@"stateConnected");
 			[self ExchangeKeys];
 			m_currentState = stateKeysExchanging;
 			break;
@@ -790,9 +731,15 @@ typedef enum {
 			// Waiting for callback
 			break;
 		case stateKeysExchanged:
-			[m_pLitePeer opCustom:OPC_RT_JOIN :[NSDictionary dictionaryWithObject:sessionID forKey:[KeyObject withByteValue:P_GAMEID]] :true :0 :true];
-			isInGame = true;
-			m_currentState = stateReceiving;
+			NSLog(@"stateKeysExchanged");
+			//[m_pLitePeer opCustom:OPC_RT_JOIN :[NSDictionary dictionaryWithObject:sessionID forKey:[KeyObject withByteValue:P_GAMEID]] :true :0 :true];
+			//isInGame = true;
+			[self EnterLobby];
+			m_currentState = stateEnterLobbying;
+			break;
+		case stateEnterLobbying:
+			break;
+		case stateEnterLobbyed:
 			break;
 		case stateLeaving:
 			[m_pLitePeer opLeave:sessionID];
@@ -801,24 +748,27 @@ typedef enum {
 			[self CloseConnection];
 			break;
 		case stateDisconnected:
-			isInGame = false;
 			break;
 		case stateErrorConnecting:
-			isInGame = false;
 			break;
 		default:
 			break;
 	}
 }
 
+#define URL_TEST_SERVER	 L"172.18.66.36:5055"
 
 -(void) CreateConnection
 {
 	//char* server = "udp.exitgames.com:5055";
 	
-	char* server = "172.18.66.36:5055";
+	//char * server = "172.18.66.36:5055";
 	
-	[m_pLitePeer Connect:[NSString stringWithUTF8String:server]];
+	nByte * pAppName = (nByte *)"LiteLobby";
+	
+	//[m_pLitePeer Connect:[NSString stringWithUTF8String:server]];
+	
+	[m_pLitePeer Connect:[NSString stringWithUTF32String:URL_TEST_SERVER]:pAppName];
 	
 	m_currentState = stateConnecting;
 }
@@ -853,6 +803,135 @@ typedef enum {
 	
 	while(m_currentState == stateDisconnecting)
 		[m_pLitePeer service];
+}
+
+- (void) EnterLobby
+{
+	//加入一个lobby
+	
+	NSDictionary * pDic = [NSDictionary dictionaryWithObjectsAndKeys:
+						   @"chat_lobby" ,[KeyObject withByteValue:P_GAMEID],
+						   nil];
+	
+	[m_pLitePeer opCustom:OPC_RT_JOIN : pDic :true];
+}
+
+- (void) LeaveRoom
+{
+	if(m_strRoomID != nil)
+	{
+		short pLeaveID = 0;
+		pLeaveID = [self Leave:m_strRoomID];
+		
+		NSLog(@"pLeaveID[%d]",pLeaveID);
+		
+		if ( pLeaveID == -1)
+		{
+			m_currentState = stateErrorLeaving;
+		}
+		
+		NSLog(@"RoomID[%@]",m_strRoomID);
+	}
+	else
+	{
+		if ([self Leave:[NSString stringWithUTF8String:"demo_photon_game"]] == -1)
+			m_currentState = stateErrorLeaving;
+		
+		NSLog(@"RoomID[demo_photon_game]");
+	}
+}
+
+- (void) EnterRoom
+{
+	if(m_strRoomID != nil)
+	{
+		short pJoinID = 0;
+		pJoinID = [self Join:m_strRoomID];
+		
+		NSLog(@"pJoinID[%d]",pJoinID);
+		
+		if ( pJoinID == -1)
+		{
+			m_currentState = stateErrorJoining;
+		}
+		
+		NSLog(@"RoomID[%@]",m_strRoomID);
+	}
+	else
+	{
+		if ([self Join:[NSString stringWithUTF8String:"demo_photon_game"]] == -1)
+			m_currentState = stateErrorJoining;
+		
+		NSLog(@"RoomID[demo_photon_game]");
+	}
+}
+
+- (short) Join:(NSString*)gameId
+{
+	//return [m_pLitePeer opJoin:gameId];	
+	//return [m_pLitePeer opJoin:@"chat_lobby"];
+	//加入room
+	NSDictionary * pDic = [NSDictionary dictionaryWithObjectsAndKeys:
+						   
+						   gameId ,[KeyObject withByteValue:P_GAMEID],
+						   @"chat_lobby" ,[KeyObject withByteValue:((nByte)5)],
+						   
+						   nil];
+	
+	return [m_pLitePeer opCustom:OPC_RT_JOIN : pDic :true];
+}
+
+- (short) Leave:(NSString*)gameId
+{
+	return [m_pLitePeer opLeave:@""];
+	
+	/*
+	 NSDictionary * pDic = [NSDictionary dictionaryWithObjectsAndKeys:
+	 
+	 gameId ,[KeyObject withByteValue:P_GAMEID],
+	 @"chat_lobby" ,[KeyObject withByteValue:((nByte)5)],
+	 
+	 
+	 nil];
+	 
+	 return [m_pLitePeer opCustom:OPC_RT_LEAVE : pDic :true];
+	 
+	 */
+	
+}
+
+-(void) JoinIntoRoom:(NSString *) pRoomNo
+{
+	/*
+	if( m_currentState == stateLeaving || m_currentState == stateConnecting || m_currentState == stateJoining 
+	   || m_currentState == stateEnterLobbying || m_currentState == stateKeysExchanging)
+	{
+		return;
+	}
+	*/
+	
+	if(b_IsWaiting)
+	{
+		return;
+	}
+	
+	self.m_strRoomID = pRoomNo;
+	
+	m_currentState = stateJoining;
+	
+	[self EnterRoom];
+	
+	//连接和加入中⋯⋯⋯⋯⋯⋯
+	
+	
+}
+
+
+-(void) UpDateRoomNum
+{
+	
+	
+	
 }
 
 @end
