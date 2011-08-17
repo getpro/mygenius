@@ -12,25 +12,29 @@
 
 -(void) room1: (id) sender
 {	
-	[item1 setString:@"ROOM1(2)"];
+	//[item1 setString:@"ROOM1(2)"];
+	//[self JoinIntoRoom:@"demo_photon_game_room1"];
+	[delegate EnterRoom:1];
 }
 
 -(void) room2: (id) sender
 {	
-	[item1 setString:@"ROOM1(2)"];
+	//[item1 setString:@"ROOM1(2)"];
+	[delegate EnterRoom:2];
 }
 
 -(void) room3: (id) sender
 {	
-	[item1 setString:@"ROOM1(2)"];
+	//[item1 setString:@"ROOM1(2)"];
+	[delegate EnterRoom:3];
 }
 
 -(void) room4: (id) sender
 {	
-	[item1 setString:@"ROOM1(2)"];
-	
-	MoveTo* move = [MoveTo actionWithDuration:3 position:CGPointMake(0.0f, 100.0f)]; 
-	[item1 runAction:move];
+	//[item1 setString:@"ROOM1(2)"];
+	//MoveTo* move = [MoveTo actionWithDuration:3 position:CGPointMake(0.0f, 100.0f)]; 
+	//[item1 runAction:move];
+	[delegate EnterRoom:4];
 }
 
 - (id) init: (id<ChoiceRoomDelegate>) _delegate 

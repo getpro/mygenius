@@ -89,8 +89,8 @@ typedef enum States
 	stateDisconnecting,
 	stateDisconnected,
 	
-	stateLobbying,
-	stateLobbyed
+	stateEnterLobbying,
+	stateEnterLobbyed
 	
 }States;
 
@@ -138,10 +138,14 @@ typedef enum States
 	//Photon
 	LitePeer    *m_pLitePeer;
 	States       m_currentState;
-	bool		 isInGame;
+	BOOL		 b_IsWaiting;
 	
 	NSTimer		*m_timer;
+	
+	NSString    *m_strRoomID;
 }
+
+@property BOOL		 b_IsWaiting;
 
 @property(nonatomic) NSInteger					state;
 
@@ -149,7 +153,7 @@ typedef enum States
 @property(nonatomic) NSInteger					role;
 @property(nonatomic) NSInteger					uniqueID;
 @property(nonatomic, copy)	 NSString			*sessionID;
-
+@property(nonatomic, copy)	 NSString			*m_strRoomID;
 //@property(nonatomic, retain) GKSession			*session;
 
 // remote peer
@@ -176,5 +180,15 @@ typedef enum States
 -(void) CloseConnection;
 -(void) leaveGame;
 -(void) ExchangeKeys;
+-(void) EnterLobby;
+-(void) EnterRoom;
+-(void) LeaveRoom;
+
+-(short) Join: (NSString*)gameId;
+-(short) Leave:(NSString*)gameId;
+
+-(void) JoinIntoRoom:(NSString *) pRoomNo;
+
+-(void) UpDateRoomNum;
 
 @end

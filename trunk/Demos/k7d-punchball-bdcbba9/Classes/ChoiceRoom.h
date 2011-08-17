@@ -25,6 +25,11 @@
 	MenuItemLabel *item3;
 	MenuItemLabel *item4;
 	
+	NSInteger m_nRoom1;
+	NSInteger m_nRoom2;
+	NSInteger m_nRoom3;
+	NSInteger m_nRoom4;
+	
 }
 
 - (id) init: (id<ChoiceRoomDelegate>) _delegate;

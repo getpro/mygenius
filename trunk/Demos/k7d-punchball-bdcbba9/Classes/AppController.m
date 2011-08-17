@@ -200,7 +200,7 @@ typedef enum {
 	
 	currentLayer = l;
 
-	//[link startPicker];
+	[link startPicker];
 }
 
 
@@ -370,7 +370,11 @@ typedef enum {
 
 -(void) EnterRoom:(NSInteger) pIndex
 {
+	[link JoinIntoRoom:[NSString stringWithFormat:@"demo_photon_game_room%d",pIndex]];
 	
+	//Empty *l = [[[Empty alloc] init] autorelease];
+	//ReplaceLayerAction *replaceScreen = [[[ReplaceLayerAction alloc] initWithScene: scene layer:l replaceLayer:currentLayer] autorelease];
+	//[scene runAction: replaceScreen];
 }
 
 @end
