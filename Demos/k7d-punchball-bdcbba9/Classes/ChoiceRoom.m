@@ -84,4 +84,74 @@
 	
 }
 
+-(void) UpDateRoom:(nByte)eventCode :(NSDictionary*)photonEvent
+{
+	if(eventCode == 1 || eventCode == 2)
+	{
+		NSDictionary* eventData = nil;
+		
+		if(!(eventData = [photonEvent objectForKey:[KeyObject withByteValue:P_DATA]]))
+			return;
+		
+		if([eventData count] > 0)
+		{
+			NSString * pRet = nil;
+			
+			pRet = (NSString*)[eventData objectForKey:[KeyObject withStringValue:@"demo_photon_game_room1"]];
+			if(pRet)
+			{
+				NSLog(@"room1[%@]",pRet);
+				m_nRoom1 = [pRet intValue];
+			}
+			else
+			{
+				m_nRoom1 = 0;
+			}
+			
+			pRet = (NSString*)[eventData objectForKey:[KeyObject withStringValue:@"demo_photon_game_room2"]];
+			if(pRet)
+			{
+				NSLog(@"room2[%@]",pRet);
+				m_nRoom2 = [pRet intValue];
+			}
+			else
+			{
+				m_nRoom2 = 0;
+			}
+			
+			pRet = (NSString*)[eventData objectForKey:[KeyObject withStringValue:@"demo_photon_game_room3"]];
+			if(pRet)
+			{
+				NSLog(@"room3[%@]",pRet);
+				m_nRoom3 = [pRet intValue];
+			}
+			else
+			{
+				m_nRoom3 = 0;
+			}
+			
+			pRet = (NSString*)[eventData objectForKey:[KeyObject withStringValue:@"demo_photon_game_room4"]];
+			if(pRet)
+			{
+				NSLog(@"room4[%@]",pRet);
+				m_nRoom4 = [pRet intValue];
+			}
+			else
+			{
+				m_nRoom4 = 0;
+			}
+			
+			[self UpDateRoomNum];
+		}
+	}
+}
+
+- (void) UpDateRoomNum
+{
+	[item1 setString:[NSString stringWithFormat:@"ROOM1(%d)",m_nRoom1]];
+	[item2 setString:[NSString stringWithFormat:@"ROOM2(%d)",m_nRoom2]];
+	[item3 setString:[NSString stringWithFormat:@"ROOM3(%d)",m_nRoom3]];
+	[item4 setString:[NSString stringWithFormat:@"ROOM4(%d)",m_nRoom4]];
+}
+
 @end

@@ -21,7 +21,7 @@
 #import "PASoundMgr.h"
 #import "Empty.h"
 #import "Splash.h"
-
+#import "Waiting.h"
 
 typedef enum {
 	StateNone,
@@ -195,6 +195,9 @@ typedef enum {
 	//[scene runAction: replaceScreen];
 	
 	ChoiceRoom *l = [[[ChoiceRoom alloc] init:self] autorelease];
+	
+	link.upDateRoomdelegate = l;
+	
 	ReplaceLayerAction *replaceScreen = [[[ReplaceLayerAction alloc] initWithScene: scene layer:l replaceLayer:currentLayer] autorelease];
 	[scene runAction: replaceScreen];
 	
@@ -210,11 +213,18 @@ typedef enum {
 	gameState = StateMulti;
 	
 	MultiPlayerGame *game;
-	if (role == RoleServer) {
+	
+	//退出waiting界面
+	[[Director sharedDirector] popScene];
+	
+	if (role == RoleServer) 
+	{
 		game = [[[MultiPlayerGame alloc] initWithDelegate:self link:link left:true] autorelease];	
-	} else {
+	} else 
+	{
 		game = [[[MultiPlayerGame alloc] initWithDelegate:self link:link left:false] autorelease];	
 	}
+	
 	if ([league getTotalGames] > 3) game.showHint = false;
 	
 	ReplaceLayerAction *replaceScreen = [[[ReplaceLayerAction alloc] initWithScene: scene layer:game replaceLayer:currentLayer] autorelease];
@@ -364,7 +374,6 @@ typedef enum {
 		replaceScreen.reverse = true;
 		[scene runAction: replaceScreen];
 		currentLayer = go;
-		
 	}
 }
 
@@ -375,6 +384,16 @@ typedef enum {
 	//Empty *l = [[[Empty alloc] init] autorelease];
 	//ReplaceLayerAction *replaceScreen = [[[ReplaceLayerAction alloc] initWithScene: scene layer:l replaceLayer:currentLayer] autorelease];
 	//[scene runAction: replaceScreen];
+	
+	//waiting界面
+	[[Director sharedDirector] pushScene: [Waiting scene:self]];
+}
+
+-(void) WaitReturn
+{
+	//退出waiting界面
+	[[Director sharedDirector] popScene];
+	[link LeaveRoom];
 }
 
 @end

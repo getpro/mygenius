@@ -115,10 +115,17 @@ typedef enum States
 
 @end
 
+@protocol UpDateRoomDelegate
+
+-(void) UpDateRoom:(nByte)eventCode :(NSDictionary*)photonEvent;
+
+@end
+
 @interface Link : NSObject  < PhotonListener >  /* <GKPeerPickerControllerDelegate,GKSessionDelegate> */
 {
 	id<LinkDelegate> delegate;
 	id<DataReceiver> dataReceiver;
+	id<UpDateRoomDelegate> upDateRoomdelegate;
 	
 	NSString	*sessionID; //相当于Photon中的GameID
 	NSString	*name;
@@ -162,7 +169,9 @@ typedef enum States
 @property(nonatomic, copy)	 NSString			*peerName;
 
 @property(nonatomic, retain) UIAlertView		*connectionAlert;
+
 @property(nonatomic, retain) id<DataReceiver>	dataReceiver;
+@property(nonatomic, retain) id<UpDateRoomDelegate> upDateRoomdelegate;
 
 - (id)initWithID:(NSString*)_sessionID name:(NSString*)_name delegate:(id<LinkDelegate>)_delegate;
 
@@ -189,6 +198,6 @@ typedef enum States
 
 -(void) JoinIntoRoom:(NSString *) pRoomNo;
 
--(void) UpDateRoomNum;
+
 
 @end

@@ -9,6 +9,7 @@
 #include "chipmunk.h"
 #include "cocos2d.h"
 #include "ReplaceLayerAction.h"
+#import  "Link.h"
 
 @protocol ChoiceRoomDelegate
 
@@ -16,7 +17,7 @@
 
 @end
 
-@interface ChoiceRoom : Layer  <ReplaceLayerActionDelegate>
+@interface ChoiceRoom : Layer  <ReplaceLayerActionDelegate , UpDateRoomDelegate>
 {
 	id<ChoiceRoomDelegate> delegate;
 	
@@ -33,5 +34,7 @@
 }
 
 - (id) init: (id<ChoiceRoomDelegate>) _delegate;
+
+- (void) UpDateRoomNum;
 
 @end

@@ -25,6 +25,7 @@
 #import "LeaguePlayers.h"
 #import "LeagueLeaderboard.h"
 #import "ChoiceRoom.h"
+#import "Waiting.h"
 
 @interface AppController : NSObject 
 	<
@@ -37,7 +38,8 @@
 	EnterNameDelegate,
 	LeaguePlayersDelegate,
 	LeagueLeaderboardDelegate,
-	ChoiceRoomDelegate
+	ChoiceRoomDelegate,
+    WaitReturnDelegate
 	> 
 {
 	UIWindow	*window;
@@ -50,9 +52,11 @@
 	int			opponent;
 	
 	bool youWin;
-	int score;
+	int  score;
+	
 	NSString *opponentName;
-	NSString *opponentID;	
+	NSString *opponentID;
+	
 }
 
 - (void) mainMenu;

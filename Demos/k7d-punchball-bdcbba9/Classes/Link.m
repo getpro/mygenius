@@ -29,7 +29,7 @@ typedef enum {
 
 @implementation Link
 
-@synthesize b_IsWaiting, state, role, name, sessionID, peerID, peerName, connectionAlert, dataReceiver, uniqueID, peerUniqueID ,m_strRoomID;
+@synthesize b_IsWaiting, state, role, name, sessionID, peerID, peerName, connectionAlert, dataReceiver, upDateRoomdelegate ,uniqueID, peerUniqueID ,m_strRoomID;
 
 - (id)initWithID:(NSString*)_sessionID name:(NSString*)_name delegate:(id<LinkDelegate>)_delegate 
 {
@@ -673,11 +673,19 @@ typedef enum {
 		m_currentState = stateEnterLobbyed;
 		NSLog(@"stateEnterLobbyed");
 		b_IsWaiting = NO;
+		
+		if(upDateRoomdelegate)
+		{
+			[upDateRoomdelegate UpDateRoom:eventCode :photonEvent];
+		}
 	}
 	else if(eventCode == 2)
 	{
 		//Lobby change
-		
+		if(upDateRoomdelegate)
+		{
+			[upDateRoomdelegate UpDateRoom:eventCode :photonEvent];
+		}
 	}
 }
 
@@ -818,6 +826,8 @@ typedef enum {
 
 - (void) LeaveRoom
 {
+	m_currentState = stateLeaving;
+	
 	if(m_strRoomID != nil)
 	{
 		short pLeaveID = 0;
@@ -883,20 +893,14 @@ typedef enum {
 
 - (short) Leave:(NSString*)gameId
 {
-	return [m_pLitePeer opLeave:@""];
+	//return [m_pLitePeer opLeave:gameId];
 	
-	/*
-	 NSDictionary * pDic = [NSDictionary dictionaryWithObjectsAndKeys:
+	NSDictionary * pDic = [NSDictionary dictionaryWithObjectsAndKeys:
+						   gameId ,[KeyObject withByteValue:P_GAMEID],
+						   @"chat_lobby" ,[KeyObject withByteValue:((nByte)5)],
+						   nil];
 	 
-	 gameId ,[KeyObject withByteValue:P_GAMEID],
-	 @"chat_lobby" ,[KeyObject withByteValue:((nByte)5)],
-	 
-	 
-	 nil];
-	 
-	 return [m_pLitePeer opCustom:OPC_RT_LEAVE : pDic :true];
-	 
-	 */
+	return [m_pLitePeer opCustom:OPC_RT_LEAVE : pDic :true];
 	
 }
 
@@ -927,11 +931,6 @@ typedef enum {
 }
 
 
--(void) UpDateRoomNum
-{
-	
-	
-	
-}
+
 
 @end
