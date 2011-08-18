@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		218A385513FB6D6F005C8163 /* Waiting.m in Sources */ = {isa = PBXBuildFile; fileRef = 218A385413FB6D6F005C8163 /* Waiting.m */; };
 		21CC86D113FA635300007E67 /* room_s.png in Resources */ = {isa = PBXBuildFile; fileRef = 21CC86CF13FA635300007E67 /* room_s.png */; };
 		21CC86D213FA635300007E67 /* room.png in Resources */ = {isa = PBXBuildFile; fileRef = 21CC86D013FA635300007E67 /* room.png */; };
 		21CC86D513FA63F300007E67 /* ChoiceRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CC86D413FA63F300007E67 /* ChoiceRoom.m */; };
@@ -305,6 +306,8 @@
 /* Begin PBXFileReference section */
 		1D6058910D05DD3D006BFB54 /* punchball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = punchball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F3B9A820EF2151B00286867 /* punchball_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = punchball_Prefix.pch; sourceTree = SOURCE_ROOT; };
+		218A385313FB6D6F005C8163 /* Waiting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Waiting.h; sourceTree = "<group>"; };
+		218A385413FB6D6F005C8163 /* Waiting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Waiting.m; sourceTree = "<group>"; };
 		21CC86CF13FA635300007E67 /* room_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = room_s.png; sourceTree = "<group>"; };
 		21CC86D013FA635300007E67 /* room.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = room.png; sourceTree = "<group>"; };
 		21CC86D313FA63F300007E67 /* ChoiceRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceRoom.h; sourceTree = "<group>"; };
@@ -1023,6 +1026,8 @@
 				63F5FE0A10C80D5400F314FC /* EnterName.m */,
 				21CC86D313FA63F300007E67 /* ChoiceRoom.h */,
 				21CC86D413FA63F300007E67 /* ChoiceRoom.m */,
+				218A385313FB6D6F005C8163 /* Waiting.h */,
+				218A385413FB6D6F005C8163 /* Waiting.m */,
 			);
 			name = Screens;
 			sourceTree = "<group>";
@@ -1453,6 +1458,7 @@
 				63F5FE6810C80D5400F314FC /* State.m in Sources */,
 				63F5FE6910C80D5400F314FC /* TwiztLeague.m in Sources */,
 				21CC86D513FA63F300007E67 /* ChoiceRoom.m in Sources */,
+				218A385513FB6D6F005C8163 /* Waiting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
