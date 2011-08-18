@@ -817,11 +817,15 @@ typedef enum {
 {
 	//加入一个lobby
 	
+	/*
 	NSDictionary * pDic = [NSDictionary dictionaryWithObjectsAndKeys:
 						   @"chat_lobby" ,[KeyObject withByteValue:P_GAMEID],
 						   nil];
 	
 	[m_pLitePeer opCustom:OPC_RT_JOIN : pDic :true];
+	*/
+	
+	[m_pLitePeer opJoin:@"chat_lobby"];
 }
 
 - (void) LeaveRoom
@@ -881,8 +885,10 @@ typedef enum {
 	//return [m_pLitePeer opJoin:gameId];	
 	//return [m_pLitePeer opJoin:@"chat_lobby"];
 	//加入room
+	
 	NSDictionary * pDic = [NSDictionary dictionaryWithObjectsAndKeys:
 						   
+						   //gameId ,[KeyObject withByteValue:P_GAMEID],
 						   gameId ,[KeyObject withByteValue:P_GAMEID],
 						   @"chat_lobby" ,[KeyObject withByteValue:((nByte)5)],
 						   
@@ -893,14 +899,16 @@ typedef enum {
 
 - (short) Leave:(NSString*)gameId
 {
-	//return [m_pLitePeer opLeave:gameId];
+	return [m_pLitePeer opLeave:@""];
 	
+	/*
 	NSDictionary * pDic = [NSDictionary dictionaryWithObjectsAndKeys:
 						   gameId ,[KeyObject withByteValue:P_GAMEID],
 						   @"chat_lobby" ,[KeyObject withByteValue:((nByte)5)],
 						   nil];
 	 
 	return [m_pLitePeer opCustom:OPC_RT_LEAVE : pDic :true];
+	*/
 	
 }
 

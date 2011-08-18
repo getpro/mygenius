@@ -37,6 +37,11 @@
 	[delegate EnterRoom:4];
 }
 
+-(void) refresh: (id) sender
+{
+	[delegate EnterRoom:0];
+}
+
 - (id) init: (id<ChoiceRoomDelegate>) _delegate 
 {
 	[super init];
@@ -75,6 +80,13 @@
 	Menu *vmm4 = [Menu menuWithItems: vm4,item4,nil];
 	vmm4.position = ccp(2 * size.width / 3, size.height / 3);
 	[self addChild:vmm4 z:1];
+	
+	
+	Label * refresh = [Label labelWithString:@"刷新" fontName:@"Marker Felt" fontSize:32];
+	MenuItemLabel * refreshItem = [MenuItemLabel itemWithLabel:refresh target:self selector:@selector(refresh:)];
+	Menu *vmmrefresh = [Menu menuWithItems: refreshItem,nil];
+	vmmrefresh.position = ccp([refreshItem rect].size.width/2,[refreshItem rect].size.height/2);
+	[self addChild:vmmrefresh z:1];
 	
 	return self;
 }

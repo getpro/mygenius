@@ -379,14 +379,22 @@ typedef enum {
 
 -(void) EnterRoom:(NSInteger) pIndex
 {
-	[link JoinIntoRoom:[NSString stringWithFormat:@"demo_photon_game_room%d",pIndex]];
-	
-	//Empty *l = [[[Empty alloc] init] autorelease];
-	//ReplaceLayerAction *replaceScreen = [[[ReplaceLayerAction alloc] initWithScene: scene layer:l replaceLayer:currentLayer] autorelease];
-	//[scene runAction: replaceScreen];
-	
-	//waiting界面
-	[[Director sharedDirector] pushScene: [Waiting scene:self]];
+	if(pIndex == 0)
+	{
+		//退出房间后需要重新加入
+		[link EnterLobby];
+	}
+	else
+	{
+		[link JoinIntoRoom:[NSString stringWithFormat:@"demo_photon_game_room%d",pIndex]];
+		
+		//Empty *l = [[[Empty alloc] init] autorelease];
+		//ReplaceLayerAction *replaceScreen = [[[ReplaceLayerAction alloc] initWithScene: scene layer:l replaceLayer:currentLayer] autorelease];
+		//[scene runAction: replaceScreen];
+		
+		//waiting界面
+		[[Director sharedDirector] pushScene: [Waiting scene:self]];
+	}
 }
 
 -(void) WaitReturn
