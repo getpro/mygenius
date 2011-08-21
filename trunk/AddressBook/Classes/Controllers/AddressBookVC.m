@@ -15,6 +15,7 @@
 @synthesize m_pSearchDC;
 @synthesize m_pSearchBar;
 @synthesize m_pTableView_IB;
+@synthesize m_pScrollView_IB;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -36,7 +37,17 @@
 	self.m_pSearchDC.searchResultsDataSource = self;
 	self.m_pSearchDC.searchResultsDelegate = self;	
 	
+	//测试添加分组
+	for (int i = 0; i < 15; i++) 
+	{
+		UILabel * pLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, i * 50, 92,50)];
+		
+		[pLabel setText: [NSString stringWithFormat:@"朋友[%d]",i]];
+		
+		[m_pScrollView_IB addSubview:pLabel];
+	}
 	
+	[m_pScrollView_IB setContentSize:CGSizeMake(92, 50 * 15)];
 	
 }
 
@@ -60,7 +71,8 @@
     // Release any cached data, images, etc. that aren't in use.
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload 
+{
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -69,9 +81,10 @@
 
 - (void)dealloc 
 {
-	[m_pSearchDC     release];
-	[m_pSearchBar    release];
-	[m_pTableView_IB release];
+	[m_pSearchDC      release];
+	[m_pSearchBar     release];
+	[m_pTableView_IB  release];
+	[m_pScrollView_IB release];
 	
     [super dealloc];
 }

@@ -22,11 +22,13 @@
 	UISearchBar				  * m_pSearchBar;
 	
 	IBOutlet UITableView      * m_pTableView_IB;
+	IBOutlet UIScrollView     * m_pScrollView_IB;
 }
 
 @property (retain,nonatomic) UISearchDisplayController * m_pSearchDC;
 @property (retain,nonatomic) UISearchBar			   * m_pSearchBar;
 @property (retain,nonatomic) IBOutlet UITableView      * m_pTableView_IB;
+@property (retain,nonatomic) IBOutlet UIScrollView     * m_pScrollView_IB;
 
 -(IBAction)editItemBtn:(id)sender;
 -(IBAction)addItemBtn: (id)sender;
