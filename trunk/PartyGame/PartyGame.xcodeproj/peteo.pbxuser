@@ -6,10 +6,6 @@
 			217BF16813FABCC3003E3A9F /* PartyGame */,
 		);
 	};
-	212B0C9413FAC01A00469528 /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 506EDC30102F528A00A389B3 /* HelloWorldLayer.m */;
-	};
 	212B0CA613FAC04500469528 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 506EDC30102F528A00A389B3 /* HelloWorldLayer.m */;
@@ -62,6 +58,16 @@
 		isa = PBXCodeSenseManager;
 		indexTemplatePath = "";
 	};
+	2186117313FAC09200C11DB8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 506EDC30102F528A00A389B3 /* HelloWorldLayer.m */;
+		name = "HelloWorldLayer.m: 10";
+		rLen = 0;
+		rLoc = 163;
+		rType = 0;
+		vrLen = 353;
+		vrLoc = 0;
+	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Debug;
 		activeExecutable = 217BF16813FABCC3003E3A9F /* PartyGame */;
@@ -93,12 +99,12 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 335200259;
-			PBXWorkspaceStateSaveDate = 335200259;
+			PBXPerProjectTemplateStateSaveDate = 335200400;
+			PBXWorkspaceStateSaveDate = 335200400;
 		};
 		perUserProjectItems = {
-			212B0C9413FAC01A00469528 /* PBXBookmark */ = 212B0C9413FAC01A00469528 /* PBXBookmark */;
 			212B0CA613FAC04500469528 /* PBXTextBookmark */ = 212B0CA613FAC04500469528 /* PBXTextBookmark */;
+			2186117313FAC09200C11DB8 /* PBXTextBookmark */ = 2186117313FAC09200C11DB8 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 217BF18113FABCD5003E3A9F /* Source Control */;
 		userBuildSettings = {
@@ -108,7 +114,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {974, 1449}}";
 			sepNavSelRange = "{163, 0}";
-			sepNavVisRange = "{0, 355}";
+			sepNavVisRange = "{0, 353}";
 		};
 	};
 	506EE05D10304ED200A389B3 /* cocos2d libraries */ = {
