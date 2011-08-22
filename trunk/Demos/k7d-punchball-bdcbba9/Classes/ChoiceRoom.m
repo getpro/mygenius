@@ -12,34 +12,50 @@
 
 -(void) room1: (id) sender
 {	
-	//[item1 setString:@"ROOM1(2)"];
-	//[self JoinIntoRoom:@"demo_photon_game_room1"];
-	[delegate EnterRoom:1];
+	if(delegate)
+	{
+		[delegate EnterRoom:1];
+	}
 }
 
 -(void) room2: (id) sender
 {	
-	//[item1 setString:@"ROOM1(2)"];
-	[delegate EnterRoom:2];
+	if(delegate)
+	{
+		[delegate EnterRoom:2];
+	}
 }
 
 -(void) room3: (id) sender
 {	
-	//[item1 setString:@"ROOM1(2)"];
-	[delegate EnterRoom:3];
+	if(delegate)
+	{
+		[delegate EnterRoom:3];
+	}
 }
 
 -(void) room4: (id) sender
 {	
-	//[item1 setString:@"ROOM1(2)"];
-	//MoveTo* move = [MoveTo actionWithDuration:3 position:CGPointMake(0.0f, 100.0f)]; 
-	//[item1 runAction:move];
-	[delegate EnterRoom:4];
+	if(delegate)
+	{
+		[delegate EnterRoom:4];
+	}
 }
 
 -(void) refresh: (id) sender
 {
-	[delegate EnterRoom:0];
+	if(delegate)
+	{
+		[delegate EnterRoom:0];
+	}
+}
+
+-(void) Return: (id) sender
+{	
+	if(delegate)
+	{
+		[delegate EnterRoom:-1];
+	}
 }
 
 - (id) init: (id<ChoiceRoomDelegate>) _delegate 
@@ -88,7 +104,12 @@
 	vmmrefresh.position = ccp([refreshItem rect].size.width/2,[refreshItem rect].size.height/2);
 	[self addChild:vmmrefresh z:1];
 	
-	
+	//返回按钮
+	MenuItemImage * returnImg = [MenuItemImage itemFromNormalImage:@"b_back.png" selectedImage:@"b_back_s.png" target:self selector:@selector(Return:)];
+	CGRect pReturnImgRect = [returnImg rect];
+	Menu * returnMenu = [Menu menuWithItems: returnImg, nil];
+	returnMenu.position = cpv(0 + pReturnImgRect.size.width / 2, size.height - pReturnImgRect.size.height / 2);
+	[self addChild:returnMenu z:1];
 	
 	return self;
 }

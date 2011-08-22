@@ -50,6 +50,8 @@ typedef enum {
 	
 	self.state = StateDisconnected;
 	
+	b_TimerIsRunning = NO;
+	m_timer		     = nil;
 	
 	//Photon
 	
@@ -72,13 +74,17 @@ typedef enum {
 	
 	[self invalidateSession];
 	
-	self.peerName = nil;	
-	self.peerID = nil;
-	self.name = nil;
+	self.peerName  = nil;	
+	self.peerID    = nil;
+	self.name      = nil;
 	self.sessionID = nil;
 	
 	//Photon
 	[m_pLitePeer release];
+	if(m_timer)
+	{
+		[m_timer invalidate];
+	}
 	[m_timer     release];
 	[m_strRoomID release];
 	
@@ -122,6 +128,7 @@ typedef enum {
 
 -(void) onTime:(NSTimer*)Timer
 {
+	b_TimerIsRunning = YES;
 	[self Run];
 }
 
@@ -131,8 +138,18 @@ typedef enum {
 	
 	NSLog(@"startPicker");
 	
-	m_timer = [[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(onTime:) userInfo:nil repeats:YES]retain];
-	
+	if(b_TimerIsRunning)
+	{
+		//
+		[self EnterLobby];
+		m_currentState = stateEnterLobbying;
+	}
+	else 
+	{
+		//第一次进多人游戏
+		m_timer = [[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(onTime:) userInfo:nil repeats:YES]retain];
+	}
+
 }
 
 
@@ -435,9 +452,11 @@ typedef enum {
 	{
 		case OPC_RT_JOIN:
 			m_currentState = stateJoined;
+			NSLog(@"stateJoined");
 			break;
 		case OPC_RT_LEAVE:
 			m_currentState = stateLeft;
+			NSLog(@"stateLeft");
 			break;
 		case OPC_RT_RAISE_EV:
 			break;
@@ -553,9 +572,9 @@ typedef enum {
 		int n = 0;
 		[(NSValue*)[photonEvent objectForKey:[KeyObject withByteValue:P_ACTORNR]] getValue:&n];
 		
-		m_currentState = stateDisconnected;
+		//m_currentState = stateDisconnected;
 		
-		NSLog(@"-------DISCONNECTED-------");
+		//NSLog(@"-------DISCONNECTED-------");
 		
 		if(self.state == StatePicker) 
 		{
@@ -581,9 +600,11 @@ typedef enum {
 				[alert release];
 			}
 			
-			self.state = StateDisconnected;
+			//self.state = StateDisconnected;
 			
-			[self leaveGame];
+			//[self leaveGame];
+			
+			[self LeaveLobby];
 			
 			//[delegate linkDisconnected];
 		}
@@ -750,7 +771,7 @@ typedef enum {
 		case stateEnterLobbyed:
 			break;
 		case stateLeaving:
-			[m_pLitePeer opLeave:sessionID];
+			//[m_pLitePeer opLeave:sessionID];
 			break;
 		case stateDisconnecting:
 			[self CloseConnection];
@@ -766,7 +787,7 @@ typedef enum {
 
 #define URL_TEST_SERVER	 L"172.18.66.36:5055"
 
-//#define URL_TEST_SERVER	 L"172.18.72.10:15055"
+//#define URL_TEST_SERVER	 L"172.18.19.73:5055"
 
 -(void) CreateConnection
 {
@@ -828,6 +849,34 @@ typedef enum {
 	*/
 	
 	[m_pLitePeer opJoin:@"chat_lobby"];
+}
+
+- (void) LeaveLobby
+{
+	m_currentState = stateLeaving;
+	
+	short pLeaveID = 0;
+	
+	/*
+	NSDictionary * pDic = [NSDictionary dictionaryWithObjectsAndKeys:
+						   //gameId ,[KeyObject withByteValue:P_GAMEID],
+						   @"chat_lobby" ,[KeyObject withByteValue:P_GAMEID],
+						   nil];
+	*/
+	
+	//pLeaveID = [m_pLitePeer opCustom:OPC_RT_LEAVE : pDic :true];
+	
+	pLeaveID = [m_pLitePeer opLeave:@"chat_lobby"];
+	
+	//pLeaveID = [self Leave:@""];
+	
+	NSLog(@"LeaveLobby[%d]",pLeaveID);
+	
+	if ( pLeaveID == -1)
+	{
+		m_currentState = stateErrorLeaving;
+	}
+	
 }
 
 - (void) LeaveRoom
@@ -901,17 +950,14 @@ typedef enum {
 
 - (short) Leave:(NSString*)gameId
 {
-	return [m_pLitePeer opLeave:@""];
+	//return [m_pLitePeer opLeave:@""];
 	
-	/*
 	NSDictionary * pDic = [NSDictionary dictionaryWithObjectsAndKeys:
 						   gameId ,[KeyObject withByteValue:P_GAMEID],
 						   @"chat_lobby" ,[KeyObject withByteValue:((nByte)5)],
 						   nil];
 	 
-	return [m_pLitePeer opCustom:OPC_RT_LEAVE : pDic :true];
-	*/
-	
+	return [m_pLitePeer opCustom:OPC_RT_LEAVE : pDic :true];	
 }
 
 -(void) JoinIntoRoom:(NSString *) pRoomNo

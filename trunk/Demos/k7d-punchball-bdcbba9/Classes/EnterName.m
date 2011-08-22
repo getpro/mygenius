@@ -62,7 +62,8 @@
 
 @implementation EnterNameView
 
-- (id) initWithDelegate: (id)_delegate {
+- (id) initWithDelegate: (id)_delegate 
+{
 	if (self = [super initWithFrame:CGRectMake(0,0,480,320)]) 
 	{
 		self.userInteractionEnabled = true;

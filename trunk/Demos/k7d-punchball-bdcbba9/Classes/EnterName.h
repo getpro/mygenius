@@ -22,7 +22,8 @@
 
 @end
 
-@interface EnterNameView : UIView<UITextFieldDelegate>{
+@interface EnterNameView : UIView<UITextFieldDelegate>
+{
 	UITextField *nameField;
 	id<EnterNameDelegate> delegate;
 }
