@@ -63,7 +63,8 @@
 @implementation EnterNameView
 
 - (id) initWithDelegate: (id)_delegate {
-	if (self = [super initWithFrame:CGRectMake(0,0,480,320)]) {
+	if (self = [super initWithFrame:CGRectMake(0,0,480,320)]) 
+	{
 		self.userInteractionEnabled = true;
 		
 		self.transform = CGAffineTransformMakeRotation(H_PI);		
