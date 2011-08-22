@@ -88,6 +88,8 @@
 	vmmrefresh.position = ccp([refreshItem rect].size.width/2,[refreshItem rect].size.height/2);
 	[self addChild:vmmrefresh z:1];
 	
+	
+	
 	return self;
 }
 

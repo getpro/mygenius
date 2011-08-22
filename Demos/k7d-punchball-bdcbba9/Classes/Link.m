@@ -766,6 +766,8 @@ typedef enum {
 
 #define URL_TEST_SERVER	 L"172.18.66.36:5055"
 
+//#define URL_TEST_SERVER	 L"172.18.72.10:15055"
+
 -(void) CreateConnection
 {
 	//char* server = "udp.exitgames.com:5055";
