@@ -384,6 +384,13 @@ typedef enum {
 		//退出房间后需要重新加入
 		[link EnterLobby];
 	}
+	else if(pIndex == -1)
+	{
+		//返回
+		[link LeaveLobby];
+		[self mainMenu];
+		
+	}
 	else
 	{
 		[link JoinIntoRoom:[NSString stringWithFormat:@"demo_photon_game_room%d",pIndex]];

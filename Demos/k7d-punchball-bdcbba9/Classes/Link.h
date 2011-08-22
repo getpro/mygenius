@@ -148,6 +148,7 @@ typedef enum States
 	BOOL		 b_IsWaiting;
 	
 	NSTimer		*m_timer;
+	BOOL         b_TimerIsRunning;
 	
 	NSString    *m_strRoomID;
 }
@@ -189,7 +190,10 @@ typedef enum States
 -(void) CloseConnection;
 -(void) leaveGame;
 -(void) ExchangeKeys;
+
 -(void) EnterLobby;
+-(void) LeaveLobby;
+
 -(void) EnterRoom;
 -(void) LeaveRoom;
 
