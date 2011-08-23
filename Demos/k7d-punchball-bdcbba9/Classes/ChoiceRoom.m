@@ -14,7 +14,7 @@
 {	
 	if(delegate)
 	{
-		[delegate EnterRoom:1];
+		[delegate EnterRoom:EEnterRoomSelect_Room1];
 	}
 }
 
@@ -22,7 +22,7 @@
 {	
 	if(delegate)
 	{
-		[delegate EnterRoom:2];
+		[delegate EnterRoom:EEnterRoomSelect_Room2];
 	}
 }
 
@@ -30,7 +30,7 @@
 {	
 	if(delegate)
 	{
-		[delegate EnterRoom:3];
+		[delegate EnterRoom:EEnterRoomSelect_Room3];
 	}
 }
 
@@ -38,7 +38,7 @@
 {	
 	if(delegate)
 	{
-		[delegate EnterRoom:4];
+		[delegate EnterRoom:EEnterRoomSelect_Room4];
 	}
 }
 
@@ -46,7 +46,7 @@
 {
 	if(delegate)
 	{
-		[delegate EnterRoom:0];
+		[delegate EnterRoom:EEnterRoomSelect_ReFresh];
 	}
 }
 
@@ -54,7 +54,15 @@
 {	
 	if(delegate)
 	{
-		[delegate EnterRoom:-1];
+		[delegate EnterRoom:EEnterRoomSelect_Return];
+	}
+}
+
+-(void) sendDate: (id) sender
+{	
+	if(delegate)
+	{
+		[delegate EnterRoom:EEnterRoomSelect_SendChat];
 	}
 }
 
@@ -110,6 +118,13 @@
 	Menu * returnMenu = [Menu menuWithItems: returnImg, nil];
 	returnMenu.position = cpv(0 + pReturnImgRect.size.width / 2, size.height - pReturnImgRect.size.height / 2);
 	[self addChild:returnMenu z:1];
+	
+	//发送数据
+	Label * pSendDate = [Label labelWithString:@"发送" fontName:@"Marker Felt" fontSize:32];
+	MenuItemLabel * SendDateItem = [MenuItemLabel itemWithLabel:pSendDate target:self selector:@selector(sendDate:)];
+	Menu *vmmSendDate = [Menu menuWithItems: SendDateItem,nil];
+	vmmSendDate.position = ccp(200 + [SendDateItem rect].size.width/2,[SendDateItem rect].size.height/2);
+	[self addChild:vmmSendDate z:1];
 	
 	return self;
 }

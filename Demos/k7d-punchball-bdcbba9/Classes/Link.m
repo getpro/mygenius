@@ -688,6 +688,18 @@ typedef enum {
 			}
 		}
 	}
+	else if(eventCode == EV_CHATDATA)
+	{
+		if(!(eventData=[photonEvent objectForKey:[KeyObject withByteValue:P_DATA]]))
+			return;
+		
+		NSLog(@"get_string[%@]",[eventData objectForKey:[KeyObject withStringValue:@"NSString"]]);
+	
+		//UILabel * pUILabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
+		
+		//pUILabel.text = [NSString stringWithFormat:@"%@",[eventData objectForKey:[KeyObject withStringValue:@"NSString"]]];
+		
+	}
 	else if(eventCode == 1)
 	{
 		//进入Lobby后获取LobbyRomm的信息
@@ -785,9 +797,9 @@ typedef enum {
 	}
 }
 
-#define URL_TEST_SERVER	 L"172.18.66.36:5055"
+//#define URL_TEST_SERVER	 L"172.18.66.36:5055"
 
-//#define URL_TEST_SERVER	 L"172.18.19.73:5055"
+#define URL_TEST_SERVER	 L"172.18.19.73:5055"
 
 -(void) CreateConnection
 {
@@ -986,7 +998,18 @@ typedef enum {
 	
 }
 
-
+- (void) sendData:(NSString*)pStr
+{
+	NSMutableDictionary* ev = [[NSMutableDictionary alloc] init];
+	
+	[ev setObject:pStr forKey:[KeyObject withStringValue:@"NSString"]];
+	
+	NSLog(@"send_string[%@]",pStr);
+	
+	[m_pLitePeer opRaiseEvent :true :ev :EV_CHATDATA];
+	
+	[ev release];
+}
 
 
 @end
