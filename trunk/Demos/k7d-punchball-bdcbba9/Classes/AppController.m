@@ -379,17 +379,21 @@ typedef enum {
 
 -(void) EnterRoom:(NSInteger) pIndex
 {
-	if(pIndex == 0)
+	if(pIndex == EEnterRoomSelect_ReFresh)
 	{
 		//退出房间后需要重新加入
 		[link EnterLobby];
 	}
-	else if(pIndex == -1)
+	else if(pIndex == EEnterRoomSelect_Return)
 	{
 		//返回
 		[link LeaveLobby];
 		[self mainMenu];
 		
+	}
+	else if(pIndex == EEnterRoomSelect_SendChat)
+	{
+		[link sendData:@"test"];
 	}
 	else
 	{

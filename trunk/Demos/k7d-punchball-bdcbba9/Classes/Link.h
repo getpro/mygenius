@@ -22,7 +22,8 @@
 
 #define MAX_PACKET_SIZE 1024
 
-#define  EV_DATA ((char)101)
+#define  EV_DATA     ((char)101)
+#define  EV_CHATDATA ((char)102)
 
 #define  STATUS_DATA ((char)43)
 
@@ -202,6 +203,6 @@ typedef enum States
 
 -(void) JoinIntoRoom:(NSString *) pRoomNo;
 
-
+-(void) sendData:(NSString*)pStr;
 
 @end

@@ -11,6 +11,18 @@
 #include "ReplaceLayerAction.h"
 #import  "Link.h"
 
+typedef enum 
+{
+	EEnterRoomSelect_ReFresh,
+	EEnterRoomSelect_Room1,
+	EEnterRoomSelect_Room2,
+	EEnterRoomSelect_Room3,
+	EEnterRoomSelect_Room4,
+	EEnterRoomSelect_Return,
+	EEnterRoomSelect_SendChat,
+	EEnterRoomSelect_Count
+}EEnterRoomSelect;
+
 @protocol ChoiceRoomDelegate
 
 -(void) EnterRoom:(NSInteger) pIndex;
