@@ -69,6 +69,8 @@ typedef enum {
 	
 	currentLayer = nil;
 	
+	bNeedPop = NO;
+	
 	[MenuItemFont setFontSize:40];
 	
 	[PASoundMgr sharedSoundManager];
@@ -178,15 +180,18 @@ typedef enum {
 
 
 
-- (void) startMultiPlayer {
+- (void) startMultiPlayer 
+{
 	gameState = StateMultiPick;
 	
-	if (!state.name) {
+	if (!state.name) 
+	{
 		[self enterName];
 		return;
 	}
 	
-	if (!link) {
+	if (!link) 
+	{
 		link = [[Link alloc] initWithID:@"Punchball" name:state.name delegate:self];
 	}
 	
@@ -194,7 +199,7 @@ typedef enum {
 	//ReplaceLayerAction *replaceScreen = [[[ReplaceLayerAction alloc] initWithScene: scene layer:l replaceLayer:currentLayer] autorelease];
 	//[scene runAction: replaceScreen];
 	
-	ChoiceRoom *l = [[[ChoiceRoom alloc] init:self] autorelease];
+	ChoiceRoom *l = [[[ChoiceRoom alloc] init:self window:window] autorelease];
 	
 	link.upDateRoomdelegate = l;
 	
@@ -208,14 +213,30 @@ typedef enum {
 
 
 
--(void) linkConnected: (LinkRole) role {
-
+-(void) linkConnected: (LinkRole) role 
+{
 	gameState = StateMulti;
 	
 	MultiPlayerGame *game;
 	
 	//退出waiting界面
-	[[Director sharedDirector] popScene];
+	if(bNeedPop)
+	{
+		[[Director sharedDirector] popScene];
+		bNeedPop = NO;
+	}
+	
+	UIView * pnameField =[window viewWithTag:1001];
+	if(pnameField)
+	{
+		[pnameField removeFromSuperview];
+	}
+	
+	UIView * pChatList  =[window viewWithTag:1002];
+	if(pChatList)
+	{
+		[pChatList removeFromSuperview];
+	}
 	
 	if (role == RoleServer) 
 	{
@@ -277,15 +298,17 @@ typedef enum {
 
 
 
--(void) onGameOverReplay {
+-(void) onGameOverReplay 
+{
 	league.delegate = nil;
 	
-	if (gameState == StateMultiOver) {
+	if (gameState == StateMultiOver) 
+	{
 		[link resync];
-		
-	} else if (gameState == StateSingleOver) {
+	}
+	else if (gameState == StateSingleOver) 
+	{
 		[self opponentSelected:opponent];
-		
 	}
 }
 
@@ -330,24 +353,30 @@ typedef enum {
 
 
 
-- (void) nameEntered: (NSString*)name {
+- (void) nameEntered: (NSString*)name 
+{
 	state.name = name;
-	if (gameState == StateSingle) {
+	if (gameState == StateSingle) 
+	{
 		[self gameOver:youWin score:score opponentName:opponentName];
-	} else { // StateMultiPick
+	} 
+	else 
+	{ // StateMultiPick
 		[self startMultiPlayer];
 	}	
 }
 
 
 
--(void) onLeagueMenu {
+-(void) onLeagueMenu 
+{
 	[self mainMenu];
 }
 
 
 
--(void) onLeaguePlayer:(NSString*)playerID {
+-(void) onLeaguePlayer:(NSString*)playerID 
+{
 	NSLog(@"onLeaguePlayer=%@", playerID);
 	LeagueLeaderboard *l = [[[LeagueLeaderboard alloc] init:self league:league window:window playerID:playerID] autorelease];	
 	ReplaceLayerAction *replaceScreen = [[[ReplaceLayerAction alloc] initWithScene:scene layer:l replaceLayer:currentLayer] autorelease];
@@ -376,6 +405,10 @@ typedef enum {
 		currentLayer = go;
 	}
 }
+-(void) EnterRoomSendDate:(NSString*) pStr
+{
+	[link sendData:[NSString stringWithFormat:@"[%@]:%@",state.name,pStr]];
+}
 
 -(void) EnterRoom:(NSInteger) pIndex
 {
@@ -393,7 +426,7 @@ typedef enum {
 	}
 	else if(pIndex == EEnterRoomSelect_SendChat)
 	{
-		[link sendData:@"test"];
+		//[link sendData:[NSString stringWithFormat:@"[%@]:test",state.name]];
 	}
 	else
 	{
@@ -405,13 +438,19 @@ typedef enum {
 		
 		//waiting界面
 		[[Director sharedDirector] pushScene: [Waiting scene:self]];
+		bNeedPop = YES;
 	}
 }
 
 -(void) WaitReturn
 {
 	//退出waiting界面
-	[[Director sharedDirector] popScene];
+	if(bNeedPop)
+	{
+		[[Director sharedDirector] popScene];
+		bNeedPop = NO;
+	}
+	
 	[link LeaveRoom];
 }
 

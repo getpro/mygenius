@@ -29,7 +29,8 @@
 
 
 
-@interface LeaguePlayers : Layer <ReplaceLayerActionDelegate, UITableViewDelegate, UITableViewDataSource> {
+@interface LeaguePlayers : Layer <ReplaceLayerActionDelegate, UITableViewDelegate, UITableViewDataSource> 
+{
 	id<LeaguePlayersDelegate> delegate;
 	UIWindow *window;
 	UITableView *table;

@@ -119,8 +119,12 @@
 
 
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[delegate onLeaguePlayer:[playerIDs objectAtIndex:indexPath.row]];
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+	if([playerIDs count] > 0)
+	{
+		[delegate onLeaguePlayer:[playerIDs objectAtIndex:indexPath.row]];
+	}
 	return indexPath;
 }
 

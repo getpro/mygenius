@@ -35,7 +35,9 @@
 #define HIT_EFFECT_TIME 0.3f
 #define MAX_HIT_EFFECT_SPEED 150.0f
 
-#define MAX_HEALTH 20.0f
+//#define MAX_HEALTH 20.0f
+//test
+#define MAX_HEALTH 5.0f
 
 #define DEFAULT_SLIDE_SPEED 1200 // max pixels per second 
 

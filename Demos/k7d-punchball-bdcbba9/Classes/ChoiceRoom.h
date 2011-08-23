@@ -26,10 +26,11 @@ typedef enum
 @protocol ChoiceRoomDelegate
 
 -(void) EnterRoom:(NSInteger) pIndex;
+-(void) EnterRoomSendDate:(NSString*) pStr;
 
 @end
 
-@interface ChoiceRoom : Layer  <ReplaceLayerActionDelegate , UpDateRoomDelegate>
+@interface ChoiceRoom : Layer  <ReplaceLayerActionDelegate , UpDateRoomDelegate ,UITextFieldDelegate>
 {
 	id<ChoiceRoomDelegate> delegate;
 	
@@ -43,10 +44,16 @@ typedef enum
 	NSInteger m_nRoom3;
 	NSInteger m_nRoom4;
 	
+	UIWindow     *window;
+	UIScrollView *m_pChatList;
+	
+	UITextField  *nameField;
 }
 
-- (id) init: (id<ChoiceRoomDelegate>) _delegate;
+- (id) init: (id<ChoiceRoomDelegate>) _delegate window:(UIWindow*)_window;
 
 - (void) UpDateRoomNum;
+
+- (void) AddChatList:(NSString*)pStr;
 
 @end
