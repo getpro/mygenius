@@ -57,6 +57,7 @@
 	NSString *opponentName;
 	NSString *opponentID;
 	
+	BOOL  bNeedPop;
 }
 
 - (void) mainMenu;

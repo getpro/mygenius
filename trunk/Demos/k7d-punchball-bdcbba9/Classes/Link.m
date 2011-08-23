@@ -548,9 +548,8 @@ typedef enum {
 		if(n == 1)
 		{
 			//自己创建房间
-			
 		}
-		else if(n >= 2)
+		else if(n == 2)
 		{
 			int pPeerID = 0;
 			
@@ -690,15 +689,10 @@ typedef enum {
 	}
 	else if(eventCode == EV_CHATDATA)
 	{
-		if(!(eventData=[photonEvent objectForKey:[KeyObject withByteValue:P_DATA]]))
-			return;
-		
-		NSLog(@"get_string[%@]",[eventData objectForKey:[KeyObject withStringValue:@"NSString"]]);
-	
-		//UILabel * pUILabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
-		
-		//pUILabel.text = [NSString stringWithFormat:@"%@",[eventData objectForKey:[KeyObject withStringValue:@"NSString"]]];
-		
+		if(upDateRoomdelegate)
+		{
+			[upDateRoomdelegate UpDateRoom:eventCode :photonEvent];
+		}
 	}
 	else if(eventCode == 1)
 	{
