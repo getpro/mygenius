@@ -1572,6 +1572,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Aiming Jia (R47265F4JC)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1604,6 +1605,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = punchball;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8C9E0CC7-C3DE-4E5F-9DE3-688067083AA4";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = debug;
@@ -1612,7 +1614,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yi Yang (3P2MDK6FQX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Aiming Jia (R47265F4JC)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -1643,7 +1645,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = punchball;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EFF5D949-CD32-4D88-BA55-28D957BFA267";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8C9E0CC7-C3DE-4E5F-9DE3-688067083AA4";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -1686,14 +1688,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yi Yang (3P2MDK6FQX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Aiming Jia (R47265F4JC)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.2;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EFF5D949-CD32-4D88-BA55-28D957BFA267";
 				SDKROOT = iphoneos;
 			};
 			name = debug;
@@ -1703,7 +1704,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Aiming Jia (R47265F4JC)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

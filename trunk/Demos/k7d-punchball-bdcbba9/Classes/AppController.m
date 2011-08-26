@@ -39,6 +39,8 @@ typedef enum {
 
 @implementation AppController
 
+@synthesize link;
+
 - (void) applicationDidFinishLaunching:(UIApplication*)application
 {
 	application.idleTimerDisabled = YES; // we don't want the screen to sleep during our game 
@@ -255,7 +257,8 @@ typedef enum {
 
 
 
--(void) linkDisconnected {
+-(void) linkDisconnected 
+{
 	NSLog(@">>> linkDisconnected");
 	[self mainMenu];
 }
@@ -314,10 +317,12 @@ typedef enum {
 
 
 
--(void) onGameOverMenu {
+-(void) onGameOverMenu 
+{
 	league.delegate = nil;
 	
-	if (gameState == StateMultiOver) {
+	if (gameState == StateMultiOver) 
+	{
 		[link invalidateSession];
 	}
 	
