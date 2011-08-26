@@ -106,10 +106,8 @@ typedef enum {
 		self.session = nil;
 	}
 	*/
-	
-	//这里需要修改
-	
-	[self leaveGame];
+		
+	[self LeaveRoom];
 	
 }
 
