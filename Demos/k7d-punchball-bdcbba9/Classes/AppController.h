@@ -60,6 +60,8 @@
 	BOOL  bNeedPop;
 }
 
+@property (nonatomic,retain) Link * link;
+
 - (void) mainMenu;
 - (void) enterName;
 

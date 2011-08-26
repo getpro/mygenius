@@ -106,6 +106,11 @@ typedef enum {
 		self.session = nil;
 	}
 	*/
+	
+	//这里需要修改
+	
+	[self leaveGame];
+	
 }
 
 
@@ -484,16 +489,25 @@ typedef enum {
 			
 			if(self.state == StatePicker) 
 			{
+				self.state = StateDisconnected;
+				
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示！" message:@"无法连接服务器!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+				[alert show];
+				[alert release];
+				
+				//[delegate linkDisconnected];
+				
 				return;				// only do stuff if we're in multiplayer, otherwise it is probably for Picker
 			}
 			
+			/*
 			//if(_state == GKPeerStateDisconnected) 
 			{
 				// We've been disconnected from the other peer.
 				
 				// Update user alert or throw alert if it isn't already up
 				
-				NSString *message = [NSString stringWithFormat:@"The peer has disconnected." /* , [_session displayNameForPeer:_peerID] */ ];
+				NSString *message = [NSString stringWithFormat:@"The peer has disconnected."];
 				if ((self.state == StateCointoss) && self.connectionAlert && self.connectionAlert.visible) 
 				{
 					self.connectionAlert.message = message;
@@ -510,7 +524,7 @@ typedef enum {
 				
 				[delegate linkDisconnected];
 			}
-			
+			*/
 			
 			break;
 		case SC_EXCEPTION:
@@ -824,6 +838,7 @@ typedef enum {
 -(void) leaveGame
 {
 	// if user closes application, leave current game and close connection to server
+	/*
 	if(m_currentState == stateJoined)
 	{
 		m_currentState = stateLeaving;
@@ -833,6 +848,7 @@ typedef enum {
 		while(m_currentState == stateLeaving)
 			[m_pLitePeer service];
 	}
+	*/
 	
 	m_currentState = stateDisconnecting;
 	

@@ -8,6 +8,7 @@
 
 #import "ChoiceRoom.h"
 #import "Common.h"
+#import "AppController.h"
 
 #include "LitePeer.h"
 
@@ -50,6 +51,28 @@
 	NSLog(@"onExit");
 }
 
+-(BOOL)checkConnected
+{
+	AppController * app = [[UIApplication sharedApplication] delegate];
+	
+	
+	if(app.link.b_IsWaiting)
+	{
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示！" message:@"正在连接中，请稍等!" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+		
+		[alert show];
+		
+		[alert release];
+		
+		return NO;
+	}
+	else
+	{
+		return YES;
+	}
+	
+}
+
 -(void) room1: (id) sender
 {	
 	if(m_nRoom1 >= 2)
@@ -60,6 +83,11 @@
 		
 		[alert release];
 		
+		return;
+	}
+	
+	if(![self checkConnected])
+	{
 		return;
 	}
 	
@@ -84,6 +112,11 @@
 		return;
 	}
 	
+	if(![self checkConnected])
+	{
+		return;
+	}
+	
 	[self SetUIControlHiden:YES];
 	
 	if(delegate)
@@ -102,6 +135,11 @@
 		
 		[alert release];
 		
+		return;
+	}
+	
+	if(![self checkConnected])
+	{
 		return;
 	}
 	
@@ -126,6 +164,11 @@
 		return;
 	}
 	
+	if(![self checkConnected])
+	{
+		return;
+	}
+	
 	[self SetUIControlHiden:YES];
 	
 	if(delegate)
@@ -136,6 +179,11 @@
 
 -(void) refresh: (id) sender
 {
+	if(![self checkConnected])
+	{
+		return;
+	}
+	
 	if(delegate)
 	{
 		[delegate EnterRoom:EEnterRoomSelect_ReFresh];
@@ -155,6 +203,11 @@
 -(void) sendDate: (id) sender
 {	
 	[nameField resignFirstResponder];
+	
+	if(![self checkConnected])
+	{
+		return;
+	}
 	
 	if(nameField.text && ![nameField.text isEqual:@""])
 	{
@@ -377,7 +430,8 @@
 	UILabel * pUILabel = [[UILabel alloc] initWithFrame:CGRectMake(0, m_pChatList.contentSize.height, 160, 24)];
 	pUILabel.backgroundColor = [UIColor clearColor];
 	pUILabel.font = [UIFont fontWithName:@"Marker Felt" size:24];
-	pUILabel.text = pStr;
+	pUILabel.textColor = [UIColor whiteColor];
+	pUILabel.text	   = pStr;
 	pUILabel.numberOfLines = 0;
 	
 	//多行处理
@@ -395,7 +449,14 @@
 	[m_pChatList setContentSize:CGSizeMake(m_pChatList.contentSize.width,
 										   m_pChatList.contentSize.height + pUILabel.frame.size.height)];
 	
-	//[m_pChatList setContentOffset:CGPointMake(0, m_pChatList.contentSize.height - m_pChatList.frame.size.height)];
+	
+	
+	if(m_pChatList.contentSize.height > 320)
+	{
+		[m_pChatList setContentOffset:CGPointMake(0, m_pChatList.contentSize.height - 180)];
+	}
+	
+	
 	
 	[pUILabel release];
 }
