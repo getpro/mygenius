@@ -11,6 +11,7 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		210F641C14092C8600ABC90F /* FtpUpLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F641B14092C8600ABC90F /* FtpUpLoad.m */; };
 		211A09B613F57A99001CDC70 /* CustomItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A09B513F57A99001CDC70 /* CustomItemView.m */; };
 		211A09D913F57F8B001CDC70 /* AddressAddMoreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A09D813F57F8B001CDC70 /* AddressAddMoreVC.m */; };
 		211A09DD13F57FD0001CDC70 /* AddressAddMoreVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 211A09DC13F57FD0001CDC70 /* AddressAddMoreVC.xib */; };
@@ -22,6 +23,8 @@
 		2176A7F213E5708500944254 /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176A7F113E5708500944254 /* DataStore.m */; };
 		2198547913F6A20E0080A256 /* CustomDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2198547813F6A20E0080A256 /* CustomDatePicker.m */; };
 		2198547D13F6A2250080A256 /* CustomDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2198547C13F6A2250080A256 /* CustomDatePicker.xib */; };
+		219C4F661409F2A600455CD6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 219C4F651409F2A600455CD6 /* CFNetwork.framework */; };
+		219C500D140A054500455CD6 /* FtpGet.m in Sources */ = {isa = PBXBuildFile; fileRef = 219C500C140A054500455CD6 /* FtpGet.m */; };
 		219D997013E506E900506FCB /* DBConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 219D996D13E506E900506FCB /* DBConnection.m */; };
 		219D997113E506E900506FCB /* Statement.m in Sources */ = {isa = PBXBuildFile; fileRef = 219D996F13E506E900506FCB /* Statement.m */; };
 		219D997313E5070A00506FCB /* AddressBook.db in Resources */ = {isa = PBXBuildFile; fileRef = 219D997213E5070A00506FCB /* AddressBook.db */; };
@@ -68,6 +71,8 @@
 		1D3623250D0F684500981E51 /* AddressBookAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* AddressBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddressBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		210F641A14092C8600ABC90F /* FtpUpLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FtpUpLoad.h; sourceTree = "<group>"; };
+		210F641B14092C8600ABC90F /* FtpUpLoad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FtpUpLoad.m; sourceTree = "<group>"; };
 		211A09B413F57A99001CDC70 /* CustomItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomItemView.h; sourceTree = "<group>"; };
 		211A09B513F57A99001CDC70 /* CustomItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomItemView.m; sourceTree = "<group>"; };
 		211A09D713F57F8B001CDC70 /* AddressAddMoreVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressAddMoreVC.h; sourceTree = "<group>"; };
@@ -86,6 +91,9 @@
 		2198547713F6A20E0080A256 /* CustomDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDatePicker.h; sourceTree = "<group>"; };
 		2198547813F6A20E0080A256 /* CustomDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDatePicker.m; sourceTree = "<group>"; };
 		2198547C13F6A2250080A256 /* CustomDatePicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomDatePicker.xib; sourceTree = "<group>"; };
+		219C4F651409F2A600455CD6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		219C500B140A054500455CD6 /* FtpGet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FtpGet.h; sourceTree = "<group>"; };
+		219C500C140A054500455CD6 /* FtpGet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FtpGet.m; sourceTree = "<group>"; };
 		219D996C13E506E900506FCB /* DBConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBConnection.h; sourceTree = "<group>"; };
 		219D996D13E506E900506FCB /* DBConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBConnection.m; sourceTree = "<group>"; };
 		219D996E13E506E900506FCB /* Statement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Statement.h; sourceTree = "<group>"; };
@@ -156,6 +164,7 @@
 				219D999913E507D600506FCB /* libxml2.dylib in Frameworks */,
 				63458B2313E7A32400338243 /* AddressBook.framework in Frameworks */,
 				63458B2513E7A32400338243 /* AddressBookUI.framework in Frameworks */,
+				219C4F661409F2A600455CD6 /* CFNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +209,10 @@
 				2198547713F6A20E0080A256 /* CustomDatePicker.h */,
 				2198547813F6A20E0080A256 /* CustomDatePicker.m */,
 				2198547C13F6A2250080A256 /* CustomDatePicker.xib */,
+				210F641A14092C8600ABC90F /* FtpUpLoad.h */,
+				210F641B14092C8600ABC90F /* FtpUpLoad.m */,
+				219C500B140A054500455CD6 /* FtpGet.h */,
+				219C500C140A054500455CD6 /* FtpGet.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -355,6 +368,7 @@
 				21E712F313E3F3E700BF47E6 /* QuartzCore.framework */,
 				63458B2213E7A32400338243 /* AddressBook.framework */,
 				63458B2413E7A32400338243 /* AddressBookUI.framework */,
+				219C4F651409F2A600455CD6 /* CFNetwork.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -463,6 +477,8 @@
 				21A2AD0713F650F90051F3D7 /* memoInfoVC.m in Sources */,
 				21A2AE4313F66FD80051F3D7 /* memoInfo.m in Sources */,
 				2198547913F6A20E0080A256 /* CustomDatePicker.m in Sources */,
+				210F641C14092C8600ABC90F /* FtpUpLoad.m in Sources */,
+				219C500D140A054500455CD6 /* FtpGet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
