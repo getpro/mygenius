@@ -22,6 +22,10 @@
 	NSMutableArray * m_arrContactsInfo; //通讯录数据
 	NSMutableArray * m_arrMemoInfo;     //备忘录数据
 	NSMutableArray * m_arrDateInfo;     //纪念日数据
+	
+	//FTP
+	NSInteger               _networkingCount;
+	
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -30,6 +34,8 @@
 @property (nonatomic, retain) NSMutableArray * m_arrContactsInfo;
 @property (nonatomic, retain) NSMutableArray * m_arrMemoInfo;
 @property (nonatomic, retain) NSMutableArray * m_arrDateInfo;
+
+@property (nonatomic, assign) NSInteger        networkingCount;
 
 @property BOOL back;
 
@@ -43,6 +49,11 @@
 - (void) backScene;
 
 - (void) GetSysAddressBook;
+
+- (NSString *)pathForTemporaryFileWithPrefix:(NSString *)prefix;
+- (NSURL *)smartURLForString:(NSString *)str;
+- (void)didStartNetworking;
+- (void)didStopNetworking;
 
 @end
 

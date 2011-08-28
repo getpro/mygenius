@@ -7,6 +7,7 @@
 //
 
 #import "accountsVC.h"
+#import "FtpUpLoad.h"
 
 
 @implementation accountsVC
@@ -40,16 +41,34 @@
     // Release any cached data, images, etc. that aren't in use.
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload 
+{
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
 
-- (void)dealloc {
+- (void)dealloc 
+{
     [super dealloc];
 }
 
+-(IBAction)sendBtn:(id)sender
+{
+	FtpUpLoad * pFtp = [[FtpUpLoad alloc]init];
+	
+	/*
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"AddressBook.db"];
+	*/
+	
+	NSString *defaultDBPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"head.png"];
+	
+	[pFtp startSend:defaultDBPath];
+	
+	//[pFtp release];
+}
 
 @end
