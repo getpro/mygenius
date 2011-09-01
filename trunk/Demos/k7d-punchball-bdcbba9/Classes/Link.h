@@ -152,6 +152,8 @@ typedef enum States
 	BOOL         b_TimerIsRunning;
 	
 	NSString    *m_strRoomID;
+	
+	
 }
 
 @property BOOL		 b_IsWaiting;

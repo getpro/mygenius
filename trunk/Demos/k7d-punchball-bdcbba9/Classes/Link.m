@@ -145,7 +145,6 @@ typedef enum {
 	{
 		//
 		[self EnterLobby];
-		m_currentState = stateEnterLobbying;
 	}
 	else 
 	{
@@ -460,6 +459,10 @@ typedef enum {
 		case OPC_RT_LEAVE:
 			m_currentState = stateLeft;
 			NSLog(@"stateLeft");
+			
+			//退出房间后需要重新加入
+			[self EnterLobby];
+			
 			break;
 		case OPC_RT_RAISE_EV:
 			break;
@@ -782,7 +785,6 @@ typedef enum {
 			//[m_pLitePeer opCustom:OPC_RT_JOIN :[NSDictionary dictionaryWithObject:sessionID forKey:[KeyObject withByteValue:P_GAMEID]] :true :0 :true];
 			//isInGame = true;
 			[self EnterLobby];
-			m_currentState = stateEnterLobbying;
 			break;
 		case stateEnterLobbying:
 			break;
@@ -858,6 +860,8 @@ typedef enum {
 
 - (void) EnterLobby
 {
+	m_currentState = stateEnterLobbying;
+	
 	//加入一个lobby
 	
 	/*

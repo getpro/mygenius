@@ -53,8 +53,7 @@
 
 -(BOOL)checkConnected
 {
-	AppController * app = [[UIApplication sharedApplication] delegate];
-	
+	AppController * app = (AppController*)[[UIApplication sharedApplication] delegate];
 	
 	if(app.link.b_IsWaiting)
 	{
