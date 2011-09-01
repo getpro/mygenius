@@ -323,10 +323,27 @@ typedef enum {
 	
 	if (gameState == StateMultiOver) 
 	{
+		//多人模式
 		[link invalidateSession];
+		
+		//返回到房间
+		ChoiceRoom *l = [[[ChoiceRoom alloc] init:self window:window] autorelease];
+		
+		link.upDateRoomdelegate = l;
+		
+		ReplaceLayerAction *replaceScreen = [[[ReplaceLayerAction alloc] initWithScene: scene layer:l replaceLayer:currentLayer] autorelease];
+		[scene runAction: replaceScreen];
+		
+		currentLayer = l;
+		
+		[link startPicker];
+		
 	}
-	
-	[self mainMenu];
+	else if(gameState == StateSingleOver)
+	{
+		//单人
+		[self mainMenu];
+	}
 }
 
 
