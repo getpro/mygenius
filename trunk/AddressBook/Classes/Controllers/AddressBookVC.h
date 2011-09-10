@@ -13,10 +13,13 @@
 
 #import "baseVC.h"
 
-@interface AddressBookVC : baseVC  <UISearchBarDelegate,
-					UITableViewDelegate, UITableViewDataSource,
-					ABNewPersonViewControllerDelegate
-					>
+@interface AddressBookVC : UIViewController  
+< 
+UISearchBarDelegate,
+UITableViewDelegate, 
+UITableViewDataSource,
+ABNewPersonViewControllerDelegate
+>
 {
 	UISearchDisplayController * m_pSearchDC;
 	UISearchBar				  * m_pSearchBar;

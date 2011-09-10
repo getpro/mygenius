@@ -7,13 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "SwitchViewController.h"
+
+typedef enum 
+{
+    TAB_ADDRESSBOOK,
+    TAB_SYNC,
+    TAB_MEMO,
+    TAB_STATISTICS,
+    TAB_MORE,
+	TAB_Count
+}TAB_ITEM;
 
 @interface AddressBookAppDelegate : NSObject <UIApplicationDelegate> 
 {
     UIWindow * window;
 	
 	SwitchViewController *switchViewController;
+	
+	IBOutlet UITabBarController*   tabBarController; //底部的5个TabBar
 	
 	//返回
 	NSMutableArray * sceneID;
@@ -29,6 +42,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) NSMutableArray * sceneID;
 
 @property (nonatomic, retain) NSMutableArray * m_arrContactsInfo;

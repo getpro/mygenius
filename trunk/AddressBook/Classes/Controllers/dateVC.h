@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "baseVC.h"
 
-@interface dateVC : baseVC 
+@interface dateVC : UIViewController 
 {
 
 }

@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "baseVC.h"
 
-@interface accountsVC : baseVC 
+@interface accountsVC : UIViewController 
 {
 
 }

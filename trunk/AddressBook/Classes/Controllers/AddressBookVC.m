@@ -22,8 +22,6 @@
 {
     [super viewDidLoad];
 	
-	m_pUITabBar_IB.selectedItem = m_pUITabBarItem1_IB;
-	
 	// Create a search bar
 	self.m_pSearchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(100.0f, 0.0f, 220.0f, 44.0f)] autorelease];
 	self.m_pSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -38,9 +36,9 @@
 	self.m_pSearchDC.searchResultsDelegate = self;	
 	
 	//测试添加分组
-	for (int i = 0; i < 15; i++) 
+	for (int i = 0; i < 15; i++)
 	{
-		UILabel * pLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, i * 50, 92,50)];
+		UILabel * pLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,i * 50, 92,50)];
 		
 		[pLabel setText: [NSString stringWithFormat:@"朋友[%d]",i]];
 		
@@ -48,12 +46,11 @@
 	}
 	
 	[m_pScrollView_IB setContentSize:CGSizeMake(92, 50 * 15)];
-	
 }
 
 -(void)myInit
 {
-	m_pUITabBar_IB.selectedItem = m_pUITabBarItem1_IB;
+	
 }
 
 /*

@@ -15,13 +15,11 @@
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
-	
-	m_pUITabBar_IB.selectedItem = m_pUITabBarItem5_IB;
 }
 
 -(void)myInit
 {
-	m_pUITabBar_IB.selectedItem = m_pUITabBarItem5_IB;
+	
 }
 
 /*

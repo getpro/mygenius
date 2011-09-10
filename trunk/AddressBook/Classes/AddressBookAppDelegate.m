@@ -15,6 +15,7 @@
 
 @implementation AddressBookAppDelegate
 
+@synthesize tabBarController;
 @synthesize window;
 @synthesize back;
 @synthesize sceneID;
@@ -97,13 +98,13 @@
 		
 		
 	}
-
-	
 	
 	//
+	tabBarController.selectedIndex = TAB_ADDRESSBOOK;
 	
+	[self.window addSubview:tabBarController.view];
 	
-	[self.window addSubview:switchViewController.view];
+	//[self.window addSubview:switchViewController.view];
     
     [self.window makeKeyAndVisible];
     
@@ -163,6 +164,7 @@
 {
 	[DBConnection closeDatabase];
 	
+	[tabBarController	  release];
 	[switchViewController release];
     [window				  release];
 	[sceneID			  release];
