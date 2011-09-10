@@ -21,6 +21,11 @@
 		2165261013E531D10075F387 /* AddressEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2165260F13E531D10075F387 /* AddressEditVC.xib */; };
 		2176A7EF13E5705700944254 /* ImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176A7EE13E5705700944254 /* ImageStore.m */; };
 		2176A7F213E5708500944254 /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176A7F113E5708500944254 /* DataStore.m */; };
+		21873900141B6C52007D64B4 /* bottom_icon_contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 218738FB141B6C52007D64B4 /* bottom_icon_contacts.png */; };
+		21873901141B6C52007D64B4 /* bottom_icon_memo.png in Resources */ = {isa = PBXBuildFile; fileRef = 218738FC141B6C52007D64B4 /* bottom_icon_memo.png */; };
+		21873902141B6C52007D64B4 /* bottom_icon_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 218738FD141B6C52007D64B4 /* bottom_icon_more.png */; };
+		21873903141B6C52007D64B4 /* bottom_icon_statistics.png in Resources */ = {isa = PBXBuildFile; fileRef = 218738FE141B6C52007D64B4 /* bottom_icon_statistics.png */; };
+		21873904141B6C52007D64B4 /* bottom_icon_sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 218738FF141B6C52007D64B4 /* bottom_icon_sync.png */; };
 		2198547913F6A20E0080A256 /* CustomDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2198547813F6A20E0080A256 /* CustomDatePicker.m */; };
 		2198547D13F6A2250080A256 /* CustomDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2198547C13F6A2250080A256 /* CustomDatePicker.xib */; };
 		219C4F661409F2A600455CD6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 219C4F651409F2A600455CD6 /* CFNetwork.framework */; };
@@ -88,6 +93,11 @@
 		2176A7EE13E5705700944254 /* ImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageStore.m; sourceTree = "<group>"; };
 		2176A7F013E5708500944254 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
 		2176A7F113E5708500944254 /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
+		218738FB141B6C52007D64B4 /* bottom_icon_contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_icon_contacts.png; sourceTree = "<group>"; };
+		218738FC141B6C52007D64B4 /* bottom_icon_memo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_icon_memo.png; sourceTree = "<group>"; };
+		218738FD141B6C52007D64B4 /* bottom_icon_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_icon_more.png; sourceTree = "<group>"; };
+		218738FE141B6C52007D64B4 /* bottom_icon_statistics.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_icon_statistics.png; sourceTree = "<group>"; };
+		218738FF141B6C52007D64B4 /* bottom_icon_sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_icon_sync.png; sourceTree = "<group>"; };
 		2198547713F6A20E0080A256 /* CustomDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDatePicker.h; sourceTree = "<group>"; };
 		2198547813F6A20E0080A256 /* CustomDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDatePicker.m; sourceTree = "<group>"; };
 		2198547C13F6A2250080A256 /* CustomDatePicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomDatePicker.xib; sourceTree = "<group>"; };
@@ -194,6 +204,25 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		218738F9141B6C52007D64B4 /* addressbook */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = addressbook;
+			sourceTree = "<group>";
+		};
+		218738FA141B6C52007D64B4 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				218738FB141B6C52007D64B4 /* bottom_icon_contacts.png */,
+				218738FC141B6C52007D64B4 /* bottom_icon_memo.png */,
+				218738FD141B6C52007D64B4 /* bottom_icon_more.png */,
+				218738FE141B6C52007D64B4 /* bottom_icon_statistics.png */,
+				218738FF141B6C52007D64B4 /* bottom_icon_sync.png */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
 		219D996A13E506E900506FCB /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +264,8 @@
 		219D99B913E5163100506FCB /* image */ = {
 			isa = PBXGroup;
 			children = (
+				218738F9141B6C52007D64B4 /* addressbook */,
+				218738FA141B6C52007D64B4 /* common */,
 				219D99BA13E5163100506FCB /* head.png */,
 				219D99BB13E5163100506FCB /* image01_kuang.png */,
 				219D99BC13E5163100506FCB /* image02_kuang.png */,
@@ -444,6 +475,11 @@
 				211A09DD13F57FD0001CDC70 /* AddressAddMoreVC.xib in Resources */,
 				21A2AD0913F6511B0051F3D7 /* memoInfoVC.xib in Resources */,
 				2198547D13F6A2250080A256 /* CustomDatePicker.xib in Resources */,
+				21873900141B6C52007D64B4 /* bottom_icon_contacts.png in Resources */,
+				21873901141B6C52007D64B4 /* bottom_icon_memo.png in Resources */,
+				21873902141B6C52007D64B4 /* bottom_icon_more.png in Resources */,
+				21873903141B6C52007D64B4 /* bottom_icon_statistics.png in Resources */,
+				21873904141B6C52007D64B4 /* bottom_icon_sync.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
