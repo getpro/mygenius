@@ -11,8 +11,13 @@
 
 #import "baseVC.h"
 
-@interface memoVC : baseVC < UIActionSheetDelegate,UISearchBarDelegate,
-	UITableViewDelegate, UITableViewDataSource >
+@interface memoVC : UIViewController 
+<  
+UIActionSheetDelegate,
+UISearchBarDelegate,
+UITableViewDelegate, 
+UITableViewDataSource 
+>
 {
 	UISearchDisplayController * m_pSearchDC;
 	UISearchBar				  * m_pSearchBar;

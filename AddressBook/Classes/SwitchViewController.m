@@ -103,8 +103,8 @@
 		}
 		
 		
-		if(![AddressBookAppDelegate getAppDelegate].back)
-			[self.m_pAddressBookVC myInit];
+		//if(![AddressBookAppDelegate getAppDelegate].back)
+		//	[self.m_pAddressBookVC myInit];
 		
 		coming = self.m_pAddressBookVC;
 		going  = [self checkGoingView];

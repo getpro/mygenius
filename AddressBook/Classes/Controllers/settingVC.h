@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "baseVC.h"
 
-@interface settingVC : baseVC 
+@interface settingVC : UIViewController 
 {
 
 }
