@@ -12,12 +12,16 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 
+#import "GroupItemView.h"
+
 @interface AddressBookVC : UIViewController  
 < 
 UISearchBarDelegate,
 UITableViewDelegate, 
 UITableViewDataSource,
-ABNewPersonViewControllerDelegate
+ABNewPersonViewControllerDelegate,
+UIActionSheetDelegate,
+GroupItemViewDelegate
 >
 {
 	UISearchDisplayController * m_pSearchDC;
@@ -25,12 +29,14 @@ ABNewPersonViewControllerDelegate
 	
 	IBOutlet UITableView      * m_pTableView_IB;
 	IBOutlet UIScrollView     * m_pScrollView_IB;
+	IBOutlet UIImageView      * m_pImageView_IB;
 }
 
 @property (retain,nonatomic) UISearchDisplayController * m_pSearchDC;
 @property (retain,nonatomic) UISearchBar			   * m_pSearchBar;
 @property (retain,nonatomic) IBOutlet UITableView      * m_pTableView_IB;
 @property (retain,nonatomic) IBOutlet UIScrollView     * m_pScrollView_IB;
+@property (retain,nonatomic) IBOutlet UIImageView      * m_pImageView_IB;
 
 -(IBAction)editItemBtn:(id)sender;
 -(IBAction)addItemBtn: (id)sender;

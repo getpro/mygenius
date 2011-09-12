@@ -8,7 +8,6 @@
 
 #import "AddressBookVC.h"
 #import "AddressBookAppDelegate.h"
-#import "GroupItemView.h"
 
 @implementation AddressBookVC
 
@@ -26,6 +25,7 @@
 @synthesize m_pSearchBar;
 @synthesize m_pTableView_IB;
 @synthesize m_pScrollView_IB;
+@synthesize m_pImageView_IB;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -38,6 +38,8 @@
 	self.m_pSearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	self.m_pSearchBar.keyboardType = UIKeyboardTypeDefault;
 	self.m_pSearchBar.delegate = self;
+	self.m_pSearchBar.barStyle = UIBarStyleDefault;
+	//self.m_pSearchBar.tintColor = [UIColor darkGrayColor];
 	self.m_pTableView_IB.tableHeaderView = self.m_pSearchBar;
 	
 	// Create the search display controller
@@ -62,8 +64,36 @@
 	
 	for (int i = 0; i < 15; i++)
 	{
-		GroupItemView * pLabel = [[GroupItemView alloc] initWithFrame:CGRectMake(0,i * 40,53,40) :[NSString stringWithFormat:@"朋友[%d]",i]];
+		GroupItemView * pLabel = nil;
 		
+		if(i == 0)
+		{
+			pLabel = [[GroupItemView alloc] initWithFrame:CGRectMake(0,i * 40,53,40) 
+														 :[NSString stringWithFormat:@"全部",i] 
+														 :9594];
+			
+			[pLabel SetHidden:NO];
+		}
+		else if(i == 1)
+		{
+			pLabel = [[GroupItemView alloc] initWithFrame:CGRectMake(0,i * 40,53,40) 
+														 :[NSString stringWithFormat:@"家人",i] 
+														 :598];
+		}
+		else if(i == 2)
+		{
+			pLabel = [[GroupItemView alloc] initWithFrame:CGRectMake(0,i * 40,53,40) 
+														 :[NSString stringWithFormat:@"同学",i] 
+														 :8];
+		}
+		else
+		{
+			pLabel = [[GroupItemView alloc] initWithFrame:CGRectMake(0,i * 40,53,40) 
+														 :[NSString stringWithFormat:@"朋友[%d]",i] 
+														 :55];
+		}
+		
+		pLabel.delegate = self;
 		pLabel.tag = i;
 		
 		[m_pScrollView_IB addSubview:pLabel];
@@ -109,6 +139,7 @@
 	[m_pSearchBar     release];
 	[m_pTableView_IB  release];
 	[m_pScrollView_IB release];
+	[m_pImageView_IB  release];
 	
     [super dealloc];
 }
@@ -124,6 +155,7 @@
 	[self.m_pSearchBar setFrame:CGRectMake(0, 0, TABLEVIEW_W + TABLEVIEW_X, SEARCH_BAR_H)];
 	
 	[m_pScrollView_IB setHidden:YES];
+	[m_pImageView_IB  setHidden:YES];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -138,6 +170,7 @@
 	[self.m_pTableView_IB setFrame:CGRectMake(TABLEVIEW_X,TABLEVIEW_Y,TABLEVIEW_W,TABLEVIEW_H)];
 	
 	[m_pScrollView_IB setHidden:NO];
+	[m_pImageView_IB  setHidden:NO];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -167,6 +200,7 @@
 	[self.m_pTableView_IB setFrame:CGRectMake(TABLEVIEW_X,TABLEVIEW_Y,TABLEVIEW_W,TABLEVIEW_H)];
 	
 	[m_pScrollView_IB setHidden:NO];
+	[m_pImageView_IB  setHidden:NO];
 }
 
 #pragma mark TableView methods
@@ -433,7 +467,7 @@
 	
 	//调用系统的添加联系人界面
 	
-	
+	/*
 	ABNewPersonViewController *picker = [[ABNewPersonViewController alloc] init];
 	picker.newPersonViewDelegate = self;
 	
@@ -442,9 +476,19 @@
 	
 	[picker release];
 	[navigation release];
-	 
+	*/
 	
 	
+	// open a dialog with two custom buttons
+	/*
+	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+															 delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil
+													otherButtonTitles:@"新建分组", @"新建联系人", nil];
+	actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+	//actionSheet.destructiveButtonIndex = 1;	// make the second button red (destructive)
+	[actionSheet showInView:self.view]; // show from our table view (pops up in the middle of the table)
+	[actionSheet release];
+	*/
 }
 
 
@@ -463,6 +507,28 @@
 	NSString * ss = [NSString stringWithFormat:@"%d" , EViewAddressAddMore];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
+	
+}
+
+#pragma mark GroupItem methods
+-(void) GroupItemViewSelect:(NSInteger)pIndex
+{
+	for(GroupItemView * pGroup in [m_pScrollView_IB subviews])
+	{
+		if(pGroup.tag == pIndex)
+		{
+			[pGroup SetHidden:NO];
+		}
+		else 
+		{
+			[pGroup SetHidden:YES];
+		}
+	}
+}
+
+#pragma mark actionSheet methods
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
 	
 }
 
