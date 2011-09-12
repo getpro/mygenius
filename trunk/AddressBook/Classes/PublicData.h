@@ -20,6 +20,8 @@
 #define ROW_WIDTH	 302
 #define ROW_HEIGHT   52
 
+#define FONT_NAME @"Arial"
+
 /*
  
  界面的索引

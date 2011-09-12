@@ -8,10 +8,9 @@
 //  通讯录首页
 
 #import <UIKit/UIKit.h>
+
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
-
-#import "baseVC.h"
 
 @interface AddressBookVC : UIViewController  
 < 

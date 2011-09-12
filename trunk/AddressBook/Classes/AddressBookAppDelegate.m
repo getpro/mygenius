@@ -29,11 +29,12 @@
 #pragma mark -
 #pragma mark Application lifecycle
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
+{    
     
     // Override point for customization after application launch.
 	
-	[DBConnection getSharedDatabase];
+	//[DBConnection getSharedDatabase];
 	
 	switchViewController = [[SwitchViewController alloc] init];
 	
@@ -50,6 +51,7 @@
 	[sceneID addObject:n];
 	
 	//
+	/*
 	if([DataStore Get_Copy_Addressbook] == 0)
 	{
 		//第一次运行程序
@@ -94,10 +96,11 @@
 			//新闻条目入库
 			pcontactsInfo.m_ncontactsSex ++;
 		}
-		*/
+		
 		
 		
 	}
+	*/
 	
 	//
 	tabBarController.selectedIndex = TAB_ADDRESSBOOK;
