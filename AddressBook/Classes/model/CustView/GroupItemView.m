@@ -11,13 +11,20 @@
 
 @implementation GroupItemView
 
+@synthesize delegate = _delegate;
+@synthesize count = _count;
+
 -(void)btnPressed:(id)sender
 {
-	NSLog(@"btnPressed");
-	[_SelectBg setHidden:NO];
+	//UIButton * pBut = (UIButton*)sender;
+	NSLog(@"btnPressed[%d]",self.tag);
+	if(_delegate)
+	{
+		[_delegate GroupItemViewSelect:self.tag];
+	}
 }
 
-- (id)initWithFrame:(CGRect)frame :(NSString*) pStr
+- (id)initWithFrame:(CGRect)frame :(NSString*) pStr :(NSInteger)pCount
 {
     self = [super initWithFrame:frame];
     if (self)
@@ -25,12 +32,14 @@
         // Initialization code.
 		[self setUserInteractionEnabled:YES];
 		
+		_count = pCount;
+		
 		self.backgroundColor = [UIColor clearColor];
 		
-		UIImage  * pBgImg = [UIImage imageNamed:@"leftBar_bg.png"];
+		//UIImage  * pBgImg = [UIImage imageNamed:@"leftBar_bg.png"];
 		UIButton * pBg = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-		[pBg setBackgroundImage:pBgImg forState:UIControlStateNormal];
-		[pBg setBackgroundImage:pBgImg forState:UIControlStateHighlighted];
+		//[pBg setBackgroundImage:pBgImg forState:UIControlStateNormal];
+		//[pBg setBackgroundImage:pBgImg forState:UIControlStateHighlighted];
 		
 		[pBg setBackgroundColor:[UIColor clearColor]];
 	    [pBg addTarget:self action:@selector(btnPressed:)forControlEvents:UIControlEventTouchUpInside];
@@ -51,22 +60,42 @@
 		[self addSubview:pLabel];
 		
 		UIImage * pNumImg = [UIImage imageNamed:@"leftBar_group_number.png"];
-		_NumBg = [[UIImageView alloc] initWithImage:pNumImg];
-		[_NumBg setFrame:CGRectMake(16, 1, pNumImg.size.width, pNumImg.size.height)];
-		[_NumBg setHidden:NO];
-		[self addSubview:_NumBg];
 		
-		_LabelNum = [[UILabel alloc] initWithFrame:CGRectMake(16, 1, pNumImg.size.width, pNumImg.size.height)];
+		//计算字符宽度
+		CGRect pNumframe = CGRectMake(0.0,0.0,100, 1000.0);
+		CGSize calcSize = [[NSString stringWithFormat:@"%d",_count] sizeWithFont:[UIFont fontWithName:FONT_NAME size:10]
+						   constrainedToSize:pNumframe.size
+							   lineBreakMode:UILineBreakModeWordWrap];
+		
+		_LabelNum = [[UILabel alloc] initWithFrame:CGRectMake(16, 1, calcSize.width, pNumImg.size.height)];
 		_LabelNum.textAlignment = UITextAlignmentCenter;
 		_LabelNum.backgroundColor = [UIColor clearColor];
 		_LabelNum.font = [UIFont fontWithName:FONT_NAME size:10];
 		_LabelNum.textColor = [UIColor whiteColor];
-		_LabelNum.text = @"22";
-		[_LabelNum setHidden:NO];
+		_LabelNum.text = [NSString stringWithFormat:@"%d",_count];
+		[_LabelNum setFrame:CGRectMake(frame.size.width -  (calcSize.width + 8), 1, calcSize.width, pNumImg.size.height)];
+		[_LabelNum setHidden:YES];
+		
+		
+		_NumBg = [[UIImageView alloc] initWithImage:pNumImg];
+		[_NumBg setFrame:CGRectMake(frame.size.width -  (calcSize.width + 8) - 4, 1, calcSize.width + 8, pNumImg.size.height)];
+		[_NumBg setHidden:YES];
+		
+		[self addSubview:_NumBg];
+		
 		[self addSubview:_LabelNum];
+		
+		
 		
     }
     return self;
+}
+
+- (void)SetHidden:(BOOL)pHidden
+{
+	[_SelectBg setHidden:pHidden];
+	[_NumBg    setHidden:pHidden];
+	[_LabelNum setHidden:pHidden];
 }
 
 /*
