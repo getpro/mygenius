@@ -8,9 +8,19 @@
 
 #import "AddressBookVC.h"
 #import "AddressBookAppDelegate.h"
+#import "GroupItemView.h"
 
 @implementation AddressBookVC
 
+/*
+联系人列表的原始坐标和大小
+*/
+#define TABLEVIEW_X  53.0f
+#define TABLEVIEW_Y  44.0f
+#define TABLEVIEW_W 267.0f
+#define TABLEVIEW_H 416.0f
+
+#define SEARCH_BAR_H 44.0f
 
 @synthesize m_pSearchDC;
 @synthesize m_pSearchBar;
@@ -23,7 +33,7 @@
     [super viewDidLoad];
 	
 	// Create a search bar
-	self.m_pSearchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(100.0f, 0.0f, 220.0f, 44.0f)] autorelease];
+	self.m_pSearchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(TABLEVIEW_X, 0, TABLEVIEW_W, SEARCH_BAR_H)] autorelease];
 	self.m_pSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
 	self.m_pSearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	self.m_pSearchBar.keyboardType = UIKeyboardTypeDefault;
@@ -33,19 +43,36 @@
 	// Create the search display controller
 	self.m_pSearchDC = [[[UISearchDisplayController alloc] initWithSearchBar:self.m_pSearchBar contentsController:self] autorelease];
 	self.m_pSearchDC.searchResultsDataSource = self;
-	self.m_pSearchDC.searchResultsDelegate = self;	
+	self.m_pSearchDC.searchResultsDelegate = self;
 	
+	//隐藏滚动条
+	m_pScrollView_IB.showsVerticalScrollIndicator   = NO;
+	m_pScrollView_IB.showsHorizontalScrollIndicator = NO;
+	
+	//分组的背景图
+	/*
+	UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftBar_bg.png"]];
+	[imageView setTag:99];
+	[imageView setFrame:CGRectMake(0.0f, 0.0f, 53.0f, 50 * 15)];
+	[m_pScrollView_IB addSubview:imageView];
+	[imageView release];
+	*/
+
 	//测试添加分组
+	
 	for (int i = 0; i < 15; i++)
 	{
-		UILabel * pLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,i * 50, 92,50)];
+		GroupItemView * pLabel = [[GroupItemView alloc] initWithFrame:CGRectMake(0,i * 40,53,40) :[NSString stringWithFormat:@"朋友[%d]",i]];
 		
-		[pLabel setText: [NSString stringWithFormat:@"朋友[%d]",i]];
+		pLabel.tag = i;
 		
 		[m_pScrollView_IB addSubview:pLabel];
+		
+		[pLabel release];
 	}
 	
-	[m_pScrollView_IB setContentSize:CGSizeMake(92, 50 * 15)];
+	
+	[m_pScrollView_IB setContentSize:CGSizeMake(53.0f, 40 * 15)];
 }
 
 -(void)myInit
@@ -86,19 +113,63 @@
     [super dealloc];
 }
 
+#pragma mark UISearchBarDelegate methods
+
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)asearchBar
 {
+	NSLog(@"searchBarTextDidBeginEditing");
+	
 	self.m_pSearchBar.prompt = @"输入字母或汉字搜索";
+	[self.m_pTableView_IB setFrame:CGRectMake(0,TABLEVIEW_Y,TABLEVIEW_W + TABLEVIEW_X,TABLEVIEW_H)];
+	[self.m_pSearchBar setFrame:CGRectMake(0, 0, TABLEVIEW_W + TABLEVIEW_X, SEARCH_BAR_H)];
+	
+	[m_pScrollView_IB setHidden:YES];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
-	[self.m_pSearchBar setText:@""]; 
+	NSLog(@"searchBarCancelButtonClicked");
+	
+	[self.m_pSearchBar setText:@""];
 	self.m_pSearchBar.prompt = nil;
-	[self.m_pSearchBar setFrame:CGRectMake(100.0f, 0.0f, 220.0f, 44.0f)];
-	self.m_pTableView_IB.tableHeaderView = self.m_pSearchBar;	
+	[self.m_pSearchBar setFrame:CGRectMake(TABLEVIEW_X, 0, TABLEVIEW_W, SEARCH_BAR_H)];
+	
+	self.m_pTableView_IB.tableHeaderView = self.m_pSearchBar;
+	[self.m_pTableView_IB setFrame:CGRectMake(TABLEVIEW_X,TABLEVIEW_Y,TABLEVIEW_W,TABLEVIEW_H)];
+	
+	[m_pScrollView_IB setHidden:NO];
 }
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+	NSLog(@"searchBarSearchButtonClicked");
+}
+
+- (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar
+{
+	NSLog(@"searchBarBookmarkButtonClicked");
+}
+
+- (void)searchBarResultsListButtonClicked:(UISearchBar *)searchBar 
+{
+	NSLog(@"searchBarResultsListButtonClicked");
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+	NSLog(@"searchBarTextDidEndEditing");
+	
+	[self.m_pSearchBar setText:@""];
+	self.m_pSearchBar.prompt = nil;
+	[self.m_pSearchBar setFrame:CGRectMake(TABLEVIEW_X, 0, TABLEVIEW_W, SEARCH_BAR_H)];
+	
+	self.m_pTableView_IB.tableHeaderView = self.m_pSearchBar;
+	[self.m_pTableView_IB setFrame:CGRectMake(TABLEVIEW_X,TABLEVIEW_Y,TABLEVIEW_W,TABLEVIEW_H)];
+	
+	[m_pScrollView_IB setHidden:NO];
+}
+
+#pragma mark TableView methods
 
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

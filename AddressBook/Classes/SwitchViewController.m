@@ -120,8 +120,8 @@
 			[paccountsVC release];
 		}
 		
-		if(![AddressBookAppDelegate getAppDelegate].back)
-			[self.m_paccountsVC myInit];
+		//if(![AddressBookAppDelegate getAppDelegate].back)
+		//	[self.m_paccountsVC myInit];
 		
 		coming = self.m_paccountsVC;
 		going  = [self checkGoingView];
@@ -137,8 +137,8 @@
 			[pdateVC release];
 		}
 		
-		if(![AddressBookAppDelegate getAppDelegate].back)
-			[self.m_pdateVC myInit];
+		//if(![AddressBookAppDelegate getAppDelegate].back)
+		//	[self.m_pdateVC myInit];
 		
 		coming = self.m_pdateVC;
 		going  = [self checkGoingView];
@@ -154,8 +154,8 @@
 			[pmemoVC release];
 		}
 		
-		if(![AddressBookAppDelegate getAppDelegate].back)
-			[self.m_pmemoVC myInit];
+		//if(![AddressBookAppDelegate getAppDelegate].back)
+		//	[self.m_pmemoVC myInit];
 		
 		coming = self.m_pmemoVC;
 		going  = [self checkGoingView];
@@ -171,8 +171,8 @@
 			[psettingVC release];
 		}
 		
-		if(![AddressBookAppDelegate getAppDelegate].back)
-			[self.m_psettingVC myInit];
+		//if(![AddressBookAppDelegate getAppDelegate].back)
+		//	[self.m_psettingVC myInit];
 		
 		coming = self.m_psettingVC;
 		going  = [self checkGoingView];
