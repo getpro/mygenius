@@ -14,6 +14,11 @@
 		210F641C14092C8600ABC90F /* FtpUpLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F641B14092C8600ABC90F /* FtpUpLoad.m */; };
 		211A09D913F57F8B001CDC70 /* AddressAddMoreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A09D813F57F8B001CDC70 /* AddressAddMoreVC.m */; };
 		211A09DD13F57FD0001CDC70 /* AddressAddMoreVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 211A09DC13F57FD0001CDC70 /* AddressAddMoreVC.xib */; };
+		211BFDB1141F9B10009C1EA5 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 211BFDAF141F9B10009C1EA5 /* pinyin.c */; };
+		211BFDEE141FA06F009C1EA5 /* ABContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 211BFDE7141FA06F009C1EA5 /* ABContact.m */; };
+		211BFDEF141FA06F009C1EA5 /* ABContactsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 211BFDE9141FA06F009C1EA5 /* ABContactsHelper.m */; };
+		211BFDF0141FA06F009C1EA5 /* ABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 211BFDEB141FA06F009C1EA5 /* ABGroup.m */; };
+		211BFDF1141FA06F009C1EA5 /* ContactData.m in Sources */ = {isa = PBXBuildFile; fileRef = 211BFDED141FA06F009C1EA5 /* ContactData.m */; };
 		216525F913E52F8F0075F387 /* AddressInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 216525F813E52F8F0075F387 /* AddressInfoVC.m */; };
 		216525FC13E52FA30075F387 /* AddressEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 216525FB13E52FA30075F387 /* AddressEditVC.m */; };
 		2165260E13E531BA0075F387 /* AddressInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2165260D13E531BA0075F387 /* AddressInfoVC.xib */; };
@@ -85,6 +90,16 @@
 		211A09D713F57F8B001CDC70 /* AddressAddMoreVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressAddMoreVC.h; sourceTree = "<group>"; };
 		211A09D813F57F8B001CDC70 /* AddressAddMoreVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressAddMoreVC.m; sourceTree = "<group>"; };
 		211A09DC13F57FD0001CDC70 /* AddressAddMoreVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressAddMoreVC.xib; sourceTree = "<group>"; };
+		211BFDAF141F9B10009C1EA5 /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
+		211BFDB0141F9B10009C1EA5 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
+		211BFDE6141FA06F009C1EA5 /* ABContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABContact.h; sourceTree = "<group>"; };
+		211BFDE7141FA06F009C1EA5 /* ABContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABContact.m; sourceTree = "<group>"; };
+		211BFDE8141FA06F009C1EA5 /* ABContactsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABContactsHelper.h; sourceTree = "<group>"; };
+		211BFDE9141FA06F009C1EA5 /* ABContactsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABContactsHelper.m; sourceTree = "<group>"; };
+		211BFDEA141FA06F009C1EA5 /* ABGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABGroup.h; sourceTree = "<group>"; };
+		211BFDEB141FA06F009C1EA5 /* ABGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABGroup.m; sourceTree = "<group>"; };
+		211BFDEC141FA06F009C1EA5 /* ContactData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactData.h; sourceTree = "<group>"; };
+		211BFDED141FA06F009C1EA5 /* ContactData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactData.m; sourceTree = "<group>"; };
 		216525F713E52F8F0075F387 /* AddressInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressInfoVC.h; sourceTree = "<group>"; };
 		216525F813E52F8F0075F387 /* AddressInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressInfoVC.m; sourceTree = "<group>"; };
 		216525FA13E52FA30075F387 /* AddressEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressEditVC.h; sourceTree = "<group>"; };
@@ -213,6 +228,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		211BFDE5141FA06F009C1EA5 /* AddressData */ = {
+			isa = PBXGroup;
+			children = (
+				211BFDE6141FA06F009C1EA5 /* ABContact.h */,
+				211BFDE7141FA06F009C1EA5 /* ABContact.m */,
+				211BFDE8141FA06F009C1EA5 /* ABContactsHelper.h */,
+				211BFDE9141FA06F009C1EA5 /* ABContactsHelper.m */,
+				211BFDEA141FA06F009C1EA5 /* ABGroup.h */,
+				211BFDEB141FA06F009C1EA5 /* ABGroup.m */,
+				211BFDEC141FA06F009C1EA5 /* ContactData.h */,
+				211BFDED141FA06F009C1EA5 /* ContactData.m */,
+			);
+			path = AddressData;
+			sourceTree = "<group>";
+		};
 		218738F9141B6C52007D64B4 /* addressbook */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,12 +268,15 @@
 		219D996A13E506E900506FCB /* model */ = {
 			isa = PBXGroup;
 			children = (
+				211BFDE5141FA06F009C1EA5 /* AddressData */,
 				21E5AE7F141DF56100B5EBA5 /* CustView */,
 				219D996B13E506E900506FCB /* DB */,
 				63458B5713E7B73D00338243 /* contactsInfo.h */,
 				63458B5813E7B73D00338243 /* contactsInfo.m */,
 				21A2AE4113F66FD80051F3D7 /* memoInfo.h */,
 				21A2AE4213F66FD80051F3D7 /* memoInfo.m */,
+				211BFDAF141F9B10009C1EA5 /* pinyin.c */,
+				211BFDB0141F9B10009C1EA5 /* pinyin.h */,
 				210F641A14092C8600ABC90F /* FtpUpLoad.h */,
 				210F641B14092C8600ABC90F /* FtpUpLoad.m */,
 				219C500B140A054500455CD6 /* FtpGet.h */,
@@ -541,6 +574,11 @@
 				21E5AE88141DF56100B5EBA5 /* CustomDatePicker.m in Sources */,
 				21E5AE8A141DF56100B5EBA5 /* CustomItemView.m in Sources */,
 				21E5AE8E141DF5DC00B5EBA5 /* GroupItemView.m in Sources */,
+				211BFDB1141F9B10009C1EA5 /* pinyin.c in Sources */,
+				211BFDEE141FA06F009C1EA5 /* ABContact.m in Sources */,
+				211BFDEF141FA06F009C1EA5 /* ABContactsHelper.m in Sources */,
+				211BFDF0141FA06F009C1EA5 /* ABGroup.m in Sources */,
+				211BFDF1141FA06F009C1EA5 /* ContactData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
+#import <QuartzCore/QuartzCore.h>
+
 #import "SwitchViewController.h"
+#import "PublicData.h"
+
 
 typedef enum 
 {
@@ -19,6 +25,8 @@ typedef enum
     TAB_MORE,
 	TAB_Count
 }TAB_ITEM;
+
+ABAddressBookRef addressBook;
 
 @interface AddressBookAppDelegate : NSObject <UIApplicationDelegate> 
 {
