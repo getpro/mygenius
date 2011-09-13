@@ -222,9 +222,9 @@ typedef enum
 		}
 	}
 	
-	CustomItemView * pDes        = (CustomItemView*)[self.m_pUIScrollView_IB viewWithTag:EViewInMemo_Des];
+	//CustomItemView * pDes        = (CustomItemView*)[self.m_pUIScrollView_IB viewWithTag:EViewInMemo_Des];
 	
-	CustomButtonView * pRemind   = (CustomButtonView*)[self.m_pUIScrollView_IB viewWithTag:EViewInMemo_Remind];
+	//CustomButtonView * pRemind   = (CustomButtonView*)[self.m_pUIScrollView_IB viewWithTag:EViewInMemo_Remind];
 	
 	return YES;
 	

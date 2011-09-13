@@ -6,12 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import <AddressBook/AddressBook.h>
-
 #import "AddressBookAppDelegate.h"
-
-#import "PublicData.h"
-
 
 @implementation AddressBookAppDelegate
 
@@ -33,6 +28,9 @@
 {    
     
     // Override point for customization after application launch.
+	
+	if(addressBook == nil)
+		addressBook = ABAddressBookCreate();
 	
 	//[DBConnection getSharedDatabase];
 	

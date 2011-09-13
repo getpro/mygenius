@@ -22,6 +22,11 @@
 
 #define FONT_NAME @"Arial"
 
+//Address Book contact
+#define KPHONELABELDICDEFINE	@"KPhoneLabelDicDefine"
+#define KPHONENUMBERDICDEFINE	@"KPhoneNumberDicDefine"
+#define KPHONENAMEDICDEFINE		@"KPhoneNameDicDefine"
+
 /*
  
  界面的索引
