@@ -51,7 +51,7 @@
 						<reference key="IBUIItems" ref="0"/>
 					</object>
 				</object>
-				<string key="NSFrameSize">{320, 460}</string>
+				<string key="NSFrameSize">{320, 412}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -128,7 +128,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>dateVC</string>
 					<string>UIResponder</string>
-					<string>{{340, 248}, {320, 460}}</string>
+					<string>{{340, 296}, {320, 412}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>

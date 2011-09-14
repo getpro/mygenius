@@ -100,7 +100,7 @@
 						<int key="IBUITextAlignment">1</int>
 					</object>
 				</object>
-				<string key="NSFrameSize">{320, 460}</string>
+				<string key="NSFrameSize">{320, 412}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -200,7 +200,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>accountsVC</string>
 					<string>UIResponder</string>
-					<string>{{72, 203}, {320, 460}}</string>
+					<string>{{72, 251}, {320, 412}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

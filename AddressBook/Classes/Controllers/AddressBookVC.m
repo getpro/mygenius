@@ -66,17 +66,8 @@
 	m_pScrollView_IB.showsVerticalScrollIndicator   = NO;
 	m_pScrollView_IB.showsHorizontalScrollIndicator = NO;
 	
-	//分组的背景图
-	/*
-	UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftBar_bg.png"]];
-	[imageView setTag:99];
-	[imageView setFrame:CGRectMake(0.0f, 0.0f, 53.0f, 50 * 15)];
-	[m_pScrollView_IB addSubview:imageView];
-	[imageView release];
-	*/
-
-	//测试添加分组
 	
+	//测试添加分组
 	for (int i = 0; i < 15; i++)
 	{
 		GroupItemView * pLabel = nil;
@@ -115,7 +106,6 @@
 		
 		[pLabel release];
 	}
-	
 	
 	[m_pScrollView_IB setContentSize:CGSizeMake(53.0f, 40 * 15)];
 }
@@ -428,6 +418,7 @@
 
 
 
+
 - (NSString *)tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger)section
 {
 	if (aTableView == self.m_pTableView_IB) 
@@ -505,6 +496,8 @@
 
 -(IBAction)addItemBtn: (id)sender
 {
+	//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
 	/*
 	rightOrLeft = YES;
 	teXiao      = YES;
@@ -529,15 +522,24 @@
 	
 	
 	// open a dialog with two custom buttons
-	/*
+	
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
 															 delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil
 													otherButtonTitles:@"新建分组", @"新建联系人", nil];
 	actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
 	//actionSheet.destructiveButtonIndex = 1;	// make the second button red (destructive)
-	[actionSheet showInView:self.view]; // show from our table view (pops up in the middle of the table)
+	//[actionSheet showInView:self.view]; // show from our table view (pops up in the middle of the table)
+	
+	//[actionSheet showFromTabBar:app.tbController.tabBar];
+	
+	[actionSheet showInView:[self.view superview]];
+	
+	//actionSheet.backgroundColor = [UIColor grayColor];
+	
+	//[actionSheet showFromRect:CGRectMake(0, 100, 320, 208) inView:self.view animated:YES];
+	
 	[actionSheet release];
-	*/
+	
 }
 
 #pragma mark ABPersonViewControllerDelegate methods

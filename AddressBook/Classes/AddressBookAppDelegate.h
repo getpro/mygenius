@@ -30,11 +30,17 @@ ABAddressBookRef addressBook;
 
 @interface AddressBookAppDelegate : NSObject <UIApplicationDelegate> 
 {
-    UIWindow * window;
+    IBOutlet UIWindow * window;
 	
 	SwitchViewController *switchViewController;
 	
-	IBOutlet UITabBarController*   tabBarController; //底部的5个TabBar
+	UITabBarController	 *tbController; //底部的5个TabBar
+	
+	AddressBookVC * m_pAddressBookVC;
+	accountsVC    * m_pAccountsVC;
+	memoVC        * m_pMemoVC;
+	dateVC        * m_pDateVC;
+	settingVC     * m_pSettingVC;
 	
 	//返回
 	NSMutableArray * sceneID;
@@ -49,8 +55,8 @@ ABAddressBookRef addressBook;
 	
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
+@property (nonatomic, retain) IBOutlet UIWindow  *window;
+@property (nonatomic, retain) UITabBarController *tbController;
 @property (nonatomic, retain) NSMutableArray * sceneID;
 
 @property (nonatomic, retain) NSMutableArray * m_arrContactsInfo;
