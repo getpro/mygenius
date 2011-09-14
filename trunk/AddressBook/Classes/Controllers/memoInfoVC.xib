@@ -73,14 +73,14 @@
 					<object class="IBUIScrollView" id="333256663">
 						<reference key="NSNextResponder" ref="1013824268"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{0, 63}, {320, 416}}</string>
+						<string key="NSFrame">{{0, -5}, {320, 416}}</string>
 						<reference key="NSSuperview" ref="1013824268"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</object>
-				<string key="NSFrameSize">{320, 480}</string>
+				<string key="NSFrameSize">{320, 412}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -118,15 +118,6 @@
 						<reference key="destination" ref="333256663"/>
 					</object>
 					<int key="connectionID">13</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">disappearKeyboard</string>
-						<reference key="source" ref="1013824268"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">1</int>
-					</object>
-					<int key="connectionID">15</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -230,7 +221,7 @@
 						<bytes key="NSTransformStruct">AQAAAABCgAAAA</bytes>
 					</object>
 					<string>UIControl</string>
-					<string>{{329, 265}, {320, 480}}</string>
+					<string>{{329, 333}, {320, 412}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">AQAAAABCgAAAA</bytes>
@@ -272,13 +263,11 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>disappearKeyboard</string>
 							<string>editItemBtn:</string>
 							<string>returnItemBtn:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -287,16 +276,11 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>disappearKeyboard</string>
 							<string>editItemBtn:</string>
 							<string>returnItemBtn:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">disappearKeyboard</string>
-								<string key="candidateClassName">id</string>
-							</object>
 							<object class="IBActionInfo">
 								<string key="name">editItemBtn:</string>
 								<string key="candidateClassName">id</string>

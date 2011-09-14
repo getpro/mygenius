@@ -10,7 +10,7 @@
 
 @implementation AddressBookAppDelegate
 
-@synthesize tabBarController;
+@synthesize tbController;
 @synthesize window;
 @synthesize back;
 @synthesize sceneID;
@@ -100,10 +100,54 @@
 	}
 	*/
 	
-	//
-	tabBarController.selectedIndex = TAB_ADDRESSBOOK;
+	//通讯录
+	m_pAddressBookVC = [[AddressBookVC alloc] init];
+									  
+	UIImage* AddressBookImage = [UIImage imageNamed:@"bottom_icon_contacts.png"];
+	UITabBarItem * AddressBookItem = [[UITabBarItem alloc] initWithTitle:@"通讯录" image:AddressBookImage tag:0];
+	m_pAddressBookVC.tabBarItem = AddressBookItem;
+	[AddressBookItem release];
 	
-	[self.window addSubview:tabBarController.view];
+	//同步备份
+	m_pAccountsVC = [[accountsVC alloc] init];
+	
+	UIImage* AccountsImage = [UIImage imageNamed:@"bottom_icon_sync.png"];
+	UITabBarItem * AccountsItem = [[UITabBarItem alloc] initWithTitle:@"同步备份" image:AccountsImage tag:0];
+	m_pAccountsVC.tabBarItem = AccountsItem;
+	[AccountsItem release];
+	
+	
+	//备忘录
+	m_pMemoVC = [[memoVC alloc] init];
+	
+	UIImage* MemoImage = [UIImage imageNamed:@"bottom_icon_memo.png"];
+	UITabBarItem * MemoItem = [[UITabBarItem alloc] initWithTitle:@"备忘录" image:MemoImage tag:0];
+	m_pMemoVC.tabBarItem = MemoItem;
+	m_pMemoVC.tabBarItem.badgeValue = @"2";
+	[MemoItem release];
+	
+	//统计
+	m_pDateVC = [[dateVC alloc] init];
+	
+	UIImage* DateImage = [UIImage imageNamed:@"bottom_icon_statistics.png.png"];
+	UITabBarItem * DateBookItem = [[UITabBarItem alloc] initWithTitle:@"统计" image:DateImage tag:0];
+	m_pDateVC.tabBarItem = DateBookItem;
+	[DateBookItem release];
+	
+	//更多
+	m_pSettingVC = [[settingVC alloc] init];
+	
+	UIImage* SettingImage = [UIImage imageNamed:@"bottom_icon_more.png"];
+	UITabBarItem * SettingItem = [[UITabBarItem alloc] initWithTitle:@"更多" image:SettingImage tag:0];
+	m_pSettingVC.tabBarItem = SettingItem;
+	[SettingItem release];
+	
+	
+	tbController = [[UITabBarController alloc] init];
+	tbController.viewControllers = [NSArray arrayWithObjects:m_pAddressBookVC,m_pAccountsVC,m_pMemoVC,m_pDateVC,m_pSettingVC,nil];
+	tbController.selectedIndex = TAB_ADDRESSBOOK;
+	
+	[self.window addSubview:tbController.view];
 	
 	//[self.window addSubview:switchViewController.view];
     
@@ -165,7 +209,13 @@
 {
 	[DBConnection closeDatabase];
 	
-	[tabBarController	  release];
+	[m_pAddressBookVC	  release];
+	[m_pAccountsVC		  release];
+	[m_pMemoVC			  release];
+	[m_pDateVC			  release];
+	[m_pSettingVC		  release];
+	
+	[tbController	      release];
 	[switchViewController release];
     [window				  release];
 	[sceneID			  release];
