@@ -10,6 +10,7 @@
 #import "AddressBookAppDelegate.h"
 #import "pinyin.h"
 #import "ContactData.h"
+#import "ContactCell.h"
 
 @implementation AddressBookVC
 
@@ -285,9 +286,10 @@
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCellStyle style =  UITableViewCellStyleSubtitle;
-	UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier:@"ContactCell"];
-	if (!cell) 
-		cell = [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:@"ContactCell"] autorelease];
+	ContactCell *cell = (ContactCell*)[aTableView dequeueReusableCellWithIdentifier:KContactCell_ID];
+	if (!cell)
+		cell = [[[ContactCell alloc] initWithStyle:style reuseIdentifier:KContactCell_ID] autorelease];
+	
 	NSString *contactName;
 	
 	// Retrieve the crayon and its color
@@ -295,8 +297,10 @@
 		contactName = [[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	else
 		contactName = [self.filteredArray objectAtIndex:indexPath.row];
-	cell.textLabel.text = [NSString stringWithCString:[contactName UTF8String] encoding:NSUTF8StringEncoding];
 	
+	cell.m_pName.text = [NSString stringWithCString:[contactName UTF8String] encoding:NSUTF8StringEncoding];
+	
+	/*
 	ABContact *contact = [ContactData byNameToGetContact:contactName];
 	if(contact)
 	{
@@ -310,6 +314,7 @@
 	}
 	else
 		cell.detailTextLabel.text = @"";
+	*/
 	
 	return cell;
 }
