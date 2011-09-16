@@ -91,7 +91,8 @@
 
 
 //通过姓名得到该联系人
-+(ABContact *) byNameToGetContact:(NSString *)name{
++(ABContact *) byNameToGetContact:(NSString *)name
+{
 	NSArray *array = [ContactData contactsArray];
 	for(ABContact * contast in array)
 	{

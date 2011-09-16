@@ -11,6 +11,8 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		2104CF8914238ECF0004FB9A /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2104CF8814238ECF0004FB9A /* ContactCell.m */; };
+		2104CFC11423929C0004FB9A /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2104CFC01423929C0004FB9A /* arrow.png */; };
 		210F641C14092C8600ABC90F /* FtpUpLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F641B14092C8600ABC90F /* FtpUpLoad.m */; };
 		211A09D913F57F8B001CDC70 /* AddressAddMoreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A09D813F57F8B001CDC70 /* AddressAddMoreVC.m */; };
 		211A09DD13F57FD0001CDC70 /* AddressAddMoreVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 211A09DC13F57FD0001CDC70 /* AddressAddMoreVC.xib */; };
@@ -85,6 +87,9 @@
 		1D3623250D0F684500981E51 /* AddressBookAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* AddressBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddressBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2104CF8714238ECF0004FB9A /* ContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCell.h; sourceTree = "<group>"; };
+		2104CF8814238ECF0004FB9A /* ContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCell.m; sourceTree = "<group>"; };
+		2104CFC01423929C0004FB9A /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		210F641A14092C8600ABC90F /* FtpUpLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FtpUpLoad.h; sourceTree = "<group>"; };
 		210F641B14092C8600ABC90F /* FtpUpLoad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FtpUpLoad.m; sourceTree = "<group>"; };
 		211A09D713F57F8B001CDC70 /* AddressAddMoreVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressAddMoreVC.h; sourceTree = "<group>"; };
@@ -256,6 +261,7 @@
 		218738FA141B6C52007D64B4 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				2104CFC01423929C0004FB9A /* arrow.png */,
 				218738FB141B6C52007D64B4 /* bottom_icon_contacts.png */,
 				218738FC141B6C52007D64B4 /* bottom_icon_memo.png */,
 				218738FD141B6C52007D64B4 /* bottom_icon_more.png */,
@@ -393,6 +399,8 @@
 				21E5AE86141DF56100B5EBA5 /* CustomItemView.m */,
 				21E5AE8C141DF5DC00B5EBA5 /* GroupItemView.h */,
 				21E5AE8D141DF5DC00B5EBA5 /* GroupItemView.m */,
+				2104CF8714238ECF0004FB9A /* ContactCell.h */,
+				2104CF8814238ECF0004FB9A /* ContactCell.m */,
 			);
 			path = CustView;
 			sourceTree = "<group>";
@@ -538,6 +546,7 @@
 				21E5AE01141DEE6C00B5EBA5 /* leftBar_group_bg.png in Resources */,
 				21E5AE02141DEE6C00B5EBA5 /* leftBar_group_number.png in Resources */,
 				21E5AE89141DF56100B5EBA5 /* CustomDatePicker.xib in Resources */,
+				2104CFC11423929C0004FB9A /* arrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,6 +588,7 @@
 				211BFDEF141FA06F009C1EA5 /* ABContactsHelper.m in Sources */,
 				211BFDF0141FA06F009C1EA5 /* ABGroup.m in Sources */,
 				211BFDF1141FA06F009C1EA5 /* ContactData.m in Sources */,
+				2104CF8914238ECF0004FB9A /* ContactCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
