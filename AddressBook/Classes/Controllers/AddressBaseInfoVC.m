@@ -1,49 +1,35 @@
     //
-//  AddressInfoVC.m
+//  AddressEdit.m
 //  AddressBook
 //
 //  Created by Peteo on 11-7-31.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "AddressInfoVC.h"
-#import "PublicData.h"
+#import "AddressBaseInfoVC.h"
+#import "AddressBookAppDelegate.h"
 
-@implementation AddressInfoVC
+@implementation AddressBaseInfoVC
 
 @synthesize m_pUIScrollView_IB;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad 
+- (void)viewDidLoad
 {
     [super viewDidLoad];
 	
-	[m_pUIScrollView_IB setContentSize:CGSizeMake(SCREEN_W, 0)];
-	
-	CGRect frame    = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
-	frame.origin.y += ROW_OFFSET_Y;
-	
-	//头像
-	UIImageView * contentHeadView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 64, 64)];
-	[contentHeadView setImage:[UIImage imageNamed:@"head.png"]];
-	[contentHeadView setUserInteractionEnabled:YES];
-	[m_pUIScrollView_IB addSubview:contentHeadView];
-	[contentHeadView release];
-	
-	
-	
-	
-	frame.origin.y += 64;
-	frame.origin.y += ROW_OFFSET_Y;
-	
-	
+	[m_pUIScrollView_IB setContentSize:CGSizeMake(SCREEN_W, SCREEN_H/2 + 420)];
 }
 
 
 -(void)myInit
 {
-	
+	if(m_pUIScrollView_IB)
+	{
+		[m_pUIScrollView_IB setContentOffset:CGPointMake(0, 0)];
+	}
 }
+
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -72,6 +58,17 @@
 	[m_pUIScrollView_IB release];
 	
     [super dealloc];
+}
+
+-(IBAction)cancelItemBtn:(id)sender
+{
+	[[AddressBookAppDelegate getAppDelegate] backScene];
+}
+
+
+-(IBAction)doneItemBtn:  (id)sender
+{
+	[[AddressBookAppDelegate getAppDelegate] backScene];
 }
 
 

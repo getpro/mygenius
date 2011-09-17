@@ -12,7 +12,7 @@
 
 @implementation SwitchViewController
 
-@synthesize m_pAddressBookVC,m_paccountsVC,m_pdateVC,m_pmemoVC,m_psettingVC,m_pAddressInfoVC,m_pAddressEditVC,m_pAddressAddMoreVC;
+@synthesize m_pAddressBookVC,m_paccountsVC,m_pdateVC,m_pmemoVC,m_psettingVC;
 @synthesize m_pmemoInfoVC;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -51,15 +51,6 @@
 	
 	else if(self.m_psettingVC.view.superview != nil)
 		return self.m_psettingVC;
-	
-	else if(self.m_pAddressInfoVC.view.superview != nil)
-		return self.m_pAddressInfoVC;
-	
-	else if(self.m_pAddressEditVC.view.superview != nil)
-		return self.m_pAddressEditVC;
-	
-	else if(self.m_pAddressAddMoreVC.view.superview != nil)
-		return self.m_pAddressAddMoreVC;
 	
 	else if(self.m_pmemoInfoVC.view.superview != nil)
 		return self.m_pmemoInfoVC;
@@ -179,56 +170,7 @@
 		
 	}
 	
-	else if(index == EViewAddressInfo)
-	{
-		if (self.m_pAddressInfoVC == nil)
-		{
-			AddressInfoVC * pAddressInfoVC = [[AddressInfoVC alloc] init];
-			self.m_pAddressInfoVC = pAddressInfoVC;
-			[pAddressInfoVC release];
-		}
-		
-		if(![AddressBookAppDelegate getAppDelegate].back)
-			[self.m_pAddressInfoVC myInit];
-		
-		coming = self.m_pAddressInfoVC;
-		going  = [self checkGoingView];
-		
-	}
 	
-	else if(index == EViewAddressEdit)
-	{
-		if (self.m_pAddressEditVC == nil)
-		{
-			AddressEditVC * pAddressEditVC = [[AddressEditVC alloc] init];
-			self.m_pAddressEditVC = pAddressEditVC;
-			[pAddressEditVC release];
-		}
-		
-		if(![AddressBookAppDelegate getAppDelegate].back)
-			[self.m_pAddressEditVC myInit];
-		
-		coming = self.m_pAddressEditVC;
-		going  = [self checkGoingView];
-		
-	}
-	
-	else if(index == EViewAddressAddMore)
-	{
-		if (self.m_pAddressAddMoreVC == nil)
-		{
-			AddressAddMoreVC * pAddressAddMoreVC = [[AddressAddMoreVC alloc] init];
-			self.m_pAddressAddMoreVC = pAddressAddMoreVC;
-			[pAddressAddMoreVC release];
-		}
-		
-		if(![AddressBookAppDelegate getAppDelegate].back)
-			[self.m_pAddressAddMoreVC myInit];
-		
-		coming = self.m_pAddressAddMoreVC;
-		going  = [self checkGoingView];
-		
-	}
 	
 	else if(index == EViewmemoInfoVC)
 	{
@@ -300,10 +242,6 @@
 	[m_pdateVC        release];
 	[m_pmemoVC		  release];
 	[m_psettingVC     release];
-	
-	[m_pAddressInfoVC    release];
-	[m_pAddressEditVC    release];
-	[m_pAddressAddMoreVC release];
 	
 	[m_pmemoInfoVC release];
 	
