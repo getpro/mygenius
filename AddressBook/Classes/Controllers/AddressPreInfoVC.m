@@ -25,7 +25,7 @@
 	
 	//头像
 	UIImageView * contentHeadView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 64, 64)];
-	[contentHeadView setImage:[UIImage imageNamed:@"head.png"]];
+	[contentHeadView setImage:[UIImage imageNamed:@"head_big.png"]];
 	[contentHeadView setUserInteractionEnabled:YES];
 	[m_pUIScrollView_IB addSubview:contentHeadView];
 	[contentHeadView release];

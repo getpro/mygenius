@@ -108,6 +108,8 @@
 	m_pAddressBookVC.tabBarItem = AddressBookItem;
 	[AddressBookItem release];
 	
+	UINavigationController * AddressBookNavController = [[UINavigationController alloc] initWithRootViewController:m_pAddressBookVC];
+	
 	//同步备份
 	m_pAccountsVC = [[accountsVC alloc] init];
 	
@@ -130,7 +132,7 @@
 	m_pDateVC = [[dateVC alloc] init];
 	
 	UIImage* DateImage = [UIImage imageNamed:@"bottom_icon_statistics.png.png"];
-	UITabBarItem * DateBookItem = [[UITabBarItem alloc] initWithTitle:@"统计" image:DateImage tag:0];
+	UITabBarItem * DateBookItem = [[UITabBarItem alloc] initWithTitle:@"日程统计" image:DateImage tag:0];
 	m_pDateVC.tabBarItem = DateBookItem;
 	[DateBookItem release];
 	
@@ -144,7 +146,7 @@
 	
 	
 	tbController = [[UITabBarController alloc] init];
-	tbController.viewControllers = [NSArray arrayWithObjects:m_pAddressBookVC,m_pAccountsVC,m_pMemoVC,m_pDateVC,m_pSettingVC,nil];
+	tbController.viewControllers = [NSArray arrayWithObjects:AddressBookNavController,m_pAccountsVC,m_pMemoVC,m_pDateVC,m_pSettingVC,nil];
 	tbController.selectedIndex = TAB_ADDRESSBOOK;
 	
 	[self.window addSubview:tbController.view];

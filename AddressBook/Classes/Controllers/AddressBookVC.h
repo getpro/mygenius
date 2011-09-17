@@ -30,6 +30,8 @@ GroupItemViewDelegate
 	IBOutlet UITableView      * m_pTableView_IB;
 	IBOutlet UIScrollView     * m_pScrollView_IB;
 	IBOutlet UIImageView      * m_pImageView_IB;
+	IBOutlet UIBarButtonItem  * m_pRightAdd;
+	
 	
 	NSMutableArray		*filteredArray;
 	NSMutableArray		*contactNameArray;
@@ -46,6 +48,7 @@ GroupItemViewDelegate
 @property (retain,nonatomic) IBOutlet UITableView      * m_pTableView_IB;
 @property (retain,nonatomic) IBOutlet UIScrollView     * m_pScrollView_IB;
 @property (retain,nonatomic) IBOutlet UIImageView      * m_pImageView_IB;
+@property (retain,nonatomic) IBOutlet UIBarButtonItem  * m_pRightAdd;
 
 @property (retain,nonatomic) NSArray *contacts;
 @property (retain,nonatomic) NSMutableArray *filteredArray;

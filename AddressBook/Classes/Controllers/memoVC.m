@@ -9,6 +9,9 @@
 #import "memoVC.h"
 #import "AddressBookAppDelegate.h"
 
+#import <EventKit/EventKit.h>
+#import <EventKitUI/EventKitUI.h>
+
 @implementation memoVC
 
 @synthesize m_pSearchDC;
