@@ -16,6 +16,8 @@
 		210876291424C3A400159CC2 /* ModalAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 210876281424C3A400159CC2 /* ModalAlert.m */; };
 		210876DC1424D71000159CC2 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 210876DB1424D71000159CC2 /* EventKit.framework */; };
 		210876DE1424D71000159CC2 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 210876DD1424D71000159CC2 /* EventKitUI.framework */; };
+		210878361424F34B00159CC2 /* head_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 210878341424F34B00159CC2 /* head_big.png */; };
+		210878371424F34B00159CC2 /* head.png in Resources */ = {isa = PBXBuildFile; fileRef = 210878351424F34B00159CC2 /* head.png */; };
 		210F641C14092C8600ABC90F /* FtpUpLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = 210F641B14092C8600ABC90F /* FtpUpLoad.m */; };
 		211A09D913F57F8B001CDC70 /* AddressSeniorInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 211A09D813F57F8B001CDC70 /* AddressSeniorInfoVC.m */; };
 		211A09DD13F57FD0001CDC70 /* AddressSeniorInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 211A09DC13F57FD0001CDC70 /* AddressSeniorInfoVC.xib */; };
@@ -42,7 +44,6 @@
 		219D997313E5070A00506FCB /* AddressBook.db in Resources */ = {isa = PBXBuildFile; fileRef = 219D997213E5070A00506FCB /* AddressBook.db */; };
 		219D999713E507B500506FCB /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 219D999613E507B500506FCB /* libsqlite3.0.dylib */; };
 		219D999913E507D600506FCB /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 219D999813E507D600506FCB /* libxml2.dylib */; };
-		219D99C413E5163100506FCB /* head.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99BA13E5163100506FCB /* head.png */; };
 		219D99C513E5163100506FCB /* image01_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99BB13E5163100506FCB /* image01_kuang.png */; };
 		219D99C613E5163100506FCB /* image02_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99BC13E5163100506FCB /* image02_kuang.png */; };
 		219D99C713E5163100506FCB /* image03_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99BD13E5163100506FCB /* image03_kuang.png */; };
@@ -97,6 +98,8 @@
 		210876281424C3A400159CC2 /* ModalAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalAlert.m; sourceTree = "<group>"; };
 		210876DB1424D71000159CC2 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		210876DD1424D71000159CC2 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		210878341424F34B00159CC2 /* head_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head_big.png; sourceTree = "<group>"; };
+		210878351424F34B00159CC2 /* head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head.png; sourceTree = "<group>"; };
 		210F641A14092C8600ABC90F /* FtpUpLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FtpUpLoad.h; sourceTree = "<group>"; };
 		210F641B14092C8600ABC90F /* FtpUpLoad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FtpUpLoad.m; sourceTree = "<group>"; };
 		211A09D713F57F8B001CDC70 /* AddressSeniorInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressSeniorInfoVC.h; sourceTree = "<group>"; };
@@ -137,7 +140,6 @@
 		219D997213E5070A00506FCB /* AddressBook.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = AddressBook.db; sourceTree = "<group>"; };
 		219D999613E507B500506FCB /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		219D999813E507D600506FCB /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
-		219D99BA13E5163100506FCB /* head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head.png; sourceTree = "<group>"; };
 		219D99BB13E5163100506FCB /* image01_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image01_kuang.png; sourceTree = "<group>"; };
 		219D99BC13E5163100506FCB /* image02_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image02_kuang.png; sourceTree = "<group>"; };
 		219D99BD13E5163100506FCB /* image03_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image03_kuang.png; sourceTree = "<group>"; };
@@ -260,6 +262,8 @@
 		218738F9141B6C52007D64B4 /* addressbook */ = {
 			isa = PBXGroup;
 			children = (
+				210878341424F34B00159CC2 /* head_big.png */,
+				210878351424F34B00159CC2 /* head.png */,
 				21E5ADFD141DEE6C00B5EBA5 /* leftBar_bg.png */,
 				21E5ADFE141DEE6C00B5EBA5 /* leftBar_group_bg.png */,
 				21E5ADFF141DEE6C00B5EBA5 /* leftBar_group_number.png */,
@@ -322,7 +326,6 @@
 			children = (
 				218738F9141B6C52007D64B4 /* addressbook */,
 				218738FA141B6C52007D64B4 /* common */,
-				219D99BA13E5163100506FCB /* head.png */,
 				219D99BB13E5163100506FCB /* image01_kuang.png */,
 				219D99BC13E5163100506FCB /* image02_kuang.png */,
 				219D99BD13E5163100506FCB /* image03_kuang.png */,
@@ -536,7 +539,6 @@
 				21E7135B13E3F8DC00BF47E6 /* memoVC.xib in Resources */,
 				21E7135C13E3F8DC00BF47E6 /* settingVC.xib in Resources */,
 				219D997313E5070A00506FCB /* AddressBook.db in Resources */,
-				219D99C413E5163100506FCB /* head.png in Resources */,
 				219D99C513E5163100506FCB /* image01_kuang.png in Resources */,
 				219D99C613E5163100506FCB /* image02_kuang.png in Resources */,
 				219D99C713E5163100506FCB /* image03_kuang.png in Resources */,
@@ -560,6 +562,8 @@
 				21E5AE02141DEE6C00B5EBA5 /* leftBar_group_number.png in Resources */,
 				21E5AE89141DF56100B5EBA5 /* CustomDatePicker.xib in Resources */,
 				2104CFC11423929C0004FB9A /* arrow.png in Resources */,
+				210878361424F34B00159CC2 /* head_big.png in Resources */,
+				210878371424F34B00159CC2 /* head.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

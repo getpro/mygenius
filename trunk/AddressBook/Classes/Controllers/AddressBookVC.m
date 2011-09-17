@@ -12,9 +12,7 @@
 #import "ContactData.h"
 #import "ContactCell.h"
 #import "ModalAlert.h"
-
-#import <EventKit/EventKit.h>
-#import <EventKitUI/EventKitUI.h>
+#import "AddressPreInfoVC.h"
 
 @implementation AddressBookVC
 
@@ -22,7 +20,7 @@
 联系人列表的原始坐标和大小
 */
 #define TABLEVIEW_X  53.0f
-#define TABLEVIEW_Y  44.0f
+#define TABLEVIEW_Y   0.0f
 #define TABLEVIEW_W 267.0f
 #define TABLEVIEW_H 416.0f
 
@@ -33,6 +31,7 @@
 @synthesize m_pTableView_IB;
 @synthesize m_pScrollView_IB;
 @synthesize m_pImageView_IB;
+@synthesize m_pRightAdd;
 
 @synthesize contacts;
 @synthesize filteredArray;
@@ -44,7 +43,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+	
+	self.navigationItem.title = @"好帮手";
+	self.navigationItem.rightBarButtonItem = m_pRightAdd;
+	
 	filteredArray    = [[NSMutableArray alloc] init];
 
 	contactNameArray = [[NSMutableArray alloc] init];
@@ -215,6 +217,7 @@
 	[m_pTableView_IB  release];
 	[m_pScrollView_IB release];
 	[m_pImageView_IB  release];
+	[m_pRightAdd      release];
 	
 	[contactNameArray release];
 	[contactNameDic	  release];
@@ -326,6 +329,8 @@
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	NSLog(@"didSelectRowAtIndexPath");
+	
 	/*
 	[aTableView deselectRowAtIndexPath:indexPath animated:NO];
 	ABPersonViewController *pvc = [[[ABPersonViewController alloc] init] autorelease];
@@ -355,6 +360,13 @@
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
 	*/
+	
+	AddressPreInfoVC * pAddressPreInfoVC = [[AddressPreInfoVC alloc] init];
+	
+	[self.navigationController pushViewController:pAddressPreInfoVC animated:YES];
+	
+	[pAddressPreInfoVC release];
+	
 }
 
 
@@ -442,6 +454,8 @@
 
 - (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section 
 {
+	NSLog(@"numberOfRowsInSection");
+	
 	[self initData];
 	// Normal table
 	if (aTableView == self.m_pTableView_IB) 

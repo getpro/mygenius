@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface AddressPreInfoVC : UIViewController 
+@interface AddressPreInfoVC : UIViewController
 {
 	IBOutlet UIScrollView * m_pUIScrollView_IB;
 }
