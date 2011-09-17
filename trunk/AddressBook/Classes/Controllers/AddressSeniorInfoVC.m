@@ -6,13 +6,13 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "AddressAddMoreVC.h"
+#import "AddressSeniorInfoVC.h"
 #import "PublicData.h"
 
 #import "CustomItemView.h"
 #import "CustomButtonView.h"
 
-@implementation AddressAddMoreVC
+@implementation AddressSeniorInfoVC
 
 @synthesize m_pUIScrollView_IB;
 

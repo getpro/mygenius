@@ -779,7 +779,7 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>AddressEditVC</string>
+					<string>AddressBaseInfoVC</string>
 					<string>UIResponder</string>
 					<string>{{332, 268}, {320, 412}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -890,7 +890,7 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">AddressEditVC</string>
+					<string key="className">AddressBaseInfoVC</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -937,7 +937,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Controllers/AddressEditVC.h</string>
+						<string key="minorKey">Classes/Controllers/AddressBaseInfoVC.h</string>
 					</object>
 				</object>
 			</object>
@@ -1225,7 +1225,7 @@
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{64, 64}</string>
+				<string>{32, 32}</string>
 				<string>{302, 52}</string>
 			</object>
 		</object>

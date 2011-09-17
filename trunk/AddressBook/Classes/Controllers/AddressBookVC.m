@@ -11,6 +11,10 @@
 #import "pinyin.h"
 #import "ContactData.h"
 #import "ContactCell.h"
+#import "ModalAlert.h"
+
+#import <EventKit/EventKit.h>
+#import <EventKitUI/EventKitUI.h>
 
 @implementation AddressBookVC
 
@@ -462,18 +466,26 @@
 		{
 			if ([ContactData searchResult:string searchText:self.m_pSearchBar.text])
 				[filteredArray addObject:string];
-			else {
+			else 
+			{
 				ABContact *contact = [ContactData byNameToGetContact:string];
-				NSArray *phoneArray = [ContactData getPhoneNumberAndPhoneLabelArray:contact];
-				NSString *phone = @"";
 				
-				if([phoneArray count] == 1)
+				NSArray  * phoneArray = nil;
+				NSString * phone = @"";
+				
+				if(contact)
+				{
+					phoneArray = [ContactData getPhoneNumberAndPhoneLabelArray:contact];
+				}
+				
+				if(phoneArray && [phoneArray count] == 1)
 				{
 					NSDictionary *PhoneDic = [phoneArray objectAtIndex:0];
 					phone = [ContactData getPhoneNumberFromDic:PhoneDic];
 					if([ContactData searchResult:phone searchText:self.m_pSearchBar.text])
 						[filteredArray addObject:string];
-				}else  if([phoneArray count] > 1)
+				}
+				else  if(phoneArray && [phoneArray count] > 1)
 				{
 					for(NSDictionary *dic in phoneArray)
 					{
@@ -485,7 +497,6 @@
 						}
 					}
 				}
-				
 			}
 		}
 	}
@@ -503,31 +514,7 @@
 {
 	//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	
-	/*
-	rightOrLeft = YES;
-	teXiao      = YES;
-	
-	NSString * ss = [NSString stringWithFormat:@"%d" , EViewAddressAddMore];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
-	*/
-	
-	//调用系统的添加联系人界面
-	
-	/*
-	ABNewPersonViewController *picker = [[ABNewPersonViewController alloc] init];
-	picker.newPersonViewDelegate = self;
-	
-	UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:picker];
-	[self presentModalViewController:navigation animated:YES];
-	
-	[picker release];
-	[navigation release];
-	*/
-	
-	
 	// open a dialog with two custom buttons
-	
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
 															 delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil
 													otherButtonTitles:@"新建分组", @"新建联系人", nil];
@@ -535,16 +522,8 @@
 	//actionSheet.destructiveButtonIndex = 1;	// make the second button red (destructive)
 	//[actionSheet showInView:self.view]; // show from our table view (pops up in the middle of the table)
 	
-	//[actionSheet showFromTabBar:app.tbController.tabBar];
-	
 	[actionSheet showInView:[self.view superview]];
-	
-	//actionSheet.backgroundColor = [UIColor grayColor];
-	
-	//[actionSheet showFromRect:CGRectMake(0, 100, 320, 208) inView:self.view animated:YES];
-	
 	[actionSheet release];
-	
 }
 
 #pragma mark ABPersonViewControllerDelegate methods
@@ -560,7 +539,7 @@
 {
 	[self dismissModalViewControllerAnimated:NO];
 	
-	[self.view setFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
+	//[self.view setFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
 	
 	/*
 	//设置更多的属性
@@ -590,10 +569,40 @@
 	}
 }
 
+- (void)GreateNewGroup
+{
+	NSString * pStr = [ModalAlert ask:@"新建分组" withTextPrompt:@"请输入组名称"];
+	if(pStr)
+	{
+		NSLog(@"NewGroupName[%@]",pStr);
+	}
+}
+
+- (void)GreateNewPerson
+{
+	//调用系统的添加联系人界面
+	ABNewPersonViewController *picker = [[ABNewPersonViewController alloc] init];
+	picker.newPersonViewDelegate = self;
+	UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:picker];
+	[self presentModalViewController:navigation animated:YES];
+	
+	[picker release];
+	[navigation release];
+}
+
 #pragma mark actionSheet methods
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	
+	if(buttonIndex == 0)
+	{
+		//新建分组
+		[self performSelector:@selector(GreateNewGroup)  withObject:nil afterDelay:0.1];
+	}
+	else if(buttonIndex == 1)
+	{
+		//新建联系人
+		[self performSelector:@selector(GreateNewPerson) withObject:nil afterDelay:0.1];
+	}
 }
 
 @end

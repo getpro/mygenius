@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface AddressEditVC : UIViewController 
+@interface AddressBaseInfoVC : UIViewController 
 {
 	IBOutlet UIScrollView * m_pUIScrollView_IB;
 }
