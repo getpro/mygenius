@@ -48,7 +48,9 @@
 
 - (void) dealloc
 {
-	if (record) CFRelease(record);
+	if (record) 
+		CFRelease(record);
+	
 	[super dealloc];
 }
 

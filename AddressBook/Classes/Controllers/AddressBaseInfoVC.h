@@ -8,17 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 
-@interface AddressBaseInfoVC : UIViewController 
+
+@interface AddressBaseInfoVC : ABPersonViewController 
 {
-	IBOutlet UIScrollView * m_pUIScrollView_IB;
+	
 }
-
-
-@property (retain,nonatomic) IBOutlet UIScrollView * m_pUIScrollView_IB;
-
-
--(void)myInit;
 
 -(IBAction)cancelItemBtn:(id)sender;
 -(IBAction)doneItemBtn:  (id)sender;

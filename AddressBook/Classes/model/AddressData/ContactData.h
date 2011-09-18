@@ -7,23 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "ABContact.h"
 
 @interface ContactData : NSObject 
 {
-	
+	NSMutableArray * contactsArray;
 }
 
-+(NSArray *) contactsArray; // people
+@property (nonatomic,retain) NSMutableArray * contactsArray;
+
+//+(NSArray *) contactsArray; // people
 
 //Equal contacts was exist in address book
-+(NSDictionary *) hasContactsExistInAddressBookByPhone:(NSString *)phone;
+-(NSDictionary *) hasContactsExistInAddressBookByPhone:(NSString *)phone;
 
 //Get contact
-+(ABContact *) byPhoneNumberAndLabelToGetContact:(NSString *)phone withLabel:(NSString *)label;
-+(ABContact *) byPhoneNumberAndNameToGetContact:(NSString *)name withPhone:(NSString *)phone;
-+(ABContact *) byNameToGetContact:(NSString *)name;
-+(ABContact *) byPhoneNumberlToGetContact:(NSString *)phone withLabel:(NSString *)label;
+-(ABContact *) byPhoneNumberAndLabelToGetContact:(NSString *)phone withLabel:(NSString *)label;
+-(ABContact *) byPhoneNumberAndNameToGetContact:(NSString *)name withPhone:(NSString *)phone;
+-(ABContact *) byNameToGetContact:(NSString *)name;
+-(ABContact *) byPhoneNumberlToGetContact:(NSString *)phone withLabel:(NSString *)label;
 
 +(NSArray *) getPhoneNumberAndPhoneLabelArray:(ABContact *) contact;
 +(NSArray *) getPhoneNumberAndPhoneLabelArrayFromABRecodID:(ABRecordRef)person withABMultiValueIdentifier:(ABMultiValueIdentifier)identifierForValue;
@@ -38,9 +41,9 @@
 
 +(BOOL)doesStringContain:(NSString* )string Withstr:(NSString*)charcter;
 
-+(NSString *)equalContactByAddressBookContacts:(NSString *)name withPhone:(NSString *)phone withLabel:(NSString *)label PhoneOrLabel:(BOOL)isPhone withFavorite:(BOOL)isFavorite;
+-(NSString *)equalContactByAddressBookContacts:(NSString *)name withPhone:(NSString *)phone withLabel:(NSString *)label PhoneOrLabel:(BOOL)isPhone withFavorite:(BOOL)isFavorite;
 
-+(NSString *)getContactsNameByPhoneNumberAndLabel:(NSString *)phone withLabel:(NSString *)label;
+-(NSString *)getContactsNameByPhoneNumberAndLabel:(NSString *)phone withLabel:(NSString *)label;
 
 +(BOOL) removeSelfFromAddressBook:(ABContact *)contact withErrow:(NSError **) error;
 

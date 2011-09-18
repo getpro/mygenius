@@ -64,10 +64,6 @@
     [super dealloc];
 }
 
--(void)myInit
-{
-	
-}
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {

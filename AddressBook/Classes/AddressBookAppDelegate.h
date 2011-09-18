@@ -14,6 +14,7 @@
 
 #import "SwitchViewController.h"
 #import "PublicData.h"
+#import "ContactData.h"
 
 
 typedef enum 
@@ -53,6 +54,8 @@ ABAddressBookRef addressBook;
 	//FTP
 	NSInteger               _networkingCount;
 	
+	//系统通讯录类
+	ContactData    * m_pContactData;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow  *window;
@@ -62,6 +65,8 @@ ABAddressBookRef addressBook;
 @property (nonatomic, retain) NSMutableArray * m_arrContactsInfo;
 @property (nonatomic, retain) NSMutableArray * m_arrMemoInfo;
 @property (nonatomic, retain) NSMutableArray * m_arrDateInfo;
+
+@property (nonatomic, retain) ContactData    * m_pContactData;
 
 @property (nonatomic, assign) NSInteger        networkingCount;
 

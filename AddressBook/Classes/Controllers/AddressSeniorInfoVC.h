@@ -16,7 +16,6 @@
 
 @property (retain,nonatomic) IBOutlet UIScrollView * m_pUIScrollView_IB;
 
--(void)myInit;
 
 -(IBAction)doneItemBtn:  (id)sender;
 

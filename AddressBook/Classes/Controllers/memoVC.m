@@ -39,10 +39,6 @@
 	self.m_pSearchDC.searchResultsDelegate = self;
 }
 
--(void)myInit
-{
-	
-}
 
 /*
 // Override to allow orientations other than the default portrait orientation.
