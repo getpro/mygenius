@@ -11,7 +11,7 @@
 
 @interface ContactData : NSObject 
 {
-
+	
 }
 
 +(NSArray *) contactsArray; // people

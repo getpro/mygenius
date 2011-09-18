@@ -71,7 +71,8 @@
 }
 
 //通过姓名与号码得到该联系人
-+(ABContact *) byPhoneNumberAndNameToGetContact:(NSString *)name withPhone:(NSString *)phone{
++(ABContact *) byPhoneNumberAndNameToGetContact:(NSString *)name withPhone:(NSString *)phone
+{
 	NSArray *array = [ContactData contactsArray];
 	for(ABContact * contast in array)
 	{
@@ -322,7 +323,8 @@
 	return ABAddressBookSave(addressBook,  (CFErrorRef *) error);
 }
 
-+(BOOL)searchResult:(NSString *)contactName searchText:(NSString *)searchT{
++(BOOL)searchResult:(NSString *)contactName searchText:(NSString *)searchT
+{
 	NSComparisonResult result = [contactName compare:searchT options:NSCaseInsensitiveSearch
 											   range:NSMakeRange(0, searchT.length)];
 	if (result == NSOrderedSame)
