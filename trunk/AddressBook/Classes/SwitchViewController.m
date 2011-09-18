@@ -181,8 +181,8 @@
 			[pmemoInfoVC release];
 		}
 		
-		if(![AddressBookAppDelegate getAppDelegate].back)
-			[self.m_pmemoInfoVC myInit];
+		//if(![AddressBookAppDelegate getAppDelegate].back)
+		//	[self.m_pmemoInfoVC myInit];
 		
 		coming = self.m_pmemoInfoVC;
 		going  = [self checkGoingView];

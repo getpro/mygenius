@@ -25,8 +25,8 @@ NSString *string1;
 
 
 // Find contacts
-+ (NSArray *) contactsMatchingName: (NSString *) fname;
-+ (NSArray *) contactsMatchingName: (NSString *) fname andName: (NSString *) lname;
++ (NSArray *) contactsMatchingName:  (NSString *) fname;
++ (NSArray *) contactsMatchingName:  (NSString *) fname andName: (NSString *) lname;
 + (NSArray *) contactsMatchingPhone: (NSString *) number;
 
 @end

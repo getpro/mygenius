@@ -24,10 +24,6 @@ typedef enum
 
 @synthesize m_pUIScrollView_IB;
 
--(void)myInit
-{
-	
-}
 
 //响应UIDatePicker事件
 -(void)DonePressed:(id)sender

@@ -29,6 +29,5 @@
 @property (nonatomic, retain) UITabBarItem * m_pUITabBarItem5_IB;
 
 
--(void)myInit;
 
 @end

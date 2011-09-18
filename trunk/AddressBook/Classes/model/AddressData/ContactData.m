@@ -12,27 +12,49 @@
 
 @implementation ContactData
 
-//从Address Book里得到所有联系人
-+ (NSArray *) contactsArray
+@synthesize contactsArray;
+
+- (id)init
 {
-	NSArray *thePeople = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
-	NSMutableArray *array = [NSMutableArray arrayWithCapacity:thePeople.count];
-	for (id person in thePeople)
-		[array addObject:[ABContact contactWithRecord:(ABRecordRef)person]];
-	[thePeople release];
-	return array;
+    if ((self = [super init]))
+	{
+		NSArray *thePeople = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+		contactsArray = [[NSMutableArray alloc]initWithCapacity:thePeople.count];
+		
+		for (id person in thePeople)
+			[contactsArray addObject:[ABContact contactWithRecord:(ABRecordRef)person]];
+		
+		[thePeople release];
+	}
+	return self;
 }
 
+//从Address Book里得到所有联系人
+/*
++ (NSArray *) contactsArray
+{
+	NSArray        *thePeople = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+	NSMutableArray *array     = [NSMutableArray arrayWithCapacity:thePeople.count];
+	
+	for (id person in thePeople)
+		[array addObject:[ABContact contactWithRecord:(ABRecordRef)person]];
+	
+	[thePeople release];
+	
+	return array;
+}
+*/
 
 //以号码来检测通讯录内是否已包含该联系人
-+ (NSDictionary *) hasContactsExistInAddressBookByPhone:(NSString *)phone{
+- (NSDictionary *) hasContactsExistInAddressBookByPhone:(NSString *)phone
+{
 	NSString *PhoneNumber = nil;
-	NSString *PhoneLabel = nil;
-	NSString *PhoneName = nil;
-	NSArray *contactarray = [ContactData contactsArray];
-	for(int i=0; i<[contactarray count]; i++)
+	NSString *PhoneLabel  = nil;
+	NSString *PhoneName   = nil;
+	
+	for(int i=0; i<[contactsArray count]; i++)
 	{
-		ABContact *contact = [contactarray objectAtIndex:i];
+		ABContact *contact = [contactsArray objectAtIndex:i];
 		NSArray *phoneCount = [ContactData getPhoneNumberAndPhoneLabelArray:contact];
 		if([phoneCount count] > 0)
 		{
@@ -52,9 +74,9 @@
 
 
 //通过号码得到该联系人
-+(ABContact *) byPhoneNumberAndLabelToGetContact:(NSString *)phone withLabel:(NSString *)label{
-	NSArray *array = [ContactData contactsArray];
-	for(ABContact * contast in array)
+-(ABContact *) byPhoneNumberAndLabelToGetContact:(NSString *)phone withLabel:(NSString *)label
+{
+	for(ABContact * contast in contactsArray)
 	{
 		NSArray *phoneArray = [ContactData getPhoneNumberAndPhoneLabelArray:contast];
 		if(phoneArray == nil)
@@ -71,10 +93,9 @@
 }
 
 //通过姓名与号码得到该联系人
-+(ABContact *) byPhoneNumberAndNameToGetContact:(NSString *)name withPhone:(NSString *)phone
+-(ABContact *) byPhoneNumberAndNameToGetContact:(NSString *)name withPhone:(NSString *)phone
 {
-	NSArray *array = [ContactData contactsArray];
-	for(ABContact * contast in array)
+	for(ABContact * contast in contactsArray)
 	{
 		NSArray *phoneArray = [ContactData getPhoneNumberAndPhoneLabelArray:contast];
 		if(phoneArray == nil)
@@ -92,10 +113,9 @@
 
 
 //通过姓名得到该联系人
-+(ABContact *) byNameToGetContact:(NSString *)name
+-(ABContact *) byNameToGetContact:(NSString *)name
 {
-	NSArray *array = [ContactData contactsArray];
-	for(ABContact * contast in array)
+	for(ABContact * contast in contactsArray)
 	{
 		if([contast.contactName isEqualToString:name])
 			return (ABContact *)contast;
@@ -105,9 +125,9 @@
 
 
 //通过号码得到该联系人
-+(ABContact *) byPhoneNumberlToGetContact:(NSString *)phone withLabel:(NSString *)label{
-	NSArray *array = [ContactData contactsArray];
-	for(ABContact * contast in array)
+-(ABContact *) byPhoneNumberlToGetContact:(NSString *)phone withLabel:(NSString *)label
+{
+	for(ABContact * contast in contactsArray)
 	{
 		NSArray *phoneArray = [ContactData getPhoneNumberAndPhoneLabelArray:contast];
 		if(phoneArray == nil)
@@ -127,11 +147,12 @@
 //得到联系人的号码组与Label组
 +(NSArray *) getPhoneNumberAndPhoneLabelArray:(ABContact *) contact
 {
-	NSMutableDictionary *phoneDic = [[[NSMutableDictionary alloc] init] autorelease];
-	NSMutableArray *phoneArray = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableDictionary *phoneDic     = [[[NSMutableDictionary alloc] init] autorelease];
+	NSMutableArray      *phoneArray   = [[[NSMutableArray alloc] init] autorelease];
 	ABMutableMultiValueRef phoneMulti = ABRecordCopyValue(contact.record, kABPersonPhoneProperty);
 	int i;
-	for (i = 0;  i < ABMultiValueGetCount(phoneMulti);  i++) {
+	for (i = 0;  i < ABMultiValueGetCount(phoneMulti);  i++) 
+	{
 		NSString *phone = [(NSString*)ABMultiValueCopyValueAtIndex(phoneMulti, i) autorelease];
 		NSString *label =  [(NSString*)ABMultiValueCopyLabelAtIndex(phoneMulti, i) autorelease];
 		phoneDic = [NSDictionary dictionaryWithObjectsAndKeys:contact.contactName,KPHONENAMEDICDEFINE,phone,KPHONENUMBERDICDEFINE,label,KPHONELABELDICDEFINE,nil];
@@ -251,20 +272,21 @@
 }
 
 
-+(NSString *)equalContactByAddressBookContacts:(NSString *)name withPhone:(NSString *)phone withLabel:(NSString *)label PhoneOrLabel:(BOOL)isPhone withFavorite:(BOOL)isFavorite
+-(NSString *)equalContactByAddressBookContacts:(NSString *)name withPhone:(NSString *)phone withLabel:(NSString *)label PhoneOrLabel:(BOOL)isPhone withFavorite:(BOOL)isFavorite
 {
 	ABContact *contact = nil;
-	NSArray *array;
-	NSString *phoneNumber = @"";
-	NSString *phoneLabel = @"";
+	NSArray   *array;
+	NSString  *phoneNumber = @"";
+	NSString  *phoneLabel  = @"";
+	
 	if(isFavorite)
-		contact = [ContactData byNameToGetContact:name];
+		contact = [self byNameToGetContact:name];
 	if(!contact)
-		contact = [ContactData byPhoneNumberAndLabelToGetContact:phone withLabel:label];
+		contact = [self byPhoneNumberAndLabelToGetContact:phone withLabel:label];
 	if(!contact)
-		contact = [ContactData byPhoneNumberAndNameToGetContact:name withPhone:phone];
+		contact = [self byPhoneNumberAndNameToGetContact:name withPhone:phone];
 	if([label isEqualToString:@"未知"] && contact == nil)
-		contact = [ContactData byPhoneNumberlToGetContact:phone withLabel:label];
+		contact = [self byPhoneNumberlToGetContact:phone withLabel:label];
 	if(contact)
 	{
 		array = [ContactData getPhoneNumberAndPhoneLabelArray:contact];
@@ -276,7 +298,8 @@
 		NSDictionary *PhoneDic = [array objectAtIndex:0];
 		phoneNumber = [ContactData getPhoneNumberFromDic:PhoneDic];
 		phoneLabel = [ContactData getPhoneLabelFromDic:PhoneDic];
-	}else  if([array count] > 1)
+	}
+	else  if([array count] > 1)
 	{
 		for(NSDictionary *dic in array)
 		{
@@ -297,9 +320,9 @@
 }
 
 
-+(NSString *)getContactsNameByPhoneNumberAndLabel:(NSString *)phone withLabel:(NSString *)label{
-	NSArray *array = [ContactData contactsArray];
-	for(ABContact * contast in array)
+-(NSString *)getContactsNameByPhoneNumberAndLabel:(NSString *)phone withLabel:(NSString *)label
+{
+	for(ABContact * contast in contactsArray)
 	{
 		NSArray *phoneArray = [ContactData getPhoneNumberAndPhoneLabelArray:contast];
 		if(phoneArray == nil)
@@ -332,4 +355,12 @@
 	else
 		return NO;
 }
+
+- (void)dealloc 
+{
+	[contactsArray release];
+	
+    [super dealloc];
+}
+
 @end

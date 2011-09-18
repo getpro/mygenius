@@ -23,7 +23,6 @@
 
 @property (retain,nonatomic) CustomDatePicker * m_pCustomDatePicker;
 
--(void)myInit;
 
 /*
  * 设置时间，并实时显示时间

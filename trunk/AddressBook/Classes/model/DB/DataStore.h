@@ -12,6 +12,8 @@
 
 #define CONFIG_ID @"1001"
 
+#define GROUP_ID  @"1101"
+
 #define CONTACTINFO_ID 2001
 
 @interface DataStore : NSObject 

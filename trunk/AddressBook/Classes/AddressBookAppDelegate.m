@@ -19,6 +19,8 @@
 @synthesize m_arrDateInfo;
 @synthesize m_arrMemoInfo;
 
+@synthesize m_pContactData;
+
 @synthesize networkingCount = _networkingCount;
 
 #pragma mark -
@@ -31,6 +33,8 @@
 	
 	if(addressBook == nil)
 		addressBook = ABAddressBookCreate();
+	
+	m_pContactData = [[ContactData alloc] init];
 	
 	//[DBConnection getSharedDatabase];
 	
@@ -210,6 +214,8 @@
 - (void)dealloc 
 {
 	[DBConnection closeDatabase];
+	
+	[m_pContactData       release];
 	
 	[m_pAddressBookVC	  release];
 	[m_pAccountsVC		  release];

@@ -1,31 +1,28 @@
 sqlite3 AddressBook.db
 
-CREATE TABLE images (
-    'contacts_id'            TEXT PRIMARY KEY,
-    'image'                  BLOB,
-    'updated_at'             DATETIME
-);
-
 CREATE TABLE contacts_info(
 'contacts_id'TEXT PRIMARY KEY,
 'contacts_name'TEXT,
 'contacts_organization'TEXT,
+'contacts_headImage'BLOB,
 'contacts_sex'INTEGER,
-'contacts_homeemail'TEXT,
-'contacts_workemail'TEXT,
+'contacts_home_email'TEXT,
+'contacts_work_email'TEXT,
+'contacts_extra_email'TEXT,
 'contacts_home_address'TEXT,
 'contacts_work_address'TEXT,
+'contacts_extra_address'TEXT,
 'contacts_mobilephone'TEXT,
 'contacts_iphone'TEXT,
 'contacts_recommend_id'TEXT,
 'contacts_recommend_name'TEXT,
-'contacts_relation_id'TEXT,
-'contacts_relation_name'TEXT
+'contacts_group_id'TEXT,
+'contacts_group_name'TEXT
 );
 
-CREATE TABLE relation (
-    'relation_id'             TEXT PRIMARY KEY,
-    'relation_name'           TEXT	 
+CREATE TABLE group(
+'group_id'TEXT PRIMARY KEY,
+'group_name'TEXT
 );
 
 CREATE TABLE config (

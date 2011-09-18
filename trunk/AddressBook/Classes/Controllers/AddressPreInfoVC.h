@@ -8,14 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+#import "ABContact.h"
 
-@interface AddressPreInfoVC : UIViewController
+@interface AddressPreInfoVC : UIViewController < ABPersonViewControllerDelegate >
 {
-	IBOutlet UIScrollView * m_pUIScrollView_IB;
+	IBOutlet UITableView      * m_pTableView_IB;
+	IBOutlet UIBarButtonItem  * m_pRightAdd;
+	
+	ABContact * m_pContact;
 }
 
-@property (retain,nonatomic) IBOutlet UIScrollView * m_pUIScrollView_IB;
+@property (retain,nonatomic) IBOutlet UITableView      * m_pTableView_IB;
+@property (retain,nonatomic) IBOutlet UIBarButtonItem  * m_pRightAdd;
+@property (retain,nonatomic) ABContact * m_pContact;
 
--(void)myInit;
+-(IBAction)MoreInfoBtn: (id)sender;
 
 @end

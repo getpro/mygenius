@@ -15,11 +15,12 @@
 #import "GroupItemView.h"
 
 @interface AddressBookVC : UIViewController  
-< 
+<
 UISearchBarDelegate,
 UITableViewDelegate, 
 UITableViewDataSource,
 ABNewPersonViewControllerDelegate,
+ABPersonViewControllerDelegate,
 UIActionSheetDelegate,
 GroupItemViewDelegate
 >
@@ -32,6 +33,7 @@ GroupItemViewDelegate
 	IBOutlet UIImageView      * m_pImageView_IB;
 	IBOutlet UIBarButtonItem  * m_pRightAdd;
 	
+	UINavigationController    * aBPersonNav;
 	
 	NSMutableArray		*filteredArray;
 	NSMutableArray		*contactNameArray;
@@ -50,13 +52,16 @@ GroupItemViewDelegate
 @property (retain,nonatomic) IBOutlet UIImageView      * m_pImageView_IB;
 @property (retain,nonatomic) IBOutlet UIBarButtonItem  * m_pRightAdd;
 
-@property (retain,nonatomic) NSArray *contacts;
 @property (retain,nonatomic) NSMutableArray *filteredArray;
 @property (retain,nonatomic) NSMutableArray *contactNameArray;
 @property (retain,nonatomic) NSMutableDictionary *contactNameDic;
 @property (retain,nonatomic) NSMutableArray *sectionArray;
 
+@property (retain,nonatomic) UINavigationController *aBPersonNav;
+
 -(IBAction)editItemBtn:(id)sender;
 -(IBAction)addItemBtn: (id)sender;
+
+-(void)initData;
 
 @end

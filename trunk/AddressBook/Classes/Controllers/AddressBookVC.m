@@ -35,11 +35,12 @@
 @synthesize m_pImageView_IB;
 @synthesize m_pRightAdd;
 
-@synthesize contacts;
 @synthesize filteredArray;
 @synthesize contactNameArray;
 @synthesize contactNameDic;
 @synthesize sectionArray;
+
+@synthesize aBPersonNav;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -117,11 +118,18 @@
 	}
 	
 	[m_pScrollView_IB setContentSize:CGSizeMake(53.0f, 40 * 15)];
+	
+	[self initData];
+	
 }
 
 -(void)initData
 {
-	self.contacts = [ContactData contactsArray];
+	NSLog(@"initData");
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
+	contacts = app.m_pContactData.contactsArray;
+	
 	if([contacts count] < 1)
 	{
 		[contactNameArray removeAllObjects];
@@ -154,7 +162,7 @@
 	for (int i = 0; i < 27; i++) 
 		[self.sectionArray addObject:[NSMutableArray array]];
 	
-	for (NSString *string in contactNameArray) 
+	for (NSString *string in contactNameArray)
 	{
 		if([ContactData searchResult:string searchText:@"曾"])
 			sectionName = @"Z";
@@ -184,10 +192,6 @@
 	}
 }
 
--(void)myInit
-{
-	
-}
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -225,7 +229,6 @@
 	[contactNameDic	  release];
 	[filteredArray	  release];
 	[sectionArray	  release];
-	[contacts	   	  release];
 	[sectionName      release];
 	
     [super dealloc];
@@ -294,6 +297,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	NSLog(@"cellForRowAtIndexPath");
+	
 	UITableViewCellStyle style =  UITableViewCellStyleSubtitle;
 	ContactCell *cell = (ContactCell*)[aTableView dequeueReusableCellWithIdentifier:KContactCell_ID];
 	if (!cell)
@@ -331,43 +336,114 @@
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
 	NSLog(@"didSelectRowAtIndexPath");
 	
-	/*
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+
+#if 0
 	[aTableView deselectRowAtIndexPath:indexPath animated:NO];
-	ABPersonViewController *pvc = [[[ABPersonViewController alloc] init] autorelease];
-	pvc.navigationItem.leftBarButtonItem = BARBUTTON(@"取消", @selector(cancelBtnAction:));
 	
 	NSString *contactName = @"";
-	if (aTableView == self.DataTable)
+	if (aTableView == self.m_pTableView_IB)
 		contactName = [[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	else
 		contactName = [self.filteredArray objectAtIndex:indexPath.row];
 	
-	ABContact *contact = [ContactData byNameToGetContact:contactName];
-	pvc.displayedPerson = contact.record;
-	pvc.allowsEditing = YES;
-	//[pvc setAllowsDeletion:YES];
-	pvc.personViewDelegate = self;
-	self.aBPersonNav = [[[UINavigationController alloc] initWithRootViewController:pvc] autorelease];
-	self.aBPersonNav.navigationBar.tintColor = SETCOLOR(redcolor,greencolor,bluecolor);
-	[self presentModalViewController:aBPersonNav animated:YES];
-	*/
+	ABContact *contact = [app.m_pContactData byNameToGetContact:contactName];
 	
 	/*
-	rightOrLeft = YES;
-	teXiao      = YES;
-	
-	NSString * ss = [NSString stringWithFormat:@"%d" , EViewAddressInfo];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
-	*/
-	
 	AddressPreInfoVC * pAddressPreInfoVC = [[AddressPreInfoVC alloc] init];
+	pAddressPreInfoVC.m_pContact = contact;
 	
 	[self.navigationController pushViewController:pAddressPreInfoVC animated:YES];
 	
 	[pAddressPreInfoVC release];
+	*/
+	
+	ABPersonViewController *pvc = [[ABPersonViewController alloc] init];
+	//pvc.navigationItem.leftBarButtonItem = BARBUTTON(@"取消", @selector(cancelBtnAction:));
+	
+	pvc.displayedPerson = contact;
+	pvc.allowsEditing   = YES;
+	//[pvc setAllowsDeletion:YES];
+	pvc.personViewDelegate = self;
+	self.aBPersonNav = [[[UINavigationController alloc] initWithRootViewController:pvc] autorelease];
+	//self.aBPersonNav.navigationBar.tintColor = SETCOLOR(redcolor,greencolor,bluecolor);
+	[self presentModalViewController:aBPersonNav animated:YES];
+	
+	//[self.navigationController pushViewController:pvc animated:YES];
+#endif	
+	
+	
+	
+	[aTableView deselectRowAtIndexPath:indexPath animated:NO];
+	
+	ABPersonViewController *pvc = [[[ABPersonViewController alloc] init] autorelease];
+	//pvc.navigationItem.leftBarButtonItem = BARBUTTON(@"取消", @selector(cancelBtnAction:));
+	/*
+	 pvc.toolbarItems = [NSArray arrayWithObjects:
+	 [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease],
+	 [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share)] autorelease],
+	 [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease],
+	 nil
+	 ];
+	 */
+	
+	NSString *contactName = @"";
+	if (aTableView == self.m_pTableView_IB)
+		contactName = [[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+	else
+		contactName = [self.filteredArray objectAtIndex:indexPath.row];
+	
+	ABContact *contact = [app.m_pContactData byNameToGetContact:contactName];
+	pvc.displayedPerson = contact.record;
+	pvc.allowsEditing = YES;
+	//[pvc setAllowsDeletion:YES];
+	pvc.personViewDelegate = self;
+	
+	self.aBPersonNav = [[[UINavigationController alloc] initWithRootViewController:pvc] autorelease];
+	
+	//self.aBPersonNav.navigationItem.leftBarButtonItem = BARBUTTON(@"取消", @selector(cancelBtnAction:));
+	/*
+	 self.aBPersonNav.toolbarItems = [NSArray arrayWithObjects:
+	 [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease],
+	 [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share)] autorelease],
+	 [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease],
+	 nil
+	 ];
+	 */
+	
+	//self.aBPersonNav.navigationBar.tintColor = SETCOLOR(redcolor,greencolor,bluecolor);
+	
+	UIToolbar	* toolbar = [UIToolbar new];
+	toolbar.barStyle = UIBarStyleDefault;
+	
+	// size up the toolbar and set its frame
+	[toolbar sizeToFit];
+	
+	[toolbar setFrame:CGRectMake(20,5,180,30)];
+	
+	UIButton * p1 = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
+	
+	
+	[p1 setFrame:CGRectMake(50,5,60,30)];
+	
+	
+	UIButton * p2 = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
+	
+	[p2 setFrame:CGRectMake(130,5,60,30)];
+	
+	
+	[self.aBPersonNav.navigationBar addSubview:p1];
+	
+	[self.aBPersonNav.navigationBar addSubview:p2];
+	
+	//[self.navigationController pushViewController:pvc animated:YES];
+	
+	[self presentModalViewController:aBPersonNav animated:YES];
+	
+	//[self presentModalViewController:pvc animated:YES];
 	
 }
 
@@ -375,6 +451,8 @@
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)aTableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	NSLog(@"canEditRowAtIndexPath");
+	
 	if(aTableView == self.m_pTableView_IB)
 		// Return NO if you do not want the specified item to be editable.
 		return YES;
@@ -386,6 +464,8 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)aTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath 
 {
+	NSLog(@"commitEditingStyle");
+	
 	/*
 	NSString *contactName = @"";
 	if (aTableView == self.DataTable)
@@ -409,13 +489,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)aTableView 
 { 
-	if(aTableView == self.m_pTableView_IB) return 27;
+	NSLog(@"numberOfSectionsInTableView");
+	
+	if(aTableView == self.m_pTableView_IB) 
+		return 27;
 	return 1;
 }
 
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)aTableView 
 {
+	NSLog(@"sectionIndexTitlesForTableView");
+	
 	if (aTableView == self.m_pTableView_IB)  // regular table
 	{
 		NSMutableArray *indices = [NSMutableArray arrayWithObject:UITableViewIndexSearch];
@@ -431,6 +516,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
 {
+	NSLog(@"sectionForSectionIndexTitle");
+	
 	if (title == UITableViewIndexSearch)
 	{
 		[self.m_pTableView_IB scrollRectToVisible:self.m_pSearchBar.frame animated:NO];
@@ -444,6 +531,8 @@
 
 - (NSString *)tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger)section
 {
+	NSLog(@"titleForHeaderInSection");
+	
 	if (aTableView == self.m_pTableView_IB) 
 	{
 		if ([[self.sectionArray objectAtIndex:section] count] == 0) 
@@ -458,7 +547,9 @@
 {
 	NSLog(@"numberOfRowsInSection");
 	
-	[self initData];
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
+	//[self initData];
 	// Normal table
 	if (aTableView == self.m_pTableView_IB) 
 		return [[self.sectionArray objectAtIndex:section] count];
@@ -484,7 +575,7 @@
 				[filteredArray addObject:string];
 			else 
 			{
-				ABContact *contact = [ContactData byNameToGetContact:string];
+				ABContact *contact = [app.m_pContactData byNameToGetContact:string];
 				
 				NSArray  * phoneArray = nil;
 				NSString * phone = @"";
@@ -542,13 +633,6 @@
 	[actionSheet release];
 }
 
-#pragma mark ABPersonViewControllerDelegate methods
-- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifierForValue
-{
-	[self dismissModalViewControllerAnimated:YES];
-	return NO;
-}
-
 #pragma mark ABNewPersonViewControllerDelegate methods
 // Dismisses the new-person view controller. 
 - (void)newPersonViewController:(ABNewPersonViewController *)newPersonViewController didCompleteWithNewPerson:(ABRecordRef)person
@@ -556,17 +640,14 @@
 	[self dismissModalViewControllerAnimated:NO];
 	
 	//[self.view setFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
-	
-	/*
-	//设置更多的属性
-	rightOrLeft = YES;
-	teXiao      = YES;
-	
-	NSString * ss = [NSString stringWithFormat:@"%d" , EViewAddressAddMore];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
-	*/
-	
+}
+
+
+#pragma mark ABPersonViewControllerDelegate methods
+- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifierForValue
+{
+	[self dismissModalViewControllerAnimated:YES];
+	return NO;
 }
 
 #pragma mark GroupItem methods
@@ -596,7 +677,6 @@
 
 - (void)GreateNewPerson
 {
-	/*
 	//调用系统的添加联系人界面
 	ABNewPersonViewController *picker = [[ABNewPersonViewController alloc] init];
 	picker.newPersonViewDelegate = self;
@@ -605,14 +685,14 @@
 	
 	[picker release];
 	[navigation release];
-	 
-	*/
+	
+	/* 分组例子
 	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	
 	CustomPicker * p = [[CustomPicker alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
 	
 	[app.window addSubview:p];
-	
+	*/
 }
 
 #pragma mark actionSheet methods
