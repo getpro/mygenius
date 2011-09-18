@@ -11,10 +11,63 @@
 
 @implementation AddressBaseInfoVC
 
+- (void)toggleStyle:(id)sender
+{
+	/*
+	UIBarButtonItemStyle style = UIBarButtonItemStylePlain;
+	
+	switch ([sender selectedSegmentIndex])
+	{
+		case 0:	// UIBarButtonItemStylePlain
+		{
+			style = UIBarButtonItemStylePlain;
+			break;
+		}
+		case 1: // UIBarButtonItemStyleBordered
+		{	
+			style = UIBarButtonItemStyleBordered;
+			break;
+		}
+		case 2:	// UIBarButtonItemStyleDone
+		{
+			style = UIBarButtonItemStyleDone;
+			break;
+		}
+	}
+	
+	NSArray *toolbarItems = toolbar.items;
+	UIBarButtonItem *item;
+	for (item in toolbarItems)
+	{
+		item.style = style;
+	}
+	*/
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	self.navigationItem.title = @"";
+	
+	if(m_pSegmentedControl)
+	{
+		[m_pSegmentedControl setHidden:NO];
+	}
+	else
+	{
+		m_pSegmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"基本信息", @"高级信息", nil]];
+		[m_pSegmentedControl addTarget:self action:@selector(toggleStyle:) forControlEvents:UIControlEventValueChanged];
+		m_pSegmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+		m_pSegmentedControl.backgroundColor = [UIColor clearColor];
+		[m_pSegmentedControl sizeToFit];
+		m_pSegmentedControl.selectedSegmentIndex = 0;
+		CGRect segmentedControlFrame = CGRectMake((320 - 166)/2,(45 - 30)/2,166,30);
+		m_pSegmentedControl.frame = segmentedControlFrame;
+		
+		[self.navigationController.navigationBar addSubview:m_pSegmentedControl];
+	}
 }
 
 
@@ -44,6 +97,8 @@
 
 - (void)dealloc 
 {	
+	[m_pSegmentedControl release];
+	
     [super dealloc];
 }
 
@@ -56,6 +111,22 @@
 -(IBAction)doneItemBtn:  (id)sender
 {
 	
+}
+
+#pragma mark - UIViewController delegate methods
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	[m_pSegmentedControl setHidden:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	
+	[m_pSegmentedControl setHidden:YES];
 }
 
 @end

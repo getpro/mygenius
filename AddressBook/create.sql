@@ -17,12 +17,14 @@ CREATE TABLE contacts_info(
 'contacts_recommend_id'TEXT,
 'contacts_recommend_name'TEXT,
 'contacts_group_id'TEXT,
-'contacts_group_name'TEXT
+'contacts_group_name'TEXT,
+'contacts_birthday'DATETIME,
+'contacts_constellation'INTEGER
 );
 
-CREATE TABLE group(
-'group_id'TEXT PRIMARY KEY,
-'group_name'TEXT
+CREATE TABLE group_info (
+    'group_id'     TEXT PRIMARY KEY,
+    'group_name'   TEXT
 );
 
 CREATE TABLE config (

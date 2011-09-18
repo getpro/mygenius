@@ -20,7 +20,6 @@ UISearchBarDelegate,
 UITableViewDelegate, 
 UITableViewDataSource,
 ABNewPersonViewControllerDelegate,
-ABPersonViewControllerDelegate,
 UIActionSheetDelegate,
 GroupItemViewDelegate
 >
@@ -32,8 +31,6 @@ GroupItemViewDelegate
 	IBOutlet UIScrollView     * m_pScrollView_IB;
 	IBOutlet UIImageView      * m_pImageView_IB;
 	IBOutlet UIBarButtonItem  * m_pRightAdd;
-	
-	UINavigationController    * aBPersonNav;
 	
 	NSMutableArray		*filteredArray;
 	NSMutableArray		*contactNameArray;
@@ -56,8 +53,6 @@ GroupItemViewDelegate
 @property (retain,nonatomic) NSMutableArray *contactNameArray;
 @property (retain,nonatomic) NSMutableDictionary *contactNameDic;
 @property (retain,nonatomic) NSMutableArray *sectionArray;
-
-@property (retain,nonatomic) UINavigationController *aBPersonNav;
 
 -(IBAction)editItemBtn:(id)sender;
 -(IBAction)addItemBtn: (id)sender;

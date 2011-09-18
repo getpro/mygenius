@@ -15,12 +15,15 @@
 	IBOutlet UITableView      * m_pTableView_IB;
 	IBOutlet UIBarButtonItem  * m_pRightAdd;
 	
+	UINavigationController    * aBPersonNav;
+	
 	ABContact * m_pContact;
 }
 
 @property (retain,nonatomic) IBOutlet UITableView      * m_pTableView_IB;
 @property (retain,nonatomic) IBOutlet UIBarButtonItem  * m_pRightAdd;
 @property (retain,nonatomic) ABContact * m_pContact;
+@property (retain,nonatomic) UINavigationController *aBPersonNav;
 
 -(IBAction)MoreInfoBtn: (id)sender;
 

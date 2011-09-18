@@ -14,7 +14,7 @@
 
 @interface AddressBaseInfoVC : ABPersonViewController 
 {
-	
+	UISegmentedControl *m_pSegmentedControl;
 }
 
 -(IBAction)cancelItemBtn:(id)sender;
