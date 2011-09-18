@@ -14,6 +14,8 @@
 #import "ModalAlert.h"
 #import "AddressPreInfoVC.h"
 
+#import "CustomPicker.h"
+
 @implementation AddressBookVC
 
 /*
@@ -594,6 +596,7 @@
 
 - (void)GreateNewPerson
 {
+	/*
 	//调用系统的添加联系人界面
 	ABNewPersonViewController *picker = [[ABNewPersonViewController alloc] init];
 	picker.newPersonViewDelegate = self;
@@ -602,6 +605,14 @@
 	
 	[picker release];
 	[navigation release];
+	 
+	*/
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
+	CustomPicker * p = [[CustomPicker alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+	
+	[app.window addSubview:p];
+	
 }
 
 #pragma mark actionSheet methods

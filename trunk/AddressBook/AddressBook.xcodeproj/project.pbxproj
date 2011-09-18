@@ -26,6 +26,7 @@
 		211BFDEF141FA06F009C1EA5 /* ABContactsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 211BFDE9141FA06F009C1EA5 /* ABContactsHelper.m */; };
 		211BFDF0141FA06F009C1EA5 /* ABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 211BFDEB141FA06F009C1EA5 /* ABGroup.m */; };
 		211BFDF1141FA06F009C1EA5 /* ContactData.m in Sources */ = {isa = PBXBuildFile; fileRef = 211BFDED141FA06F009C1EA5 /* ContactData.m */; };
+		212B47C414258D3B00DE4938 /* CustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 212B47C314258D3B00DE4938 /* CustomPicker.m */; };
 		216525F913E52F8F0075F387 /* AddressPreInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 216525F813E52F8F0075F387 /* AddressPreInfoVC.m */; };
 		216525FC13E52FA30075F387 /* AddressBaseInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 216525FB13E52FA30075F387 /* AddressBaseInfoVC.m */; };
 		2165260E13E531BA0075F387 /* AddressPreInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2165260D13E531BA0075F387 /* AddressPreInfoVC.xib */; };
@@ -115,6 +116,8 @@
 		211BFDEB141FA06F009C1EA5 /* ABGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABGroup.m; sourceTree = "<group>"; };
 		211BFDEC141FA06F009C1EA5 /* ContactData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactData.h; sourceTree = "<group>"; };
 		211BFDED141FA06F009C1EA5 /* ContactData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactData.m; sourceTree = "<group>"; };
+		212B47C214258D3B00DE4938 /* CustomPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPicker.h; sourceTree = "<group>"; };
+		212B47C314258D3B00DE4938 /* CustomPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPicker.m; sourceTree = "<group>"; };
 		216525F713E52F8F0075F387 /* AddressPreInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressPreInfoVC.h; sourceTree = "<group>"; };
 		216525F813E52F8F0075F387 /* AddressPreInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressPreInfoVC.m; sourceTree = "<group>"; };
 		216525FA13E52FA30075F387 /* AddressBaseInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBaseInfoVC.h; sourceTree = "<group>"; };
@@ -415,6 +418,8 @@
 				21E5AE8D141DF5DC00B5EBA5 /* GroupItemView.m */,
 				2104CF8714238ECF0004FB9A /* ContactCell.h */,
 				2104CF8814238ECF0004FB9A /* ContactCell.m */,
+				212B47C214258D3B00DE4938 /* CustomPicker.h */,
+				212B47C314258D3B00DE4938 /* CustomPicker.m */,
 			);
 			path = CustView;
 			sourceTree = "<group>";
@@ -607,6 +612,7 @@
 				211BFDF1141FA06F009C1EA5 /* ContactData.m in Sources */,
 				2104CF8914238ECF0004FB9A /* ContactCell.m in Sources */,
 				210876291424C3A400159CC2 /* ModalAlert.m in Sources */,
+				212B47C414258D3B00DE4938 /* CustomPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
