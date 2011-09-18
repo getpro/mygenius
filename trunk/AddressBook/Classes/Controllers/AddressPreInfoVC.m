@@ -23,6 +23,7 @@ typedef enum
 @synthesize m_pTableView_IB;
 @synthesize m_pRightAdd;
 @synthesize m_pContact;
+@synthesize aBPersonNav;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
@@ -63,27 +64,46 @@ typedef enum
 {
 	[m_pTableView_IB release];
 	[m_pContact      release];
+	[aBPersonNav     release];
 	
     [super dealloc];
 }
 
 -(IBAction)MoreInfoBtn: (id)sender
 {
-	ABPersonViewController *pvc = [[[ABPersonViewController alloc] init] autorelease];
-	//pvc.navigationItem.leftBarButtonItem = BARBUTTON(@"取消", @selector(cancelBtnAction:));
-	 
-	pvc.displayedPerson = m_pContact;
-	pvc.allowsEditing   = YES;
+	AddressBaseInfoVC *pvc = [[AddressBaseInfoVC alloc] init];
+	
+	pvc.displayedPerson = m_pContact.record;
+	pvc.allowsEditing = YES;
 	//[pvc setAllowsDeletion:YES];
 	pvc.personViewDelegate = self;
+	
 	//self.aBPersonNav = [[[UINavigationController alloc] initWithRootViewController:pvc] autorelease];
-	//self.aBPersonNav.navigationBar.tintColor = SETCOLOR(redcolor,greencolor,bluecolor);
+	
+	/*
+	UIToolbar	* toolbar = [UIToolbar new];
+	toolbar.barStyle = UIBarStyleDefault;
+	
+	// size up the toolbar and set its frame
+	[toolbar sizeToFit];
+	
+	[toolbar setFrame:CGRectMake(20,5,180,30)];
+	
+	UIButton * p1 = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
+	[p1 setFrame:CGRectMake(50,5,60,30)];
+	
+	UIButton * p2 = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
+	[p2 setFrame:CGRectMake(130,5,60,30)];
+	
+	[self.aBPersonNav.navigationBar addSubview:p1];
+	[self.aBPersonNav.navigationBar addSubview:p2];
+	*/
+	
+	[self.navigationController pushViewController:pvc animated:YES];
+	
+	[pvc release];
+	
 	//[self presentModalViewController:aBPersonNav animated:YES];
-	
-	//[self.navigationController pushViewController:pvc animated:YES];
-	
-	UINavigationController * aBPersonNav = [[[UINavigationController alloc] initWithRootViewController:pvc] autorelease];
-	[self presentModalViewController:aBPersonNav animated:YES];
 }
 
 #pragma mark - UITableView delegates
@@ -215,7 +235,7 @@ typedef enum
 #pragma mark ABPersonViewControllerDelegate methods
 - (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifierForValue
 {
-	[self dismissModalViewControllerAnimated:YES];
+	//[self dismissModalViewControllerAnimated:YES];
 	return NO;
 }
 

@@ -40,8 +40,6 @@
 @synthesize contactNameDic;
 @synthesize sectionArray;
 
-@synthesize aBPersonNav;
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -340,9 +338,8 @@
 	NSLog(@"didSelectRowAtIndexPath");
 	
 	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
-
-#if 0
-	[aTableView deselectRowAtIndexPath:indexPath animated:NO];
+	
+	//[aTableView deselectRowAtIndexPath:indexPath animated:NO];
 	
 	NSString *contactName = @"";
 	if (aTableView == self.m_pTableView_IB)
@@ -352,99 +349,13 @@
 	
 	ABContact *contact = [app.m_pContactData byNameToGetContact:contactName];
 	
-	/*
+	
 	AddressPreInfoVC * pAddressPreInfoVC = [[AddressPreInfoVC alloc] init];
 	pAddressPreInfoVC.m_pContact = contact;
 	
 	[self.navigationController pushViewController:pAddressPreInfoVC animated:YES];
-	
+	 
 	[pAddressPreInfoVC release];
-	*/
-	
-	ABPersonViewController *pvc = [[ABPersonViewController alloc] init];
-	//pvc.navigationItem.leftBarButtonItem = BARBUTTON(@"取消", @selector(cancelBtnAction:));
-	
-	pvc.displayedPerson = contact;
-	pvc.allowsEditing   = YES;
-	//[pvc setAllowsDeletion:YES];
-	pvc.personViewDelegate = self;
-	self.aBPersonNav = [[[UINavigationController alloc] initWithRootViewController:pvc] autorelease];
-	//self.aBPersonNav.navigationBar.tintColor = SETCOLOR(redcolor,greencolor,bluecolor);
-	[self presentModalViewController:aBPersonNav animated:YES];
-	
-	//[self.navigationController pushViewController:pvc animated:YES];
-#endif	
-	
-	
-	
-	[aTableView deselectRowAtIndexPath:indexPath animated:NO];
-	
-	ABPersonViewController *pvc = [[[ABPersonViewController alloc] init] autorelease];
-	//pvc.navigationItem.leftBarButtonItem = BARBUTTON(@"取消", @selector(cancelBtnAction:));
-	/*
-	 pvc.toolbarItems = [NSArray arrayWithObjects:
-	 [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease],
-	 [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share)] autorelease],
-	 [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease],
-	 nil
-	 ];
-	 */
-	
-	NSString *contactName = @"";
-	if (aTableView == self.m_pTableView_IB)
-		contactName = [[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-	else
-		contactName = [self.filteredArray objectAtIndex:indexPath.row];
-	
-	ABContact *contact = [app.m_pContactData byNameToGetContact:contactName];
-	pvc.displayedPerson = contact.record;
-	pvc.allowsEditing = YES;
-	//[pvc setAllowsDeletion:YES];
-	pvc.personViewDelegate = self;
-	
-	self.aBPersonNav = [[[UINavigationController alloc] initWithRootViewController:pvc] autorelease];
-	
-	//self.aBPersonNav.navigationItem.leftBarButtonItem = BARBUTTON(@"取消", @selector(cancelBtnAction:));
-	/*
-	 self.aBPersonNav.toolbarItems = [NSArray arrayWithObjects:
-	 [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease],
-	 [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share)] autorelease],
-	 [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease],
-	 nil
-	 ];
-	 */
-	
-	//self.aBPersonNav.navigationBar.tintColor = SETCOLOR(redcolor,greencolor,bluecolor);
-	
-	UIToolbar	* toolbar = [UIToolbar new];
-	toolbar.barStyle = UIBarStyleDefault;
-	
-	// size up the toolbar and set its frame
-	[toolbar sizeToFit];
-	
-	[toolbar setFrame:CGRectMake(20,5,180,30)];
-	
-	UIButton * p1 = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
-	
-	
-	[p1 setFrame:CGRectMake(50,5,60,30)];
-	
-	
-	UIButton * p2 = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
-	
-	[p2 setFrame:CGRectMake(130,5,60,30)];
-	
-	
-	[self.aBPersonNav.navigationBar addSubview:p1];
-	
-	[self.aBPersonNav.navigationBar addSubview:p2];
-	
-	//[self.navigationController pushViewController:pvc animated:YES];
-	
-	[self presentModalViewController:aBPersonNav animated:YES];
-	
-	//[self presentModalViewController:pvc animated:YES];
-	
 }
 
 
@@ -642,14 +553,6 @@
 	//[self.view setFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
 }
 
-
-#pragma mark ABPersonViewControllerDelegate methods
-- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifierForValue
-{
-	[self dismissModalViewControllerAnimated:YES];
-	return NO;
-}
-
 #pragma mark GroupItem methods
 -(void) GroupItemViewSelect:(NSInteger)pIndex
 {
@@ -709,5 +612,7 @@
 		[self performSelector:@selector(GreateNewPerson) withObject:nil afterDelay:0.1];
 	}
 }
+
+
 
 @end
