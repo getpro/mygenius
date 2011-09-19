@@ -24,6 +24,8 @@ typedef enum
 @synthesize m_pRightAdd;
 @synthesize m_pContact;
 @synthesize aBPersonNav;
+@synthesize m_pContainer;
+@synthesize m_pData;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
@@ -33,6 +35,51 @@ typedef enum
 	self.navigationItem.title = @"联系人";
 	self.navigationItem.rightBarButtonItem = m_pRightAdd;
 	
+	m_pContainer = [[CAttributeContainer alloc] init];
+	
+	CAttribute *attr = nil;
+	
+	attr = [[[CAttributeString alloc] init] autorelease];
+	[m_pContainer setValue:attr forKey:@"分组"];
+	
+	attr = [[[CAttributeString alloc] init] autorelease];
+	[m_pContainer setValue:attr forKey:@"移动电话"];
+	
+	attr = [[[CAttributeString alloc] init] autorelease];
+	[m_pContainer setValue:attr forKey:@"短信"];
+	
+	attr = [[[CAttributeString alloc] init] autorelease];
+	[m_pContainer setValue:attr forKey:@"工作"];
+	
+	attr = [[[CAttributeString alloc] init] autorelease];
+	[m_pContainer setValue:attr forKey:@"星座"];
+	
+	m_pData = [[NSMutableArray alloc]initWithArray:m_pContainer.attributes];
+	
+	/*
+	BOOL foundImage  = NO;
+	BOOL foundString = NO;
+	
+	UILabel     *lbl;
+	
+	for (CAttribute *att in m_pContainer.attributes) 
+	{
+		if (!foundString && [att.type isEqualToString:@"string"]) 
+		{
+			lbl = (UILabel*)[sectionHeader viewWithTag:101];
+			if (lbl != nil) 
+			{
+				NSString *st = [att valueForKey:@"stringValue"];
+				if (st)
+					lbl.text = st;
+				[temp addObject:att];
+				foundString = YES;
+			}
+		}
+	}
+	//if ([temp count]>0)
+	//	[data removeObjectsInArray:temp];
+	*/
 }
 
 
@@ -65,6 +112,8 @@ typedef enum
 	[m_pTableView_IB release];
 	[m_pContact      release];
 	[aBPersonNav     release];
+	[m_pContainer    release];
+	[m_pData         release];
 	
     [super dealloc];
 }
@@ -77,27 +126,6 @@ typedef enum
 	pvc.allowsEditing = YES;
 	//[pvc setAllowsDeletion:YES];
 	pvc.personViewDelegate = self;
-	
-	//self.aBPersonNav = [[[UINavigationController alloc] initWithRootViewController:pvc] autorelease];
-	
-	/*
-	UIToolbar	* toolbar = [UIToolbar new];
-	toolbar.barStyle = UIBarStyleDefault;
-	
-	// size up the toolbar and set its frame
-	[toolbar sizeToFit];
-	
-	[toolbar setFrame:CGRectMake(20,5,180,30)];
-	
-	UIButton * p1 = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
-	[p1 setFrame:CGRectMake(50,5,60,30)];
-	
-	UIButton * p2 = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
-	[p2 setFrame:CGRectMake(130,5,60,30)];
-	
-	[self.aBPersonNav.navigationBar addSubview:p1];
-	[self.aBPersonNav.navigationBar addSubview:p2];
-	*/
 	
 	[self.navigationController pushViewController:pvc animated:YES];
 	
@@ -184,11 +212,13 @@ typedef enum
 		 cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSInteger row = [indexPath row];
+	UITableViewCell *cell = nil;
+	CAttribute      *attr = nil;
 	
-	UITableViewCellStyle style =  UITableViewCellStyleSubtitle;
-	UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"ID_ID"];
-	if (!cell)
-		cell = [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:@"ID_ID"] autorelease];
+	//UITableViewCellStyle style =  UITableViewCellStyleSubtitle;
+	//UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"ID_ID"];
+	//if (!cell)
+	//	cell = [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:@"ID_ID"] autorelease];
 	
 	
 	switch (indexPath.section)
@@ -197,12 +227,15 @@ typedef enum
 		{
 			if (row == 0)
 			{
-				cell.textLabel.text = @"分组";
+				//cell.textLabel.text = @"分组";
+				attr = [self.m_pData objectAtIndex:0];
 			}
 			break;
 		}
 		case TableView_Section_Contact:
 		{
+			attr = [self.m_pData objectAtIndex:row + 1];
+			/*
 			if (row == 0)
 			{
 				cell.textLabel.text = @"移动电话";
@@ -215,19 +248,23 @@ typedef enum
 			{
 				cell.textLabel.text = @"工作";
 			}
+			*/
 			break;
 		}
 		case TableView_Section_Constellation:
 		{
 			if (row == 0)
 			{
-				cell.textLabel.text = @"星座";
+				//cell.textLabel.text = @"星座";
+				attr = [self.m_pData objectAtIndex:row + 4];
 			}
 			break;
 		}
 		default:
 			break;
 	}
+	
+	cell = [attr cellForTableView:tableView];
 	
 	return cell;
 }
