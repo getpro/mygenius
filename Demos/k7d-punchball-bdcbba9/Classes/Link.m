@@ -807,7 +807,9 @@ typedef enum {
 
 //#define URL_TEST_SERVER	 L"172.18.66.36:5055"
 
-#define URL_TEST_SERVER	 L"172.18.19.73:5055"
+//#define URL_TEST_SERVER	 L"172.18.19.73:5055"
+
+#define URL_TEST_SERVER	 L"172.18.3.49:5055"
 
 -(void) CreateConnection
 {
