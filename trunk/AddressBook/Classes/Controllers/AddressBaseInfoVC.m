@@ -8,40 +8,35 @@
 
 #import "AddressBaseInfoVC.h"
 #import "AddressBookAppDelegate.h"
+#import "AddressSeniorInfoVC.h"
 
 @implementation AddressBaseInfoVC
 
+@synthesize aBPersonNav;
+
 - (void)toggleStyle:(id)sender
 {
-	/*
-	UIBarButtonItemStyle style = UIBarButtonItemStylePlain;
-	
 	switch ([sender selectedSegmentIndex])
 	{
-		case 0:	// UIBarButtonItemStylePlain
+		case 0:	
 		{
-			style = UIBarButtonItemStylePlain;
 			break;
 		}
-		case 1: // UIBarButtonItemStyleBordered
-		{	
-			style = UIBarButtonItemStyleBordered;
-			break;
-		}
-		case 2:	// UIBarButtonItemStyleDone
+		case 1:
 		{
-			style = UIBarButtonItemStyleDone;
+			[aBPersonNav popViewControllerAnimated:NO];
+			
+			AddressSeniorInfoVC * pAddressSeniorInfoVC = [[AddressSeniorInfoVC alloc] init];
+			
+			pAddressSeniorInfoVC.aBPersonNav = aBPersonNav;
+			
+			[aBPersonNav pushViewController:pAddressSeniorInfoVC animated:NO];
+			
+			[pAddressSeniorInfoVC release];
+			
 			break;
 		}
 	}
-	
-	NSArray *toolbarItems = toolbar.items;
-	UIBarButtonItem *item;
-	for (item in toolbarItems)
-	{
-		item.style = style;
-	}
-	*/
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -120,6 +115,7 @@
 - (void)dealloc 
 {	
 	[m_pSegmentedControl release];
+	[aBPersonNav         release];
 	
     [super dealloc];
 }

@@ -16,8 +16,6 @@
 	IBOutlet UITableView      * m_pTableView_IB;
 	IBOutlet UIBarButtonItem  * m_pRightAdd;
 	
-	UINavigationController    * aBPersonNav;
-	
 	ABContact * m_pContact;
 	
 	CAttributeContainer * m_pContainer;

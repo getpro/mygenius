@@ -11,11 +11,15 @@
 
 @interface AddressSeniorInfoVC : UIViewController 
 {
-	IBOutlet UITableView      * m_pTableView_IB;
+	IBOutlet UITableView     * m_pTableView_IB;
+	
+	UISegmentedControl       * m_pSegmentedControl;
+	
+	UINavigationController   * aBPersonNav;
 }
 
 @property (retain,nonatomic) IBOutlet UITableView * m_pTableView_IB;
-
+@property (retain,nonatomic) UINavigationController *aBPersonNav;
 
 -(IBAction)doneItemBtn:  (id)sender;
 

@@ -8,19 +8,67 @@
 
 #import "AddressSeniorInfoVC.h"
 #import "PublicData.h"
-
+#import "AddressBaseInfoVC.h"
 
 @implementation AddressSeniorInfoVC
 
 @synthesize m_pTableView_IB;
+@synthesize aBPersonNav;
 
+- (void)toggleStyle:(id)sender
+{
+	switch ([sender selectedSegmentIndex])
+	{
+		case 0:	
+		{
+			[aBPersonNav popViewControllerAnimated:NO];
+			
+			AddressBaseInfoVC *pvc = [[AddressBaseInfoVC alloc] init];
+			
+			//pvc.displayedPerson = m_pContact.record;
+			pvc.allowsEditing = YES;
+			//[pvc setAllowsDeletion:YES];
+			pvc.personViewDelegate = pvc;
+			
+			pvc.aBPersonNav = aBPersonNav;
+			
+			[aBPersonNav pushViewController:pvc animated:NO];
+			
+			[pvc release];
+			
+			break;
+		}
+		case 1: 
+		{
+			break;
+		}
+	}
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
 	
+	self.navigationItem.title = @"";
 	
+	if(m_pSegmentedControl)
+	{
+		[m_pSegmentedControl setHidden:NO];
+	}
+	else
+	{
+		m_pSegmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"基本信息", @"高级信息", nil]];
+		[m_pSegmentedControl addTarget:self action:@selector(toggleStyle:) forControlEvents:UIControlEventValueChanged];
+		m_pSegmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+		m_pSegmentedControl.backgroundColor = [UIColor clearColor];
+		[m_pSegmentedControl sizeToFit];
+		m_pSegmentedControl.selectedSegmentIndex = 1;
+		CGRect segmentedControlFrame = CGRectMake((320 - 166)/2,(45 - 30)/2,166,30);
+		m_pSegmentedControl.frame = segmentedControlFrame;
+		
+		[self.navigationController.navigationBar addSubview:m_pSegmentedControl];
+	}
 	
 }
 
@@ -50,20 +98,32 @@
 
 - (void)dealloc 
 {
-	[m_pTableView_IB release];
+	[m_pTableView_IB	 release];
+	[m_pSegmentedControl release];
+	[aBPersonNav		 release];
 	
     [super dealloc];
 }
 
 -(IBAction)doneItemBtn:  (id)sender
 {
-	rightOrLeft = YES;
-	teXiao      = YES;
 	
-	NSString * ss = [NSString stringWithFormat:@"%d" , EViewAddressBook];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
 }
 
+#pragma mark - UIViewController delegate methods
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	[m_pSegmentedControl setHidden:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	
+	[m_pSegmentedControl setHidden:YES];
+}
 
 @end
