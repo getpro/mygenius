@@ -70,6 +70,28 @@
 	}
 }
 
+- (void)setEditing:(BOOL)editing
+{
+	if(editing == YES)
+	{
+		[m_pSegmentedControl setHidden:YES];
+	}
+	[super setEditing:editing];
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+	if(editing == YES)
+	{
+		[m_pSegmentedControl setHidden:YES];
+	}
+	else
+	{
+		[m_pSegmentedControl setHidden:NO];
+	}
+	[super setEditing:editing animated:animated];
+}
+
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -111,6 +133,15 @@
 -(IBAction)doneItemBtn:  (id)sender
 {
 	
+}
+
+#pragma mark ABPersonViewControllerDelegate methods
+
+- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
+{
+	//[self dismissModalViewControllerAnimated:YES];
+	NSLog(@"111111111");
+	return NO;
 }
 
 #pragma mark - UIViewController delegate methods

@@ -530,8 +530,6 @@
 
 -(IBAction)addItemBtn: (id)sender
 {
-	//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
-	
 	// open a dialog with two custom buttons
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
 															 delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil

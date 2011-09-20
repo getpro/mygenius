@@ -44,12 +44,15 @@ typedef enum
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"移动电话"];
+	((CAttributeString*)attr).stringValue = @"13764980031";
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"短信"];
+	((CAttributeString*)attr).stringValue = @"13764980031";
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"工作"];
+	((CAttributeString*)attr).stringValue = @"12@163.com";
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"星座"];
@@ -269,10 +272,92 @@ typedef enum
 	return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+	//UIViewController *vc = nil;
+	NSInteger row = [indexPath row];
+	CAttribute       *attr = nil;
+	CAttributeString *stringAttr = nil;
+	
+	switch (indexPath.section)
+	{
+		case TableView_Section_Group:
+		{
+			if (row == 0)
+			{
+				//cell.textLabel.text = @"分组";
+			}
+			break;
+		}
+		case TableView_Section_Contact:
+		{
+			attr = [self.m_pData objectAtIndex:row + 1];
+			stringAttr = (CAttributeString*)attr;
+			
+			if (row == 0)
+			{
+				//cell.textLabel.text = @"移动电话";
+				NSLog(@"tel[%@]",stringAttr.stringValue);
+				NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", stringAttr.stringValue]];
+				[[UIApplication sharedApplication] openURL:URL]; 
+			}
+			else if(row == 1)
+			{
+				//cell.textLabel.text = @"短信";
+				NSLog(@"sms[%@]",stringAttr.stringValue);
+				NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"sms://%@", stringAttr.stringValue]];
+				[[UIApplication sharedApplication] openURL:URL];
+			}
+			else if(row == 2)
+			{
+				//cell.textLabel.text = @"工作";
+				NSLog(@"email[%@]",stringAttr.stringValue);
+				NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"mailto://%@", stringAttr.stringValue]];
+				[[UIApplication sharedApplication] openURL:URL];
+			}
+			 
+			break;
+		}
+		case TableView_Section_Constellation:
+		{
+			if (row == 0)
+			{
+				//cell.textLabel.text = @"星座";
+			}
+			break;
+		}
+		default:
+			break;
+	}
+	
+	
+	/*
+	CAttribute *attr = [self.m_pData objectAtIndex:indexPath.row];
+	if (attr)
+	{
+		vc = [attr detailViewController:self.editing];
+	}
+	*/
+	
+	/*
+	if (vc) 
+	{
+		[self presentModalViewController:vc animated:YES];
+		[tableView deselectRowAtIndexPath:indexPath animated:NO];
+	} 
+	else 
+	{
+		[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	}
+	*/
+}
+
 #pragma mark ABPersonViewControllerDelegate methods
-- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifierForValue
+
+- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
 {
 	//[self dismissModalViewControllerAnimated:YES];
+	NSLog(@"111111111");
 	return NO;
 }
 

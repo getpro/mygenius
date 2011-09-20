@@ -12,7 +12,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 
 
-@interface AddressBaseInfoVC : ABPersonViewController 
+@interface AddressBaseInfoVC : ABPersonViewController < ABPersonViewControllerDelegate >
 {
 	UISegmentedControl *m_pSegmentedControl;
 }

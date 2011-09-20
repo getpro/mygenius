@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "CustomItemView.h"
-#import "CustomButtonView.h"
+
 #import "CustomDatePicker.h"
 
 @interface memoInfoVC : UIViewController 

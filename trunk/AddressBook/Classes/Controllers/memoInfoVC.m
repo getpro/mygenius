@@ -62,39 +62,6 @@ typedef enum
 	frame.origin.x    = (SCREEN_W - ROW_WIDTH )/2;
 	
 	
-	CustomItemView * pSubject = [[CustomItemView alloc] initWithFrame:frame IsEdit:YES];
-	pSubject.m_pTitle.text = @"主题";
-	pSubject.tag = EViewInMemo_Subject;
-	[m_pUIScrollView_IB addSubview:pSubject];
-	
-	frame.origin.y += ROW_HEIGHT;
-	frame.origin.y += ROW_OFFSET_Y;
-	
-	
-	CustomItemView * pDes = [[CustomItemView alloc] initWithFrame:frame IsEdit:YES];
-	pDes.m_pTitle.text = @"描述";
-	pDes.tag = EViewInMemo_Des;
-	[m_pUIScrollView_IB addSubview:pDes];
-	
-	frame.origin.y += ROW_HEIGHT;
-	frame.origin.y += ROW_OFFSET_Y;
-	
-	CustomButtonView * pDate = [[CustomButtonView alloc] initWithFrame:frame target:self action:@selector(DatePressed:)];
-	pDate.m_pTitle.text = @"日期";
-	pDate.tag = EViewInMemo_Date;
-	[m_pUIScrollView_IB addSubview:pDate];
-	
-	frame.origin.y += ROW_HEIGHT;
-	frame.origin.y += ROW_OFFSET_Y;
-	
-	CustomButtonView * pRemind = [[CustomButtonView alloc] initWithFrame:frame target:self action:@selector(RemindPressed:)];
-	pRemind.m_pTitle.text = @"提醒";
-	pRemind.tag = EViewInMemo_Remind;
-	[m_pUIScrollView_IB addSubview:pRemind];
-	
-	frame.origin.y += ROW_HEIGHT;
-	frame.origin.y += ROW_OFFSET_Y;
-	
 
 	/////
 	[m_pUIScrollView_IB setContentSize:CGSizeMake(SCREEN_W, frame.origin.y)];
@@ -165,6 +132,7 @@ typedef enum
 	
 	//datepicker.date = [NSDate date];//显示默认当前时间
 	
+	/*
 	NSDateFormatter * conversion1 = [[NSDateFormatter alloc]init];
 	
 	[conversion1 setDateFormat: @"yyyy-MM-dd HH:mm"];//设置时间格式
@@ -177,11 +145,13 @@ typedef enum
 	}
 	
 	[conversion1 release];
+	*/
 	
 }
 
 -(BOOL)SaveMemoInfo
 {
+	/*
 	CustomItemView * pSubject  = (CustomItemView*)[self.m_pUIScrollView_IB viewWithTag:EViewInMemo_Subject];
 	if(pSubject)
 	{
@@ -217,7 +187,7 @@ typedef enum
 			return NO;
 		}
 	}
-	
+	*/
 	//CustomItemView * pDes        = (CustomItemView*)[self.m_pUIScrollView_IB viewWithTag:EViewInMemo_Des];
 	
 	//CustomButtonView * pRemind   = (CustomButtonView*)[self.m_pUIScrollView_IB viewWithTag:EViewInMemo_Remind];
