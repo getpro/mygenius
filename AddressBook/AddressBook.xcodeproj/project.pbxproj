@@ -60,10 +60,8 @@
 		21E5AE00141DEE6C00B5EBA5 /* leftBar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E5ADFD141DEE6C00B5EBA5 /* leftBar_bg.png */; };
 		21E5AE01141DEE6C00B5EBA5 /* leftBar_group_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E5ADFE141DEE6C00B5EBA5 /* leftBar_group_bg.png */; };
 		21E5AE02141DEE6C00B5EBA5 /* leftBar_group_number.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E5ADFF141DEE6C00B5EBA5 /* leftBar_group_number.png */; };
-		21E5AE87141DF56100B5EBA5 /* CustomButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E5AE81141DF56100B5EBA5 /* CustomButtonView.m */; };
 		21E5AE88141DF56100B5EBA5 /* CustomDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E5AE83141DF56100B5EBA5 /* CustomDatePicker.m */; };
 		21E5AE89141DF56100B5EBA5 /* CustomDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E5AE84141DF56100B5EBA5 /* CustomDatePicker.xib */; };
-		21E5AE8A141DF56100B5EBA5 /* CustomItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E5AE86141DF56100B5EBA5 /* CustomItemView.m */; };
 		21E5AE8E141DF5DC00B5EBA5 /* GroupItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E5AE8D141DF5DC00B5EBA5 /* GroupItemView.m */; };
 		21E712D113E3EFF400BF47E6 /* SwitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E712D013E3EFF400BF47E6 /* SwitchViewController.m */; };
 		21E712D913E3F13700BF47E6 /* PublicData.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E712D813E3F13700BF47E6 /* PublicData.m */; };
@@ -165,13 +163,9 @@
 		21E5ADFD141DEE6C00B5EBA5 /* leftBar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftBar_bg.png; sourceTree = "<group>"; };
 		21E5ADFE141DEE6C00B5EBA5 /* leftBar_group_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftBar_group_bg.png; sourceTree = "<group>"; };
 		21E5ADFF141DEE6C00B5EBA5 /* leftBar_group_number.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftBar_group_number.png; sourceTree = "<group>"; };
-		21E5AE80141DF56100B5EBA5 /* CustomButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButtonView.h; sourceTree = "<group>"; };
-		21E5AE81141DF56100B5EBA5 /* CustomButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButtonView.m; sourceTree = "<group>"; };
 		21E5AE82141DF56100B5EBA5 /* CustomDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDatePicker.h; sourceTree = "<group>"; };
 		21E5AE83141DF56100B5EBA5 /* CustomDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDatePicker.m; sourceTree = "<group>"; };
 		21E5AE84141DF56100B5EBA5 /* CustomDatePicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomDatePicker.xib; sourceTree = "<group>"; };
-		21E5AE85141DF56100B5EBA5 /* CustomItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomItemView.h; sourceTree = "<group>"; };
-		21E5AE86141DF56100B5EBA5 /* CustomItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomItemView.m; sourceTree = "<group>"; };
 		21E5AE8C141DF5DC00B5EBA5 /* GroupItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupItemView.h; sourceTree = "<group>"; };
 		21E5AE8D141DF5DC00B5EBA5 /* GroupItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupItemView.m; sourceTree = "<group>"; };
 		21E712CF13E3EFF400BF47E6 /* SwitchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchViewController.h; sourceTree = "<group>"; };
@@ -423,13 +417,9 @@
 		21E5AE7F141DF56100B5EBA5 /* CustView */ = {
 			isa = PBXGroup;
 			children = (
-				21E5AE80141DF56100B5EBA5 /* CustomButtonView.h */,
-				21E5AE81141DF56100B5EBA5 /* CustomButtonView.m */,
 				21E5AE82141DF56100B5EBA5 /* CustomDatePicker.h */,
 				21E5AE83141DF56100B5EBA5 /* CustomDatePicker.m */,
 				21E5AE84141DF56100B5EBA5 /* CustomDatePicker.xib */,
-				21E5AE85141DF56100B5EBA5 /* CustomItemView.h */,
-				21E5AE86141DF56100B5EBA5 /* CustomItemView.m */,
 				21E5AE8C141DF5DC00B5EBA5 /* GroupItemView.h */,
 				21E5AE8D141DF5DC00B5EBA5 /* GroupItemView.m */,
 				212B47C214258D3B00DE4938 /* CustomPicker.h */,
@@ -634,9 +624,7 @@
 				21A2AE4313F66FD80051F3D7 /* memoInfo.m in Sources */,
 				210F641C14092C8600ABC90F /* FtpUpLoad.m in Sources */,
 				219C500D140A054500455CD6 /* FtpGet.m in Sources */,
-				21E5AE87141DF56100B5EBA5 /* CustomButtonView.m in Sources */,
 				21E5AE88141DF56100B5EBA5 /* CustomDatePicker.m in Sources */,
-				21E5AE8A141DF56100B5EBA5 /* CustomItemView.m in Sources */,
 				21E5AE8E141DF5DC00B5EBA5 /* GroupItemView.m in Sources */,
 				211BFDB1141F9B10009C1EA5 /* pinyin.c in Sources */,
 				211BFDEE141FA06F009C1EA5 /* ABContact.m in Sources */,
