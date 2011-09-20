@@ -130,6 +130,8 @@ typedef enum
 	//[pvc setAllowsDeletion:YES];
 	pvc.personViewDelegate = self;
 	
+	pvc.aBPersonNav = self.navigationController;
+	
 	[self.navigationController pushViewController:pvc animated:YES];
 	
 	[pvc release];
