@@ -158,8 +158,8 @@
 		phoneDic = [NSDictionary dictionaryWithObjectsAndKeys:contact.contactName,KPHONENAMEDICDEFINE,phone,KPHONENUMBERDICDEFINE,label,KPHONELABELDICDEFINE,nil];
 		[phoneArray addObject:phoneDic];
 	}
-	return phoneArray;
 	CFRelease(phoneMulti);
+	return phoneArray;
 }
 
 //得到联系人的号码组与Label组
