@@ -14,8 +14,8 @@
 }
 
 + (id) group;
-+ (id) groupWithRecord: (ABRecordRef) record;
-+ (id) groupWithRecordID: (ABRecordID) recordID;
++ (id) groupWithRecord:   (ABRecordRef) record;
++ (id) groupWithRecordID: (ABRecordID)  recordID;
 
 @property (nonatomic, readonly) ABRecordRef record;
 @property (nonatomic, readonly) ABRecordID recordID;
@@ -26,7 +26,7 @@
 - (BOOL) addMember: (ABContact *) contact withError: (NSError **) error;
 - (BOOL) removeMember: (ABContact *) contact withError: (NSError **) error;
 
-@property (nonatomic, assign) NSString *name;
-@property (nonatomic, readonly) NSArray *members; 
+@property (nonatomic, assign)   NSString *name;
+@property (nonatomic, readonly) NSArray  *members;
 
 @end

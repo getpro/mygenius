@@ -17,12 +17,22 @@ NSString *string1;
 // Address Book
 + (ABAddressBookRef) addressBook;
 
+// Address Book Contacts and Groups
++ (NSArray *) contacts; // people
++ (NSArray *) groups;   // groups
+
+// Counting
++ (int) contactsCount;
++ (int) contactsWithImageCount;
++ (int) contactsWithoutImageCount;
++ (int) numberOfGroups;
+
 // Sorting
 + (BOOL) firstNameSorting;
 
 // Add contacts and groups
 + (BOOL) addContact: (ABContact *) aContact withError: (NSError **) error;
-
++ (BOOL) addGroup:   (ABGroup *) aGroup withError: (NSError **) error;
 
 // Find contacts
 + (NSArray *) contactsMatchingName:  (NSString *) fname;

@@ -33,10 +33,10 @@ GroupItemViewDelegate
 	IBOutlet UIBarButtonItem  * m_pRightAdd;
 	
 	NSMutableArray		*filteredArray;
-	NSMutableArray		*contactNameArray;
-	NSMutableDictionary *contactNameDic;
-	NSMutableArray		*sectionArray;  
-	NSArray				*contacts;
+	NSMutableArray		*contactNameArray;   //所有联系人的名字
+	NSMutableDictionary *contactNameDic;     //名字对应和对应的第一个字母
+	NSMutableArray		*sectionArray;       //成员是27个NSMutableArray,每一个NSMutableArray包含了对应ABContact
+	NSArray				*contacts;           //ContactData系统通讯录的数组的索引(成员是ABContact)
 	NSString			*sectionName;
 	
 	BOOL isSearch, isEdit, isGroup;

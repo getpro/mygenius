@@ -8,6 +8,8 @@
 
 #import "AddressBookAppDelegate.h"
 
+#import "ABContactsHelper.h"
+
 @implementation AddressBookAppDelegate
 
 @synthesize tbController;
@@ -18,6 +20,7 @@
 @synthesize m_arrContactsInfo;
 @synthesize m_arrDateInfo;
 @synthesize m_arrMemoInfo;
+@synthesize m_arrGroup;
 
 @synthesize m_pContactData;
 
@@ -45,12 +48,24 @@
 	m_arrContactsInfo   = [[NSMutableArray alloc] initWithCapacity:10];
 	m_arrDateInfo       = [[NSMutableArray alloc] initWithCapacity:10];
 	m_arrMemoInfo       = [[NSMutableArray alloc] initWithCapacity:10];
+	m_arrGroup          = [[NSMutableArray alloc] initWithCapacity:10];
 	
 	NSNumber * n = [NSNumber numberWithInt:0];
 	
 	[sceneID addObject:n];
 	[sceneID addObject:n];
 	[sceneID addObject:n];
+	
+	
+	//Group
+	NSArray * groups = [ABContactsHelper groups];
+	//NSLog(@"groups[%d]",[groups count]);
+	
+	for(ABGroup * pGroup in groups)
+	{
+		[m_arrGroup addObject:pGroup];
+		NSLog(@"groups[%@]",pGroup.name);
+	}
 	
 	//
 	/*
@@ -158,7 +173,7 @@
 	//[self.window addSubview:switchViewController.view];
     
     [self.window makeKeyAndVisible];
-    
+	
     return YES;
 }
 
@@ -231,6 +246,7 @@
 	[m_arrContactsInfo    release];
 	[m_arrDateInfo		  release];
 	[m_arrMemoInfo		  release];
+	[m_arrGroup           release];
 	
     [super dealloc];
 }

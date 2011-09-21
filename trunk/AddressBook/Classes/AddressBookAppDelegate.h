@@ -56,6 +56,8 @@ ABAddressBookRef addressBook;
 	
 	//系统通讯录类
 	ContactData    * m_pContactData;
+	
+	NSMutableArray * m_arrGroup;        //系统分组
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow  *window;
@@ -65,6 +67,8 @@ ABAddressBookRef addressBook;
 @property (nonatomic, retain) NSMutableArray * m_arrContactsInfo;
 @property (nonatomic, retain) NSMutableArray * m_arrMemoInfo;
 @property (nonatomic, retain) NSMutableArray * m_arrDateInfo;
+@property (nonatomic, retain) NSMutableArray * m_arrGroup;
+
 
 @property (nonatomic, retain) ContactData    * m_pContactData;
 

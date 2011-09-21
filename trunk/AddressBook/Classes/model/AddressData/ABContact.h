@@ -59,7 +59,7 @@
 @property (nonatomic, readonly) NSString *compositeName; // via AB
 
 #pragma mark DATE
-@property (nonatomic, assign) NSDate *birthday;
+@property (nonatomic, assign)   NSDate *birthday;
 @property (nonatomic, readonly) NSDate *creationDate;
 @property (nonatomic, readonly) NSDate *modificationDate;
 

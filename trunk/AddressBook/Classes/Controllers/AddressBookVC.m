@@ -140,8 +140,17 @@
 	[contactNameArray removeAllObjects];
 	[contactNameDic   removeAllObjects];
 	
+	sectionArray = [[NSMutableArray alloc] initWithCapacity:27];
+	
+	for (int i = 0; i < 27; i++)
+		[self.sectionArray addObject:[NSMutableArray array]];
+	
 	for(ABContact *contact in contacts)
 	{
+		NSString *string = nil;
+		
+		//如果没有名字，用电话号码
+		/*
 		NSString *phone;
 		NSArray  *phoneCount = [ContactData getPhoneNumberAndPhoneLabelArray:contact];
 		if([phoneCount count] > 0)
@@ -149,17 +158,51 @@
 			NSDictionary *PhoneDic = [phoneCount objectAtIndex:0];
 			phone = [ContactData getPhoneNumberFromDic:PhoneDic];
 		}
-		if([contact.contactName length] > 0)
+		*/
+		
+		if(contact.contactName && [contact.contactName length] > 0)
+		{
 			[contactNameArray addObject:contact.contactName];
+			string = contact.contactName;
+		}
 		else
-			[contactNameArray addObject:phone];
+		{
+			[contactNameArray addObject:[NSString stringWithFormat:@"无名"]];
+			string = @"无名";
+		}
+	
+		//NSLog(@"[%@]",string);
+		//NSLog(@"[string%d]",[string length]);
+		
+		if([ContactData searchResult:string searchText:@"曾"])
+			sectionName = @"Z";
+		else if([ContactData searchResult:string searchText:@"解"])
+			sectionName = @"X";
+		else if([ContactData searchResult:string searchText:@"仇"])
+			sectionName = @"Q";
+		else if([ContactData searchResult:string searchText:@"朴"])
+			sectionName = @"P";
+		else if([ContactData searchResult:string searchText:@"查"])
+			sectionName = @"Z";
+		else if([ContactData searchResult:string searchText:@"能"])
+			sectionName = @"N";
+		else if([ContactData searchResult:string searchText:@"乐"])
+			sectionName = @"Y";
+		else if([ContactData searchResult:string searchText:@"单"])
+			sectionName = @"S";
+		else
+			sectionName = [[NSString stringWithFormat:@"%c",pinyinFirstLetter([string characterAtIndex:0])] uppercaseString];
+		
+		[self.contactNameDic setObject:string forKey:sectionName];
+		
+		NSUInteger firstLetter = [ALPHA rangeOfString:[sectionName substringToIndex:1]].location;
+		
+		if (firstLetter != NSNotFound)
+			[[self.sectionArray objectAtIndex:firstLetter] addObject:contact];
+		
 	}
 	
-	self.sectionArray = [NSMutableArray array];
-	
-	for (int i = 0; i < 27; i++) 
-		[self.sectionArray addObject:[NSMutableArray array]];
-	
+	/*
 	for (NSString *string in contactNameArray)
 	{
 		if([ContactData searchResult:string searchText:@"曾"])
@@ -188,6 +231,7 @@
 		if (firstLetter != NSNotFound)
 			[[self.sectionArray objectAtIndex:firstLetter] addObject:string];
 	}
+	*/
 }
 
 
@@ -295,22 +339,30 @@
 
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSLog(@"cellForRowAtIndexPath");
+	//NSLog(@"cellForRowAtIndexPath");
 	
 	UITableViewCellStyle style =  UITableViewCellStyleSubtitle;
 	ContactCell *cell = (ContactCell*)[aTableView dequeueReusableCellWithIdentifier:KContactCell_ID];
 	if (!cell)
 		cell = [[[ContactCell alloc] initWithStyle:style reuseIdentifier:KContactCell_ID] autorelease];
 	
-	NSString *contactName;
+	ABContact *contact = nil;
 	
 	// Retrieve the crayon and its color
 	if (aTableView == self.m_pTableView_IB)
-		contactName = [[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+		contact = [[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	else
-		contactName = [self.filteredArray objectAtIndex:indexPath.row];
+		contact = [self.filteredArray objectAtIndex:indexPath.row];
 	
-	cell.m_pName.text = [NSString stringWithCString:[contactName UTF8String] encoding:NSUTF8StringEncoding];
+	cell.m_pName.text = [NSString stringWithCString:[contact.contactName UTF8String] encoding:NSUTF8StringEncoding];
+	
+	/*
+	ABContact *pContact = [contacts byNameToGetContact:contactName];
+	if(pContact && pContact.image)
+	{
+		cell.m_pHead.image = pContact.image;
+	}
+	*/
 	
 	/*
 	ABContact *contact = [ContactData byNameToGetContact:contactName];
@@ -334,21 +386,16 @@
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-	NSLog(@"didSelectRowAtIndexPath");
-	
-	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	//NSLog(@"didSelectRowAtIndexPath");
 	
 	//[aTableView deselectRowAtIndexPath:indexPath animated:NO];
 	
-	NSString *contactName = @"";
+	ABContact *contact = nil;
+	
 	if (aTableView == self.m_pTableView_IB)
-		contactName = [[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+		contact = [[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	else
-		contactName = [self.filteredArray objectAtIndex:indexPath.row];
-	
-	ABContact *contact = [app.m_pContactData byNameToGetContact:contactName];
-	
+		contact = [self.filteredArray objectAtIndex:indexPath.row];
 	
 	AddressPreInfoVC * pAddressPreInfoVC = [[AddressPreInfoVC alloc] init];
 	pAddressPreInfoVC.m_pContact = contact;
@@ -400,7 +447,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)aTableView 
 { 
-	NSLog(@"numberOfSectionsInTableView");
+	//NSLog(@"numberOfSectionsInTableView");
 	
 	if(aTableView == self.m_pTableView_IB) 
 		return 27;
@@ -410,7 +457,7 @@
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)aTableView 
 {
-	NSLog(@"sectionIndexTitlesForTableView");
+	//NSLog(@"sectionIndexTitlesForTableView");
 	
 	if (aTableView == self.m_pTableView_IB)  // regular table
 	{
@@ -427,7 +474,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
 {
-	NSLog(@"sectionForSectionIndexTitle");
+	//NSLog(@"sectionForSectionIndexTitle");
 	
 	if (title == UITableViewIndexSearch)
 	{
@@ -442,7 +489,7 @@
 
 - (NSString *)tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger)section
 {
-	NSLog(@"titleForHeaderInSection");
+	//NSLog(@"titleForHeaderInSection");
 	
 	if (aTableView == self.m_pTableView_IB) 
 	{
@@ -456,9 +503,9 @@
 
 - (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section 
 {
-	NSLog(@"numberOfRowsInSection");
+	//NSLog(@"numberOfRowsInSection");
 	
-	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	
 	//[self initData];
 	// Normal table
@@ -468,6 +515,59 @@
 		[filteredArray removeAllObjects];
 	
 	// Search table
+	// 搜索算法太慢，需要优化
+	
+	for(ABContact *contact in contacts)
+	{
+		NSString *string = contact.contactName;
+		NSString *name = @"";
+		for (int i = 0; i < [string length]; i++)
+		{
+			if([name length] < 1)
+				name = [NSString stringWithFormat:@"%c",pinyinFirstLetter([string characterAtIndex:i])];
+			else
+				name = [NSString stringWithFormat:@"%@%c",name,pinyinFirstLetter([string characterAtIndex:i])];
+		}
+		if ([ContactData searchResult:name searchText:self.m_pSearchBar.text])
+			[filteredArray addObject:contact];
+		else 
+		{
+			if ([ContactData searchResult:string searchText:self.m_pSearchBar.text])
+				[filteredArray addObject:contact];
+			else 
+			{
+				NSArray  * phoneArray = nil;
+				NSString * phone = @"";
+				
+				if(contact)
+				{
+					phoneArray = [ContactData getPhoneNumberAndPhoneLabelArray:contact];
+				}
+				
+				if(phoneArray && [phoneArray count] == 1)
+				{
+					NSDictionary *PhoneDic = [phoneArray objectAtIndex:0];
+					phone = [ContactData getPhoneNumberFromDic:PhoneDic];
+					if([ContactData searchResult:phone searchText:self.m_pSearchBar.text])
+						[filteredArray addObject:contact];
+				}
+				else  if(phoneArray && [phoneArray count] > 1)
+				{
+					for(NSDictionary *dic in phoneArray)
+					{
+						phone = [ContactData getPhoneNumberFromDic:dic];
+						if([ContactData searchResult:phone searchText:self.m_pSearchBar.text])
+						{
+							[filteredArray addObject:contact];
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	/*
 	for(NSString *string in contactNameArray)
 	{
 		NSString *name = @"";
@@ -518,6 +618,9 @@
 			}
 		}
 	}
+	*/
+	
+	
 	return self.filteredArray.count;
 }
 

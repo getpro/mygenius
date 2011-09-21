@@ -37,6 +37,11 @@
 	return ABAddressBookSave(addressBook, (CFErrorRef *) error);
 }
 
++ (BOOL) addGroup: (ABGroup *) aGroup withError: (NSError **) error
+{
+	if (!ABAddressBookAddRecord(addressBook, aGroup.record, (CFErrorRef *) error)) return NO;
+	return ABAddressBookSave(addressBook, (CFErrorRef *) error);
+}
 
 + (NSArray *) contactsMatchingName: (NSString *) fname
 {
@@ -71,4 +76,57 @@
 	pred = [NSPredicate predicateWithFormat:@"phonenumbers contains[cd] %@", number];
 	return [contacts filteredArrayUsingPredicate:pred];
 }
+
++ (NSArray *) contacts
+{
+	NSArray *thePeople = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+	NSMutableArray *array = [NSMutableArray arrayWithCapacity:thePeople.count];
+	for (id person in thePeople)
+		[array addObject:[ABContact contactWithRecord:(ABRecordRef)person]];
+	[thePeople release];
+	return array;
+}
+
++ (int) contactsCount
+{
+	return ABAddressBookGetPersonCount(addressBook);
+}
+
++ (int) contactsWithImageCount
+{
+	NSArray *peopleArray = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+	int ncount = 0;
+	for (id person in peopleArray) if (ABPersonHasImageData(person)) ncount++;
+	[peopleArray release];
+	return ncount;
+}
+
++ (int) contactsWithoutImageCount
+{
+	NSArray *peopleArray = (NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+	int ncount = 0;
+	for (id person in peopleArray) if (!ABPersonHasImageData(person)) ncount++;
+	[peopleArray release];
+	return ncount;
+}
+
+// Groups
++ (int) numberOfGroups
+{
+	NSArray *groups = (NSArray *)ABAddressBookCopyArrayOfAllGroups(addressBook);
+	int ncount = groups.count;
+	[groups release];
+	return ncount;
+}
+
++ (NSArray *) groups
+{
+	NSArray *groups = (NSArray *)ABAddressBookCopyArrayOfAllGroups(addressBook);
+	NSMutableArray *array = [NSMutableArray arrayWithCapacity:groups.count];
+	for (id group in groups)
+		[array addObject:[ABGroup groupWithRecord:(ABRecordRef)group]];
+	[groups release];
+	return array;
+}
+
 @end
