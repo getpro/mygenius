@@ -15,6 +15,7 @@
 {
 	IBOutlet UITableView      * m_pTableView_IB;
 	IBOutlet UIBarButtonItem  * m_pRightAdd;
+	IBOutlet UIImageView      * m_pHead_IB;
 	
 	ABContact * m_pContact;
 	
@@ -24,8 +25,9 @@
 
 @property (retain,nonatomic) IBOutlet UITableView      * m_pTableView_IB;
 @property (retain,nonatomic) IBOutlet UIBarButtonItem  * m_pRightAdd;
+@property (retain,nonatomic) IBOutlet UIImageView      * m_pHead_IB;
+
 @property (retain,nonatomic) ABContact * m_pContact;
-@property (retain,nonatomic) UINavigationController *aBPersonNav;
 @property (retain,nonatomic) CAttributeContainer * m_pContainer;
 @property (retain,nonatomic) NSMutableArray      * m_pData;
 
