@@ -21,9 +21,10 @@ typedef enum
 @implementation AddressPreInfoVC
 
 @synthesize m_pTableView_IB;
+@synthesize m_pHead_IB;
+
 @synthesize m_pRightAdd;
 @synthesize m_pContact;
-@synthesize aBPersonNav;
 @synthesize m_pContainer;
 @synthesize m_pData;
 
@@ -34,6 +35,11 @@ typedef enum
 	
 	self.navigationItem.title = @"联系人";
 	self.navigationItem.rightBarButtonItem = m_pRightAdd;
+	
+	if(m_pContact.image)
+	{
+		self.m_pHead_IB.image = m_pContact.image;
+	}
 	
 	m_pContainer = [[CAttributeContainer alloc] init];
 	
@@ -114,9 +120,9 @@ typedef enum
 {
 	[m_pTableView_IB release];
 	[m_pContact      release];
-	[aBPersonNav     release];
 	[m_pContainer    release];
 	[m_pData         release];
+	[m_pHead_IB      release];
 	
     [super dealloc];
 }

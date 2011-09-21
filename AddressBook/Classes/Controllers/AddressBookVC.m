@@ -356,13 +356,11 @@
 	
 	cell.m_pName.text = [NSString stringWithCString:[contact.contactName UTF8String] encoding:NSUTF8StringEncoding];
 	
-	/*
-	ABContact *pContact = [contacts byNameToGetContact:contactName];
-	if(pContact && pContact.image)
+	if(contact.image)
 	{
-		cell.m_pHead.image = pContact.image;
+		cell.m_pHead.image = contact.image;
 	}
-	*/
+	
 	
 	/*
 	ABContact *contact = [ContactData byNameToGetContact:contactName];
