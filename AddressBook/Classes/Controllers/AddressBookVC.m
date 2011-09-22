@@ -45,6 +45,8 @@
 {
     [super viewDidLoad];
 	
+	//m_pTableView_IB.backgroundColor = [UIColor clearColor];
+	
 	self.navigationItem.title = @"好帮手";
 	self.navigationItem.rightBarButtonItem = m_pRightAdd;
 	
@@ -386,7 +388,7 @@
 {
 	//NSLog(@"didSelectRowAtIndexPath");
 	
-	//[aTableView deselectRowAtIndexPath:indexPath animated:NO];
+	//[aTableView deselectRowAtIndexPath:indexPath animated:YES];
 	
 	ABContact *contact = nil;
 	

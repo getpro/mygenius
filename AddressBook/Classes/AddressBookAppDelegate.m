@@ -14,8 +14,6 @@
 
 @synthesize tbController;
 @synthesize window;
-@synthesize back;
-@synthesize sceneID;
 
 @synthesize m_arrContactsInfo;
 @synthesize m_arrDateInfo;
@@ -41,22 +39,12 @@
 	
 	//[DBConnection getSharedDatabase];
 	
-	switchViewController = [[SwitchViewController alloc] init];
-	
-	sceneID				= [[NSMutableArray alloc] initWithCapacity:10];
-	
 	m_arrContactsInfo   = [[NSMutableArray alloc] initWithCapacity:10];
 	m_arrDateInfo       = [[NSMutableArray alloc] initWithCapacity:10];
 	m_arrMemoInfo       = [[NSMutableArray alloc] initWithCapacity:10];
 	m_arrGroup          = [[NSMutableArray alloc] initWithCapacity:10];
 	
-	NSNumber * n = [NSNumber numberWithInt:0];
-	
-	[sceneID addObject:n];
-	[sceneID addObject:n];
-	[sceneID addObject:n];
-	
-	
+
 	//Group
 	NSArray * groups = [ABContactsHelper groups];
 	//NSLog(@"groups[%d]",[groups count]);
@@ -130,13 +118,14 @@
 	UINavigationController * AddressBookNavController = [[UINavigationController alloc] initWithRootViewController:m_pAddressBookVC];
 	
 	//同步备份
-	m_pAccountsVC = [[accountsVC alloc] init];
+	m_psyncVC = [[syncVC alloc] init];
 	
 	UIImage* AccountsImage = [UIImage imageNamed:@"bottom_icon_sync.png"];
 	UITabBarItem * AccountsItem = [[UITabBarItem alloc] initWithTitle:@"同步备份" image:AccountsImage tag:0];
-	m_pAccountsVC.tabBarItem = AccountsItem;
+	m_psyncVC.tabBarItem = AccountsItem;
 	[AccountsItem release];
 	
+	UINavigationController * syncNavController = [[UINavigationController alloc] initWithRootViewController:m_psyncVC];
 	
 	//备忘录
 	m_pMemoVC = [[memoVC alloc] init];
@@ -147,26 +136,38 @@
 	m_pMemoVC.tabBarItem.badgeValue = @"2";
 	[MemoItem release];
 	
+	UINavigationController * MemoNavController = [[UINavigationController alloc] initWithRootViewController:m_pMemoVC];
+	
 	//统计
-	m_pDateVC = [[dateVC alloc] init];
+	m_pstatisticsVC = [[statisticsVC alloc] init];
 	
 	UIImage* DateImage = [UIImage imageNamed:@"bottom_icon_statistics.png.png"];
 	UITabBarItem * DateBookItem = [[UITabBarItem alloc] initWithTitle:@"日程统计" image:DateImage tag:0];
-	m_pDateVC.tabBarItem = DateBookItem;
+	m_pstatisticsVC.tabBarItem = DateBookItem;
 	[DateBookItem release];
 	
+	UINavigationController * statisticsNavController = [[UINavigationController alloc] initWithRootViewController:m_pstatisticsVC];
+
 	//更多
-	m_pSettingVC = [[settingVC alloc] init];
+	m_pmoreVC = [[moreVC alloc] init];
 	
 	UIImage* SettingImage = [UIImage imageNamed:@"bottom_icon_more.png"];
 	UITabBarItem * SettingItem = [[UITabBarItem alloc] initWithTitle:@"更多" image:SettingImage tag:0];
-	m_pSettingVC.tabBarItem = SettingItem;
+	m_pmoreVC.tabBarItem = SettingItem;
 	[SettingItem release];
 	
+	UINavigationController * moreNavController = [[UINavigationController alloc] initWithRootViewController:m_pmoreVC];
 	
 	tbController = [[UITabBarController alloc] init];
-	tbController.viewControllers = [NSArray arrayWithObjects:AddressBookNavController,m_pAccountsVC,m_pMemoVC,m_pDateVC,m_pSettingVC,nil];
+	tbController.viewControllers = [NSArray arrayWithObjects:AddressBookNavController,syncNavController,MemoNavController,statisticsNavController,moreNavController,nil];
 	tbController.selectedIndex = TAB_ADDRESSBOOK;
+	
+	[AddressBookNavController release];
+	[syncNavController		  release];
+	[MemoNavController		  release];
+	[statisticsNavController  release];
+	[moreNavController        release];
+	
 	
 	[self.window addSubview:tbController.view];
 	
@@ -233,20 +234,18 @@
 	[m_pContactData       release];
 	
 	[m_pAddressBookVC	  release];
-	[m_pAccountsVC		  release];
+	[m_psyncVC			  release];
 	[m_pMemoVC			  release];
-	[m_pDateVC			  release];
-	[m_pSettingVC		  release];
-	
-	[tbController	      release];
-	[switchViewController release];
-    [window				  release];
-	[sceneID			  release];
+	[m_pstatisticsVC	  release];
+	[m_pmoreVC	    	  release];
 	
 	[m_arrContactsInfo    release];
 	[m_arrDateInfo		  release];
 	[m_arrMemoInfo		  release];
 	[m_arrGroup           release];
+	
+	[tbController	      release];
+    [window				  release];
 	
     [super dealloc];
 }
@@ -254,22 +253,6 @@
 +(AddressBookAppDelegate*)getAppDelegate
 {
     return (AddressBookAppDelegate*)[UIApplication sharedApplication].delegate;
-}
-
-- (void) backScene
-{
-	rightOrLeft = NO;
-	teXiao      = YES;
-	back        = YES;
-	
-	NSNumber * n = [sceneID objectAtIndex:[sceneID count] - 2];
-	[sceneID removeLastObject];
-	backSceneID = [n intValue];
-	
-	NSString * ss = [NSString stringWithFormat:@"%d" , backSceneID];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
-	
 }
 
 -(void) GetSysAddressBook

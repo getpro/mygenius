@@ -12,10 +12,14 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import <QuartzCore/QuartzCore.h>
 
-#import "SwitchViewController.h"
 #import "PublicData.h"
 #import "ContactData.h"
 
+#import "AddressBookVC.h"
+#import "syncVC.h"
+#import "memoVC.h"
+#import "statisticsVC.h"
+#import "moreVC.h"
 
 typedef enum 
 {
@@ -33,19 +37,13 @@ ABAddressBookRef addressBook;
 {
     IBOutlet UIWindow * window;
 	
-	SwitchViewController *switchViewController;
-	
 	UITabBarController	 *tbController; //底部的5个TabBar
 	
 	AddressBookVC * m_pAddressBookVC;
-	accountsVC    * m_pAccountsVC;
+	syncVC        * m_psyncVC;
 	memoVC        * m_pMemoVC;
-	dateVC        * m_pDateVC;
-	settingVC     * m_pSettingVC;
-	
-	//返回
-	NSMutableArray * sceneID;
-	BOOL back;
+	statisticsVC  * m_pstatisticsVC;
+	moreVC        * m_pmoreVC;
 	
 	NSMutableArray * m_arrContactsInfo; //通讯录数据
 	NSMutableArray * m_arrMemoInfo;     //备忘录数据
@@ -62,7 +60,6 @@ ABAddressBookRef addressBook;
 
 @property (nonatomic, retain) IBOutlet UIWindow  *window;
 @property (nonatomic, retain) UITabBarController *tbController;
-@property (nonatomic, retain) NSMutableArray * sceneID;
 
 @property (nonatomic, retain) NSMutableArray * m_arrContactsInfo;
 @property (nonatomic, retain) NSMutableArray * m_arrMemoInfo;
@@ -74,7 +71,6 @@ ABAddressBookRef addressBook;
 
 @property (nonatomic, assign) NSInteger        networkingCount;
 
-@property BOOL back;
 
 /*
  *
@@ -82,8 +78,6 @@ ABAddressBookRef addressBook;
  * @param NSDictionary * params parameters for the API call
 */
 + (AddressBookAppDelegate * ) getAppDelegate;
-
-- (void) backScene;
 
 - (void) GetSysAddressBook;
 
