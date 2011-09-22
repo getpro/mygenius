@@ -22,6 +22,9 @@ typedef enum
 
 @synthesize m_pTableView_IB;
 @synthesize m_pHead_IB;
+@synthesize m_pName_IB;
+@synthesize m_pJobAndDep_IB;
+@synthesize m_pOrganization_IB;
 
 @synthesize m_pRightAdd;
 @synthesize m_pContact;
@@ -36,10 +39,37 @@ typedef enum
 	self.navigationItem.title = @"联系人";
 	self.navigationItem.rightBarButtonItem = m_pRightAdd;
 	
+	//头像
 	if(m_pContact.image)
 	{
 		self.m_pHead_IB.image = m_pContact.image;
 	}
+	
+	//姓名
+	if(m_pContact.contactName)
+	{
+		self.m_pName_IB.text = m_pContact.contactName;
+	}
+	
+	//职位部门
+	NSMutableString * pJobAndDep = [NSMutableString stringWithCapacity:10];
+	if(m_pContact.jobtitle)
+	{
+		[pJobAndDep appendString:m_pContact.jobtitle];
+		[pJobAndDep appendString:@" "];
+	}
+	if(m_pContact.department)
+	{
+		[pJobAndDep appendString:m_pContact.department];
+	}
+	self.m_pJobAndDep_IB.text = pJobAndDep;
+	
+	//公司
+	if(m_pContact.organization)
+	{
+		self.m_pOrganization_IB.text = m_pContact.organization;
+	}
+	
 	
 	m_pContainer = [[CAttributeContainer alloc] init];
 	
@@ -50,15 +80,15 @@ typedef enum
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"移动电话"];
-	((CAttributeString*)attr).stringValue = @"13764980031";
+	((CAttributeString*)attr).stringValue = m_pContact.phonenumber;
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"短信"];
-	((CAttributeString*)attr).stringValue = @"13764980031";
+	((CAttributeString*)attr).stringValue = m_pContact.phonenumber;
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
-	[m_pContainer setValue:attr forKey:@"工作"];
-	((CAttributeString*)attr).stringValue = @"12@163.com";
+	[m_pContainer setValue:attr forKey:@"邮件"];
+	((CAttributeString*)attr).stringValue = m_pContact.emailaddresse;
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"星座"];
@@ -116,13 +146,17 @@ typedef enum
 }
 
 
-- (void)dealloc 
+- (void)dealloc
 {
 	[m_pTableView_IB release];
 	[m_pContact      release];
 	[m_pContainer    release];
 	[m_pData         release];
 	[m_pHead_IB      release];
+	
+	[m_pName_IB		 release];
+	[m_pJobAndDep_IB release];
+	[m_pOrganization_IB release];
 	
     [super dealloc];
 }
