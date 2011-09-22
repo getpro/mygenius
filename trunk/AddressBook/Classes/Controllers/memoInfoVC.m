@@ -108,7 +108,7 @@ typedef enum
 
 -(IBAction)returnItemBtn: (id)sender
 {
-	[[AddressBookAppDelegate getAppDelegate] backScene];
+	
 }
 
 

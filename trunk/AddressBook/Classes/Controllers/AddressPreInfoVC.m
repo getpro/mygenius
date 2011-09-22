@@ -32,9 +32,11 @@ typedef enum
 @synthesize m_pData;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad 
+- (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	m_pTableView_IB.backgroundColor = [UIColor clearColor];
 	
 	self.navigationItem.title = @"联系人";
 	self.navigationItem.rightBarButtonItem = m_pRightAdd;
@@ -316,6 +318,8 @@ typedef enum
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
+	//[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	
 	//UIViewController *vc = nil;
 	NSInteger row = [indexPath row];
 	CAttribute       *attr = nil;
