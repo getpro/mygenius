@@ -62,7 +62,7 @@
 	{
 		cell.textLabel.text = self.label;
 		[cell setTarget:self withKey:@"stringValue"];
-		cell.textField.placeholder = @"...";
+		//cell.textField.placeholder = @"...";
 	}
 	
 	return cell;

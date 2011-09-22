@@ -270,6 +270,32 @@
 	return [string autorelease];
 }
 
+- (NSString *) phonenumber
+{
+	NSArray * pArray = self.phoneArray;
+	if([pArray count] > 0)
+	{
+		return [pArray objectAtIndex:0];
+	}
+	else
+	{
+		return nil;
+	}
+}
+
+- (NSString *) emailaddresse
+{
+	NSArray * pArray = self.emailArray;
+	if([pArray count] > 0)
+	{
+		return [pArray objectAtIndex:0];
+	}
+	else
+	{
+		return nil;
+	}
+}
+
 
 #pragma mark Dates
 - (NSDate *) getRecordDate:(ABPropertyID) anID

@@ -13,9 +13,13 @@
 
 @interface AddressPreInfoVC : UIViewController < ABPersonViewControllerDelegate >
 {
-	IBOutlet UITableView      * m_pTableView_IB;
-	IBOutlet UIBarButtonItem  * m_pRightAdd;
-	IBOutlet UIImageView      * m_pHead_IB;
+	IBOutlet UITableView      * m_pTableView_IB;    //信息表
+	IBOutlet UIBarButtonItem  * m_pRightAdd;        //更多信息
+	IBOutlet UIImageView      * m_pHead_IB;         //头像
+	
+	IBOutlet UILabel          * m_pName_IB;			//姓名
+	IBOutlet UILabel          * m_pJobAndDep_IB;	//职位和部门
+	IBOutlet UILabel          * m_pOrganization_IB;	//公司
 	
 	ABContact * m_pContact;
 	
@@ -26,6 +30,10 @@
 @property (retain,nonatomic) IBOutlet UITableView      * m_pTableView_IB;
 @property (retain,nonatomic) IBOutlet UIBarButtonItem  * m_pRightAdd;
 @property (retain,nonatomic) IBOutlet UIImageView      * m_pHead_IB;
+@property (retain,nonatomic) IBOutlet UILabel          * m_pName_IB;
+@property (retain,nonatomic) IBOutlet UILabel          * m_pJobAndDep_IB;
+@property (retain,nonatomic) IBOutlet UILabel          * m_pOrganization_IB;
+
 
 @property (retain,nonatomic) ABContact * m_pContact;
 @property (retain,nonatomic) CAttributeContainer * m_pContainer;
