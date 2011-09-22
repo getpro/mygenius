@@ -1,20 +1,17 @@
 //
-//  accountsVC.h
+//  dateVC.h
 //  AddressBook
 //
 //  Created by Peteo on 11-7-30.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
-// 帐号管理
+//  日期提醒
 
 #import <UIKit/UIKit.h>
-#import "baseVC.h"
 
-@interface accountsVC : UIViewController 
+@interface statisticsVC : UIViewController 
 {
 
 }
-
--(IBAction)sendBtn:(id)sender;
 
 @end
