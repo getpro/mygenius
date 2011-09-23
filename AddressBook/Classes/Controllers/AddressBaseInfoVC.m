@@ -13,6 +13,7 @@
 @implementation AddressBaseInfoVC
 
 @synthesize aBPersonNav;
+@synthesize m_pContact;
 
 - (void)toggleStyle:(id)sender
 {
@@ -28,7 +29,8 @@
 			
 			AddressSeniorInfoVC * pAddressSeniorInfoVC = [[AddressSeniorInfoVC alloc] init];
 			
-			pAddressSeniorInfoVC.aBPersonNav = aBPersonNav;
+			pAddressSeniorInfoVC.m_pContact    = m_pContact;
+			pAddressSeniorInfoVC.aBPersonNav   = aBPersonNav;
 			
 			[aBPersonNav pushViewController:pAddressSeniorInfoVC animated:NO];
 			
@@ -45,6 +47,8 @@
     [super viewDidLoad];
 	
 	self.navigationItem.title = @"";
+	
+	self.displayedPerson = m_pContact.record;
 	
 	if(m_pSegmentedControl)
 	{
@@ -116,6 +120,7 @@
 {	
 	[m_pSegmentedControl release];
 	[aBPersonNav         release];
+	[m_pContact          release];
 	
     [super dealloc];
 }

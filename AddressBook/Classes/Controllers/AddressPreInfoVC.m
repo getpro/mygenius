@@ -167,7 +167,8 @@ typedef enum
 {
 	AddressBaseInfoVC *pvc = [[AddressBaseInfoVC alloc] init];
 	
-	pvc.displayedPerson = m_pContact.record;
+	pvc.m_pContact = m_pContact;
+	//pvc.displayedPerson = m_pContact.record;
 	pvc.allowsEditing = YES;
 	//[pvc setAllowsDeletion:YES];
 	pvc.personViewDelegate = self;
