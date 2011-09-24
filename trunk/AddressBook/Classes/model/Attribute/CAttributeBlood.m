@@ -1,19 +1,23 @@
 //
-//  CAttributeGroup.m
+//  CAttributeBlood.m
+//  AddressBook
+//
+//  Created by Peteo on 11-9-24.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "CAttributeGroup.h"
+#import "CAttributeBlood.h"
 #import "CustomPicker.h"
 #import "PublicData.h"
 #import "AddressBookAppDelegate.h"
 
-@implementation CAttributeGroup
+@implementation CAttributeBlood
 
 @synthesize stringValue;
 
 - (NSString*)type
 {
-	return @"group";
+	return @"blood";
 }
 
 - (id)initWithString:(NSString*)inputString 
@@ -50,7 +54,7 @@
 
 - (UITableViewCell*)cellForTableView:(UITableView *)tableView 
 {
-	static NSString* cellIdentifier = @"CAttributeGroupCell";
+	static NSString* cellIdentifier = @"CAttributeBloodCell";
 	CAttributeCell* cell = (CAttributeCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (![cell isKindOfClass:[CAttributeCell class]]) 
 	{
@@ -73,7 +77,7 @@
 	
 	CustomPicker *tvc = [[[CustomPicker alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)] autorelease];
 	//test
-	NSArray * pArry = [NSArray arrayWithObjects:@"朋友",@"家人",@"同学",nil];
+	NSArray * pArry = [NSArray arrayWithObjects:@"A",@"B",@"AB",@"O",nil];
 	tvc.sourceArray = pArry;
 	
 	return (UIViewController*)tvc;

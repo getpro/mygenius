@@ -29,7 +29,7 @@ typedef enum
 {
     [super viewDidLoad];
 	
-	//[self setEditing:YES];
+	//[m_pTableView_IB setEditing:YES];
 	
 	self.navigationItem.title = @"高级信息";
 	self.navigationItem.rightBarButtonItem = m_pRightDone;
@@ -82,7 +82,7 @@ typedef enum
 
 -(IBAction)doneItemBtn:  (id)sender
 {
-	
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UIViewController delegate methods
@@ -188,7 +188,6 @@ typedef enum
 {
 	//[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
-	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	UIViewController *vc = nil;
 	
 	/*
@@ -255,6 +254,11 @@ typedef enum
 		vc = [attr detailViewController:self.editing];
 	}
 	
+	if (vc && attr)
+	{
+		[attr Show:vc];
+	}
+	
 	/*
 	if (vc)
 	{
@@ -266,12 +270,6 @@ typedef enum
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
 	*/
-	
-	UIView * p = (UIView*)vc;
-	if(p)
-	{
-		[app.window addSubview:p];
-	}
 }
 
 @end

@@ -13,6 +13,9 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2104CF8914238ECF0004FB9A /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2104CF8814238ECF0004FB9A /* ContactCell.m */; };
 		2104CFC11423929C0004FB9A /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2104CFC01423929C0004FB9A /* arrow.png */; };
+		2106B7FD142E169800F9DD6C /* TagVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2106B7FC142E169800F9DD6C /* TagVC.m */; };
+		2106B801142E16FF00F9DD6C /* TagVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2106B800142E16FF00F9DD6C /* TagVC.xib */; };
+		2106B881142E252800F9DD6C /* CAttributeBlood.m in Sources */ = {isa = PBXBuildFile; fileRef = 2106B880142E252800F9DD6C /* CAttributeBlood.m */; };
 		210876291424C3A400159CC2 /* ModalAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 210876281424C3A400159CC2 /* ModalAlert.m */; };
 		210876DC1424D71000159CC2 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 210876DB1424D71000159CC2 /* EventKit.framework */; };
 		210876DE1424D71000159CC2 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 210876DD1424D71000159CC2 /* EventKitUI.framework */; };
@@ -88,7 +91,6 @@
 		21E7135A13E3F8DC00BF47E6 /* statisticsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E7135613E3F8DC00BF47E6 /* statisticsVC.xib */; };
 		21E7135B13E3F8DC00BF47E6 /* memoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E7135713E3F8DC00BF47E6 /* memoVC.xib */; };
 		21E7135C13E3F8DC00BF47E6 /* moreVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E7135813E3F8DC00BF47E6 /* moreVC.xib */; };
-		21E7137813E3FBA800BF47E6 /* baseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E7137713E3FBA800BF47E6 /* baseVC.m */; };
 		21F57BCA14278AA40099BEB5 /* CAttributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F57BC714278AA40099BEB5 /* CAttributeCell.m */; };
 		21F57BCB14278AA40099BEB5 /* EditableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F57BC914278AA40099BEB5 /* EditableCell.m */; };
 		21F57BD714278CD40099BEB5 /* CAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F57BD214278CD40099BEB5 /* CAttribute.m */; };
@@ -110,6 +112,11 @@
 		2104CF8714238ECF0004FB9A /* ContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCell.h; sourceTree = "<group>"; };
 		2104CF8814238ECF0004FB9A /* ContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCell.m; sourceTree = "<group>"; };
 		2104CFC01423929C0004FB9A /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		2106B7FB142E169800F9DD6C /* TagVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagVC.h; sourceTree = "<group>"; };
+		2106B7FC142E169800F9DD6C /* TagVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagVC.m; sourceTree = "<group>"; };
+		2106B800142E16FF00F9DD6C /* TagVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagVC.xib; sourceTree = "<group>"; };
+		2106B87F142E252800F9DD6C /* CAttributeBlood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAttributeBlood.h; sourceTree = "<group>"; };
+		2106B880142E252800F9DD6C /* CAttributeBlood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAttributeBlood.m; sourceTree = "<group>"; };
 		210876271424C3A400159CC2 /* ModalAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalAlert.h; sourceTree = "<group>"; };
 		210876281424C3A400159CC2 /* ModalAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalAlert.m; sourceTree = "<group>"; };
 		210876DB1424D71000159CC2 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
@@ -215,8 +222,6 @@
 		21E7135613E3F8DC00BF47E6 /* statisticsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = statisticsVC.xib; sourceTree = "<group>"; };
 		21E7135713E3F8DC00BF47E6 /* memoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = memoVC.xib; sourceTree = "<group>"; };
 		21E7135813E3F8DC00BF47E6 /* moreVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = moreVC.xib; sourceTree = "<group>"; };
-		21E7137613E3FBA800BF47E6 /* baseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = baseVC.h; sourceTree = "<group>"; };
-		21E7137713E3FBA800BF47E6 /* baseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = baseVC.m; sourceTree = "<group>"; };
 		21F57BC614278AA40099BEB5 /* CAttributeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAttributeCell.h; sourceTree = "<group>"; };
 		21F57BC714278AA40099BEB5 /* CAttributeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAttributeCell.m; sourceTree = "<group>"; };
 		21F57BC814278AA40099BEB5 /* EditableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditableCell.h; sourceTree = "<group>"; };
@@ -463,6 +468,9 @@
 		21E5AE7F141DF56100B5EBA5 /* CustView */ = {
 			isa = PBXGroup;
 			children = (
+				2106B7FB142E169800F9DD6C /* TagVC.h */,
+				2106B7FC142E169800F9DD6C /* TagVC.m */,
+				2106B800142E16FF00F9DD6C /* TagVC.xib */,
 				21E5AE82141DF56100B5EBA5 /* CustomDatePicker.h */,
 				21E5AE83141DF56100B5EBA5 /* CustomDatePicker.m */,
 				21E5AE84141DF56100B5EBA5 /* CustomDatePicker.xib */,
@@ -490,8 +498,6 @@
 				219D99D313E5169800506FCB /* 备忘录 */,
 				219D99D513E516E400506FCB /* 统计 */,
 				219D99D613E5170F00506FCB /* 更多 */,
-				21E7137613E3FBA800BF47E6 /* baseVC.h */,
-				21E7137713E3FBA800BF47E6 /* baseVC.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -505,6 +511,8 @@
 				21F57BD414278CD40099BEB5 /* CAttributeContainer.m */,
 				219A4370142DA69D00594D2B /* CAttributeGroup.h */,
 				219A4371142DA69D00594D2B /* CAttributeGroup.m */,
+				2106B87F142E252800F9DD6C /* CAttributeBlood.h */,
+				2106B880142E252800F9DD6C /* CAttributeBlood.m */,
 				21F57BD514278CD40099BEB5 /* CAttributeString.h */,
 				21F57BD614278CD40099BEB5 /* CAttributeString.m */,
 			);
@@ -651,6 +659,7 @@
 				21D25787142B889700306515 /* synchronous_hover.png in Resources */,
 				21A327CD142D7BE000F62134 /* syncAccountVC.xib in Resources */,
 				219A4301142D98B900594D2B /* AddressAddSeniorVC.xib in Resources */,
+				2106B801142E16FF00F9DD6C /* TagVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,7 +678,6 @@
 				21E7132113E3F58700BF47E6 /* statisticsVC.m in Sources */,
 				21E7132413E3F5D300BF47E6 /* memoVC.m in Sources */,
 				21E7132713E3F5E800BF47E6 /* moreVC.m in Sources */,
-				21E7137813E3FBA800BF47E6 /* baseVC.m in Sources */,
 				219D997013E506E900506FCB /* DBConnection.m in Sources */,
 				219D997113E506E900506FCB /* Statement.m in Sources */,
 				216525F913E52F8F0075F387 /* AddressPreInfoVC.m in Sources */,
@@ -701,6 +709,8 @@
 				21A32829142D819700F62134 /* syncButtonCell.m in Sources */,
 				219A4300142D98B900594D2B /* AddressAddSeniorVC.m in Sources */,
 				219A4372142DA69D00594D2B /* CAttributeGroup.m in Sources */,
+				2106B7FD142E169800F9DD6C /* TagVC.m in Sources */,
+				2106B881142E252800F9DD6C /* CAttributeBlood.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

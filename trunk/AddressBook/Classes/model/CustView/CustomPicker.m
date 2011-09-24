@@ -13,10 +13,9 @@
 
 @synthesize pickerSheet;
 @synthesize picker;
-@synthesize isPickerShow;
 @synthesize sourceArray;
 
-- (id)initWithFrame:(CGRect)frame 
+- (id)initWithFrame:(CGRect)frame
 {    
     self = [super initWithFrame:frame];
     if (self)
@@ -30,7 +29,7 @@
 		[view setAlpha:0.6f];
 		[self addSubview:view];
 		
-		sourceArray = [[NSArray alloc]initWithObjects: @"iOS应用软件开发", @"iOS企业OA开发",@"iOS定制应用", @"iOS游戏开发", nil];
+		//sourceArray = [[NSArray alloc]initWithObjects: @"iOS应用软件开发", @"iOS企业OA开发",@"iOS定制应用", @"iOS游戏开发", nil];
 		
 		CGRect pFrame = CGRectMake(0, 200, SCREEN_W, SCREEN_H - 200);
 		pickerSheet = [[UIActionSheet alloc] initWithFrame:pFrame];
@@ -99,48 +98,13 @@
 
 -(void)pickerHideOK
 {
-	/*
-	if(isPickerShow)//首先要隐藏，然后发送网络请求
-	{
-		CGRect pickFrame = pickerSheet.frame;	
-		[UIView beginAnimations:nil context:self];
-		[UIView setAnimationDelegate:self];
-		[UIView setAnimationDuration:0.4f];
-		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-		[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:[pickerSheet superview] cache:YES];	
-		pickFrame.origin.y += pickFrame.size.height - 40;//应该根据应用动态计算需要的位置
-		[pickerSheet setFrame:pickFrame];	
-		[UIView commitAnimations];	
-		isPickerShow = FALSE;
-	}
-	*/
-	
 	[self removeFromSuperview];
-	
 }
 
 -(void)pickerHideCancel
 {
-	/*
-	if(isPickerShow)
-	{
-		CGRect pickFrame = pickerSheet.frame;	
-		[UIView beginAnimations:nil context:self];
-		[UIView setAnimationDelegate:self];
-		[UIView setAnimationDuration:0.4f];
-		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-		[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:[pickerSheet superview] cache:YES];	
-		pickFrame.origin.y += pickFrame.size.height - 40;//应该根据应用动态计算需要的位置
-		[pickerSheet setFrame:pickFrame];	
-		[UIView commitAnimations];	
-		isPickerShow = FALSE;
-	}
-	*/
-	
 	[self removeFromSuperview];
 }
-
-
 
 - (void)dealloc 
 {
@@ -150,8 +114,6 @@
 	
     [super dealloc];
 }
-
-
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row
 			forComponent:(NSInteger)component

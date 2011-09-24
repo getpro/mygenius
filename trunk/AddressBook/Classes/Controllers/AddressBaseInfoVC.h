@@ -5,6 +5,7 @@
 //  Created by Peteo on 11-7-31.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
+// 查看联系人－基本信息
 
 #import <UIKit/UIKit.h>
 #import <AddressBook/AddressBook.h>

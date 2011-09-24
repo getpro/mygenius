@@ -1,11 +1,11 @@
 //
-//  accountsVC.h
+//  syncVC.h
 //  AddressBook
 //
 //  Created by Peteo on 11-7-30.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
-// 帐号管理
+//  同步备份
 
 #import <UIKit/UIKit.h>
 
