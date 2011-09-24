@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
-
 @interface CustomPicker : UIView < UIPickerViewDelegate, UIPickerViewDataSource >
 {
 	UIActionSheet * pickerSheet;

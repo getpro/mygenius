@@ -23,11 +23,13 @@ UITableViewDataSource
 	UISearchBar				  * m_pSearchBar;
 	
 	IBOutlet UITableView      * m_pTableView_IB;
+	IBOutlet UIBarButtonItem  * m_pRightAdd;
 }
 
 @property (retain,nonatomic) UISearchDisplayController * m_pSearchDC;
 @property (retain,nonatomic) UISearchBar			   * m_pSearchBar;
 @property (retain,nonatomic) IBOutlet UITableView      * m_pTableView_IB;
+@property (retain,nonatomic) IBOutlet UIBarButtonItem  * m_pRightAdd;
 
 -(IBAction)addItemBtn:(id)sender;
 -(IBAction)editItemBtn:(id)sender;

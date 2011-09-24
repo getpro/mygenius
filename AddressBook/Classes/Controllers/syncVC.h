@@ -11,8 +11,12 @@
 
 @interface syncVC : UIViewController 
 {
+	IBOutlet UITableView     * m_pTableView_IB;
 	
+	UIButton * m_pSyncAccountBtn;
 }
+
+@property (nonatomic,retain) IBOutlet UITableView  * m_pTableView_IB;
 
 -(IBAction)sendBtn:(id)sender;
 

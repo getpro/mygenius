@@ -1,9 +1,5 @@
 //
 //  CAttribute.h
-//  Pulp Dossier
-//
-//  Created by Courtney Holmes on 6/5/11.
-//  Copyright 2011 CJ Holmes. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -46,13 +42,10 @@
  */
 - (UIViewController*) detailViewController:(BOOL)editing;
 
-/*	Takes an abbreviated class name from our xml parser and turns it into the correct
-	class.  For example, the XML element name "track" would return the CAttributeTrack class.
-
-+ (Class)classForString:(NSString*)className;
-
-+ (NSString*)stringForClass;
- 
+/*
+ Show the UIViewController
 */
+
+- (void) Show :(id) pVc;
 
 @end
