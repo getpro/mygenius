@@ -1,9 +1,5 @@
 //
 //  CAttribute.m
-//  Pulp Dossier
-//
-//  Created by Courtney Holmes on 6/5/11.
-//  Copyright 2011 CJ Holmes. All rights reserved.
 //
 
 #import "CAttribute.h"
@@ -63,7 +59,12 @@
 
 - (UIViewController*) detailViewController:(BOOL)editing 
 { 
-	return nil; 
+	return nil;
+}
+
+- (void) Show :(id) pVc
+{
+	
 }
 
 @end

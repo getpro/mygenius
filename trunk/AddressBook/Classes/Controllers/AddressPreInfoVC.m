@@ -12,11 +12,11 @@
 
 typedef enum 
 {
-    TableView_Section_Group,
-    TableView_Section_Contact,
-    TableView_Section_Constellation,
-	TableView_Section_Count
-}TableView_Section;
+    PreInfo_TableView_Section_Group,
+    PreInfo_TableView_Section_Contact,
+    PreInfo_TableView_Section_Constellation,
+	PreInfo_TableView_Section_Count
+}PreInfo_TableView_Section;
 
 @implementation AddressPreInfoVC
 
@@ -37,6 +37,7 @@ typedef enum
     [super viewDidLoad];
 	
 	m_pTableView_IB.backgroundColor = [UIColor clearColor];
+	m_pTableView_IB.scrollEnabled = NO;
 	
 	self.navigationItem.title = @"联系人";
 	self.navigationItem.rightBarButtonItem = m_pRightAdd;
@@ -193,7 +194,7 @@ typedef enum
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return TableView_Section_Count;
+	return PreInfo_TableView_Section_Count;
 }
 
 /*
@@ -209,17 +210,17 @@ typedef enum
 	
 	switch (section)
 	{
-		case TableView_Section_Group:
+		case PreInfo_TableView_Section_Group:
 		{
 			pRetNum = 1;
 			break;
 		}
-		case TableView_Section_Contact:
+		case PreInfo_TableView_Section_Contact:
 		{
 			pRetNum = 3;
 			break;
 		}
-		case TableView_Section_Constellation:
+		case PreInfo_TableView_Section_Constellation:
 		{
 			pRetNum = 1;
 			break;
@@ -271,7 +272,7 @@ typedef enum
 	
 	switch (indexPath.section)
 	{
-		case TableView_Section_Group:
+		case PreInfo_TableView_Section_Group:
 		{
 			if (row == 0)
 			{
@@ -280,7 +281,7 @@ typedef enum
 			}
 			break;
 		}
-		case TableView_Section_Contact:
+		case PreInfo_TableView_Section_Contact:
 		{
 			attr = [self.m_pData objectAtIndex:row + 1];
 			/*
@@ -299,7 +300,7 @@ typedef enum
 			*/
 			break;
 		}
-		case TableView_Section_Constellation:
+		case PreInfo_TableView_Section_Constellation:
 		{
 			if (row == 0)
 			{
@@ -328,7 +329,7 @@ typedef enum
 	
 	switch (indexPath.section)
 	{
-		case TableView_Section_Group:
+		case PreInfo_TableView_Section_Group:
 		{
 			if (row == 0)
 			{
@@ -336,7 +337,7 @@ typedef enum
 			}
 			break;
 		}
-		case TableView_Section_Contact:
+		case PreInfo_TableView_Section_Contact:
 		{
 			attr = [self.m_pData objectAtIndex:row + 1];
 			stringAttr = (CAttributeString*)attr;
@@ -365,7 +366,7 @@ typedef enum
 			 
 			break;
 		}
-		case TableView_Section_Constellation:
+		case PreInfo_TableView_Section_Constellation:
 		{
 			if (row == 0)
 			{

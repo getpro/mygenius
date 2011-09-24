@@ -13,6 +13,7 @@
 #import "ContactCell.h"
 #import "ModalAlert.h"
 #import "AddressPreInfoVC.h"
+#import "AddressAddSeniorVC.h"
 
 #import "CustomPicker.h"
 
@@ -362,6 +363,11 @@
 	{
 		cell.m_pHead.image = contact.image;
 	}
+	else 
+	{
+		cell.m_pHead.image = [UIImage imageNamed:@"head.png"];
+	}
+
 	
 	
 	/*
@@ -652,6 +658,16 @@
 	[self dismissModalViewControllerAnimated:NO];
 	
 	//[self.view setFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
+	
+	if(person)
+	{
+		//点击完成
+		AddressAddSeniorVC * pVc = [[AddressAddSeniorVC alloc] init];
+		
+		[self.navigationController pushViewController:pVc animated:NO];
+		
+		[pVc release];
+	}
 }
 
 #pragma mark GroupItem methods

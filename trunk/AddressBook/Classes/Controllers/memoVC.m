@@ -17,6 +17,7 @@
 @synthesize m_pSearchDC;
 @synthesize m_pSearchBar;
 @synthesize m_pTableView_IB;
+@synthesize m_pRightAdd;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
@@ -24,6 +25,7 @@
     [super viewDidLoad];
 	
 	self.navigationItem.title = @"备忘录";
+	self.navigationItem.rightBarButtonItem = m_pRightAdd;
 	
 	// Create a search bar
 	self.m_pSearchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 44.0f)] autorelease];
@@ -67,30 +69,13 @@
 	[m_pSearchDC     release];
 	[m_pSearchBar    release];
 	[m_pTableView_IB release];
+	[m_pRightAdd     release];
 	
     [super dealloc];
 }
 
 -(IBAction)addItemBtn:(id)sender
 {
-	/*
-	//查看
-	// open a dialog with two custom buttons
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"查看类型"
-															 delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil
-													otherButtonTitles:@"每日事件查看", @"每月时间查看",@"全部", @"返回",nil];
-	actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-	//actionSheet.destructiveButtonIndex = m_nTypeIndex;	// make the second button red (destructive)
-	[actionSheet showInView:self.view]; // show from our table view (pops up in the middle of the table)
-	[actionSheet release];
-	*/
-	
-	rightOrLeft = YES;
-	teXiao      = YES;
-	
-	NSString * ss = [NSString stringWithFormat:@"%d" , EViewmemoInfoVC];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
 	
 }
 

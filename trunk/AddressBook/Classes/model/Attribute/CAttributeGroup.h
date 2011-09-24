@@ -1,15 +1,16 @@
 //
-//  CAttributeString.h
+//  CAttributeGroup.h
 //
-//  左边标签，右边编辑内容
+//  分组
 
 #import <Foundation/Foundation.h>
+
 #import "CAttribute.h"
 
 /*	
  Attributes for short text strings. 
 */
-@interface CAttributeString : CAttribute 
+@interface CAttributeGroup : CAttribute 
 {
 	NSString* stringValue;
 }
