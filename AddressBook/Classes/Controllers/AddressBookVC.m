@@ -44,6 +44,8 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+	//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
     [super viewDidLoad];
 	
 	//m_pTableView_IB.backgroundColor = [UIColor clearColor];
@@ -705,14 +707,6 @@
 	
 	[picker release];
 	[navigation release];
-	
-	/* 分组例子
-	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
-	
-	CustomPicker * p = [[CustomPicker alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-	
-	[app.window addSubview:p];
-	*/
 }
 
 #pragma mark actionSheet methods

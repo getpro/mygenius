@@ -13,16 +13,12 @@
 	UIActionSheet * pickerSheet;
 	UIPickerView  * picker;
     NSArray		  * sourceArray;
-	
-	bool isPickerShow;
 }
 
 @property(nonatomic, retain)UIActionSheet* pickerSheet;
 @property(nonatomic, retain)UIPickerView* picker;
-@property(nonatomic) bool isPickerShow;
-@property(nonatomic, retain) NSArray* sourceArray;
+@property(nonatomic, retain)NSArray* sourceArray;
 
--(void)pickerShow;
 -(void)pickerHideOK;
 -(void)pickerHideCancel;
 
