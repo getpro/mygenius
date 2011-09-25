@@ -66,6 +66,8 @@
 		21A327CB142D7B6A00F62134 /* syncAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A327CA142D7B6A00F62134 /* syncAccountVC.m */; };
 		21A327CD142D7BE000F62134 /* syncAccountVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21A327CC142D7BE000F62134 /* syncAccountVC.xib */; };
 		21A32829142D819700F62134 /* syncButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A32828142D819700F62134 /* syncButtonCell.m */; };
+		21BCEC5D142F60AA00FB27BE /* AddFieldVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BCEC5C142F60AA00FB27BE /* AddFieldVC.m */; };
+		21BCEC62142F612A00FB27BE /* AddFieldVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BCEC61142F612A00FB27BE /* AddFieldVC.xib */; };
 		21D256E2142B806E00306515 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D256E1142B806E00306515 /* background.png */; };
 		21D25782142B889700306515 /* backup.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D2577C142B889700306515 /* backup.png */; };
 		21D25783142B889700306515 /* backup_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D2577D142B889700306515 /* backup_hover.png */; };
@@ -190,6 +192,9 @@
 		21A327CC142D7BE000F62134 /* syncAccountVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = syncAccountVC.xib; sourceTree = "<group>"; };
 		21A32827142D819700F62134 /* syncButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = syncButtonCell.h; sourceTree = "<group>"; };
 		21A32828142D819700F62134 /* syncButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = syncButtonCell.m; sourceTree = "<group>"; };
+		21BCEC5B142F60AA00FB27BE /* AddFieldVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFieldVC.h; sourceTree = "<group>"; };
+		21BCEC5C142F60AA00FB27BE /* AddFieldVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFieldVC.m; sourceTree = "<group>"; };
+		21BCEC61142F612A00FB27BE /* AddFieldVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFieldVC.xib; sourceTree = "<group>"; };
 		21D256E1142B806E00306515 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		21D2577C142B889700306515 /* backup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backup.png; sourceTree = "<group>"; };
 		21D2577D142B889700306515 /* backup_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backup_hover.png; sourceTree = "<group>"; };
@@ -405,6 +410,9 @@
 				219A42FD142D98B900594D2B /* AddressAddSeniorVC.h */,
 				219A42FE142D98B900594D2B /* AddressAddSeniorVC.m */,
 				219A42FF142D98B900594D2B /* AddressAddSeniorVC.xib */,
+				21BCEC5B142F60AA00FB27BE /* AddFieldVC.h */,
+				21BCEC5C142F60AA00FB27BE /* AddFieldVC.m */,
+				21BCEC61142F612A00FB27BE /* AddFieldVC.xib */,
 			);
 			name = "通讯录";
 			sourceTree = "<group>";
@@ -665,6 +673,7 @@
 				21A327CD142D7BE000F62134 /* syncAccountVC.xib in Resources */,
 				219A4301142D98B900594D2B /* AddressAddSeniorVC.xib in Resources */,
 				2106B801142E16FF00F9DD6C /* TagVC.xib in Resources */,
+				21BCEC62142F612A00FB27BE /* AddFieldVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -717,6 +726,7 @@
 				2106B7FD142E169800F9DD6C /* TagVC.m in Sources */,
 				2106B881142E252800F9DD6C /* CAttributeBlood.m in Sources */,
 				21FFC2AE142F1185006DB72C /* CAttributeMemo.m in Sources */,
+				21BCEC5D142F60AA00FB27BE /* AddFieldVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

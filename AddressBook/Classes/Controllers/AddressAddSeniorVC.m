@@ -10,12 +10,15 @@
 #import "PublicData.h"
 #import "AddressBaseInfoVC.h"
 #import "AddressBookAppDelegate.h"
+#import "AddFieldVC.h"
+
 
 typedef enum 
 {
     AddSenior_TableView_Section_Group,
 	AddSenior_TableView_Section_Blood,
 	AddSenior_TableView_Section_Account,
+	AddSenior_TableView_Section_AddField,
 	AddSenior_TableView_Section_Count
 }AddSenior_TableView_Section;
 
@@ -49,7 +52,7 @@ typedef enum
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"帐号"];
-	
+		
 	m_pData = [[NSMutableArray alloc]initWithArray:m_pContainer.attributes];
 	
 }
@@ -113,10 +116,8 @@ typedef enum
 //
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-	//UITableViewCellEditingStyle retval = UITableViewCellEditingStyleDelete;
-	
-	//if (indexPath.row >= [self.data count])
-	//	retval = UITableViewCellEditingStyleInsert;
+	if(indexPath.section == AddSenior_TableView_Section_AddField)
+		return UITableViewCellEditingStyleInsert;
 	
 	return UITableViewCellEditingStyleNone;
 }
@@ -206,6 +207,25 @@ typedef enum
 			}
 			break;
 		}
+		case AddSenior_TableView_Section_AddField:
+		{
+			if (row == 0)
+			{
+				static NSString* cellIdentifier = @"AddFieldCell";
+				UITableViewCell * cell2 = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+				if (![cell2 isKindOfClass:[UITableViewCell class]])
+				{
+					cell2 = [[[CAttributeCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier] autorelease];
+					cell2.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
+				}
+				if (cell2 != nil)
+				{
+					cell2.textLabel.text = @"添加字段";
+				}
+				return cell2;
+			}
+			break;
+		}
 		default:
 			break;
 	}
@@ -221,63 +241,18 @@ typedef enum
 	
 	UIViewController *vc = nil;
 	
-	/*
-	NSInteger row = [indexPath row];
-	CAttribute       *attr = nil;
-	CAttributeString *stringAttr = nil;
-	
-	switch (indexPath.section)
+	if(indexPath.section == AddSenior_TableView_Section_AddField)
 	{
-		case TableView_Section_Group:
-		{
-			if (row == 0)
-			{
-				//cell.textLabel.text = @"分组";
-			}
-			break;
-		}
-		case TableView_Section_Contact:
-		{
-			attr = [self.m_pData objectAtIndex:row + 1];
-			stringAttr = (CAttributeString*)attr;
-			
-			if (row == 0)
-			{
-				//cell.textLabel.text = @"移动电话";
-				NSLog(@"tel[%@]",stringAttr.stringValue);
-				NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", stringAttr.stringValue]];
-				[[UIApplication sharedApplication] openURL:URL]; 
-			}
-			else if(row == 1)
-			{
-				//cell.textLabel.text = @"短信";
-				NSLog(@"sms[%@]",stringAttr.stringValue);
-				NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"sms://%@", stringAttr.stringValue]];
-				[[UIApplication sharedApplication] openURL:URL];
-			}
-			else if(row == 2)
-			{
-				//cell.textLabel.text = @"工作";
-				NSLog(@"email[%@]",stringAttr.stringValue);
-				NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"mailto://%@", stringAttr.stringValue]];
-				[[UIApplication sharedApplication] openURL:URL];
-			}
-			
-			break;
-		}
-		case TableView_Section_Constellation:
-		{
-			if (row == 0)
-			{
-				//cell.textLabel.text = @"星座";
-			}
-			break;
-		}
-		default:
-			break;
+		NSLog(@"AddField");
+		
+		AddFieldVC * pVC = [[AddFieldVC alloc] init];
+		
+		[self.navigationController pushViewController:pVC animated:YES];
+		
+		[pVC release];
+		
+		return;
 	}
-	*/
-	
 	
 	CAttribute *attr = [m_pData objectAtIndex:indexPath.section];
 	if (attr)
