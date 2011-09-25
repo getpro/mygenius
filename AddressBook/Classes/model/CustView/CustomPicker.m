@@ -98,6 +98,8 @@
 
 -(void)pickerHideOK
 {
+	
+	
 	[self removeFromSuperview];
 }
 

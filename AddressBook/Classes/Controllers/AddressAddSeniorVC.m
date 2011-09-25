@@ -14,6 +14,7 @@
 typedef enum 
 {
     AddSenior_TableView_Section_Group,
+	AddSenior_TableView_Section_Blood,
 	AddSenior_TableView_Section_Count
 }AddSenior_TableView_Section;
 
@@ -41,6 +42,9 @@ typedef enum
 	attr = [[[CAttributeGroup alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"分组"];
 	
+	attr = [[[CAttributeBlood alloc] init] autorelease];
+	[m_pContainer setValue:attr forKey:@"血型"];
+	
 	m_pData = [[NSMutableArray alloc]initWithArray:m_pContainer.attributes];
 	
 }
@@ -54,7 +58,8 @@ typedef enum
 }
 */
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning 
+{
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -175,6 +180,14 @@ typedef enum
 			}
 			break;
 		}
+		case AddSenior_TableView_Section_Blood:
+		{
+			if (row == 0)
+			{
+				attr = [m_pData objectAtIndex:1];
+			}
+			break;
+		}
 		default:
 			break;
 	}
@@ -186,7 +199,7 @@ typedef enum
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-	//[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
 	UIViewController *vc = nil;
 	
@@ -248,7 +261,7 @@ typedef enum
 	*/
 	
 	
-	CAttribute *attr = [m_pData objectAtIndex:indexPath.row];
+	CAttribute *attr = [m_pData objectAtIndex:indexPath.section];
 	if (attr)
 	{
 		vc = [attr detailViewController:self.editing];

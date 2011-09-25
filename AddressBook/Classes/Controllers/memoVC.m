@@ -9,15 +9,14 @@
 #import "memoVC.h"
 #import "AddressBookAppDelegate.h"
 
-#import <EventKit/EventKit.h>
-#import <EventKitUI/EventKitUI.h>
-
 @implementation memoVC
 
 @synthesize m_pSearchDC;
 @synthesize m_pSearchBar;
 @synthesize m_pTableView_IB;
 @synthesize m_pRightAdd;
+
+@synthesize eventsList, eventStore, defaultCalendar, detailViewController;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
@@ -39,6 +38,21 @@
 	self.m_pSearchDC = [[[UISearchDisplayController alloc] initWithSearchBar:self.m_pSearchBar contentsController:self] autorelease];
 	self.m_pSearchDC.searchResultsDataSource = self;
 	self.m_pSearchDC.searchResultsDelegate = self;
+	
+	// Initialize an event store object with the init method. Initilize the array for events.
+	self.eventStore = [[EKEventStore alloc] init];
+	
+	self.eventsList = [[NSMutableArray alloc] initWithArray:0];
+	
+	// Get the default calendar from store.
+	self.defaultCalendar = [self.eventStore defaultCalendarForNewEvents];
+	
+	//self.navigationController.delegate = self;
+	
+	// Fetch today's event on selected calendar and put them into the eventsList array
+	[self.eventsList addObjectsFromArray:[self fetchEventsForToday]];
+	
+	[m_pTableView_IB reloadData];
 }
 
 
@@ -57,10 +71,13 @@
     // Release any cached data, images, etc. that aren't in use.
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload 
+{
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+	
+	self.eventsList = nil;
 }
 
 
@@ -71,17 +88,48 @@
 	[m_pTableView_IB release];
 	[m_pRightAdd     release];
 	
+	[eventStore			  release];
+	[eventsList			  release];
+	[defaultCalendar	  release];
+	[detailViewController release];
+	
     [super dealloc];
 }
 
 -(IBAction)addItemBtn:(id)sender
 {
+	// When add button is pushed, create an EKEventEditViewController to display the event.
+	EKEventEditViewController *addController = [[EKEventEditViewController alloc] initWithNibName:nil bundle:nil];
 	
+	// set the addController's event store to the current event store.
+	addController.eventStore = self.eventStore;
+	
+	// present EventsAddViewController as a modal view controller
+	[self presentModalViewController:addController animated:YES];
+	
+	addController.editViewDelegate = self;
+	[addController release];
 }
 
--(IBAction)editItemBtn:(id)sender
-{
-	//编辑
+
+
+// Fetching events happening in the next 24 hours with a predicate, limiting to the default calendar 
+- (NSArray *)fetchEventsForToday 
+{	
+	NSDate *startDate = [NSDate date];
+	
+	// endDate is 1 day = 60*60*24 seconds = 86400 seconds from startDate
+	NSDate *endDate = [NSDate dateWithTimeIntervalSinceNow:86400];
+	
+	// Create the predicate. Pass it the default calendar.
+	NSArray *calendarArray = [NSArray arrayWithObject:defaultCalendar];
+	NSPredicate *predicate = [self.eventStore predicateForEventsWithStartDate:startDate endDate:endDate 
+																	calendars:calendarArray]; 
+	
+	// Fetch all events that match the predicate.
+	NSArray *events = [self.eventStore eventsMatchingPredicate:predicate];
+	
+	return events;
 }
 
 
@@ -106,248 +154,141 @@
 	self.m_pTableView_IB.tableHeaderView = self.m_pSearchBar;	
 }
 
+#pragma mark -
+#pragma mark Table View
 
-- (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
-	UITableViewCellStyle style =  UITableViewCellStyleSubtitle;
-	UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier:@"ContactCell"];
+	return eventsList.count;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+	static NSString *CellIdentifier = @"memoCell";
 	
-	if (!cell) 
-		cell = [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:@"ContactCell"] autorelease];
-	
-	NSString * contactName = nil;
+	// Add disclosure triangle to cell
+	UITableViewCellAccessoryType editableCellAccessoryType =UITableViewCellAccessoryDisclosureIndicator;
 	
 	
-	contactsInfo * pcontactsInfo = (contactsInfo*)[[AddressBookAppDelegate getAppDelegate].m_arrContactsInfo objectAtIndex:indexPath.row];
-	if(pcontactsInfo)
-	{
-		contactName = pcontactsInfo.m_strcontactsName;
-	}
-	// Retrieve the crayon and its color
-	/*
-	 if (aTableView == self.DataTable)
-	 contactName = [[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-	 else
-	 contactName = [self.filteredArray objectAtIndex:indexPath.row];
-	 */
-	
-	if(contactName)
-	{
-		cell.textLabel.text = [NSString stringWithCString:[contactName UTF8String] encoding:NSUTF8StringEncoding];
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if (cell == nil) {
+		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+									   reuseIdentifier:CellIdentifier] autorelease];
 	}
 	
-	/*
-	 ABContact *contact = [ContactData byNameToGetContact:contactName];
-	 if(contact)
-	 {
-	 NSArray *phoneArray = [ContactData getPhoneNumberAndPhoneLabelArray:contact];
-	 if([phoneArray count] > 0)
-	 {
-	 NSDictionary *dic = [phoneArray objectAtIndex:0];
-	 NSString *phone = [ContactData getPhoneNumberFromDic:dic];
-	 cell.detailTextLabel.text = phone;
-	 }
-	 }
-	 else
-	 cell.detailTextLabel.text = @"";
-	 */
+	cell.accessoryType = editableCellAccessoryType;
+	
+	// Get the event at the row selected and display it's title
+	cell.textLabel.text = [[self.eventsList objectAtIndex:indexPath.row] title];
 	
 	return cell;
 }
 
 
-- (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	/*
-	 [aTableView deselectRowAtIndexPath:indexPath animated:NO];
-	 ABPersonViewController *pvc = [[[ABPersonViewController alloc] init] autorelease];
-	 pvc.navigationItem.leftBarButtonItem = BARBUTTON(@"取消", @selector(cancelBtnAction:));
-	 
-	 NSString *contactName = @"";
-	 if (aTableView == self.DataTable)
-	 contactName = [[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-	 else
-	 contactName = [self.filteredArray objectAtIndex:indexPath.row];
-	 
-	 ABContact *contact = [ContactData byNameToGetContact:contactName];
-	 pvc.displayedPerson = contact.record;
-	 pvc.allowsEditing = YES;
-	 //[pvc setAllowsDeletion:YES];
-	 pvc.personViewDelegate = self;
-	 self.aBPersonNav = [[[UINavigationController alloc] initWithRootViewController:pvc] autorelease];
-	 self.aBPersonNav.navigationBar.tintColor = SETCOLOR(redcolor,greencolor,bluecolor);
-	 [self presentModalViewController:aBPersonNav animated:YES];
-	 */
+#pragma mark -
+#pragma mark Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {	
+	// Upon selecting an event, create an EKEventViewController to display the event.
+	self.detailViewController = [[EKEventViewController alloc] initWithNibName:nil bundle:nil];			
+	detailViewController.event = [self.eventsList objectAtIndex:indexPath.row];
 	
-	rightOrLeft = YES;
-	teXiao      = YES;
+	// Allow event editing.
+	detailViewController.allowsEditing = YES;
 	
-	NSString * ss = [NSString stringWithFormat:@"%d" , EViewmemoInfoVC];
+	//	Push detailViewController onto the navigation controller stack
+	//	If the underlying event gets deleted, detailViewController will remove itself from
+	//	the stack and clear its event property.
+	[self.navigationController pushViewController:detailViewController animated:YES];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeScene" object:ss];
 }
 
+#pragma mark -
+#pragma mark Navigation Controller delegate
 
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)aTableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)navigationController:(UINavigationController *)navigationController 
+	  willShowViewController:(UIViewController *)viewController animated:(BOOL)animated 
 {
-	if(aTableView == self.m_pTableView_IB)
-		// Return NO if you do not want the specified item to be editable.
-		return YES;
-	else
-		return NO;
-}
-
-
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)aTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath 
-{
-	/*
-	 NSString *contactName = @"";
-	 if (aTableView == self.DataTable)
-	 contactName = [[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-	 else
-	 contactName = [self.filteredArray objectAtIndex:indexPath.row];
-	 ABContact *contact = [ContactData byNameToGetContact:contactName];
-	 
-	 if ([ModalAlert ask:@"真的要删除 %@?", contact.compositeName])
-	 {
-	 [[self.sectionArray objectAtIndex:indexPath.section] removeObjectAtIndex:indexPath.row];
-	 [ContactData removeSelfFromAddressBook:contact withErrow:nil];
-	 [DataTable reloadData];
-	 }
-	 [DataTable  setEditing:NO];
-	 editBtn.title = @"编辑";
-	 isEdit = NO;
-	 */
-}
-
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)aTableView 
-{ 
-	//if(aTableView == self.DataTable)
-	//	return 27;
-	return 1; 
-}
-
-
-- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)aTableView 
-{
-	if (aTableView == self.m_pTableView_IB)  // regular table
+	// if we are navigating back to the rootViewController, and the detailViewController's event
+	// has been deleted -  will title being NULL, then remove the events from the eventsList
+	// and reload the table view. This takes care of reloading the table view after adding an event too.
+	if (viewController == self && self.detailViewController.event.title == NULL) 
 	{
-		/*
-		 NSMutableArray *indices = [NSMutableArray arrayWithObject:UITableViewIndexSearch];
-		 for (int i = 0; i < 27; i++) 
-		 if ([[self.sectionArray objectAtIndex:i] count])
-		 [indices addObject:[[ALPHA substringFromIndex:i] substringToIndex:1]];
-		 //[indices addObject:@"\ue057"]; // <-- using emoji
-		 return indices;
-		 */
-		
-		return nil;
-	}
-	else
-	{
-		return nil; // search table
+		[self.eventsList removeObject:self.detailViewController.event];
+		[m_pTableView_IB reloadData];
 	}
 }
 
+#pragma mark - UIViewController delegate methods
 
-- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
+- (void)viewWillAppear:(BOOL)animated
 {
-	/*
-	 if (title == UITableViewIndexSearch) 
-	 {
-	 [self.DataTable scrollRectToVisible:self.searchBar.frame animated:NO];
-	 return -1;
-	 }
-	 return [ALPHA rangeOfString:title].location;
-	 */
+	[super viewWillAppear:animated];
+	[m_pTableView_IB deselectRowAtIndexPath:m_pTableView_IB.indexPathForSelectedRow animated:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+}
+
+#pragma mark -
+#pragma mark EKEventEditViewDelegate
+
+// Overriding EKEventEditViewDelegate method to update event store according to user actions.
+- (void)eventEditViewController:(EKEventEditViewController *)controller 
+		  didCompleteWithAction:(EKEventEditViewAction)action 
+{
+	NSError *error = nil;
+	EKEvent *thisEvent = controller.event;
 	
-	return 0;
-}
-
-
-
-- (NSString *)tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger)section
-{
-	if (aTableView == self.m_pTableView_IB) 
+	switch (action) 
 	{
-		/*
-		 if ([[self.sectionArray objectAtIndex:section] count] == 0) return nil;
-		 return [NSString stringWithFormat:@"%@", [[ALPHA substringFromIndex:section] substringToIndex:1]];
-		 */
-		return nil;
+		case EKEventEditViewActionCanceled:
+			// Edit action canceled, do nothing. 
+			break;
+			
+		case EKEventEditViewActionSaved:
+			// When user hit "Done" button, save the newly created event to the event store, 
+			// and reload table view.
+			// If the new event is being added to the default calendar, then update its 
+			// eventsList.
+			if (self.defaultCalendar ==  thisEvent.calendar) 
+			{
+				[self.eventsList addObject:thisEvent];
+			}
+			[controller.eventStore saveEvent:controller.event span:EKSpanThisEvent error:&error];
+			[m_pTableView_IB reloadData];
+			break;
+			
+		case EKEventEditViewActionDeleted:
+			// When deleting an event, remove the event from the event store, 
+			// and reload table view.
+			// If deleting an event from the currenly default calendar, then update its 
+			// eventsList.
+			if (self.defaultCalendar ==  thisEvent.calendar) 
+			{
+				[self.eventsList removeObject:thisEvent];
+			}
+			[controller.eventStore removeEvent:thisEvent span:EKSpanThisEvent error:&error];
+			[m_pTableView_IB reloadData];
+			break;
+			
+		default:
+			break;
 	}
-	else
-	{
-		return nil;
-	}
-}
-
-
-- (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section 
-{
-	//[self initData];
-	// Normal table
-	/*
-	 if (aTableView == self.DataTable) 
-	 {
-	 return [[self.sectionArray objectAtIndex:section] count];
-	 }
-	 else
-	 {
-	 [filteredArray removeAllObjects];
-	 }
-	 // Search table
-	 for(NSString *string in contactNameArray)
-	 {
-	 NSString *name = @"";
-	 for (int i = 0; i < [string length]; i++)
-	 {
-	 if([name length] < 1)
-	 name = [NSString stringWithFormat:@"%c",pinyinFirstLetter([string characterAtIndex:i])];
-	 else
-	 name = [NSString stringWithFormat:@"%@%c",name,pinyinFirstLetter([string characterAtIndex:i])];
-	 }
-	 if ([ContactData searchResult:name searchText:self.searchBar.text])
-	 [filteredArray addObject:string];
-	 else 
-	 {
-	 if ([ContactData searchResult:string searchText:self.searchBar.text])
-	 [filteredArray addObject:string];
-	 else {
-	 ABContact *contact = [ContactData byNameToGetContact:string];
-	 NSArray *phoneArray = [ContactData getPhoneNumberAndPhoneLabelArray:contact];
-	 NSString *phone = @"";
-	 
-	 if([phoneArray count] == 1)
-	 {
-	 NSDictionary *PhoneDic = [phoneArray objectAtIndex:0];
-	 phone = [ContactData getPhoneNumberFromDic:PhoneDic];
-	 if([ContactData searchResult:phone searchText:self.searchBar.text])
-	 [filteredArray addObject:string];
-	 }else  if([phoneArray count] > 1)
-	 {
-	 for(NSDictionary *dic in phoneArray)
-	 {
-	 phone = [ContactData getPhoneNumberFromDic:dic];
-	 if([ContactData searchResult:phone searchText:self.searchBar.text])
-	 {
-	 [filteredArray addObject:string];	
-	 break;
-	 }
-	 }
-	 }
-	 
-	 }
-	 }
-	 }
-	 return self.filteredArray.count;
-	 */
+	// Dismiss the modal view controller
+	[controller dismissModalViewControllerAnimated:YES];
 	
-	return [[AddressBookAppDelegate getAppDelegate].m_arrContactsInfo count];
 }
 
+
+// Set the calendar edited by EKEventEditViewController to our chosen calendar - the default calendar.
+- (EKCalendar *)eventEditViewControllerDefaultCalendarForNewEvents:(EKEventEditViewController *)controller 
+{
+	EKCalendar *calendarForEdit = self.defaultCalendar;
+	return calendarForEdit;
+}
 
 @end
