@@ -26,7 +26,7 @@
 - (void)setTarget:(id)target withKey:(NSString*)key 
 {
 	// unregister any old observers
-	if (dataTarget) 
+	if (dataTarget)
 	{
 		[dataTarget removeObserver:self forKeyPath:dataKey];
 		[dataTarget release];
