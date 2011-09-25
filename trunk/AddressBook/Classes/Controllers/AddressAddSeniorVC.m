@@ -15,6 +15,7 @@ typedef enum
 {
     AddSenior_TableView_Section_Group,
 	AddSenior_TableView_Section_Blood,
+	AddSenior_TableView_Section_Account,
 	AddSenior_TableView_Section_Count
 }AddSenior_TableView_Section;
 
@@ -30,7 +31,8 @@ typedef enum
 {
     [super viewDidLoad];
 	
-	//[m_pTableView_IB setEditing:YES];
+	[m_pTableView_IB setEditing:YES];
+	m_pTableView_IB.allowsSelectionDuringEditing = YES;
 	
 	self.navigationItem.title = @"高级信息";
 	self.navigationItem.rightBarButtonItem = m_pRightDone;
@@ -44,6 +46,9 @@ typedef enum
 	
 	attr = [[[CAttributeBlood alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"血型"];
+	
+	attr = [[[CAttributeString alloc] init] autorelease];
+	[m_pContainer setValue:attr forKey:@"帐号"];
 	
 	m_pData = [[NSMutableArray alloc]initWithArray:m_pContainer.attributes];
 	
@@ -106,8 +111,13 @@ typedef enum
 
 // if you want the entire table to just be re-orderable then just return UITableViewCellEditingStyleNone
 //
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
+	//UITableViewCellEditingStyle retval = UITableViewCellEditingStyleDelete;
+	
+	//if (indexPath.row >= [self.data count])
+	//	retval = UITableViewCellEditingStyleInsert;
+	
 	return UITableViewCellEditingStyleNone;
 }
 
@@ -185,6 +195,14 @@ typedef enum
 			if (row == 0)
 			{
 				attr = [m_pData objectAtIndex:1];
+			}
+			break;
+		}
+		case AddSenior_TableView_Section_Account:
+		{
+			if (row == 0)
+			{
+				attr = [m_pData objectAtIndex:2];
 			}
 			break;
 		}

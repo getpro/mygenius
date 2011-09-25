@@ -49,6 +49,8 @@ ABAddressBookRef addressBook;
 	NSMutableArray * m_arrMemoInfo;     //备忘录数据
 	NSMutableArray * m_arrDateInfo;     //纪念日数据
 	
+	NSMutableArray * m_arrCustomTag;    //自定义标签
+	
 	//FTP
 	NSInteger               _networkingCount;
 	
@@ -65,7 +67,7 @@ ABAddressBookRef addressBook;
 @property (nonatomic, retain) NSMutableArray * m_arrMemoInfo;
 @property (nonatomic, retain) NSMutableArray * m_arrDateInfo;
 @property (nonatomic, retain) NSMutableArray * m_arrGroup;
-
+@property (nonatomic, retain) NSMutableArray * m_arrCustomTag;
 
 @property (nonatomic, retain) ContactData    * m_pContactData;
 

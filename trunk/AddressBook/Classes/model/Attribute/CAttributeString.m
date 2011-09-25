@@ -41,7 +41,8 @@
 
 - (void)dealloc 
 {
-	[self.stringValue release];
+	[stringValue release];
+	
 	[super dealloc];
 }
 

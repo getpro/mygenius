@@ -9,7 +9,7 @@
 
 @synthesize label;
 
-- (NSString*)type 
+- (NSString*)type
 {
 	return @"attribute";
 }

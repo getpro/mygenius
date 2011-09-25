@@ -14,6 +14,8 @@
 @synthesize pickerSheet;
 @synthesize picker;
 @synthesize sourceArray;
+@synthesize Target;
+@synthesize Selector;
 
 - (id)initWithFrame:(CGRect)frame
 {    
@@ -98,7 +100,10 @@
 
 -(void)pickerHideOK
 {
-	
+	if (Target && Selector && [Target respondsToSelector:Selector]) 
+	{
+		[Target performSelector:Selector withObject:[NSString stringWithFormat:@"%d",[picker selectedRowInComponent:0]]];
+	}
 	
 	[self removeFromSuperview];
 }

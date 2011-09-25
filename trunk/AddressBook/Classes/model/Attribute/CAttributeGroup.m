@@ -16,6 +16,16 @@
 	return @"group";
 }
 
+- (id)init
+{
+    if ((self = [super init]))
+	{
+		m_pDateArry = [NSArray arrayWithObjects:@"朋友",@"家人",@"同学",nil];
+		[m_pDateArry retain];
+	}
+	return self;
+}
+
 - (id)initWithString:(NSString*)inputString 
 {
 	self = [super initWithString:inputString];
@@ -44,6 +54,7 @@
 - (void)dealloc 
 {
 	[stringValue release];
+	[m_pDateArry release];
 	
 	[super dealloc];
 }
@@ -67,14 +78,25 @@
 	return cell;
 }
 
+-(void)getContentResult:(id)index
+{
+	NSString * pIndex = (NSString*)index;
+	NSString * pStr = [m_pDateArry objectAtIndex:[pIndex intValue]];
+	
+	if(pStr)
+	{
+		self.stringValue = pStr;
+	}
+}
+
 - (UIViewController*) detailViewController:(BOOL)editing 
 {
 	//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	
 	CustomPicker *tvc = [[[CustomPicker alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)] autorelease];
-	//test
-	NSArray * pArry = [NSArray arrayWithObjects:@"朋友",@"家人",@"同学",nil];
-	tvc.sourceArray = pArry;
+	tvc.Target   = self;
+	tvc.Selector = @selector(getContentResult:);
+	tvc.sourceArray = m_pDateArry;
 	
 	return (UIViewController*)tvc;
 }

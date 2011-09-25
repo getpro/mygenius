@@ -20,6 +20,16 @@
 	return @"blood";
 }
 
+- (id)init
+{
+    if ((self = [super init]))
+	{
+		m_pDateArry = [NSArray arrayWithObjects:@"A",@"B",@"AB",@"O",nil];
+		[m_pDateArry retain];
+	}
+	return self;
+}
+
 - (id)initWithString:(NSString*)inputString 
 {
 	self = [super initWithString:inputString];
@@ -48,6 +58,7 @@
 - (void)dealloc 
 {
 	[stringValue release];
+	[m_pDateArry release];
 	
 	[super dealloc];
 }
@@ -71,14 +82,25 @@
 	return cell;
 }
 
+-(void)getContentResult:(id)index
+{
+	NSString * pIndex = (NSString*)index;
+	NSString * pStr = [m_pDateArry objectAtIndex:[pIndex intValue]];
+	
+	if(pStr)
+	{
+		self.stringValue = pStr;
+	}
+}
+
 - (UIViewController*) detailViewController:(BOOL)editing 
 {
 	//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	
 	CustomPicker *tvc = [[[CustomPicker alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)] autorelease];
-	//test
-	NSArray * pArry = [NSArray arrayWithObjects:@"A",@"B",@"AB",@"O",nil];
-	tvc.sourceArray = pArry;
+	tvc.sourceArray = m_pDateArry;
+	tvc.Target   = self;
+	tvc.Selector = @selector(getContentResult:);
 	
 	return (UIViewController*)tvc;
 }

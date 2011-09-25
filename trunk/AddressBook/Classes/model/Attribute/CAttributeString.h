@@ -16,5 +16,4 @@
 
 @property (nonatomic, retain) NSString* stringValue;
 
-
 @end

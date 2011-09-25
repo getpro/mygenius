@@ -13,8 +13,11 @@
 @interface EditableCell : CAttributeCell 
 {
 	UITextField *textField;
+	UIButton    *button;
+	BOOL         bIsLabel_Click; //标签是否能点击
 }
 
 @property (nonatomic, readonly) UITextField *textField;
+@property (nonatomic, assign) BOOL bIsLabel_Click;
 
 @end

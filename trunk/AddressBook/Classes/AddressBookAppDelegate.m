@@ -19,7 +19,7 @@
 @synthesize m_arrDateInfo;
 @synthesize m_arrMemoInfo;
 @synthesize m_arrGroup;
-
+@synthesize m_arrCustomTag;
 @synthesize m_pContactData;
 
 @synthesize networkingCount = _networkingCount;
@@ -43,7 +43,7 @@
 	m_arrDateInfo       = [[NSMutableArray alloc] initWithCapacity:10];
 	m_arrMemoInfo       = [[NSMutableArray alloc] initWithCapacity:10];
 	m_arrGroup          = [[NSMutableArray alloc] initWithCapacity:10];
-	
+	m_arrCustomTag      = [[NSMutableArray alloc] initWithCapacity:10];
 
 	//Group
 	NSArray * groups = [ABContactsHelper groups];
@@ -243,6 +243,7 @@
 	[m_arrDateInfo		  release];
 	[m_arrMemoInfo		  release];
 	[m_arrGroup           release];
+	[m_arrCustomTag       release];
 	
 	[tbController	      release];
     [window				  release];
