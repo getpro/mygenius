@@ -13,6 +13,8 @@
 
 @interface CAttributeBlood : CAttribute 
 {
+	NSArray * m_pDateArry;
+	
 	NSString* stringValue;
 }
 

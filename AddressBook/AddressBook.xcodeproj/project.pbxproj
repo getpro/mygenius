@@ -96,6 +96,7 @@
 		21F57BD714278CD40099BEB5 /* CAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F57BD214278CD40099BEB5 /* CAttribute.m */; };
 		21F57BD814278CD40099BEB5 /* CAttributeContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F57BD414278CD40099BEB5 /* CAttributeContainer.m */; };
 		21F57BD914278CD40099BEB5 /* CAttributeString.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F57BD614278CD40099BEB5 /* CAttributeString.m */; };
+		21FFC2AE142F1185006DB72C /* CAttributeMemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 21FFC2AD142F1185006DB72C /* CAttributeMemo.m */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		63458B2313E7A32400338243 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63458B2213E7A32400338243 /* AddressBook.framework */; };
@@ -232,6 +233,8 @@
 		21F57BD414278CD40099BEB5 /* CAttributeContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAttributeContainer.m; sourceTree = "<group>"; };
 		21F57BD514278CD40099BEB5 /* CAttributeString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAttributeString.h; sourceTree = "<group>"; };
 		21F57BD614278CD40099BEB5 /* CAttributeString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAttributeString.m; sourceTree = "<group>"; };
+		21FFC2AC142F1185006DB72C /* CAttributeMemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAttributeMemo.h; sourceTree = "<group>"; };
+		21FFC2AD142F1185006DB72C /* CAttributeMemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAttributeMemo.m; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -515,6 +518,8 @@
 				2106B880142E252800F9DD6C /* CAttributeBlood.m */,
 				21F57BD514278CD40099BEB5 /* CAttributeString.h */,
 				21F57BD614278CD40099BEB5 /* CAttributeString.m */,
+				21FFC2AC142F1185006DB72C /* CAttributeMemo.h */,
+				21FFC2AD142F1185006DB72C /* CAttributeMemo.m */,
 			);
 			path = Attribute;
 			sourceTree = "<group>";
@@ -711,6 +716,7 @@
 				219A4372142DA69D00594D2B /* CAttributeGroup.m in Sources */,
 				2106B7FD142E169800F9DD6C /* TagVC.m in Sources */,
 				2106B881142E252800F9DD6C /* CAttributeBlood.m in Sources */,
+				21FFC2AE142F1185006DB72C /* CAttributeMemo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

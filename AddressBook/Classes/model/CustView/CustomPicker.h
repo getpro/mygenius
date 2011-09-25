@@ -13,11 +13,17 @@
 	UIActionSheet * pickerSheet;
 	UIPickerView  * picker;
     NSArray		  * sourceArray;
+	
+	id  Target;
+	SEL Selector;
 }
 
 @property(nonatomic, retain)UIActionSheet* pickerSheet;
 @property(nonatomic, retain)UIPickerView* picker;
 @property(nonatomic, retain)NSArray* sourceArray;
+
+@property (nonatomic, assign) id  Target;
+@property (nonatomic, assign) SEL Selector;
 
 -(void)pickerHideOK;
 -(void)pickerHideCancel;

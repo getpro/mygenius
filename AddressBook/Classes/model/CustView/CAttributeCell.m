@@ -18,7 +18,6 @@
 
 - (void)dealloc
 {
-	
 	[self setTarget:nil withKey:nil];	// takes care of release and unregisters us as observer
     [super dealloc];
 }
@@ -37,7 +36,7 @@
 	dataKey    = [key retain];
 	
 	// register as an observer of our target object
-	if (dataTarget) 
+	if (dataTarget)
 	{
 		[dataTarget addObserver:self 
 					 forKeyPath:key 

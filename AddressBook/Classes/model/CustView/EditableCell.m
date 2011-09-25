@@ -12,11 +12,22 @@
 @implementation EditableCell
 
 @synthesize textField;
+@synthesize bIsLabel_Click;
+
+//响应标签按钮事件
+-(void)btnPressed:(id)sender
+{
+	NSLog(@"btnPressed");
+	if(bIsLabel_Click)
+	{
+		
+	}
+}
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier 
 {    
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) 
+    if (self)
 	{
         textField = [[UITextField alloc] initWithFrame:CGRectZero];
 		textField.adjustsFontSizeToFitWidth = YES;
@@ -30,10 +41,28 @@
 					  action:@selector(doneWithKeyboard:)
 			forControlEvents:UIControlEventEditingDidEnd | UIControlEventEditingDidEndOnExit];
 		
+		// we let the contentView own the textField
 		[self.contentView addSubview:textField];
-		[textField release];	// we let the contentView own the textField
+		
+		//在textLabel上面添加一层Button,相应切换标签事件
+		bIsLabel_Click = NO;
+		
+		button = [[UIButton alloc] initWithFrame:CGRectZero];
+		[button setBackgroundColor:[UIColor clearColor]];
+	    [button addTarget:self action:@selector(btnPressed:)
+				  forControlEvents:UIControlEventTouchUpInside];
+		
+		[self addSubview:button];
     }
     return self;
+}
+
+- (void)dealloc
+{
+	[textField release];
+	[button    release];
+	
+    [super dealloc];
 }
 
 /**
@@ -62,9 +91,16 @@
 	self.detailTextLabel.hidden = YES;
 	
 	if (self.editing)
+	{
 		textField.enabled = YES;
+		bIsLabel_Click    = YES;
+		button.frame = CGRectMake(40, 0, 80, 40);
+	}
 	else
+	{
+		bIsLabel_Click    = NO;
 		textField.enabled = NO;
+	}
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated 
