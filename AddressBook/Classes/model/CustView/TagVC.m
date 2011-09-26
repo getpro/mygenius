@@ -21,9 +21,13 @@ typedef enum
 @synthesize m_pTableView_IB,m_pRightDone,m_pRightEdit;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad 
+- (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	self.navigationItem.title = @"标签";
+	
+	
 }
 
 /*

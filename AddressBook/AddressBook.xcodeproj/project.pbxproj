@@ -75,6 +75,7 @@
 		21D25785142B889700306515 /* sync_account_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D2577F142B889700306515 /* sync_account_hover.png */; };
 		21D25786142B889700306515 /* synchronous.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D25780142B889700306515 /* synchronous.png */; };
 		21D25787142B889700306515 /* synchronous_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D25781142B889700306515 /* synchronous_hover.png */; };
+		21E206ED1430CB8B00DE2CDB /* CAttributeRecommend.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E206EC1430CB8B00DE2CDB /* CAttributeRecommend.m */; };
 		21E5AE00141DEE6C00B5EBA5 /* leftBar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E5ADFD141DEE6C00B5EBA5 /* leftBar_bg.png */; };
 		21E5AE01141DEE6C00B5EBA5 /* leftBar_group_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E5ADFE141DEE6C00B5EBA5 /* leftBar_group_bg.png */; };
 		21E5AE02141DEE6C00B5EBA5 /* leftBar_group_number.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E5ADFF141DEE6C00B5EBA5 /* leftBar_group_number.png */; };
@@ -202,6 +203,8 @@
 		21D2577F142B889700306515 /* sync_account_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sync_account_hover.png; sourceTree = "<group>"; };
 		21D25780142B889700306515 /* synchronous.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = synchronous.png; sourceTree = "<group>"; };
 		21D25781142B889700306515 /* synchronous_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = synchronous_hover.png; sourceTree = "<group>"; };
+		21E206EB1430CB8B00DE2CDB /* CAttributeRecommend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAttributeRecommend.h; sourceTree = "<group>"; };
+		21E206EC1430CB8B00DE2CDB /* CAttributeRecommend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAttributeRecommend.m; sourceTree = "<group>"; };
 		21E5ADFD141DEE6C00B5EBA5 /* leftBar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftBar_bg.png; sourceTree = "<group>"; };
 		21E5ADFE141DEE6C00B5EBA5 /* leftBar_group_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftBar_group_bg.png; sourceTree = "<group>"; };
 		21E5ADFF141DEE6C00B5EBA5 /* leftBar_group_number.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftBar_group_number.png; sourceTree = "<group>"; };
@@ -524,6 +527,8 @@
 				219A4371142DA69D00594D2B /* CAttributeGroup.m */,
 				2106B87F142E252800F9DD6C /* CAttributeBlood.h */,
 				2106B880142E252800F9DD6C /* CAttributeBlood.m */,
+				21E206EB1430CB8B00DE2CDB /* CAttributeRecommend.h */,
+				21E206EC1430CB8B00DE2CDB /* CAttributeRecommend.m */,
 				21F57BD514278CD40099BEB5 /* CAttributeString.h */,
 				21F57BD614278CD40099BEB5 /* CAttributeString.m */,
 				21FFC2AC142F1185006DB72C /* CAttributeMemo.h */,
@@ -727,6 +732,7 @@
 				2106B881142E252800F9DD6C /* CAttributeBlood.m in Sources */,
 				21FFC2AE142F1185006DB72C /* CAttributeMemo.m in Sources */,
 				21BCEC5D142F60AA00FB27BE /* AddFieldVC.m in Sources */,
+				21E206ED1430CB8B00DE2CDB /* CAttributeRecommend.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

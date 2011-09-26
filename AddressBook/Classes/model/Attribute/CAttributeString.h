@@ -12,8 +12,11 @@
 @interface CAttributeString : CAttribute 
 {
 	NSString* stringValue;
+	
+	UINavigationController * nvController;
 }
 
 @property (nonatomic, retain) NSString* stringValue;
+@property (nonatomic, assign) UINavigationController* nvController;
 
 @end
