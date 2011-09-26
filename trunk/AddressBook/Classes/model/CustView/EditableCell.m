@@ -13,6 +13,8 @@
 
 @synthesize textField;
 @synthesize bIsLabel_Click;
+@synthesize Target;
+@synthesize Selector;
 
 //响应标签按钮事件
 -(void)btnPressed:(id)sender
@@ -20,7 +22,10 @@
 	NSLog(@"btnPressed");
 	if(bIsLabel_Click)
 	{
-		
+		if (Target && Selector && [Target respondsToSelector:Selector]) 
+		{
+			[Target performSelector:Selector];
+		}
 	}
 }
 

@@ -248,18 +248,32 @@
 	
 	if (self.firstname || self.lastname)
 	{
-		if (self.prefix) [string appendFormat:@"%@ ", self.prefix];
-		if (self.firstname) [string appendFormat:@"%@ ", self.firstname];
-		if (self.nickname) [string appendFormat:@"\"%@\" ", self.nickname];
-		if (self.lastname) [string appendFormat:@"%@", self.lastname];
+		/*
+		if (self.prefix) 
+			[string appendFormat:@"%@ ", self.prefix];
+		if (self.firstname)
+			[string appendFormat:@"%@ ", self.firstname];
+		if (self.nickname)
+			[string appendFormat:@"\"%@\" ", self.nickname];
+		if (self.lastname)
+			[string appendFormat:@"%@", self.lastname];
 		
 		if (self.suffix && string.length)
 			[string appendFormat:@", %@ ", self.suffix];
 		else
 			[string appendFormat:@" "];
+		*/
+		
+		if (self.lastname)
+			[string appendFormat:@"%@", self.lastname];
+		if (self.firstname)
+			[string appendFormat:@"%@", self.firstname];
+		
 	}
 	
-	if (self.organization) [string appendString:self.organization];
+	//if (self.organization) 
+	//	[string appendString:self.organization];
+	
 	return [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 

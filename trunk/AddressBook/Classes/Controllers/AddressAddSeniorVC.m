@@ -18,6 +18,7 @@ typedef enum
     AddSenior_TableView_Section_Group,
 	AddSenior_TableView_Section_Blood,
 	AddSenior_TableView_Section_Account,
+	AddSenior_TableView_Section_Certificate,
 	AddSenior_TableView_Section_AddField,
 	AddSenior_TableView_Section_Count
 }AddSenior_TableView_Section;
@@ -51,7 +52,12 @@ typedef enum
 	[m_pContainer setValue:attr forKey:@"血型"];
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
+	((CAttributeString*)attr).nvController = self.navigationController;
 	[m_pContainer setValue:attr forKey:@"帐号"];
+	
+	attr = [[[CAttributeString alloc] init] autorelease];
+	((CAttributeString*)attr).nvController = self.navigationController;
+	[m_pContainer setValue:attr forKey:@"证件"];
 		
 	m_pData = [[NSMutableArray alloc]initWithArray:m_pContainer.attributes];
 	
@@ -204,6 +210,14 @@ typedef enum
 			if (row == 0)
 			{
 				attr = [m_pData objectAtIndex:2];
+			}
+			break;
+		}
+		case AddSenior_TableView_Section_Certificate:
+		{
+			if (row == 0)
+			{
+				attr = [m_pData objectAtIndex:3];
 			}
 			break;
 		}

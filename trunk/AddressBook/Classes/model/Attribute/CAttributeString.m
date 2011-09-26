@@ -4,10 +4,12 @@
 
 #import "CAttributeString.h"
 #import "EditableCell.h"
+#import "TagVC.h"
 
 @implementation CAttributeString
 
 @synthesize stringValue;
+@synthesize nvController;
 
 - (NSString*)type 
 {
@@ -46,6 +48,19 @@
 	[super dealloc];
 }
 
+-(void)getTagClick
+{
+	//标签被点击
+	if(nvController)
+	{
+		TagVC * pVc = [[TagVC alloc] init];
+	
+		[nvController pushViewController:pVc animated:YES];
+	
+		[pVc release];
+	}
+}
+
 - (UITableViewCell*)cellForTableView:(UITableView *)tableView 
 {
 	static NSString* cellIdentifier = @"CAttributeStringCell";
@@ -59,6 +74,8 @@
 	{
 		cell.textLabel.text = self.label;
 		[cell setTarget:self withKey:@"stringValue"];
+		cell.Target   = self;
+		cell.Selector = @selector(getTagClick);
 		//cell.textField.placeholder = @"...";
 	}
 	
