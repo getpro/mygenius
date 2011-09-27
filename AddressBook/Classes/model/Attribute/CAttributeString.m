@@ -10,6 +10,7 @@
 
 @synthesize stringValue;
 @synthesize nvController;
+@synthesize m_nType;
 
 - (NSString*)type 
 {
@@ -48,13 +49,25 @@
 	[super dealloc];
 }
 
+-(void)getTagContent:(id)str
+{
+	NSString * pStr = (NSString *)str;
+	if(pStr)
+	{
+		self.label = pStr;
+		NSLog(@"getTagContent[%@]",pStr);
+	}
+}
+
 -(void)getTagClick
 {
 	//标签被点击
 	if(nvController)
 	{
 		TagVC * pVc = [[TagVC alloc] init];
-	
+		pVc.m_nType  = m_nType;
+		pVc.Target   = self;
+		pVc.Selector = @selector(getTagContent:);
 		[nvController pushViewController:pVc animated:YES];
 	
 		[pVc release];

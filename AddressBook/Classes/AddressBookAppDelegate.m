@@ -44,6 +44,11 @@
 	m_arrMemoInfo       = [[NSMutableArray alloc] initWithCapacity:10];
 	m_arrGroup          = [[NSMutableArray alloc] initWithCapacity:10];
 	m_arrCustomTag      = [[NSMutableArray alloc] initWithCapacity:10];
+	
+	//test
+	[m_arrCustomTag addObject:@"自定义1"];
+	[m_arrCustomTag addObject:@"自定义2"];
+	[m_arrCustomTag addObject:@"自定义3"];
 
 	//Group
 	NSArray * groups = [ABContactsHelper groups];
