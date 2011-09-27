@@ -6,8 +6,9 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-
 #import "TagVC.h"
+#import "AddressBookAppDelegate.h"
+#import "ModalAlert.h"
 
 typedef enum 
 {
@@ -18,7 +19,9 @@ typedef enum
 
 @implementation TagVC
 
-@synthesize m_pTableView_IB,m_pRightDone,m_pRightEdit;
+@synthesize m_pTableView_IB,m_pRightDone,m_pRightEdit,m_nType;
+@synthesize Target;
+@synthesize Selector;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -27,7 +30,33 @@ typedef enum
 	
 	self.navigationItem.title = @"标签";
 	
+	switch (m_nType) 
+	{
+		case Tag_Type_None:
+		{
+			m_pDateArry = [NSArray arrayWithObjects:nil];
+		}
+			break;
+		case Tag_Type_Memo:
+		{
+			m_pDateArry = [NSArray arrayWithObjects:@"结婚纪念日",@"周年",@"买车纪念日",nil];
+		}
+			break;
+		case Tag_Type_Account:
+		{
+			m_pDateArry = [NSArray arrayWithObjects:@"QQ",@"MSN",@"Skype",@"招商",@"工商",@"农业",@"浦发",nil];
+		}
+			break;
+		case Tag_Type_Certificate:
+		{
+			m_pDateArry = [NSArray arrayWithObjects:@"身份证",@"学生证",@"工作证",nil];
+		}
+			break;
+		default:
+			break;
+	}
 	
+	[m_pDateArry retain];
 }
 
 /*
@@ -58,6 +87,8 @@ typedef enum
 	[m_pRightDone    release];
 	[m_pRightEdit    release];
 	
+	[m_pDateArry     release];
+	
     [super dealloc];
 }
 
@@ -72,7 +103,15 @@ typedef enum
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return Tag_TableView_Section_Count;
+	if([m_pDateArry count] == 0)
+	{
+		//只有自定义标签
+		return Tag_TableView_Section_Custom;
+	}
+	else
+	{
+		return Tag_TableView_Section_Count;
+	}
 }
 
 /*
@@ -84,30 +123,27 @@ typedef enum
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
 	NSInteger pRetNum = 1;
 	
-	/*
-	 switch (section)
-	 {
-	 case TableView_Section_Group:
-	 {
-	 pRetNum = 1;
-	 break;
-	 }
-	 case TableView_Section_Contact:
-	 {
-	 pRetNum = 3;
-	 break;
-	 }
-	 case TableView_Section_Constellation:
-	 {
-	 pRetNum = 1;
-	 break;
-	 }
-	 default:
-	 break;
-	 }
-	 */
+	switch (section)
+	{
+		case Tag_TableView_Section_Content:
+		{
+			pRetNum = [m_pDateArry count];
+			break;
+		}
+		case Tag_TableView_Section_Custom:
+		{
+			// + 1 添加自定义标签
+			pRetNum = [app.m_arrCustomTag count] + 1;
+			break;
+		}
+		default:
+			break;
+	}
+	 
 	return pRetNum;
 }
 
@@ -125,116 +161,90 @@ typedef enum
 - (UITableViewCell *)tableView:(UITableView *)tableView 
 		 cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	//NSInteger row = [indexPath row];
-	UITableViewCell *cell = nil;
-	//CAttribute      *attr = nil;
-	/*
+	static NSString* cellIdentifier = @"TagCell";
+	NSInteger row = [indexPath row];
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
+	UITableViewCell * cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+	if (![cell isKindOfClass:[UITableViewCell class]])
+	{
+		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+		cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	}
+	
+	if (cell != nil)
+	{
+		switch (indexPath.section)
+		{
+			case Tag_TableView_Section_Content:
+			{
+				cell.textLabel.text = [m_pDateArry objectAtIndex:row];
+				break;
+			}
+			case Tag_TableView_Section_Custom:
+			{
+				if(row == [app.m_arrCustomTag count])
+				{
+					cell.textLabel.text = @"添加自定义标签";
+				}
+				else
+				{
+					cell.textLabel.text = [app.m_arrCustomTag objectAtIndex:row];
+				}
+				break;
+			}
+		}
+		
+	}
+	return cell;
+}
+
+- (void)GreateNewGroup
+{
+	NSString * pStr = [ModalAlert ask:@"新建添加自定义标签" withTextPrompt:@"请输入标签名称"];
+	if(pStr)
+	{
+		NSLog(@"NewGroupName[%@]",pStr);
+	}
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	NSInteger row = [indexPath row];
+	
+	NSString * pStr = nil;
+	
 	switch (indexPath.section)
 	{
-		case AddSenior_TableView_Section_Group:
+		case Tag_TableView_Section_Content:
 		{
-			if (row == 0)
-			{
-				attr = [m_pData objectAtIndex:0];
-			}
+			pStr = [m_pDateArry objectAtIndex:row];
 			break;
+		}
+		case Tag_TableView_Section_Custom:
+		{
+			if (row == [app.m_arrCustomTag count])
+			{
+				[self GreateNewGroup];
+			}
+			else
+			{
+				pStr = [app.m_arrCustomTag objectAtIndex:row];
+			}
 		}
 		default:
 			break;
 	}
 	
-	cell = [attr cellForTableView:tableView];
-	*/
-	return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
-{
-	//[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	
-	//UIViewController *vc = nil;
-	
-	/*
-	 NSInteger row = [indexPath row];
-	 CAttribute       *attr = nil;
-	 CAttributeString *stringAttr = nil;
-	 
-	 switch (indexPath.section)
-	 {
-	 case TableView_Section_Group:
-	 {
-	 if (row == 0)
-	 {
-	 //cell.textLabel.text = @"分组";
-	 }
-	 break;
-	 }
-	 case TableView_Section_Contact:
-	 {
-	 attr = [self.m_pData objectAtIndex:row + 1];
-	 stringAttr = (CAttributeString*)attr;
-	 
-	 if (row == 0)
-	 {
-	 //cell.textLabel.text = @"移动电话";
-	 NSLog(@"tel[%@]",stringAttr.stringValue);
-	 NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", stringAttr.stringValue]];
-	 [[UIApplication sharedApplication] openURL:URL]; 
-	 }
-	 else if(row == 1)
-	 {
-	 //cell.textLabel.text = @"短信";
-	 NSLog(@"sms[%@]",stringAttr.stringValue);
-	 NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"sms://%@", stringAttr.stringValue]];
-	 [[UIApplication sharedApplication] openURL:URL];
-	 }
-	 else if(row == 2)
-	 {
-	 //cell.textLabel.text = @"工作";
-	 NSLog(@"email[%@]",stringAttr.stringValue);
-	 NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"mailto://%@", stringAttr.stringValue]];
-	 [[UIApplication sharedApplication] openURL:URL];
-	 }
-	 
-	 break;
-	 }
-	 case TableView_Section_Constellation:
-	 {
-	 if (row == 0)
-	 {
-	 //cell.textLabel.text = @"星座";
-	 }
-	 break;
-	 }
-	 default:
-	 break;
-	 }
-	 */
-	
-	/*
-	CAttribute *attr = [m_pData objectAtIndex:indexPath.row];
-	if (attr)
+	if (pStr && Target && Selector && [Target respondsToSelector:Selector]) 
 	{
-		vc = [attr detailViewController:self.editing];
+		[Target performSelector:Selector withObject:pStr];
 	}
 	
-	if (vc && attr)
-	{
-		[attr Show:vc];
-	}
-	*/
-	
-	/*
-	 if (vc)
-	 {
-	 [self presentModalViewController:vc animated:YES];
-	 [tableView deselectRowAtIndexPath:indexPath animated:NO];
-	 }
-	 else 
-	 {
-	 [tableView deselectRowAtIndexPath:indexPath animated:YES];
-	 }
-	 */
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

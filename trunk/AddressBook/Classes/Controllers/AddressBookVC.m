@@ -396,7 +396,7 @@
 {
 	//NSLog(@"didSelectRowAtIndexPath");
 	
-	//[aTableView deselectRowAtIndexPath:indexPath animated:YES];
+	[aTableView deselectRowAtIndexPath:indexPath animated:YES];
 	
 	ABContact *contact = nil;
 	

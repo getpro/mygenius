@@ -53,10 +53,12 @@ typedef enum
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	((CAttributeString*)attr).nvController = self.navigationController;
+	((CAttributeString*)attr).m_nType      = Tag_Type_Account;
 	[m_pContainer setValue:attr forKey:@"帐号"];
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	((CAttributeString*)attr).nvController = self.navigationController;
+	((CAttributeString*)attr).m_nType      = Tag_Type_Certificate;
 	[m_pContainer setValue:attr forKey:@"证件"];
 		
 	m_pData = [[NSMutableArray alloc]initWithArray:m_pContainer.attributes];
