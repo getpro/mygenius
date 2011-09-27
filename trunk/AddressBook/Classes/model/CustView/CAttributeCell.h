@@ -11,19 +11,18 @@
 
 @interface CAttributeCell : UITableViewCell 
 {
-	id dataTarget;
+	id         dataTarget;
 	NSString * dataKey;
-	UIViewController * controller;
+	NSString * dataLabel;
 }
 
-@property (nonatomic, readonly) id dataTarget;
+@property (nonatomic, readonly)        id dataTarget;
 @property (nonatomic, readonly) NSString *dataKey;
-@property (nonatomic, retain)   UIViewController *controller;
-
+@property (nonatomic, readonly) NSString *dataLabel;
 /**
  *	Set the source of the text data here.  The cell will pull the NSString data
  *	using Key-Value Coding.
  */
-- (void)setTarget:(id)target withKey:(NSString*)key;
+- (void)setTarget:(id)target withLabel:(NSString*)label withkey:(NSString*)key;
 
 @end

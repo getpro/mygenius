@@ -34,7 +34,8 @@
 
 - (void)dealloc 
 {
-	[self.label release];
+	[label release];
+	
 	[super dealloc];
 }
 
@@ -49,9 +50,9 @@
 	
 	if (cell != nil)
 	{
-		[cell setTarget:self withKey:@"label"];
+		[cell setTarget:self withLabel:@"label" withkey:@"stringValue"];
 		cell.textLabel.text = self.label;
-		cell.detailTextLabel.text = @"huh?";
+		//cell.detailTextLabel.text = @"huh?";
 	}
 	
 	return cell;

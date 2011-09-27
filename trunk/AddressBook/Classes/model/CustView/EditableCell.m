@@ -144,7 +144,16 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context 
 {
-	; // we explicitly do nothing here, because we're driving the text changes
+	NSString *newText = [change valueForKey:NSKeyValueChangeNewKey];
+	
+	if ([newText isKindOfClass:[NSString class]]) 
+	{
+		if([keyPath isEqual:@"label"])
+		{
+			self.textLabel.text = newText;
+			[self setNeedsLayout];
+		}
+	}
 }
 
 @end

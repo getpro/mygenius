@@ -86,7 +86,7 @@
 	if (cell != nil)
 	{
 		cell.textLabel.text = self.label;
-		[cell setTarget:self withKey:@"stringValue"];
+		[cell setTarget:self withLabel:@"label" withkey:@"stringValue"];
 		cell.Target   = self;
 		cell.Selector = @selector(getTagClick);
 		//cell.textField.placeholder = @"...";

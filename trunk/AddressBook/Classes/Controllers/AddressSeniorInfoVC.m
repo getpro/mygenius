@@ -211,7 +211,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView 
 		 cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSInteger row = [indexPath row];
+	//NSInteger row = [indexPath row];
 	UITableViewCell *cell = nil;
 	//CAttribute      *attr = nil;
 	
