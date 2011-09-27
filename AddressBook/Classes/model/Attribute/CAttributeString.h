@@ -21,6 +21,7 @@
 }
 
 @property (nonatomic, retain) NSString* stringValue;
+
 @property (nonatomic, assign) UINavigationController* nvController;
 @property (nonatomic, assign) Tag_Type m_nType;
 
