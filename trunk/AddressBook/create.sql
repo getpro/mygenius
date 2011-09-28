@@ -2,35 +2,106 @@ sqlite3 AddressBook.db
 
 CREATE TABLE contacts_info(
 'contacts_id'TEXT PRIMARY KEY,
-'contacts_name'TEXT,
+'contacts_lastname'TEXT,
+'contacts_firstname'TEXT,
+'contacts_prefix'TEXT,
+'contacts_firstnamephonetic'TEXT,
+'contacts_lastnamephonetic'TEXT,
+'contacts_middlename'TEXT,
+'contacts_suffix'TEXT,
+'contacts_nickname'TEXT,
 'contacts_organization'TEXT,
+'contacts_jobtitle'TEXT,
+'contacts_department'TEXT,
 'contacts_headImage'BLOB,
-'contacts_sex'INTEGER,
-'contacts_home_email'TEXT,
-'contacts_work_email'TEXT,
-'contacts_extra_email'TEXT,
-'contacts_home_address'TEXT,
-'contacts_work_address'TEXT,
-'contacts_extra_address'TEXT,
-'contacts_mobilephone'TEXT,
-'contacts_iphone'TEXT,
+'contacts_sex'TEXT,
+'contacts_ring'TEXT,
 'contacts_recommend_id'TEXT,
-'contacts_recommend_name'TEXT,
 'contacts_group_id'TEXT,
-'contacts_group_name'TEXT,
 'contacts_birthday'DATETIME,
-'contacts_constellation'INTEGER
+'contacts_note'TEXT,
+'contacts_constellation'TEXT
+'contacts_blood'TEXT,
+'contacts_add_type'TEXT,
+'contacts_creation'DATETIME NOT NULL,
+'contacts_modification'DATETIME NOT NULL
 );
 
-CREATE TABLE group_info (
-    'group_id'     TEXT PRIMARY KEY,
-    'group_name'   TEXT
+CREATE TABLE group_info(
+'group_id'TEXT PRIMARY KEY,
+'group_name'TEXT NOT NULL,
+'group_creation'DATETIME NOT NULL,
+'group_modification'DATETIME NOT NULL
 );
 
-CREATE TABLE config (
-    'config_id'                 TEXT PRIMARY KEY,
-    'config_copy_addressbook'   INTEGER,
-    'config_first_use'          DATETIME	 
+CREATE TABLE tel_info(
+'contacts_id'TEXT PRIMARY KEY,
+'tel_num'TEXT NOT NULL,
+'tel_label'TEXT NOT NULL,
+'tel_servicer'TEXT,
+'tel_index'TEXT NOT NULL
+);
+
+CREATE TABLE url_info(
+'contacts_id'TEXT PRIMARY KEY,
+'url_content'TEXT NOT NULL,
+'url_label'TEXT NOT NULL,
+'url_index'TEXT NOT NULL
+);
+
+CREATE TABLE email_info(
+'contacts_id'TEXT PRIMARY KEY,
+'email_content'TEXT NOT NULL,
+'email_label'TEXT NOT NULL,
+'email_index'TEXT NOT NULL
+);
+
+CREATE TABLE address_info(
+'contacts_id'TEXT PRIMARY KEY,
+'address_street'TEXT,
+'address_zip'TEXT,
+'address_city'TEXT,
+'address_state'TEXT,
+'address_country'TEXT,
+'address_label'TEXT NOT NULL,
+'address_index'TEXT NOT NULL
+);
+
+CREATE TABLE instantMessage_info(
+'contacts_id'TEXT PRIMARY KEY,
+'instantMessage_content'TEXT NOT NULL,
+'instantMessage_label'TEXT NOT NULL,
+'instantMessage_index'TEXT NOT NULL
+);
+
+CREATE TABLE date_info(
+'contacts_id'TEXT PRIMARY KEY,
+'date_time'DATETIME NOT NULL,
+'date_label'TEXT NOT NULL,
+'date_remind'TEXT,
+'date_index'TEXT NOT NULL
+);
+
+CREATE TABLE account_info(
+'contacts_id'TEXT PRIMARY KEY,
+'account_content'TEXT NOT NULL,
+'account_label'TEXT NOT NULL,
+'account_index'TEXT NOT NULL
+);
+
+CREATE TABLE certificate_info(
+'contacts_id'TEXT PRIMARY KEY,
+'certificate_content'TEXT NOT NULL,
+'certificate_label'TEXT NOT NULL,
+'certificate_index'TEXT NOT NULL
+);
+
+CREATE TABLE tag_info(
+'tag_id'TEXT PRIMARY KEY,
+'tag_name'TEXT NOT NULL,
+'tag_type'TEXT NOT NULL,
+'tag_creation'DATETIME NOT NULL,
+'tag_modification'DATETIME NOT NULL
 );
 
 CREATE TABLE memo_info(
@@ -41,19 +112,15 @@ CREATE TABLE memo_info(
 'memo_remind'INTEGER
 );
 
-CREATE TABLE date_info(
-'date_id'TEXT PRIMARY KEY,
-'date_type_id'TEXT,
-'date_type_name'TEXT,
-'date_des'TEXT,
-'date_date'TEXT,
-'date_remind'INTEGER
-);
-
 CREATE TABLE date_type(
 'date_type_id'TEXT PRIMARY KEY,
 'date_type_name'TEXT	 
 );
 
+CREATE TABLE config(
+'config_id'TEXT PRIMARY KEY,
+'config_copy_addressbook'INTEGER,
+'config_first_use'DATETIME	 
+);
 
 REPLACE INTO config VALUES(1001, 0, DATETIME('now'))
