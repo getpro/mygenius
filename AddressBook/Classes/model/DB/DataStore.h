@@ -10,10 +10,20 @@
 
 #import "contactsInfo.h"
 
+
+//系统设置
 #define CONFIG_ID @"1001"
 
+//分组
 #define GROUP_ID  @"1101"
 
+//自定义标签
+#define TAG_ID    @"1201"
+
+//备忘录
+#define MEMO_ID   @"1501"
+
+//联系人
 #define CONTACTINFO_ID 2001
 
 @interface DataStore : NSObject 
