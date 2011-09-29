@@ -15,7 +15,6 @@
 @synthesize tbController;
 @synthesize window;
 
-@synthesize m_arrContactsInfo;
 @synthesize m_arrDateInfo;
 @synthesize m_arrMemoInfo;
 @synthesize m_arrGroup;
@@ -37,9 +36,8 @@
 	
 	m_pContactData = [[ContactData alloc] init];
 	
-	//[DBConnection getSharedDatabase];
+	[DBConnection getSharedDatabase];
 	
-	m_arrContactsInfo   = [[NSMutableArray alloc] initWithCapacity:10];
 	m_arrDateInfo       = [[NSMutableArray alloc] initWithCapacity:10];
 	m_arrMemoInfo       = [[NSMutableArray alloc] initWithCapacity:10];
 	m_arrGroup          = [[NSMutableArray alloc] initWithCapacity:10];
@@ -60,57 +58,49 @@
 		NSLog(@"groups[%@]",pGroup.name);
 	}
 	
-	//
-	/*
+	//第一次运行程序
 	if([DataStore Get_Copy_Addressbook] == 0)
 	{
-		//第一次运行程序
 		NSLog(@"Copy_Addressbook==0");
-		
-		[self GetSysAddressBook];
-		
-		//系统通讯录的数据入库
-		[DBConnection beginTransaction];
-		
-		for (int i = 0; i < [self.m_arrContactsInfo count]; i++)
-		{
-			contactsInfo * pcontactsInfo = (contactsInfo*)[self.m_arrContactsInfo objectAtIndex:i];
-			
-			if (pcontactsInfo)
-			{
-				//新闻条目入库
-				[DataStore insertContactsInfo:pcontactsInfo];
-			}
-		}
-		
-		[DBConnection commitTransaction];
-		
 		//修改Copy_Addressbook = 1
 		[DataStore Set_Copy_Addressbook :1];
 		
 		[DataStore Set_First_Use];
-		
 	}
-	else 
+	
+	//系统通讯录的数据入库
+	[DBConnection beginTransaction];
+	
+	for(ABContact * pABContact in m_pContactData.contactsArray)
 	{
-		//已经把系统通讯录的数据导入到了库里面
-		NSLog(@"Copy_Addressbook==1");
+		ABRecordRef pRecord    = pABContact.record;
+		ABRecordID  pRecordID  = ABRecordGetRecordID(pRecord);
 		
-		[DataStore getContactsInfo:self.m_arrContactsInfo];
-		
-		/*
-		for (int i = 0; i < [self.m_arrContactsInfo count]; i++)
+		//判断RecordID是否已在库中
+		if([DataStore RecordIDIsExist:pRecordID])
 		{
-			contactsInfo * pcontactsInfo = (contactsInfo*)[self.m_arrContactsInfo objectAtIndex:i];
+			//在库中
+			//检测修改时间是否相同
+			NSLog(@"IN[%d]",pRecordID);
+			if(YES)
+			{
+				//不相同，修改库中的内容
+				
+			}
+		}
+		else
+		{
+			//不在库中,存入库中
+			NSLog(@"OUT[%d]",pRecordID);
 			
-			//新闻条目入库
-			pcontactsInfo.m_ncontactsSex ++;
+			[DataStore insertContactsBaseInfo:pRecord];
+			
 		}
 		
-		
-		
 	}
-	*/
+	
+	[DBConnection commitTransaction];
+	
 	
 	//通讯录
 	m_pAddressBookVC = [[AddressBookVC alloc] init];
@@ -244,7 +234,6 @@
 	[m_pstatisticsVC	  release];
 	[m_pmoreVC	    	  release];
 	
-	[m_arrContactsInfo    release];
 	[m_arrDateInfo		  release];
 	[m_arrMemoInfo		  release];
 	[m_arrGroup           release];
@@ -259,321 +248,6 @@
 +(AddressBookAppDelegate*)getAppDelegate
 {
     return (AddressBookAppDelegate*)[UIApplication sharedApplication].delegate;
-}
-
--(void) GetSysAddressBook
-{
-	//获得通讯录中联系人的所有属性
-	ABAddressBookRef addressBook = ABAddressBookCreate();
-	
-	CFArrayRef results = ABAddressBookCopyArrayOfAllPeople(addressBook);
-	
-	static int pCONTACTINFO_ID = CONTACTINFO_ID;
-	
-	for(int i = 0; i < CFArrayGetCount(results); i++)
-	{
-		
-		contactsInfo * pcontactsInfo = [[contactsInfo alloc] init];
-		
-		pcontactsInfo.m_strcontactsID = [NSString stringWithFormat:@"%d",pCONTACTINFO_ID];
-		
-		pCONTACTINFO_ID ++ ;
-		
-		ABRecordRef person = CFArrayGetValueAtIndex(results, i);
-		
-		NSMutableString * pMutableNameString = [NSMutableString stringWithCapacity:10];
-		
-		//读取firstname
-		NSString *personName = (NSString*)ABRecordCopyValue(person, kABPersonFirstNameProperty);
-		if(personName != nil)
-		{
-			//textView.text = [textView.text stringByAppendingFormat:@"\n姓名：%@\n",personName];
-			[pMutableNameString appendString:personName];
-		}
-		
-		//读取lastname
-		NSString *lastname = (NSString*)ABRecordCopyValue(person, kABPersonLastNameProperty);
-		if(lastname != nil)
-		{
-			//textView.text = [textView.text stringByAppendingFormat:@"%@\n",lastname];
-			[pMutableNameString appendString:lastname];
-		}
-		
-		pcontactsInfo.m_strcontactsName = pMutableNameString;
-		
-		/*
-		 //读取middlename
-		 NSString *middlename = (NSString*)ABRecordCopyValue(person, kABPersonMiddleNameProperty);
-		 if(middlename != nil)
-		 textView.text = [textView.text stringByAppendingFormat:@"%@\n",middlename];
-		 //读取prefix前缀
-		 NSString *prefix = (NSString*)ABRecordCopyValue(person, kABPersonPrefixProperty);
-		 if(prefix != nil)
-		 textView.text = [textView.text stringByAppendingFormat:@"%@\n",prefix];
-		 //读取suffix后缀
-		 NSString *suffix = (NSString*)ABRecordCopyValue(person, kABPersonSuffixProperty);
-		 if(suffix != nil)
-		 textView.text = [textView.text stringByAppendingFormat:@"%@\n",suffix];
-		 //读取nickname呢称
-		 NSString *nickname = (NSString*)ABRecordCopyValue(person, kABPersonNicknameProperty);
-		 if(nickname != nil)
-		 textView.text = [textView.text stringByAppendingFormat:@"%@\n",nickname];
-		 //读取firstname拼音音标
-		 NSString *firstnamePhonetic = (NSString*)ABRecordCopyValue(person, kABPersonFirstNamePhoneticProperty);
-		 if(firstnamePhonetic != nil)
-		 textView.text = [textView.text stringByAppendingFormat:@"%@\n",firstnamePhonetic];
-		 //读取lastname拼音音标
-		 NSString *lastnamePhonetic = (NSString*)ABRecordCopyValue(person, kABPersonLastNamePhoneticProperty);
-		 if(lastnamePhonetic != nil)
-		 textView.text = [textView.text stringByAppendingFormat:@"%@\n",lastnamePhonetic];
-		 //读取middlename拼音音标
-		 NSString *middlenamePhonetic = (NSString*)ABRecordCopyValue(person, kABPersonMiddleNamePhoneticProperty);
-		 if(middlenamePhonetic != nil)
-		 textView.text = [textView.text stringByAppendingFormat:@"%@\n",middlenamePhonetic];
-		 */
-		
-		
-		//读取organization公司
-		NSString *organization = (NSString*)ABRecordCopyValue(person, kABPersonOrganizationProperty);
-		if(organization != nil)
-		{
-			//textView.text = [textView.text stringByAppendingFormat:@"%@\n",organization];
-			pcontactsInfo.m_strcontactsOrganization = organization;
-		}
-		
-		/*
-		 //读取jobtitle工作
-		 NSString *jobtitle = (NSString*)ABRecordCopyValue(person, kABPersonJobTitleProperty);
-		 if(jobtitle != nil)
-		 textView.text = [textView.text stringByAppendingFormat:@"%@\n",jobtitle];
-		 
-		 
-		 //读取department部门
-		 NSString *department = (NSString*)ABRecordCopyValue(person, kABPersonDepartmentProperty);
-		 if(department != nil)
-		 textView.text = [textView.text stringByAppendingFormat:@"%@\n",department];
-		 
-		 
-		 //读取birthday生日
-		 NSDate *birthday = (NSDate*)ABRecordCopyValue(person, kABPersonBirthdayProperty);
-		 if(birthday != nil)
-		 textView.text = [textView.text stringByAppendingFormat:@"%@\n",birthday];
-		 //读取note备忘录
-		 NSString *note = (NSString*)ABRecordCopyValue(person, kABPersonNoteProperty);
-		 if(note != nil)
-		 textView.text = [textView.text stringByAppendingFormat:@"%@\n",note];
-		 //第一次添加该条记录的时间
-		 NSString *firstknow = (NSString*)ABRecordCopyValue(person, kABPersonCreationDateProperty);
-		 NSLog(@"第一次添加该条记录的时间%@\n",firstknow);
-		 //最后一次修改該条记录的时间
-		 NSString *lastknow = (NSString*)ABRecordCopyValue(person, kABPersonModificationDateProperty);
-		 NSLog(@"最后一次修改該条记录的时间%@\n",lastknow);
-		 */
-		
-		
-		
-		//获取email多值
-		ABMultiValueRef email = ABRecordCopyValue(person, kABPersonEmailProperty);
-		int emailcount = ABMultiValueGetCount(email);    
-		for (int x = 0; x < emailcount; x++)
-		{
-			//获取email Label
-			NSString* emailLabel = (NSString*)ABAddressBookCopyLocalizedLabel(ABMultiValueCopyLabelAtIndex(email, x));
-			//获取email值
-			NSString* emailContent = (NSString*)ABMultiValueCopyValueAtIndex(email, x);
-			//textView.text = [textView.text stringByAppendingFormat:@"%@:%@\n",emailLabel,emailContent];
-			
-			//住宅和工作
-			if([emailLabel isEqual:@"住宅"])
-			{
-				pcontactsInfo.m_strcontactsHomeEmail = emailContent;
-			}
-			else if([emailLabel isEqual:@"工作"])
-			{
-				pcontactsInfo.m_strcontactsWorkEmail = emailContent;
-			}
-		}
-		
-		
-		//读取地址多值
-		ABMultiValueRef address = ABRecordCopyValue(person, kABPersonAddressProperty);
-		int count = ABMultiValueGetCount(address);    
-		
-		for(int j = 0; j < count; j++)
-		{
-			//获取地址Label
-			NSString* addressLabel = (NSString*)ABMultiValueCopyLabelAtIndex(address, j);
-			
-			//_$!<Work>!$_
-			//_$!<Home>!$_
-			
-			//textView.text = [textView.text stringByAppendingFormat:@"%@\n",addressLabel];
-			
-			//获取該label下的地址6属性
-			NSDictionary* personaddress =(NSDictionary*) ABMultiValueCopyValueAtIndex(address, j);
-			
-			NSMutableString * pMutableaddressString = [NSMutableString stringWithCapacity:24];
-			
-			{
-				
-				
-				/*
-				 NSString* country = [personaddress valueForKey:(NSString *)kABPersonAddressCountryKey];
-				 if(country != nil)
-				 {
-				 //textView.text = [textView.text stringByAppendingFormat:@"国家：%@\n",country];
-				 }
-				 */
-				
-				NSString* city = [personaddress valueForKey:(NSString *)kABPersonAddressCityKey];
-				if(city != nil)
-				{
-					//textView.text = [textView.text stringByAppendingFormat:@"城市：%@\n",city];
-					[pMutableaddressString appendString:city];
-				}
-				
-				NSString* state = [personaddress valueForKey:(NSString *)kABPersonAddressStateKey];
-				if(state != nil)
-				{
-					//textView.text = [textView.text stringByAppendingFormat:@"省：%@\n",state];
-					[pMutableaddressString appendString:state];
-				}
-				
-				NSString* street = [personaddress valueForKey:(NSString *)kABPersonAddressStreetKey];
-				if(street != nil)
-				{
-					//textView.text = [textView.text stringByAppendingFormat:@"街道：%@\n",street];
-					[pMutableaddressString appendString:street];
-				}
-				
-				
-				
-				/*
-				 NSString* zip = [personaddress valueForKey:(NSString *)kABPersonAddressZIPKey];
-				 if(zip != nil)
-				 {
-				 //textView.text = [textView.text stringByAppendingFormat:@"邮编：%@\n",zip];
-				 }
-				 
-				 NSString* coutntrycode = [personaddress valueForKey:(NSString *)kABPersonAddressCountryCodeKey];
-				 if(coutntrycode != nil)
-				 {
-				 //textView.text = [textView.text stringByAppendingFormat:@"国家编号：%@\n",coutntrycode];    
-				 }
-				 */
-			}
-			
-			if([addressLabel isEqual:@"_$!<Work>!$_"])
-			{
-				pcontactsInfo.m_strcontactsWorkAddress = pMutableaddressString;
-			}
-			else if([addressLabel isEqual:@"_$!<Home>!$_"])
-			{
-				pcontactsInfo.m_strcontactsHomeAddress = pMutableaddressString;
-			}
-			
-			
-		}
-		
-		/*
-		 //获取dates多值
-		 ABMultiValueRef dates = ABRecordCopyValue(person, kABPersonDateProperty);
-		 int datescount = ABMultiValueGetCount(dates);    
-		 for (int y = 0; y < datescount; y++)
-		 {
-		 //获取dates Label
-		 NSString* datesLabel = (NSString*)ABAddressBookCopyLocalizedLabel(ABMultiValueCopyLabelAtIndex(dates, y));
-		 //获取dates值
-		 NSString* datesContent = (NSString*)ABMultiValueCopyValueAtIndex(dates, y);
-		 textView.text = [textView.text stringByAppendingFormat:@"%@:%@\n",datesLabel,datesContent];
-		 }
-		 //获取kind值
-		 CFNumberRef recordType = ABRecordCopyValue(person, kABPersonKindProperty);
-		 if (recordType == kABPersonKindOrganization) {
-		 // it's a company
-		 NSLog(@"it's a company\n");
-		 } else {
-		 // it's a person, resource, or room
-		 NSLog(@"it's a person, resource, or room\n");
-		 }
-		 
-		 
-		 //获取IM多值
-		 ABMultiValueRef instantMessage = ABRecordCopyValue(person, kABPersonInstantMessageProperty);
-		 for (int l = 1; l < ABMultiValueGetCount(instantMessage); l++)
-		 {
-		 //获取IM Label
-		 NSString* instantMessageLabel = (NSString*)ABMultiValueCopyLabelAtIndex(instantMessage, l);
-		 textView.text = [textView.text stringByAppendingFormat:@"%@\n",instantMessageLabel];
-		 //获取該label下的2属性
-		 NSDictionary* instantMessageContent =(NSDictionary*) ABMultiValueCopyValueAtIndex(instantMessage, l);        
-		 NSString* username = [instantMessageContent valueForKey:(NSString *)kABPersonInstantMessageUsernameKey];
-		 if(username != nil)
-		 textView.text = [textView.text stringByAppendingFormat:@"username：%@\n",username];
-		 
-		 NSString* service = [instantMessageContent valueForKey:(NSString *)kABPersonInstantMessageServiceKey];
-		 if(service != nil)
-		 textView.text = [textView.text stringByAppendingFormat:@"service：%@\n",service];            
-		 }
-		 */
-		
-		
-		//读取电话多值
-		ABMultiValueRef phone = ABRecordCopyValue(person, kABPersonPhoneProperty);
-		for (int k = 0; k<ABMultiValueGetCount(phone); k++)
-		{
-			//获取电话Label
-			NSString * personPhoneLabel = (NSString*)ABAddressBookCopyLocalizedLabel(ABMultiValueCopyLabelAtIndex(phone, k));
-			//获取該Label下的电话值
-			NSString * personPhone = (NSString*)ABMultiValueCopyValueAtIndex(phone, k);
-			
-			//textView.text = [textView.text stringByAppendingFormat:@"%@:%@\n",personPhoneLabel,personPhone];
-			
-			//iPhone和移动电话
-			
-			if([personPhoneLabel isEqual:@"iPhone"])
-			{
-				pcontactsInfo.m_strcontactsIphone = personPhone;
-			}
-			else if([personPhoneLabel isEqual:@"移动电话"])
-			{
-				pcontactsInfo.m_strcontactsMobilePhone = personPhone;
-			}
-			
-		}
-		
-		/*
-		 //获取URL多值
-		 ABMultiValueRef url = ABRecordCopyValue(person, kABPersonURLProperty);
-		 for (int m = 0; m < ABMultiValueGetCount(url); m++)
-		 {
-		 //获取电话Label
-		 NSString * urlLabel = (NSString*)ABAddressBookCopyLocalizedLabel(ABMultiValueCopyLabelAtIndex(url, m));
-		 //获取該Label下的电话值
-		 NSString * urlContent = (NSString*)ABMultiValueCopyValueAtIndex(url,m);
-		 
-		 textView.text = [textView.text stringByAppendingFormat:@"%@:%@\n",urlLabel,urlContent];
-		 }
-		 */
-		
-		//读取照片
-		NSData *image = (NSData*)ABPersonCopyImageData(person);
-		
-		if(image && [image length] > 0)
-		{
-			UIImageView *myImage = [[UIImageView alloc] initWithFrame:CGRectMake(200, 0, 50, 50)];
-			[myImage setImage:[UIImage imageWithData:image]];
-			myImage.opaque = YES;
-			//[textView addSubview:myImage];
-		}
-		
-		[self.m_arrContactsInfo addObject:pcontactsInfo];
-		
-		[pcontactsInfo release];
-	}
-	
-	CFRelease(results);
-	CFRelease(addressBook);
 }
 
 - (NSURL *)smartURLForString:(NSString *)str

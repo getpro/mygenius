@@ -45,14 +45,13 @@ ABAddressBookRef addressBook;
 	statisticsVC  * m_pstatisticsVC;
 	moreVC        * m_pmoreVC;
 	
-	NSMutableArray * m_arrContactsInfo; //通讯录数据
 	NSMutableArray * m_arrMemoInfo;     //备忘录数据
 	NSMutableArray * m_arrDateInfo;     //纪念日数据
 	
 	NSMutableArray * m_arrCustomTag;    //自定义标签
 	
 	//FTP
-	NSInteger               _networkingCount;
+	NSInteger        _networkingCount;
 	
 	//系统通讯录类
 	ContactData    * m_pContactData;
@@ -63,7 +62,6 @@ ABAddressBookRef addressBook;
 @property (nonatomic, retain) IBOutlet UIWindow  *window;
 @property (nonatomic, retain) UITabBarController *tbController;
 
-@property (nonatomic, retain) NSMutableArray * m_arrContactsInfo;
 @property (nonatomic, retain) NSMutableArray * m_arrMemoInfo;
 @property (nonatomic, retain) NSMutableArray * m_arrDateInfo;
 @property (nonatomic, retain) NSMutableArray * m_arrGroup;
@@ -80,8 +78,6 @@ ABAddressBookRef addressBook;
  * @param NSDictionary * params parameters for the API call
 */
 + (AddressBookAppDelegate * ) getAppDelegate;
-
-- (void) GetSysAddressBook;
 
 - (NSString *)pathForTemporaryFileWithPrefix:(NSString *)prefix;
 - (NSURL *)smartURLForString:(NSString *)str;

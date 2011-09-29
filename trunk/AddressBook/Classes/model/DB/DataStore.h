@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 
 #import "contactsInfo.h"
 
@@ -45,8 +47,12 @@
 
 /* contacts_info */
 
-+(void)insertContactsInfo:(contactsInfo *)pContactsInfo;
+//基本信息
++(void)insertContactsBaseInfo:(ABRecordRef)pABRecordRef;
 
 +(NSInteger)getContactsInfo:(NSMutableArray*)pArray;
+
+//判断RecordID是否已在库中
++(BOOL)RecordIDIsExist:(ABRecordID)pRecordID;
 
 @end
