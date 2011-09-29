@@ -98,6 +98,26 @@ typedef enum {
 }
 
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url 
+{
+	// Do something with the url here
+	if (!url) {  return NO; }
+	
+	/*
+    NSString *URLString = [url relativeString];
+    //[[NSUserDefaults standardUserDefaults] setObject:URLString forKey:@"url"];
+    //[[NSUserDefaults standardUserDefaults] synchronize];
+	
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:URLString
+												   delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+	[alert show];	
+	[alert release];
+	*/
+	[self startMultiPlayer];
+	
+    return YES;
+}
+
 
 - (void) dealloc
 {
