@@ -54,11 +54,7 @@ static sqlite3*             theDatabase = nil;
         if (theDatabase == nil) 
 		{
             [DBConnection createEditableCopyOfDatabaseIfNeeded:true];
-			
-			/*
-            [[LeisurelinessTDAppDelegate getAppDelegate] alert:@"Local cache error" 
-													   message:@"Local cache database has been corrupted. Re-created new database."];
-			*/
+			NSLog(@"Local cache database has been corrupted. Re-created new database.");
         }
     }
     return theDatabase;
