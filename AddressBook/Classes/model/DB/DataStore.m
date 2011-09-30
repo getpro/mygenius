@@ -109,8 +109,9 @@
     }
 	
 	ABRecordRef person = pABRecordRef;
+	ABRecordID  pRecordID  = ABRecordGetRecordID(person);
 	
-	[stmt bindString:[NSString stringWithFormat:@"%d",ABRecordGetRecordID(pABRecordRef)] forIndex:1];//1.contacts_id
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID] forIndex:1];//1.contacts_id
 	
 	//读取lastname
 	NSString *lastname = (NSString*)ABRecordCopyValue(person, kABPersonLastNameProperty);
@@ -221,7 +222,7 @@
 	NSDate *birthday = (NSDate*)ABRecordCopyValue(person, kABPersonBirthdayProperty);
 	if(birthday != nil)
 	{
-		[stmt bindString:birthday	forIndex:18];//18.contacts_birthday
+		[stmt bindInt32:[birthday timeIntervalSince1970] forIndex:18];//18.contacts_birthday
 	}
 	
 	//读取note备忘录
@@ -246,7 +247,7 @@
 	{
 		firstknow = [NSDate date];
 	}
-	[stmt bindString:firstknow	forIndex:23];//23.contacts_creation
+	[stmt bindInt32:[firstknow timeIntervalSince1970] forIndex:23];//23.contacts_creation
 	
 	//最后一次修改該条记录的时间
 	NSDate *lastknow = (NSDate*)ABRecordCopyValue(person, kABPersonModificationDateProperty);
@@ -254,30 +255,19 @@
 	{
 		lastknow = [NSDate date];
 	}
-	[stmt bindString:lastknow	forIndex:24];//24.contacts_modification
+	[stmt bindInt32:[lastknow timeIntervalSince1970] forIndex:24];//24.contacts_modification
 	
-	
-	/*
 	//获取email多值
 	ABMultiValueRef email = ABRecordCopyValue(person, kABPersonEmailProperty);
 	int emailcount = ABMultiValueGetCount(email);    
 	for (int x = 0; x < emailcount; x++)
 	{
 		//获取email Label
-		NSString* emailLabel = (NSString*)ABAddressBookCopyLocalizedLabel(ABMultiValueCopyLabelAtIndex(email, x));
+		NSString* emailLabel   = (NSString*)ABAddressBookCopyLocalizedLabel(ABMultiValueCopyLabelAtIndex(email, x));
 		//获取email值
 		NSString* emailContent = (NSString*)ABMultiValueCopyValueAtIndex(email, x);
-		//textView.text = [textView.text stringByAppendingFormat:@"%@:%@\n",emailLabel,emailContent];
 		
-		//住宅和工作
-		if([emailLabel isEqual:@"住宅"])
-		{
-			pcontactsInfo.m_strcontactsHomeEmail = emailContent;
-		}
-		else if([emailLabel isEqual:@"工作"])
-		{
-			pcontactsInfo.m_strcontactsWorkEmail = emailContent;
-		}
+		[self insertEmails:pRecordID:emailContent:emailLabel:x];
 	}
 	
 	
@@ -289,120 +279,70 @@
 	{
 		//获取地址Label
 		NSString* addressLabel = (NSString*)ABMultiValueCopyLabelAtIndex(address, j);
-		
 		//_$!<Work>!$_
 		//_$!<Home>!$_
-		
-		//textView.text = [textView.text stringByAppendingFormat:@"%@\n",addressLabel];
-		
 		//获取該label下的地址6属性
 		NSDictionary* personaddress =(NSDictionary*) ABMultiValueCopyValueAtIndex(address, j);
 		
-		NSMutableString * pMutableaddressString = [NSMutableString stringWithCapacity:24];
+		NSString* country = [personaddress valueForKey:(NSString *)kABPersonAddressCountryKey];
 		
-		{
+		NSString* city = [personaddress valueForKey:(NSString *)kABPersonAddressCityKey];
 			
+		NSString* state = [personaddress valueForKey:(NSString *)kABPersonAddressStateKey];
 			
+	    NSString* street = [personaddress valueForKey:(NSString *)kABPersonAddressStreetKey];
 			
-			 NSString* country = [personaddress valueForKey:(NSString *)kABPersonAddressCountryKey];
-			 if(country != nil)
-			 {
-			 //textView.text = [textView.text stringByAppendingFormat:@"国家：%@\n",country];
-			 }
-			 
-			
-			NSString* city = [personaddress valueForKey:(NSString *)kABPersonAddressCityKey];
-			if(city != nil)
-			{
-				//textView.text = [textView.text stringByAppendingFormat:@"城市：%@\n",city];
-				[pMutableaddressString appendString:city];
-			}
-			
-			NSString* state = [personaddress valueForKey:(NSString *)kABPersonAddressStateKey];
-			if(state != nil)
-			{
-				//textView.text = [textView.text stringByAppendingFormat:@"省：%@\n",state];
-				[pMutableaddressString appendString:state];
-			}
-			
-			NSString* street = [personaddress valueForKey:(NSString *)kABPersonAddressStreetKey];
-			if(street != nil)
-			{
-				//textView.text = [textView.text stringByAppendingFormat:@"街道：%@\n",street];
-				[pMutableaddressString appendString:street];
-			}
-			
-			
-			
-			
-			 NSString* zip = [personaddress valueForKey:(NSString *)kABPersonAddressZIPKey];
-			 if(zip != nil)
-			 {
-			 //textView.text = [textView.text stringByAppendingFormat:@"邮编：%@\n",zip];
-			 }
-			 
-			 NSString* coutntrycode = [personaddress valueForKey:(NSString *)kABPersonAddressCountryCodeKey];
-			 if(coutntrycode != nil)
-			 {
-			 //textView.text = [textView.text stringByAppendingFormat:@"国家编号：%@\n",coutntrycode];    
-			 }
-			 
-		}
+		NSString* zip = [personaddress valueForKey:(NSString *)kABPersonAddressZIPKey];
 		
-		if([addressLabel isEqual:@"_$!<Work>!$_"])
-		{
-			pcontactsInfo.m_strcontactsWorkAddress = pMutableaddressString;
-		}
-		else if([addressLabel isEqual:@"_$!<Home>!$_"])
-		{
-			pcontactsInfo.m_strcontactsHomeAddress = pMutableaddressString;
-		}
+		//NSString* coutntrycode = [personaddress valueForKey:(NSString *)kABPersonAddressCountryCodeKey];
 		
+		[self insertAddresses:pRecordID:street
+							 :zip:city:state
+							 :country:addressLabel:j];
+			 
+	}
+	
+	//获取dates多值
+	ABMultiValueRef dates = ABRecordCopyValue(person, kABPersonDateProperty);
+	int datescount = ABMultiValueGetCount(dates);    
+	for (int y = 0; y < datescount; y++)
+	{
+		//获取dates Label
+		NSString* datesLabel = (NSString*)ABAddressBookCopyLocalizedLabel(ABMultiValueCopyLabelAtIndex(dates, y));
+		//获取dates值
+		NSDate* datesContent = (NSDate*)ABMultiValueCopyValueAtIndex(dates, y);
+		
+		[self insertDates:pRecordID:[datesContent timeIntervalSince1970]:datesLabel:y];
 		
 	}
 	
+	//获取kind值
+	//CFNumberRef recordType = ABRecordCopyValue(person, kABPersonKindProperty);
+	//if (recordType == kABPersonKindOrganization) 
+	//{
+	//	 // it's a company
+	//	 NSLog(@"it's a company\n");
+	//} 
+	//else 
+	//{
+		// it's a person, resource, or room
+		//NSLog(@"it's a person, resource, or room\n");
+	//}
 	
-	 //获取dates多值
-	 ABMultiValueRef dates = ABRecordCopyValue(person, kABPersonDateProperty);
-	 int datescount = ABMultiValueGetCount(dates);    
-	 for (int y = 0; y < datescount; y++)
-	 {
-	 //获取dates Label
-	 NSString* datesLabel = (NSString*)ABAddressBookCopyLocalizedLabel(ABMultiValueCopyLabelAtIndex(dates, y));
-	 //获取dates值
-	 NSString* datesContent = (NSString*)ABMultiValueCopyValueAtIndex(dates, y);
-	 textView.text = [textView.text stringByAppendingFormat:@"%@:%@\n",datesLabel,datesContent];
-	 }
-	 //获取kind值
-	 CFNumberRef recordType = ABRecordCopyValue(person, kABPersonKindProperty);
-	 if (recordType == kABPersonKindOrganization) {
-	 // it's a company
-	 NSLog(@"it's a company\n");
-	 } else {
-	 // it's a person, resource, or room
-	 NSLog(@"it's a person, resource, or room\n");
-	 }
-	 
-	 
-	 //获取IM多值
-	 ABMultiValueRef instantMessage = ABRecordCopyValue(person, kABPersonInstantMessageProperty);
-	 for (int l = 1; l < ABMultiValueGetCount(instantMessage); l++)
-	 {
-	 //获取IM Label
-	 NSString* instantMessageLabel = (NSString*)ABMultiValueCopyLabelAtIndex(instantMessage, l);
-	 textView.text = [textView.text stringByAppendingFormat:@"%@\n",instantMessageLabel];
-	 //获取該label下的2属性
-	 NSDictionary* instantMessageContent =(NSDictionary*) ABMultiValueCopyValueAtIndex(instantMessage, l);        
-	 NSString* username = [instantMessageContent valueForKey:(NSString *)kABPersonInstantMessageUsernameKey];
-	 if(username != nil)
-	 textView.text = [textView.text stringByAppendingFormat:@"username：%@\n",username];
-	 
-	 NSString* service = [instantMessageContent valueForKey:(NSString *)kABPersonInstantMessageServiceKey];
-	 if(service != nil)
-	 textView.text = [textView.text stringByAppendingFormat:@"service：%@\n",service];            
-	 }
-	 
-	
+	//获取IM多值
+	ABMultiValueRef instantMessage = ABRecordCopyValue(person, kABPersonInstantMessageProperty);
+	for (int l = 0; l < ABMultiValueGetCount(instantMessage); l++)
+	{
+		//获取IM Label
+		NSString* instantMessageLabel = (NSString*)ABMultiValueCopyLabelAtIndex(instantMessage, l);
+		
+		//获取該label下的2属性
+		NSDictionary* instantMessageContent =(NSDictionary*) ABMultiValueCopyValueAtIndex(instantMessage, l);
+		NSString* username = [instantMessageContent valueForKey:(NSString *)kABPersonInstantMessageUsernameKey];
+		NSString* service = [instantMessageContent valueForKey:(NSString *)kABPersonInstantMessageServiceKey];
+		
+		[self insertInstantMessage:pRecordID:username:service:instantMessageLabel:l];
+	}
 	
 	//读取电话多值
 	ABMultiValueRef phone = ABRecordCopyValue(person, kABPersonPhoneProperty);
@@ -413,41 +353,27 @@
 		//获取該Label下的电话值
 		NSString * personPhone = (NSString*)ABMultiValueCopyValueAtIndex(phone, k);
 		
-		//textView.text = [textView.text stringByAppendingFormat:@"%@:%@\n",personPhoneLabel,personPhone];
-		
-		//iPhone和移动电话
-		
-		if([personPhoneLabel isEqual:@"iPhone"])
-		{
-			pcontactsInfo.m_strcontactsIphone = personPhone;
-		}
-		else if([personPhoneLabel isEqual:@"移动电话"])
-		{
-			pcontactsInfo.m_strcontactsMobilePhone = personPhone;
-		}
-		
+		[self insertPhones:pRecordID:personPhone:personPhoneLabel:k];
 	}
 	
-	
-	 //获取URL多值
-	 ABMultiValueRef url = ABRecordCopyValue(person, kABPersonURLProperty);
-	 for (int m = 0; m < ABMultiValueGetCount(url); m++)
-	 {
-	 //获取电话Label
-	 NSString * urlLabel = (NSString*)ABAddressBookCopyLocalizedLabel(ABMultiValueCopyLabelAtIndex(url, m));
-	 //获取該Label下的电话值
-	 NSString * urlContent = (NSString*)ABMultiValueCopyValueAtIndex(url,m);
-	 
-	 textView.text = [textView.text stringByAppendingFormat:@"%@:%@\n",urlLabel,urlContent];
-	 }
-	
-	 */
+	//获取URL多值
+	ABMultiValueRef url = ABRecordCopyValue(person, kABPersonURLProperty);
+	for (int m = 0; m < ABMultiValueGetCount(url); m++)
+	{
+		//获取电话Label
+		NSString * urlLabel = (NSString*)ABAddressBookCopyLocalizedLabel(ABMultiValueCopyLabelAtIndex(url, m));
+		//获取該Label下的电话值
+		NSString * urlContent = (NSString*)ABMultiValueCopyValueAtIndex(url,m);
+		
+		[self insertUrls:pRecordID:urlContent:urlLabel:m];
+	}
 	
     [stmt step];
     [stmt reset];
 	[stmt release];
 }
 
+/*
 +(NSInteger)getContactsInfo:(NSMutableArray*)pArray
 {
 	if (pArray == nil) 
@@ -506,6 +432,7 @@
 	
 	return count;
 }
+*/
 
 +(BOOL)RecordIDIsExist:(ABRecordID)pRecordID
 {
@@ -526,5 +453,115 @@
 	return pRet;
 }
 
++(void)insertEmails:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex;
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"INSERT INTO email_info VALUES(?,?,?,?)"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	[stmt bindString:pContent						                forIndex:2];//2.content
+	[stmt bindString:pLabel									        forIndex:3];//3.label
+	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:4];//4.index
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
++(void)insertAddresses:(ABRecordID)pRecordID:(NSString*)pStreet:(NSString*)pZip
+					  :(NSString*)pCity:(NSString*)pState:(NSString*)pCountry
+				      :(NSString*)pLabel:(NSInteger)pIndex
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"INSERT INTO address_info VALUES(?,?,?,?,?,?,?,?)"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	[stmt bindString:pStreet						                forIndex:2];//2.street
+	[stmt bindString:pZip									        forIndex:3];//3.zip
+	[stmt bindString:pCity											forIndex:4];//4.city
+	[stmt bindString:pState									        forIndex:5];//5.state
+	[stmt bindString:pCountry						                forIndex:6];//6.country
+	[stmt bindString:pLabel									        forIndex:7];//7.label
+	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:8];//8.index
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
++(void)insertDates:(ABRecordID)pRecordID:(NSInteger)pContent:(NSString*)pLabel:(NSInteger)pIndex
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"INSERT INTO date_info VALUES(?,?,?,?,?)"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	[stmt bindInt32:pContent						                forIndex:2];//2.time
+	[stmt bindString:pLabel									        forIndex:3];//3.label
+	[stmt bindString:@"0"									        forIndex:4];//4.remind
+	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:5];//5.index
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
++(void)insertInstantMessage:(ABRecordID)pRecordID:(NSString*)pUsername:(NSString*)pService:(NSString*)pLabel:(NSInteger)pIndex
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"INSERT INTO instantMessage_info VALUES(?,?,?,?,?)"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	[stmt bindString:pUsername						                forIndex:2];//2.username
+	[stmt bindString:pService									    forIndex:3];//3.service
+	[stmt bindString:pLabel										    forIndex:4];//4.label
+	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:5];//5.index
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
++(void)insertPhones:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"INSERT INTO tel_info VALUES(?,?,?,?,?)"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	[stmt bindString:pContent						                forIndex:2];//2.num
+	[stmt bindString:pLabel									        forIndex:3];//3.label
+	[stmt bindString:@"0"									        forIndex:4];//4.servicer
+	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:5];//5.index
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
++(void)insertUrls:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"INSERT INTO url_info VALUES(?,?,?,?)"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	[stmt bindString:pContent						                forIndex:2];//2.num
+	[stmt bindString:pLabel									        forIndex:3];//3.label
+	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:4];//4.index
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
 
 @end

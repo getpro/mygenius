@@ -18,20 +18,20 @@ CREATE TABLE contacts_info(
 'contacts_ring'TEXT,
 'contacts_recommend_id'TEXT,
 'contacts_group_id'TEXT,
-'contacts_birthday'DATETIME,
+'contacts_birthday'INTEGER,
 'contacts_note'TEXT,
 'contacts_constellation'TEXT,
 'contacts_blood'TEXT,
 'contacts_add_type'TEXT,
-'contacts_creation'DATETIME NOT NULL,
-'contacts_modification'DATETIME NOT NULL
+'contacts_creation'INTEGER NOT NULL,
+'contacts_modification'INTEGER NOT NULL
 );
 
 CREATE TABLE group_info(
 'group_id'TEXT PRIMARY KEY,
 'group_name'TEXT NOT NULL,
-'group_creation'DATETIME NOT NULL,
-'group_modification'DATETIME NOT NULL
+'group_creation'INTEGER NOT NULL,
+'group_modification'INTEGER NOT NULL
 );
 
 CREATE TABLE tel_info(
@@ -69,14 +69,15 @@ CREATE TABLE address_info(
 
 CREATE TABLE instantMessage_info(
 'contacts_id'TEXT NOT NULL,
-'instantMessage_content'TEXT NOT NULL,
+'instantMessage_username'TEXT NOT NULL,
+'instantMessage_service'TEXT NOT NULL,
 'instantMessage_label'TEXT NOT NULL,
 'instantMessage_index'TEXT NOT NULL
 );
 
 CREATE TABLE date_info(
 'contacts_id'TEXT NOT NULL,
-'date_time'DATETIME NOT NULL,
+'date_time'INTEGER NOT NULL,
 'date_label'TEXT NOT NULL,
 'date_remind'TEXT,
 'date_index'TEXT NOT NULL
@@ -100,8 +101,8 @@ CREATE TABLE tag_info(
 'tag_id'TEXT PRIMARY KEY,
 'tag_name'TEXT NOT NULL,
 'tag_type'TEXT NOT NULL,
-'tag_creation'DATETIME NOT NULL,
-'tag_modification'DATETIME NOT NULL
+'tag_creation'INTEGER NOT NULL,
+'tag_modification'INTEGER NOT NULL
 );
 
 CREATE TABLE memo_info(
