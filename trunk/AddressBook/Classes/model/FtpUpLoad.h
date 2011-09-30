@@ -15,7 +15,7 @@
 
 #define FTP_URL  @"ftp://61.147.124.46"
 
-enum 
+enum
 {
     kSendBufferSize = 32768
 };

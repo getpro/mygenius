@@ -194,85 +194,33 @@ typedef enum
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-	//[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	
-	//UIViewController *vc = nil;
-	/*
-	 NSInteger row = [indexPath row];
-	 CAttribute       *attr = nil;
-	 CAttributeString *stringAttr = nil;
-	 
-	 switch (indexPath.section)
-	 {
-	 case TableView_Section_Group:
-	 {
-	 if (row == 0)
-	 {
-	 //cell.textLabel.text = @"分组";
-	 }
-	 break;
-	 }
-	 case TableView_Section_Contact:
-	 {
-	 attr = [self.m_pData objectAtIndex:row + 1];
-	 stringAttr = (CAttributeString*)attr;
-	 
-	 if (row == 0)
-	 {
-	 //cell.textLabel.text = @"移动电话";
-	 NSLog(@"tel[%@]",stringAttr.stringValue);
-	 NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", stringAttr.stringValue]];
-	 [[UIApplication sharedApplication] openURL:URL]; 
-	 }
-	 else if(row == 1)
-	 {
-	 //cell.textLabel.text = @"短信";
-	 NSLog(@"sms[%@]",stringAttr.stringValue);
-	 NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"sms://%@", stringAttr.stringValue]];
-	 [[UIApplication sharedApplication] openURL:URL];
-	 }
-	 else if(row == 2)
-	 {
-	 //cell.textLabel.text = @"工作";
-	 NSLog(@"email[%@]",stringAttr.stringValue);
-	 NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"mailto://%@", stringAttr.stringValue]];
-	 [[UIApplication sharedApplication] openURL:URL];
-	 }
-	 
-	 break;
-	 }
-	 case TableView_Section_Constellation:
-	 {
-	 if (row == 0)
-	 {
-	 //cell.textLabel.text = @"星座";
-	 }
-	 break;
-	 }
-	 default:
-	 break;
-	 }
-	 */
-	
-	/*
-	 CAttribute *attr = [self.m_pData objectAtIndex:indexPath.row];
-	 if (attr)
-	 {
-	 vc = [attr detailViewController:self.editing];
-	 }
-	 */
-	
-	/*
-	 if (vc) 
-	 {
-	 [self presentModalViewController:vc animated:YES];
-	 [tableView deselectRowAtIndexPath:indexPath animated:NO];
-	 } 
-	 else 
-	 {
-	 [tableView deselectRowAtIndexPath:indexPath animated:YES];
-	 }
-	 */
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	switch (indexPath.section)
+	{
+		case Sync_TableView_Section_Sync:
+		{
+			//同步
+			
+			break;
+		}
+		case Sync_TableView_Section_BackUp:
+		{
+			//备份
+			FtpUpLoad * pFtp = [[FtpUpLoad alloc]init];
+			
+			NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+			NSString *documentsDirectory = [paths objectAtIndex:0];
+			NSString *path = [documentsDirectory stringByAppendingPathComponent:@"AddressBook.db"];
+			
+			//NSString *defaultDBPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"head.png"];
+			
+			[pFtp startSend:path];
+			
+			break;
+		}
+		default:
+			break;
+	}	
 }
 
 @end

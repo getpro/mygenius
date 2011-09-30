@@ -65,6 +65,8 @@ typedef enum
 //判断RecordID是否已在库中
 +(BOOL)RecordIDIsExist:(ABRecordID)pRecordID;
 
+//判断RecordID是否被修改
++(BOOL)RecordIDIsModify:(ABRecordRef)pABRecordRef;
 
 //email多值
 +(void)insertEmails:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex;

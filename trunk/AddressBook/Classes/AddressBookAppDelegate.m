@@ -80,12 +80,11 @@
 		if([DataStore RecordIDIsExist:pRecordID])
 		{
 			//在库中
-			//检测修改时间是否相同
+			//检测是否被修改
 			NSLog(@"IN[%d]",pRecordID);
-			if(YES)
+			if([DataStore RecordIDIsModify:pRecord])
 			{
-				//不相同，修改库中的内容
-				
+				//[DataStore insertContactsBaseInfo:pRecord];
 			}
 		}
 		else
