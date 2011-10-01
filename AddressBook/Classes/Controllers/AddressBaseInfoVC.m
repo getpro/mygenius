@@ -27,7 +27,8 @@
 		{
 			[aBPersonNav popViewControllerAnimated:NO];
 			
-			AddressSeniorInfoVC * pAddressSeniorInfoVC = [[AddressSeniorInfoVC alloc] init];
+			//AddressSeniorInfoVC * pAddressSeniorInfoVC = [[AddressSeniorInfoVC alloc] init];
+			AddressSeniorInfoVC * pAddressSeniorInfoVC = [[AddressSeniorInfoVC alloc] initWithNibName:@"AddressSeniorInfoVC" bundle:nil];
 			
 			pAddressSeniorInfoVC.m_pContact    = m_pContact;
 			pAddressSeniorInfoVC.aBPersonNav   = aBPersonNav;
