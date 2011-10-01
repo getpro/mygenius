@@ -73,6 +73,7 @@
 	}
 	
 	//第一次运行程序
+	/*
 	if([DataStore Get_Copy_Addressbook] == 0)
 	{
 		NSLog(@"Copy_Addressbook==0");
@@ -81,7 +82,8 @@
 		
 		[DataStore Set_First_Use];
 	}
-	
+	*/
+	 
 	//系统通讯录的数据入库
 	[DBConnection beginTransaction];
 	
@@ -91,6 +93,8 @@
 	{
 		ABRecordRef pRecord    = pABContact.record;
 		ABRecordID  pRecordID  = ABRecordGetRecordID(pRecord);
+		
+		BOOL bFined = NO;
 		
 		//判断RecordID是否已在库中
 		if([DataStore RecordIDIsExist:pRecordID])
@@ -109,6 +113,27 @@
 			NSLog(@"OUT[%d]",pRecordID);
 			
 			[DataStore insertContactsBaseInfo:pRecord];
+			
+			//修改Group信息
+			for(int i = 1;i < [m_arrContactData count];i++)
+			{
+				ContactData * pContactData = [m_arrContactData objectAtIndex:i];
+				for(ABContact * pContact in pContactData.contactsArray)
+				{
+					if(ABRecordGetRecordID(pContact.record) == pRecordID)
+					{
+						ABGroup * pGroup = [m_arrGroup objectAtIndex:i - 1];
+						[DataStore updateGroupID:pRecordID:ABRecordGetRecordID(pGroup.record)];
+						bFined = YES;
+						break;
+					}
+				}
+				
+				if(bFined)
+				{
+					break;
+				}
+			}
 		}
 	}
 	

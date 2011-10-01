@@ -88,9 +88,17 @@ typedef enum
 +(void)insertUrls:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex;
 
 //分组
+//添加新分组
 +(void)insertGroup:(ABGroup *)pNew;
 
+//修改联系人的分组信息
++(void)updateGroupID:(ABRecordID)pRecordID:(ABRecordID)pGroupID;
+
 +(ABRecordID)GetGroupID:(NSString *)pName;
+
++(NSString*)GetGroupName:(ABRecordID)pGroupID;
+
++(ABRecordID)GetGroupID2:(ABRecordID)pRecordID;
 
 //高级信息
 +(void)updateGroup:(ABRecordID)pRecordID:(ABRecordID)pGroupID;

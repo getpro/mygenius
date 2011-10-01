@@ -616,6 +616,41 @@
 	[actionSheet release];
 }
 
+ABRecordRef GRecord;
+
+-(void)AddGp:(id)p1
+{
+	CFErrorRef  error;
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
+	//ABRecordRef aRecord = (ABRecordRef)p1;
+	
+	ABGroup * pGroup = [app.m_arrGroup objectAtIndex:2];
+	
+    @try 
+	{ 
+		
+        //ABAddressBookSave(addressBook, &error);         // 如果出现异常错误
+		[pGroup addMember2:GRecord withError:&error];
+    }
+    @catch (NSException *exception) 
+	{
+		
+        NSLog(@"%@:%@", [exception name], [exception reason]);    //抓错，系统报错
+		
+    }
+	
+    @finally {
+		
+    }
+	
+	//int p = 0;
+	
+	//CFErrorGetCode(error);
+	
+	//NSLog(@"[%d]",p);
+}
+
 #pragma mark ABNewPersonViewControllerDelegate methods
 // Dismisses the new-person view controller. 
 - (void)newPersonViewController:(ABNewPersonViewController *)newPersonViewController didCompleteWithNewPerson:(ABRecordRef)person
@@ -628,17 +663,21 @@
 	{
 		[DataStore insertContactsBaseInfo:person];
 		
-		/*
+		//GRecord = (person);
+		
 		//test
-		NSError    * error;
-		AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+		//NSError    * error;
+		//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 		
 		//CFErrorRef   errorRef;
 		
 		//ABAddressBookAddRecord(addressBook,person,&errorRef);
 		//ABAddressBookSave(addressBook, &errorRef);
 		
-		ABRecordRef aRecord = ABPersonCreate(); 
+		//ABRecordRef aRecord = ABPersonCreate(); 
+		
+		/*
+		ABRecordRef aRecord = CFRetain(person);
 		
 		CFErrorRef  anError = NULL;
 		
@@ -670,8 +709,10 @@
 		ABGroup * pGroup = [app.m_arrGroup objectAtIndex:2];
 		
 		[pGroup addMember2:aRecord withError:&error];
-		
+		 
 		*/
+		
+		//[self performSelector:@selector(AddGp:)  withObject:nil afterDelay:0.5];
 		
 		
 		//点击完成
