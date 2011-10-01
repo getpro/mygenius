@@ -73,13 +73,13 @@ typedef enum
 		self.m_pOrganization_IB.text = m_pContact.organization;
 	}
 	
-	
 	m_pContainer = [[CAttributeContainer alloc] init];
 	
 	CAttribute *attr = nil;
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"分组"];
+	((CAttributeString*)attr).stringValue = [DataStore GetGroupName:[DataStore GetGroupID2:ABRecordGetRecordID(m_pContact.record)]];
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"移动电话"];
@@ -98,30 +98,7 @@ typedef enum
 	
 	m_pData = [[NSMutableArray alloc]initWithArray:m_pContainer.attributes];
 	
-	/*
-	BOOL foundImage  = NO;
-	BOOL foundString = NO;
 	
-	UILabel     *lbl;
-	
-	for (CAttribute *att in m_pContainer.attributes) 
-	{
-		if (!foundString && [att.type isEqualToString:@"string"]) 
-		{
-			lbl = (UILabel*)[sectionHeader viewWithTag:101];
-			if (lbl != nil) 
-			{
-				NSString *st = [att valueForKey:@"stringValue"];
-				if (st)
-					lbl.text = st;
-				[temp addObject:att];
-				foundString = YES;
-			}
-		}
-	}
-	//if ([temp count]>0)
-	//	[data removeObjectsInArray:temp];
-	*/
 }
 
 

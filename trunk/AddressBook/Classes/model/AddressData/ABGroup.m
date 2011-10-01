@@ -84,11 +84,11 @@
 	return NO;
 }
 
-- (BOOL) addMember2: (ABRecordRef) contact withError: (NSError **) error
+- (BOOL) addMember2: (ABRecordRef) contact withError: (CFErrorRef *) error
 {
-	if(ABGroupAddMember(self.record, contact, (CFErrorRef *) error))
+	if(ABGroupAddMember(self.record, contact,error))
 	{
-		return ABAddressBookSave(addressBook,  (CFErrorRef *) error);
+		return ABAddressBookSave(addressBook,error);
 	}
 	return NO;
 }

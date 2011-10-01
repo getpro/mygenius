@@ -620,6 +620,16 @@
 	
 }
 
++(void)updateGroupID:(ABRecordID)pRecordID:(ABRecordID)pGroupID
+{
+	Statement *stmt = [DBConnection statementWithQuery:"UPDATE contacts_info SET contacts_group_id = ? WHERE contacts_id = ?"];
+	
+    [stmt bindString:[NSString stringWithFormat:@"%d",pGroupID]    forIndex:1];
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]   forIndex:2];
+	
+    [stmt step];
+}
+
 +(ABRecordID)GetGroupID:(NSString *)pName
 {
 	ABRecordID  pID = 0;
@@ -640,6 +650,50 @@
     [stmt release];
 	return pID;
 }
+
++(NSString*)GetGroupName:(ABRecordID)pGroupID
+{
+	NSString*  pName = 0;
+	Statement *stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"SELECT group_name FROM group_info WHERE group_id = ? "];
+	[stmt retain];
+    
+    // Note that the parameters are numbered from 1, not from 0.
+    [stmt bindInt32:pGroupID forIndex:1];
+    if ([stmt step] == SQLITE_ROW)
+	{
+        // Restore image from Database
+        pName = [stmt getString:0];
+    }
+	
+    [stmt reset];
+    [stmt release];
+	return pName;
+}
+
++(ABRecordID)GetGroupID2:(ABRecordID)pRecordID
+{
+	ABRecordID  pID = 0;
+	Statement *stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"SELECT contacts_group_id FROM contacts_info WHERE contacts_id = ? "];
+	[stmt retain];
+    
+    // Note that the parameters are numbered from 1, not from 0.
+    [stmt bindString:[NSString stringWithFormat:@"%d",pRecordID] forIndex:1];
+    if ([stmt step] == SQLITE_ROW)
+	{
+        // Restore image from Database
+        pID = [[stmt getString:0] intValue];
+    }
+	
+    [stmt reset];
+    [stmt release];
+	return pID;
+}
+
+
 
 +(void)updateGroup:(ABRecordID)pRecordID:(ABRecordID)pGroupID
 {
