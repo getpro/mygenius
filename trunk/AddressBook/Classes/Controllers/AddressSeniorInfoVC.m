@@ -9,13 +9,29 @@
 #import "AddressSeniorInfoVC.h"
 #import "PublicData.h"
 #import "AddressBaseInfoVC.h"
+#import "AddFieldVC.h"
 
 @implementation AddressSeniorInfoVC
 
 @synthesize m_pTableView_IB;
-@synthesize m_pRightEdit;
+//@synthesize m_pRightEdit;
 @synthesize aBPersonNav;
 @synthesize m_pContact;
+@synthesize m_pButtonItemEdit;
+@synthesize m_pButtonItemDone;
+//@synthesize m_pButtonItemReturn;
+@synthesize m_pButtonItemCancel;
+
+typedef enum 
+{
+    SeniorInfo_TableView_Section_Group,
+	SeniorInfo_TableView_Section_Blood,
+	SeniorInfo_TableView_Section_Memo,
+	SeniorInfo_TableView_Section_Account,
+	SeniorInfo_TableView_Section_Certificate,
+	SeniorInfo_TableView_Section_AddField,
+	SeniorInfo_TableView_Section_Count
+}SeniorInfo_TableView_Section;
 
 - (void)toggleStyle:(id)sender
 {
@@ -48,12 +64,18 @@
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad 
+- (void)viewDidLoad
 {
     [super viewDidLoad];
 	
+	//self.tableView.backgroundColor = [UIColor clearColor];
+	//self.tableView.style = UITableViewStyleGrouped;
+	m_pTableView_IB.allowsSelectionDuringEditing = YES;
+	
 	self.navigationItem.title = @"";
-	self.navigationItem.rightBarButtonItem = m_pRightEdit;
+	self.navigationItem.rightBarButtonItem = m_pButtonItemEdit;
+	
+	m_pButtonItemReturn = self.navigationItem.leftBarButtonItem;
 	
 	if(m_pSegmentedControl)
 	{
@@ -73,6 +95,41 @@
 		[self.navigationController.navigationBar addSubview:m_pSegmentedControl];
 	}
 	
+	m_pContainer			= [[CAttributeContainer alloc] init];
+	m_pMemoContainer		= [[CAttributeContainer alloc] init];
+	m_pAccountsContainer	= [[CAttributeContainer alloc] init];
+	m_pCertificateContainer = [[CAttributeContainer alloc] init];
+	
+	CAttribute *attr = nil;
+	
+	attr = [[[CAttributeGroup alloc] init] autorelease];
+	[m_pContainer setValue:attr forKey:@"分组"];
+	
+	attr = [[[CAttributeBlood alloc] init] autorelease];
+	[m_pContainer setValue:attr forKey:@"血型"];
+	
+	//m_pData = [[NSMutableArray alloc]initWithArray:pContainer.attributes];
+	
+	
+	attr = [[[CAttributeString alloc] init] autorelease];
+	((CAttributeString*)attr).nvController = self.navigationController;
+	((CAttributeString*)attr).m_nType      = Tag_Type_Memo;
+	[m_pMemoContainer setValue:attr        forKey:@"纪念日"];
+	
+	attr = [[[CAttributeString alloc] init] autorelease];
+	((CAttributeString*)attr).nvController = self.navigationController;
+	((CAttributeString*)attr).m_nType      = Tag_Type_Account;
+	[m_pAccountsContainer setValue:attr    forKey:@"帐号"];
+	
+	attr = [[[CAttributeString alloc] init] autorelease];
+	((CAttributeString*)attr).nvController = self.navigationController;
+	((CAttributeString*)attr).m_nType      = Tag_Type_Certificate;
+	[m_pCertificateContainer setValue:attr forKey:@"证件"];
+	
+	
+	
+	
+	[self setEditing:NO animated:NO];
 }
 
 
@@ -98,6 +155,23 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animate 
+{
+	[super setEditing:editing animated:animate];
+	[m_pTableView_IB setEditing:editing animated:animate];
+	
+	if (editing)
+	{
+		self.navigationItem.rightBarButtonItem = m_pButtonItemDone;
+		self.navigationItem.leftBarButtonItem  = m_pButtonItemCancel;
+	} 
+	else 
+	{
+		self.navigationItem.rightBarButtonItem = m_pButtonItemEdit;
+		self.navigationItem.leftBarButtonItem  = m_pButtonItemReturn;
+	}
+ 	[m_pTableView_IB reloadData];
+}
 
 - (void)dealloc 
 {
@@ -105,13 +179,37 @@
 	[m_pSegmentedControl release];
 	[aBPersonNav		 release];
 	[m_pContact			 release];
-	[m_pRightEdit		 release];
+	[m_pButtonItemEdit   release];
+	[m_pButtonItemDone   release];
+	//[m_pButtonItemReturn release];
+	[m_pButtonItemCancel release];
+	
+	[m_pContainer		  release];
+	[m_pMemoContainer	  release];
+	[m_pAccountsContainer release];
+	[m_pCertificateContainer release];
 	
     [super dealloc];
 }
 
--(IBAction)doneItemBtn:  (id)sender
+-(IBAction)doneItemBtn:    (id)sender
 {
+	[self setEditing:NO animated:YES];
+}
+
+-(IBAction)cancelItemBtn:  (id)sender
+{
+	[self setEditing:NO animated:YES];
+}
+
+//-(IBAction)returnItemBtn:  (id)sender
+//{
+//	[self.navigationController	popViewControllerAnimated:YES];
+//}
+
+-(IBAction)editItemBtn:    (id)sender
+{
+	[self setEditing:YES animated:YES];
 	
 }
 
@@ -131,19 +229,58 @@
 	[m_pSegmentedControl setHidden:YES];
 }
 
+#pragma mark - AddField delegates
+- (void)GetAddField:(id)pDic
+{
+	NSDictionary * resultItem = (NSDictionary * )pDic;
+	NSString *text = nil;
+	text = [resultItem valueForKey:@"name"];
+	if(text)
+	{
+		CAttribute *attr = nil;
+		
+		NSLog(@"[%@]",text);
+		if([text isEqual:@"纪念日"])
+		{
+			attr = [[[CAttributeString alloc] init] autorelease];
+			((CAttributeString*)attr).nvController = self.navigationController;
+			((CAttributeString*)attr).m_nType      = Tag_Type_Memo;
+			[m_pMemoContainer setValue:attr forKey:@"纪念日"];
+		}
+		else if([text isEqual:@"证件"])
+		{
+			attr = [[[CAttributeString alloc] init] autorelease];
+			((CAttributeString*)attr).nvController = self.navigationController;
+			((CAttributeString*)attr).m_nType      = Tag_Type_Certificate;
+			[m_pCertificateContainer setValue:attr forKey:@"证件"];
+		}
+		else if([text isEqual:@"帐号"])
+		{
+			attr = [[[CAttributeString alloc] init] autorelease];
+			((CAttributeString*)attr).nvController = self.navigationController;
+			((CAttributeString*)attr).m_nType      = Tag_Type_Account;
+			[m_pAccountsContainer setValue:attr forKey:@"帐号"];
+		}
+		
+		[m_pTableView_IB reloadData];
+	}
+}
+
 #pragma mark - UITableView delegates
 
 // if you want the entire table to just be re-orderable then just return UITableViewCellEditingStyleNone
 //
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
+	if(indexPath.section == SeniorInfo_TableView_Section_AddField)
+		return UITableViewCellEditingStyleInsert;
+	
 	return UITableViewCellEditingStyleNone;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	//return TableView_Section_Count;
-	return 0;
+	return SeniorInfo_TableView_Section_Count;
 }
 
 /*
@@ -157,28 +294,42 @@
 {
 	NSInteger pRetNum = 1;
 	
-	/*
 	switch (section)
 	{
-		case TableView_Section_Group:
+		case SeniorInfo_TableView_Section_Group:
 		{
 			pRetNum = 1;
 			break;
 		}
-		case TableView_Section_Contact:
-		{
-			pRetNum = 3;
-			break;
-		}
-		case TableView_Section_Constellation:
+		case SeniorInfo_TableView_Section_Blood:
 		{
 			pRetNum = 1;
+			break;
+		}
+		case SeniorInfo_TableView_Section_AddField:
+		{
+			pRetNum = 1;
+			break;
+		}
+		case SeniorInfo_TableView_Section_Memo:
+		{
+			pRetNum = [m_pMemoContainer.attributes count];
+			break;
+		}
+		case SeniorInfo_TableView_Section_Account:
+		{
+			pRetNum = [m_pAccountsContainer.attributes count];
+			break;
+		}
+		case SeniorInfo_TableView_Section_Certificate:
+		{
+			pRetNum = [m_pCertificateContainer.attributes count];
 			break;
 		}
 		default:
 			break;
 	}
-	*/
+	
 	return pRetNum;
 }
 
@@ -188,22 +339,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	CGFloat result = 40.0f;
-	/*
-	 switch ([indexPath row])
-	 {
-	 case 0:
-	 {
-	 result = kUIRowHeight;
-	 break;
-	 }
-	 case 1:
-	 {
-	 result = kUIRowLabelHeight;
-	 break;
-	 }
-	 }
-	 */
-	return result;
+	return  result;
 }
 
 // to determine which UITableViewCell to be used on a given row.
@@ -211,38 +347,62 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView 
 		 cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	//NSInteger row = [indexPath row];
+	NSInteger row = [indexPath row];
 	UITableViewCell *cell = nil;
-	//CAttribute      *attr = nil;
+	CAttribute      *attr = nil;
 	
-	//UITableViewCellStyle style =  UITableViewCellStyleSubtitle;
-	//UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"ID_ID"];
-	//if (!cell)
-	//	cell = [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:@"ID_ID"] autorelease];
-	
-	/*
 	switch (indexPath.section)
 	{
-		case TableView_Section_Group:
+		case SeniorInfo_TableView_Section_Group:
 		{
 			if (row == 0)
 			{
-				//cell.textLabel.text = @"分组";
-				attr = [self.m_pData objectAtIndex:0];
+				attr = [m_pContainer.attributes objectAtIndex:0];
 			}
 			break;
 		}
-		case TableView_Section_Contact:
-		{
-			attr = [self.m_pData objectAtIndex:row + 1];
-			break;
-		}
-		case TableView_Section_Constellation:
+		case SeniorInfo_TableView_Section_Blood:
 		{
 			if (row == 0)
 			{
-				//cell.textLabel.text = @"星座";
-				attr = [self.m_pData objectAtIndex:row + 4];
+				attr = [m_pContainer.attributes objectAtIndex:1];
+			}
+			break;
+		}
+		case SeniorInfo_TableView_Section_Memo:
+		{
+			attr = [m_pMemoContainer.attributes objectAtIndex:row];
+			
+			break;
+		}
+		case SeniorInfo_TableView_Section_Account:
+		{
+			attr = [m_pAccountsContainer.attributes objectAtIndex:row];
+			
+			break;
+		}
+		case SeniorInfo_TableView_Section_Certificate:
+		{
+			attr = [m_pCertificateContainer.attributes objectAtIndex:row];
+			
+			break;
+		}
+		case SeniorInfo_TableView_Section_AddField:
+		{
+			if (row == 0)
+			{
+				static NSString* cellIdentifier = @"AddFieldCell";
+				UITableViewCell * cell2 = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+				if (![cell2 isKindOfClass:[UITableViewCell class]])
+				{
+					cell2 = [[[CAttributeCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier] autorelease];
+					cell2.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
+				}
+				if (cell2 != nil)
+				{
+					cell2.textLabel.text = @"添加字段";
+				}
+				return cell2;
 			}
 			break;
 		}
@@ -251,91 +411,89 @@
 	}
 	
 	cell = [attr cellForTableView:tableView];
-	*/
+	
 	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-	//[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
-	//UIViewController *vc = nil;
-	/*
+	if(!m_pTableView_IB.editing)
+	{
+		return;
+	}
+	
+	UIViewController *vc = nil;
 	NSInteger row = [indexPath row];
-	CAttribute       *attr = nil;
-	CAttributeString *stringAttr = nil;
+	
+	if(indexPath.section == SeniorInfo_TableView_Section_AddField)
+	{
+		NSLog(@"AddField");
+		
+		AddFieldVC * pVC = [[AddFieldVC alloc] init];
+		
+		pVC.Target   = self;
+		pVC.Selector = @selector(GetAddField:);
+		
+		[self.navigationController pushViewController:pVC animated:YES];
+		
+		[pVC release];
+		
+		return;
+	}
+	
+	CAttribute *attr = nil;
 	
 	switch (indexPath.section)
 	{
-		case TableView_Section_Group:
+		case SeniorInfo_TableView_Section_Group:
 		{
 			if (row == 0)
 			{
-				//cell.textLabel.text = @"分组";
+				attr = [m_pContainer.attributes objectAtIndex:0];
 			}
 			break;
 		}
-		case TableView_Section_Contact:
+		case SeniorInfo_TableView_Section_Blood:
 		{
-			attr = [self.m_pData objectAtIndex:row + 1];
-			stringAttr = (CAttributeString*)attr;
-			
 			if (row == 0)
 			{
-				//cell.textLabel.text = @"移动电话";
-				NSLog(@"tel[%@]",stringAttr.stringValue);
-				NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", stringAttr.stringValue]];
-				[[UIApplication sharedApplication] openURL:URL]; 
+				attr = [m_pContainer.attributes objectAtIndex:1];
 			}
-			else if(row == 1)
-			{
-				//cell.textLabel.text = @"短信";
-				NSLog(@"sms[%@]",stringAttr.stringValue);
-				NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"sms://%@", stringAttr.stringValue]];
-				[[UIApplication sharedApplication] openURL:URL];
-			}
-			else if(row == 2)
-			{
-				//cell.textLabel.text = @"工作";
-				NSLog(@"email[%@]",stringAttr.stringValue);
-				NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"mailto://%@", stringAttr.stringValue]];
-				[[UIApplication sharedApplication] openURL:URL];
-			}
+			break;
+		}
+		case SeniorInfo_TableView_Section_Memo:
+		{
+			attr = [m_pMemoContainer.attributes objectAtIndex:row];
 			
 			break;
 		}
-		case TableView_Section_Constellation:
+		case SeniorInfo_TableView_Section_Account:
 		{
-			if (row == 0)
-			{
-				//cell.textLabel.text = @"星座";
-			}
+			attr = [m_pAccountsContainer.attributes objectAtIndex:row];
+			
+			break;
+		}
+		case SeniorInfo_TableView_Section_Certificate:
+		{
+			attr = [m_pCertificateContainer.attributes objectAtIndex:row];
+			
 			break;
 		}
 		default:
 			break;
 	}
-	*/
 	
-	/*
-	 CAttribute *attr = [self.m_pData objectAtIndex:indexPath.row];
-	 if (attr)
-	 {
-	 vc = [attr detailViewController:self.editing];
-	 }
-	 */
+	if (attr)
+	{
+		vc = [attr detailViewController:self.editing];
+	}
 	
-	/*
-	 if (vc) 
-	 {
-	 [self presentModalViewController:vc animated:YES];
-	 [tableView deselectRowAtIndexPath:indexPath animated:NO];
-	 } 
-	 else 
-	 {
-	 [tableView deselectRowAtIndexPath:indexPath animated:YES];
-	 }
-	 */
+	if (vc && attr)
+	{
+		[attr Show:vc];
+	}
 }
 
 @end

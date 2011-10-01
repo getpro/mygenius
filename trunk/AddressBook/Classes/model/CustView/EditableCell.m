@@ -139,6 +139,12 @@
  */
 - (void)doneWithKeyboard:(UITextField*)ctrl 
 {
+	NSLog(@"doneWithKeyboard");
+	
+	self.detailTextLabel.text = textField.text;
+	NSObject *obj = dataTarget;
+	[obj setValue:textField.text forKey:dataKey];
+	
 	[textField resignFirstResponder];
 }
 
