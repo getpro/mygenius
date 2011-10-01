@@ -19,7 +19,8 @@
 @synthesize m_arrMemoInfo;
 @synthesize m_arrGroup;
 @synthesize m_arrCustomTag;
-@synthesize m_pContactData;
+//@synthesize m_pContactData;
+@synthesize m_arrContactData;
 
 @synthesize networkingCount = _networkingCount;
 
@@ -34,7 +35,10 @@
 	if(addressBook == nil)
 		addressBook = ABAddressBookCreate();
 	
-	m_pContactData = [[ContactData alloc] init];
+	//通讯录有改变
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeAddress:)
+	 /*收到消息后的响应函数*/ name:@"changeAddress"
+	 /*消息名字，在发消息时　　指定的*/ object:nil];
 	
 	[DBConnection getSharedDatabase];
 	
@@ -42,6 +46,7 @@
 	m_arrMemoInfo       = [[NSMutableArray alloc] initWithCapacity:10];
 	m_arrGroup          = [[NSMutableArray alloc] initWithCapacity:10];
 	m_arrCustomTag      = [[NSMutableArray alloc] initWithCapacity:10];
+	m_arrContactData    = [[NSMutableArray alloc] initWithCapacity:10];
 	
 	//test
 	[m_arrCustomTag addObject:@"自定义1"];
@@ -52,10 +57,19 @@
 	NSArray * groups = [ABContactsHelper groups];
 	//NSLog(@"groups[%d]",[groups count]);
 	
+	//所有联系人
+	ContactData * pAllContactData = [[ContactData alloc] init];
+	[m_arrContactData addObject:pAllContactData];
+	[pAllContactData release];
+	
 	for(ABGroup * pGroup in groups)
 	{
 		[m_arrGroup addObject:pGroup];
-		NSLog(@"groups[%@]",pGroup.name);
+		[DataStore insertGroup:pGroup];
+		//NSLog(@"groups[%@]",pGroup.name);
+		
+		ContactData * pContactData = [[ContactData alloc] initWithArry:pGroup.members];
+		[m_arrContactData addObject:pContactData];
 	}
 	
 	//第一次运行程序
@@ -71,7 +85,9 @@
 	//系统通讯录的数据入库
 	[DBConnection beginTransaction];
 	
-	for(ABContact * pABContact in m_pContactData.contactsArray)
+	ContactData * AllContactData = (ContactData *)[m_arrContactData objectAtIndex:0];
+	
+	for(ABContact * pABContact in AllContactData.contactsArray)
 	{
 		ABRecordRef pRecord    = pABContact.record;
 		ABRecordID  pRecordID  = ABRecordGetRecordID(pRecord);
@@ -93,13 +109,10 @@
 			NSLog(@"OUT[%d]",pRecordID);
 			
 			[DataStore insertContactsBaseInfo:pRecord];
-			
 		}
-		
 	}
 	
 	[DBConnection commitTransaction];
-	
 	
 	//通讯录
 	m_pAddressBookVC = [[AddressBookVC alloc] init];
@@ -172,6 +185,11 @@
     return YES;
 }
 
+-(void)changeAddress:(NSNotification*)notification
+{
+	
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     /*
@@ -223,9 +241,11 @@
 
 - (void)dealloc 
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"changeAddress" object:nil];
+	
 	[DBConnection closeDatabase];
 	
-	[m_pContactData       release];
+	//[m_pContactData       release];
 	
 	[m_pAddressBookVC	  release];
 	[m_psyncVC			  release];
@@ -237,6 +257,7 @@
 	[m_arrMemoInfo		  release];
 	[m_arrGroup           release];
 	[m_arrCustomTag       release];
+	[m_arrContactData     release];
 	
 	[tbController	      release];
     [window				  release];

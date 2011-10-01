@@ -17,6 +17,8 @@
 
 @property (nonatomic,retain) NSMutableArray * contactsArray;
 
+- (id)initWithArry:(NSArray *)pArry;
+
 //+(NSArray *) contactsArray; // people
 
 //Equal contacts was exist in address book

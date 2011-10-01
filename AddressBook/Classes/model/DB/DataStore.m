@@ -596,4 +596,28 @@
 	[stmt release];
 }
 
++(void)insertGroup:(ABGroup *) pNew
+{
+	if (pNew == nil)
+	{
+		return;
+	}
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"REPLACE INTO group_info VALUES(?,?,?,?)"];
+	[stmt retain];
+    
+	ABRecordID  pGroupID  = ABRecordGetRecordID(pNew.record);
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pGroupID] forIndex:1];//1.group_id
+	[stmt bindString:pNew.name									forIndex:2];//2.group_name
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]		forIndex:3];//3.group_creation
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]		forIndex:4];//4.group_modification
+	
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+	
+}
+
 @end

@@ -77,12 +77,20 @@
 
 - (BOOL) addMember: (ABContact *) contact withError: (NSError **) error
 {
-	return ABGroupAddMember(self.record, contact.record, (CFErrorRef *) error);
+	if(ABGroupAddMember(self.record, contact.record, (CFErrorRef *) error))
+	{
+		return ABAddressBookSave(addressBook,  (CFErrorRef *) error);
+	}
+	return NO;
 }
 
 - (BOOL) removeMember: (ABContact *) contact withError: (NSError **) error
 {
-	return ABGroupRemoveMember(self.record, contact.record, (CFErrorRef *) error);
+	if(ABGroupRemoveMember(self.record, contact.record, (CFErrorRef *) error))
+	{
+		return ABAddressBookSave(addressBook,  (CFErrorRef *) error);
+	}
+	return NO;
 }
 
 #pragma mark name

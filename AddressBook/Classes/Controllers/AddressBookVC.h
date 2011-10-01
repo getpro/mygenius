@@ -57,6 +57,10 @@ GroupItemViewDelegate
 -(IBAction)editItemBtn:(id)sender;
 -(IBAction)addItemBtn: (id)sender;
 
--(void)initData;
+//初始化数据
+-(void)initData:(NSInteger)pIndex;
+
+//加载分组信息
+-(void)LoadGroup;
 
 @end

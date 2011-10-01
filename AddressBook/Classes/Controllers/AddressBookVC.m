@@ -1,4 +1,4 @@
-    //
+//
 //  AddressBookVC.m
 //  AddressBook
 //
@@ -14,7 +14,7 @@
 #import "ModalAlert.h"
 #import "AddressPreInfoVC.h"
 #import "AddressAddSeniorVC.h"
-
+#import "ABContactsHelper.h"
 #import "CustomPicker.h"
 
 @implementation AddressBookVC
@@ -54,11 +54,9 @@
 	self.navigationItem.rightBarButtonItem = m_pRightAdd;
 	
 	filteredArray    = [[NSMutableArray alloc] init];
-
 	contactNameArray = [[NSMutableArray alloc] init];
-	
 	contactNameDic   = [[NSMutableDictionary alloc] init];
-	
+	sectionArray     = [[NSMutableArray alloc] initWithCapacity:27];
 	
 	// Create a search bar
 	self.m_pSearchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(TABLEVIEW_X, 0, TABLEVIEW_W, SEARCH_BAR_H)] autorelease];
@@ -79,59 +77,64 @@
 	m_pScrollView_IB.showsVerticalScrollIndicator   = NO;
 	m_pScrollView_IB.showsHorizontalScrollIndicator = NO;
 	
+	[self LoadGroup];
+
+	[self initData:0];
+}
+
+-(void)LoadGroup
+{
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
+	ContactData * AllContactData = (ContactData *)[app.m_arrContactData objectAtIndex:0];
+	
+	for(UIView * pView in m_pScrollView_IB.subviews)
+	{
+		[pView removeFromSuperview];
+	}
+	
+	[m_pScrollView_IB setContentSize:CGSizeMake(TABLEVIEW_X, 0)];
+	
+	//添加全部
+	GroupItemView * pLabel = nil;
+	pLabel = [[[GroupItemView alloc] initWithFrame:CGRectMake(0,0,TABLEVIEW_X,40) 
+												  :@"全部"
+												  :[AllContactData.contactsArray count]] autorelease];
+	
+	[pLabel SetHidden:NO];
+	pLabel.delegate = self;
+	pLabel.tag = 0;
+	
+	[m_pScrollView_IB addSubview:pLabel];
+	
+	int nCount = [app.m_arrGroup count];
 	
 	//测试添加分组
-	for (int i = 0; i < 15; i++)
+	for(int i = 1; i <= nCount; i++)
 	{
-		GroupItemView * pLabel = nil;
+		ContactData * GroupContactData = (ContactData *)[app.m_arrContactData objectAtIndex:i];
 		
-		if(i == 0)
-		{
-			pLabel = [[GroupItemView alloc] initWithFrame:CGRectMake(0,i * 40,53,40) 
-														 :[NSString stringWithFormat:@"全部",i] 
-														 :9594];
-			
-			[pLabel SetHidden:NO];
-		}
-		else if(i == 1)
-		{
-			pLabel = [[GroupItemView alloc] initWithFrame:CGRectMake(0,i * 40,53,40) 
-														 :[NSString stringWithFormat:@"家人",i] 
-														 :598];
-		}
-		else if(i == 2)
-		{
-			pLabel = [[GroupItemView alloc] initWithFrame:CGRectMake(0,i * 40,53,40) 
-														 :[NSString stringWithFormat:@"同学",i] 
-														 :8];
-		}
-		else
-		{
-			pLabel = [[GroupItemView alloc] initWithFrame:CGRectMake(0,i * 40,53,40) 
-														 :[NSString stringWithFormat:@"朋友[%d]",i] 
-														 :55];
-		}
+		ABGroup * pGroup = [app.m_arrGroup objectAtIndex:(i - 1)];
+		pLabel = [[[GroupItemView alloc] initWithFrame:CGRectMake(0,i * 40,TABLEVIEW_X,40) 
+													  :pGroup.name 
+													  :[GroupContactData.contactsArray count]] autorelease];
 		
 		pLabel.delegate = self;
 		pLabel.tag = i;
 		
 		[m_pScrollView_IB addSubview:pLabel];
-		
-		[pLabel release];
 	}
-	
-	[m_pScrollView_IB setContentSize:CGSizeMake(53.0f, 40 * 15)];
-	
-	[self initData];
-	
+		
+	[m_pScrollView_IB setContentSize:CGSizeMake(TABLEVIEW_X, 40 * (nCount + 1))];
 }
 
--(void)initData
+-(void)initData:(NSInteger)pIndex
 {
 	NSLog(@"initData");
 	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	
-	contacts = app.m_pContactData.contactsArray;
+	ContactData * AllContactData = (ContactData *)[app.m_arrContactData objectAtIndex:pIndex];
+	contacts = AllContactData.contactsArray;
 	
 	if([contacts count] < 1)
 	{
@@ -139,13 +142,14 @@
 		[contactNameDic   removeAllObjects];
 		for (int i = 0; i < 27; i++) 
 			[self.sectionArray replaceObjectAtIndex:i withObject:[NSMutableArray array]];
+		
+		[m_pTableView_IB reloadData];
 		return;
 	}
 	
 	[contactNameArray removeAllObjects];
 	[contactNameDic   removeAllObjects];
-	
-	sectionArray = [[NSMutableArray alloc] initWithCapacity:27];
+	[sectionArray     removeAllObjects];
 	
 	for (int i = 0; i < 27; i++)
 		[self.sectionArray addObject:[NSMutableArray array]];
@@ -153,17 +157,6 @@
 	for(ABContact *contact in contacts)
 	{
 		NSString *string = nil;
-		
-		//如果没有名字，用电话号码
-		/*
-		NSString *phone;
-		NSArray  *phoneCount = [ContactData getPhoneNumberAndPhoneLabelArray:contact];
-		if([phoneCount count] > 0)
-		{
-			NSDictionary *PhoneDic = [phoneCount objectAtIndex:0];
-			phone = [ContactData getPhoneNumberFromDic:PhoneDic];
-		}
-		*/
 		
 		if(contact.contactName && [contact.contactName length] > 0)
 		{
@@ -204,39 +197,9 @@
 		
 		if (firstLetter != NSNotFound)
 			[[self.sectionArray objectAtIndex:firstLetter] addObject:contact];
-		
 	}
 	
-	/*
-	for (NSString *string in contactNameArray)
-	{
-		if([ContactData searchResult:string searchText:@"曾"])
-			sectionName = @"Z";
-		else if([ContactData searchResult:string searchText:@"解"])
-			sectionName = @"X";
-		else if([ContactData searchResult:string searchText:@"仇"])
-			sectionName = @"Q";
-		else if([ContactData searchResult:string searchText:@"朴"])
-			sectionName = @"P";
-		else if([ContactData searchResult:string searchText:@"查"])
-			sectionName = @"Z";
-		else if([ContactData searchResult:string searchText:@"能"])
-			sectionName = @"N";
-		else if([ContactData searchResult:string searchText:@"乐"])
-			sectionName = @"Y";
-		else if([ContactData searchResult:string searchText:@"单"])
-			sectionName = @"S";
-		else
-			sectionName = [[NSString stringWithFormat:@"%c",pinyinFirstLetter([string characterAtIndex:0])] uppercaseString];
-		
-		[self.contactNameDic setObject:string forKey:sectionName];
-		
-		NSUInteger firstLetter = [ALPHA rangeOfString:[sectionName substringToIndex:1]].location;
-		
-		if (firstLetter != NSNotFound)
-			[[self.sectionArray objectAtIndex:firstLetter] addObject:string];
-	}
-	*/
+	[m_pTableView_IB reloadData];
 }
 
 
@@ -398,12 +361,19 @@
 	
 	[aTableView deselectRowAtIndexPath:indexPath animated:YES];
 	
+	//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	//NSError * error;
+	
 	ABContact *contact = nil;
 	
 	if (aTableView == self.m_pTableView_IB)
 		contact = [[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	else
 		contact = [self.filteredArray objectAtIndex:indexPath.row];
+	
+	//test 设置分组
+	//ABGroup * pGroup = [app.m_arrGroup objectAtIndex:1];
+	//BOOL pB = [pGroup addMember:contact withError:&error];
 	
 	AddressPreInfoVC * pAddressPreInfoVC = [[AddressPreInfoVC alloc] init];
 	pAddressPreInfoVC.m_pContact = contact;
@@ -501,7 +471,7 @@
 	
 	if (aTableView == self.m_pTableView_IB) 
 	{
-		if ([[self.sectionArray objectAtIndex:section] count] == 0) 
+		if ([self.sectionArray count] > 0 && [[self.sectionArray objectAtIndex:section] count] == 0) 
 			return nil;
 		return [NSString stringWithFormat:@"%@", [[ALPHA substringFromIndex:section] substringToIndex:1]];
 	}
@@ -517,7 +487,7 @@
 	
 	//[self initData];
 	// Normal table
-	if (aTableView == self.m_pTableView_IB) 
+	if (aTableView == self.m_pTableView_IB && [self.sectionArray count]) 
 		return [[self.sectionArray objectAtIndex:section] count];
 	else
 		[filteredArray removeAllObjects];
@@ -685,15 +655,34 @@
 		{
 			[pGroup SetHidden:YES];
 		}
+		
+		[self initData:pIndex];
 	}
 }
 
 - (void)GreateNewGroup
 {
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
 	NSString * pStr = [ModalAlert ask:@"新建分组" withTextPrompt:@"请输入组名称"];
+	
 	if(pStr)
 	{
 		NSLog(@"NewGroupName[%@]",pStr);
+		
+		//创建新的分组
+		NSError * error;
+		ABGroup * pNew = [ABGroup group];
+		pNew.name = pStr;
+		if([ABContactsHelper addGroup:pNew withError:&error])
+		{
+			//分组信息入库
+			[DataStore insertGroup:pNew];
+			
+			[app.m_arrGroup addObject:pNew];
+		}
+		
+		[self LoadGroup];
 	}
 }
 
