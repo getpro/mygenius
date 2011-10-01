@@ -91,13 +91,16 @@
 		CAttribute *attr = value;
 		attr.label = key;
 
+		/*
 		oldValue = [self valueForUndefinedKey:key];
-		if (oldValue) 
+		if (oldValue)
 		{
 			NSInteger index = [self.attributes indexOfObject:oldValue];
 			[self.attributes replaceObjectAtIndex:index withObject:attr];
-		} 
-		else 
+		}
+		else
+		*/
+		
 		{
 			[self.attributes addObject:attr];
 		}

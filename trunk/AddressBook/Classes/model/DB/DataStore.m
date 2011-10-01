@@ -620,4 +620,79 @@
 	
 }
 
++(ABRecordID)GetGroupID:(NSString *)pName
+{
+	ABRecordID  pID = 0;
+	Statement *stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"SELECT group_id FROM group_info WHERE group_name = ? "];
+	[stmt retain];
+    
+    // Note that the parameters are numbered from 1, not from 0.
+    [stmt bindString:pName forIndex:1];
+    if ([stmt step] == SQLITE_ROW)
+	{
+        // Restore image from Database
+        pID = [[stmt getString:0] intValue];
+    }
+	
+    [stmt reset];
+    [stmt release];
+	return pID;
+}
+
++(void)updateGroup:(ABRecordID)pRecordID:(ABRecordID)pGroupID
+{
+	Statement *stmt = [DBConnection statementWithQuery:"UPDATE contacts_info SET contacts_group_id = ? WHERE contacts_id = ?"];
+	
+    [stmt bindString:[NSString stringWithFormat:@"%d",pGroupID]    forIndex:1];
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]   forIndex:2];
+	
+    [stmt step];
+}
+
++(void)updateBlood:(ABRecordID)pRecordID:(NSString*)pStr
+{
+	Statement *stmt = [DBConnection statementWithQuery:"UPDATE contacts_info SET contacts_blood = ? WHERE contacts_id = ?"];
+	
+    [stmt bindString:pStr									       forIndex:1];
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]   forIndex:2];
+	
+    [stmt step];
+}
+
++(void)insertAccounts:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"INSERT INTO account_info VALUES(?,?,?,?)"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	[stmt bindString:pContent						                forIndex:2];//2.content
+	[stmt bindString:pLabel									        forIndex:3];//3.label
+	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:4];//4.index
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
++(void)insertCertificate:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"INSERT INTO certificate_info VALUES(?,?,?,?)"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	[stmt bindString:pContent						                forIndex:2];//2.content
+	[stmt bindString:pLabel									        forIndex:3];//3.label
+	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:4];//4.index
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
 @end

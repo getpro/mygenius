@@ -84,6 +84,15 @@
 	return NO;
 }
 
+- (BOOL) addMember2: (ABRecordRef) contact withError: (NSError **) error
+{
+	if(ABGroupAddMember(self.record, contact, (CFErrorRef *) error))
+	{
+		return ABAddressBookSave(addressBook,  (CFErrorRef *) error);
+	}
+	return NO;
+}
+
 - (BOOL) removeMember: (ABContact *) contact withError: (NSError **) error
 {
 	if(ABGroupRemoveMember(self.record, contact.record, (CFErrorRef *) error))

@@ -19,6 +19,8 @@ typedef enum
 @implementation AddFieldVC
 
 @synthesize m_pTableView_IB;
+@synthesize Target;
+@synthesize Selector;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
@@ -35,12 +37,12 @@ typedef enum
 				  nil],
 				 [NSDictionary dictionaryWithObjectsAndKeys:
 				  @"帐号", @"name",
-				  @"CAttributeText", @"className",
+				  @"CAttributeString", @"className",
 				  @"Longer strings (eg: novel contents)", @"description",
 				  nil],
 				 [NSDictionary dictionaryWithObjectsAndKeys:
 				  @"证件", @"name",
-				  @"CAttributeInteger", @"className",
+				  @"CAttributeString", @"className",
 				  @"A simple counter with +/- keys (eg: fate points)", @"description",
 				  nil],
 				 nil];
@@ -133,18 +135,16 @@ typedef enum
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-	/*
-	id resultItem;
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
-	if (source && indexPath.row < [source count]) {
-		resultItem = [source objectAtIndex:indexPath.row];
+	NSDictionary * resultItem = [m_pSource objectAtIndex:indexPath.section];
+	
+	if (Target && Selector && [Target respondsToSelector:Selector]) 
+	{
+		[Target performSelector:Selector withObject:resultItem];
 	}
 	
-	if (insertTarget && insertSelector && [insertTarget respondsToSelector:insertSelector]) {
-		[insertTarget performSelector:insertSelector withObject:resultItem];
-	}
 	[self.navigationController popViewControllerAnimated:YES];
-	*/
 }
 
 @end

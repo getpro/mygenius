@@ -24,6 +24,7 @@
 
 - (NSArray *) membersWithSorting: (ABPersonSortOrdering) ordering;
 - (BOOL) addMember: (ABContact *) contact withError: (NSError **) error;
+- (BOOL) addMember2: (ABRecordRef) contact withError: (NSError **) error;
 - (BOOL) removeMember: (ABContact *) contact withError: (NSError **) error;
 
 @property (nonatomic, assign)   NSString *name;
