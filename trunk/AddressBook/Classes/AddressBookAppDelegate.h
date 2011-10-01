@@ -54,7 +54,8 @@ ABAddressBookRef addressBook;
 	NSInteger        _networkingCount;
 	
 	//系统通讯录类
-	ContactData    * m_pContactData;
+	NSMutableArray * m_arrContactData;  //分组联系人 0:全部 1:m_arrGroup（0）...
+	//ContactData    * m_pContactData;
 	
 	NSMutableArray * m_arrGroup;        //系统分组
 }
@@ -66,8 +67,9 @@ ABAddressBookRef addressBook;
 @property (nonatomic, retain) NSMutableArray * m_arrDateInfo;
 @property (nonatomic, retain) NSMutableArray * m_arrGroup;
 @property (nonatomic, retain) NSMutableArray * m_arrCustomTag;
+@property (nonatomic, retain) NSMutableArray * m_arrContactData;
 
-@property (nonatomic, retain) ContactData    * m_pContactData;
+//@property (nonatomic, retain) ContactData    * m_pContactData;
 
 @property (nonatomic, assign) NSInteger        networkingCount;
 

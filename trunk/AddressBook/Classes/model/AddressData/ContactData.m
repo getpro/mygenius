@@ -29,6 +29,19 @@
 	return self;
 }
 
+- (id)initWithArry:(NSArray *)pArry
+{
+    if ((self = [super init]))
+	{
+		NSArray *thePeople = pArry;
+		contactsArray = [[NSMutableArray alloc]initWithCapacity:thePeople.count];
+		
+		for (ABContact * person in thePeople)
+			[contactsArray addObject:person];
+	}
+	return self;
+}
+
 //从Address Book里得到所有联系人
 /*
 + (NSArray *) contactsArray

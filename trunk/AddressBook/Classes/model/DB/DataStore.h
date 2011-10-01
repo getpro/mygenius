@@ -10,8 +10,7 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 
-#import "contactsInfo.h"
-
+#import "ABContactsHelper.h"
 
 //系统设置
 #define CONFIG_ID @"1001"
@@ -87,5 +86,8 @@ typedef enum
 
 //URL多值
 +(void)insertUrls:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex;
+
+//分组
++(void)insertGroup:(ABGroup *)pNew;
 
 @end

@@ -46,9 +46,10 @@
 + (NSArray *) contactsMatchingName: (NSString *) fname
 {
 	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	ContactData * AllContactData = (ContactData *)[app.m_arrContactData objectAtIndex:0];
 	
 	NSPredicate *pred;
-	NSArray     *contacts = app.m_pContactData.contactsArray;
+	NSArray     *contacts = AllContactData.contactsArray;
 	
 	pred = [NSPredicate predicateWithFormat:@"firstname contains[cd] %@ OR lastname contains[cd] %@ OR nickname contains[cd] %@ OR middlename contains[cd] %@", fname, fname, fname, fname];
 	return [contacts filteredArrayUsingPredicate:pred];
@@ -57,9 +58,10 @@
 + (NSArray *) contactsMatchingName: (NSString *) fname andName: (NSString *) lname
 {
 	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	ContactData * AllContactData = (ContactData *)[app.m_arrContactData objectAtIndex:0];
 	
 	NSPredicate *pred;
-	NSArray     *contacts = app.m_pContactData.contactsArray;
+	NSArray     *contacts = AllContactData.contactsArray;
 	pred = [NSPredicate predicateWithFormat:@"firstname contains[cd] %@ OR lastname contains[cd] %@ OR nickname contains[cd] %@ OR middlename contains[cd] %@", fname, fname, fname, fname];
 	contacts = [contacts filteredArrayUsingPredicate:pred];
 	pred = [NSPredicate predicateWithFormat:@"firstname contains[cd] %@ OR lastname contains[cd] %@ OR nickname contains[cd] %@ OR middlename contains[cd] %@", lname, lname, lname, lname];
@@ -70,9 +72,10 @@
 + (NSArray *) contactsMatchingPhone: (NSString *) number
 {
 	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	ContactData * AllContactData = (ContactData *)[app.m_arrContactData objectAtIndex:0];
 	
 	NSPredicate *pred;
-	NSArray     *contacts = app.m_pContactData.contactsArray;
+	NSArray     *contacts = AllContactData.contactsArray;
 	pred = [NSPredicate predicateWithFormat:@"phonenumbers contains[cd] %@", number];
 	return [contacts filteredArrayUsingPredicate:pred];
 }

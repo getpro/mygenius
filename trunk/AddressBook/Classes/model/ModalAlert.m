@@ -162,6 +162,7 @@
 	tf.autocorrectionType = UITextAutocorrectionTypeNo;
 	tf.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 
+	
 	// Show alert and wait for it to finish displaying
 	[alertView show];
 	while (CGRectEqualToRect(alertView.bounds, CGRectZero));
