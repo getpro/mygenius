@@ -19,8 +19,11 @@
 	
 	ABContact * m_pContact;
 	
-	CAttributeContainer * m_pContainer;
-	NSMutableArray      * m_pData;
+	//CAttributeContainer * m_pContainer;
+	CAttributeContainer      * m_pContainer;					//单项
+	CAttributeContainer      * m_pMemoContainer;				//多项
+	CAttributeContainer      * m_pAccountsContainer;
+	CAttributeContainer      * m_pCertificateContainer;
 }
 
 @property (retain,nonatomic) IBOutlet UITableView * m_pTableView_IB;

@@ -3,7 +3,6 @@
 //
 
 #import "CAttributeString.h"
-#import "EditableCell.h"
 #import "TagVC.h"
 
 @implementation CAttributeString
@@ -11,6 +10,7 @@
 @synthesize stringValue;
 @synthesize nvController;
 @synthesize m_nType;
+@synthesize m_pCell;
 
 - (NSString*)type 
 {
@@ -91,6 +91,8 @@
 		cell.Selector = @selector(getTagClick);
 		//cell.textField.placeholder = @"...";
 	}
+	
+	m_pCell = cell;
 	
 	return cell;
 }

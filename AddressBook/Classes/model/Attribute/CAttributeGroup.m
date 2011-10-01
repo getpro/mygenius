@@ -20,8 +20,15 @@
 {
     if ((self = [super init]))
 	{
-		m_pDateArry = [NSArray arrayWithObjects:@"朋友",@"家人",@"同学",nil];
-		[m_pDateArry retain];
+		AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+		
+		m_pDateArry = [[NSMutableArray alloc] initWithCapacity:10];
+		
+		for(int i = 0; i < [app.m_arrGroup count]; i++)
+		{
+			ABGroup * pGroup = [app.m_arrGroup objectAtIndex:(i)];
+			[m_pDateArry addObject:pGroup.name];
+		}
 	}
 	return self;
 }

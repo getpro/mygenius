@@ -7,6 +7,7 @@
 
 #import "CAttribute.h"
 #import "PublicData.h"
+#import "EditableCell.h"
 
 /*	
  Attributes for short text strings. 
@@ -17,6 +18,8 @@
 	
 	UINavigationController * nvController;
 	
+	EditableCell* m_pCell;
+	
 	Tag_Type m_nType;
 }
 
@@ -24,5 +27,6 @@
 
 @property (nonatomic, assign) UINavigationController* nvController;
 @property (nonatomic, assign) Tag_Type m_nType;
+@property (nonatomic, readonly) EditableCell * m_pCell;
 
 @end

@@ -12,7 +12,7 @@
 */
 @interface CAttributeGroup : CAttribute 
 {
-	NSArray * m_pDateArry;
+	NSMutableArray * m_pDateArry;
 	
 	NSString* stringValue;
 }

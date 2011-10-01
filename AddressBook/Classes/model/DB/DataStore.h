@@ -90,4 +90,15 @@ typedef enum
 //分组
 +(void)insertGroup:(ABGroup *)pNew;
 
++(ABRecordID)GetGroupID:(NSString *)pName;
+
+//高级信息
++(void)updateGroup:(ABRecordID)pRecordID:(ABRecordID)pGroupID;
+
++(void)updateBlood:(ABRecordID)pRecordID:(NSString*)pStr;
+
++(void)insertAccounts:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex;
+
++(void)insertCertificate:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex;
+
 @end

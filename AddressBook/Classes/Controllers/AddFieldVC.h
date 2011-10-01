@@ -13,8 +13,13 @@
 {
 	IBOutlet UITableView     * m_pTableView_IB;
 	NSArray					 * m_pSource;
+	
+	id  Target;
+	SEL Selector;
 }
 
 @property (retain,nonatomic) IBOutlet UITableView * m_pTableView_IB;
+@property (nonatomic, assign) id  Target;
+@property (nonatomic, assign) SEL Selector;
 
 @end

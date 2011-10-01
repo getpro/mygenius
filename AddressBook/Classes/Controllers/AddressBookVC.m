@@ -109,7 +109,7 @@
 	
 	int nCount = [app.m_arrGroup count];
 	
-	//测试添加分组
+	//添加分组
 	for(int i = 1; i <= nCount; i++)
 	{
 		ContactData * GroupContactData = (ContactData *)[app.m_arrContactData objectAtIndex:i];
@@ -361,19 +361,12 @@
 	
 	[aTableView deselectRowAtIndexPath:indexPath animated:YES];
 	
-	//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
-	//NSError * error;
-	
 	ABContact *contact = nil;
 	
 	if (aTableView == self.m_pTableView_IB)
 		contact = [[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	else
 		contact = [self.filteredArray objectAtIndex:indexPath.row];
-	
-	//test 设置分组
-	//ABGroup * pGroup = [app.m_arrGroup objectAtIndex:1];
-	//BOOL pB = [pGroup addMember:contact withError:&error];
 	
 	AddressPreInfoVC * pAddressPreInfoVC = [[AddressPreInfoVC alloc] init];
 	pAddressPreInfoVC.m_pContact = contact;
@@ -633,8 +626,57 @@
 	
 	if(person)
 	{
+		[DataStore insertContactsBaseInfo:person];
+		
+		/*
+		//test
+		NSError    * error;
+		AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+		
+		//CFErrorRef   errorRef;
+		
+		//ABAddressBookAddRecord(addressBook,person,&errorRef);
+		//ABAddressBookSave(addressBook, &errorRef);
+		
+		ABRecordRef aRecord = ABPersonCreate(); 
+		
+		CFErrorRef  anError = NULL;
+		
+		ABRecordSetValue(aRecord, kABPersonFirstNameProperty, 
+						 CFSTR("Jijo1"), &anError); 
+		ABRecordSetValue(aRecord, kABPersonLastNameProperty, 
+						 CFSTR("Pulikkottil1"), &anError); 
+		if (anError != NULL) 
+		{
+			NSLog(@"error while creating..");
+		}
+		
+		CFErrorRef error2 = NULL; 
+		
+		BOOL isAdded = ABAddressBookAddRecord (addressBook,aRecord,&error2);
+		
+		if(isAdded)
+		{
+			NSLog(@"added..");
+		}
+		if (error2 != NULL) 
+		{
+			NSLog(@"ABAddressBookAddRecord %@", error2);
+		} 
+		error2 = NULL;
+		
+		ABAddressBookSave (addressBook, &error2);
+	
+		ABGroup * pGroup = [app.m_arrGroup objectAtIndex:2];
+		
+		[pGroup addMember2:aRecord withError:&error];
+		
+		*/
+		
+		
 		//点击完成
 		AddressAddSeniorVC * pVc = [[AddressAddSeniorVC alloc] init];
+		pVc.m_pContact = [ABContact contactWithRecord:person];
 		
 		[self.navigationController pushViewController:pVc animated:NO];
 		

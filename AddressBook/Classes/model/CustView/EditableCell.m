@@ -151,8 +151,14 @@
 		if([keyPath isEqual:@"label"])
 		{
 			self.textLabel.text = newText;
-			[self setNeedsLayout];
 		}
+		else if([keyPath isEqual:@"stringValue"])
+		{
+			//self.detailTextLabel.text = newText;
+			//NSObject *obj = dataTarget;
+			//[obj setValue:newText forKey:dataKey];
+		}
+		[self setNeedsLayout];
 	}
 }
 
