@@ -40,6 +40,7 @@
 @property (retain,nonatomic) CAttributeContainer * m_pContainer;
 @property (retain,nonatomic) NSMutableArray      * m_pData;
 
--(IBAction)MoreInfoBtn: (id)sender;
+-(IBAction)MoreInfoBtn:   (id)sender;
+-(IBAction)toggleBarStyle:(id)sender;
 
 @end

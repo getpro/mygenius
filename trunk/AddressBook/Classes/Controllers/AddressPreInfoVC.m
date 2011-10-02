@@ -9,6 +9,7 @@
 #import "AddressPreInfoVC.h"
 #import "PublicData.h"
 #import "AddressBaseInfoVC.h"
+#import "ModalAlert.h"
 
 typedef enum 
 {
@@ -376,6 +377,30 @@ typedef enum
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
 	*/
+}
+
+- (IBAction)toggleBarStyle:(id)sender
+{
+	switch ([sender selectedSegmentIndex])
+	{
+		case 0:
+		{
+			//删除
+			if(1 == [ModalAlert ask:@"确认删除么？"withCancel:@"取消"withButtons:nil])
+			{
+				[self.navigationController popViewControllerAnimated:YES];
+			}
+		}	
+			break;
+		case 1:
+			//同步
+			
+			break;
+		case 2:
+			//推荐详情
+			
+			break;
+	}
 }
 
 #pragma mark ABPersonViewControllerDelegate methods
