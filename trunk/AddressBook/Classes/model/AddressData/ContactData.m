@@ -353,10 +353,12 @@
 
 
 // 从通讯录中删除联联人
-+(BOOL) removeSelfFromAddressBook:(ABContact *)contact withErrow:(NSError **) error
++(BOOL)removeSelfFromAddressBook:(ABRecordRef)pABRecordRef
 {
-	if (!ABAddressBookRemoveRecord(addressBook, contact.record, (CFErrorRef *) error)) return NO;
-	return ABAddressBookSave(addressBook,  (CFErrorRef *) error);
+	CFErrorRef error;
+	if (!ABAddressBookRemoveRecord(addressBook,pABRecordRef,&error))
+		return NO;
+	return ABAddressBookSave(addressBook,&error);
 }
 
 +(BOOL)searchResult:(NSString *)contactName searchText:(NSString *)searchT

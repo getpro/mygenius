@@ -10,6 +10,7 @@
 #import "PublicData.h"
 #import "AddressBaseInfoVC.h"
 #import "ModalAlert.h"
+#import "ContactData.h"
 
 typedef enum 
 {
@@ -388,7 +389,14 @@ typedef enum
 			//删除
 			if(1 == [ModalAlert ask:@"确认删除么？"withCancel:@"取消"withButtons:nil])
 			{
-				[self.navigationController popViewControllerAnimated:YES];
+				if([ContactData removeSelfFromAddressBook:m_pContact.record])
+				{
+					[DataStore RemoveContact:m_pContact.record];
+					
+					[[NSNotificationCenter defaultCenter] postNotificationName:@"changeAddress" object:nil];
+				
+					[self.navigationController popViewControllerAnimated:YES];
+				}
 			}
 		}	
 			break;

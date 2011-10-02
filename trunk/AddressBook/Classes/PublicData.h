@@ -36,6 +36,13 @@ typedef enum
 	Tag_Type_Count
 }Tag_Type;
 
+typedef enum
+{
+	ChangeAddress_Type_Account,	      //帐号
+	ChangeAddress_Type_Certificate,   //证件
+	ChangeAddress_Type_Count
+}ChangeAddress_Type;
+
 /*
  
  界面的索引
