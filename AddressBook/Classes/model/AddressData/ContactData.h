@@ -47,7 +47,7 @@
 
 -(NSString *)getContactsNameByPhoneNumberAndLabel:(NSString *)phone withLabel:(NSString *)label;
 
-+(BOOL) removeSelfFromAddressBook:(ABContact *)contact withErrow:(NSError **) error;
++(BOOL) removeSelfFromAddressBook:(ABRecordRef)pABRecordRef;
 
 +(BOOL)searchResult:(NSString *)contactName searchText:(NSString *)searchT;
 

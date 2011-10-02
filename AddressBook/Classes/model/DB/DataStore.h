@@ -57,8 +57,12 @@ typedef enum
 
 /* contacts_info */
 
+//删除联系人
++(void)RemoveContact:(ABRecordRef)pABRecordRef;
+
 //基本信息
 +(void)insertContactsBaseInfo:(ABRecordRef)pABRecordRef;
++(void)removeContactsBaseInfo:(ABRecordRef)pABRecordRef;
 
 //+(NSInteger)getContactsInfo:(NSMutableArray*)pArray;
 
@@ -70,23 +74,34 @@ typedef enum
 
 //email多值
 +(void)insertEmails:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex;
++(void)removeEmails:(ABRecordID)pRecordID;
+
 
 //地址多值
 +(void)insertAddresses:(ABRecordID)pRecordID:(NSString*)pStreet:(NSString*)pZip
 					  :(NSString*)pCity:(NSString*)pState:(NSString*)pCountry
 				      :(NSString*)pLabel:(NSInteger)pIndex;
++(void)removeAddresses:(ABRecordID)pRecordID;
+
 
 //dates多值
-+(void)insertDates:(ABRecordID)pRecordID:(NSInteger)pContent:(NSString*)pLabel:(NSInteger)pIndex;
++(void)insertDates:(ABRecordID)pRecordID:(NSInteger)pContent:(NSString*)pLabel:(NSInteger)pIndex:(NSInteger)pType;
++(void)removeDates:(ABRecordID)pRecordID;
+
 
 //IM多值
-+(void)insertInstantMessage:(ABRecordID)pRecordID:(NSString*)pUsername:(NSString*)pService:(NSString*)pLabel:(NSInteger)pIndex;
++(void)insertInstantMessage:(ABRecordID)pRecordID:(NSString*)pUsername:(NSString*)pService:(NSString*)pLabel:(NSInteger)pIndex:(NSInteger)pType;
++(void)removeInstantMessage:(ABRecordID)pRecordID;
+
 
 //电话多值
 +(void)insertPhones:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex;
++(void)removePhones:(ABRecordID)pRecordID;
 
 //URL多值
 +(void)insertUrls:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex;
++(void)removeUrls:(ABRecordID)pRecordID;
+
 
 //分组
 //添加新分组
@@ -100,6 +115,9 @@ typedef enum
 +(NSString*)GetGroupName:(ABRecordID)pGroupID;
 
 +(ABRecordID)GetGroupID2:(ABRecordID)pRecordID;
+
+
+
 
 //高级信息
 +(void)updateGroup:(ABRecordID)pRecordID:(ABRecordID)pGroupID;
@@ -118,5 +136,8 @@ typedef enum
 +(void)insertCertificate:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex;
 +(NSArray*)getCertificate:(ABRecordID)pRecordID;
 +(void)removeAllCertificate:(ABRecordID)pRecordID;
+
+//相关联系人
++(void)removeAllrelate:(ABRecordID)pRecordID;
 
 @end

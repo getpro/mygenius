@@ -39,21 +39,27 @@ CREATE TABLE tel_info(
 'tel_num'TEXT NOT NULL,
 'tel_label'TEXT NOT NULL,
 'tel_servicer'TEXT,
-'tel_index'TEXT NOT NULL
+'tel_index'TEXT NOT NULL,
+'tel_creation'INTEGER NOT NULL,
+'tel_modification'INTEGER NOT NULL
 );
 
 CREATE TABLE url_info(
 'contacts_id'TEXT NOT NULL,
 'url_content'TEXT NOT NULL,
 'url_label'TEXT NOT NULL,
-'url_index'TEXT NOT NULL
+'url_index'TEXT NOT NULL,
+'url_creation'INTEGER NOT NULL,
+'url_modification'INTEGER NOT NULL
 );
 
 CREATE TABLE email_info(
 'contacts_id'TEXT NOT NULL,
 'email_content'TEXT NOT NULL,
 'email_label'TEXT NOT NULL,
-'email_index'TEXT NOT NULL
+'email_index'TEXT NOT NULL,
+'email_creation'INTEGER NOT NULL,
+'email_modification'INTEGER NOT NULL
 );
 
 CREATE TABLE address_info(
@@ -64,15 +70,20 @@ CREATE TABLE address_info(
 'address_state'TEXT,
 'address_country'TEXT,
 'address_label'TEXT NOT NULL,
-'address_index'TEXT NOT NULL
+'address_index'TEXT NOT NULL,
+'address_creation'INTEGER NOT NULL,
+'address_modification'INTEGER NOT NULL
 );
 
 CREATE TABLE instantMessage_info(
 'contacts_id'TEXT NOT NULL,
 'instantMessage_username'TEXT NOT NULL,
-'instantMessage_service'TEXT NOT NULL,
+'instantMessage_service'TEXT,
 'instantMessage_label'TEXT NOT NULL,
-'instantMessage_index'TEXT NOT NULL
+'instantMessage_index'TEXT NOT NULL,
+'instantMessage_type'TEXT NOT NULL,
+'instantMessage_creation'INTEGER NOT NULL,
+'instantMessage_modification'INTEGER NOT NULL
 );
 
 CREATE TABLE date_info(
@@ -80,21 +91,37 @@ CREATE TABLE date_info(
 'date_time'INTEGER NOT NULL,
 'date_label'TEXT NOT NULL,
 'date_remind'TEXT,
-'date_index'TEXT NOT NULL
+'date_index'TEXT NOT NULL,
+'date_type'TEXT NOT NULL,
+'date_creation'INTEGER NOT NULL,
+'date_modification'INTEGER NOT NULL
 );
 
 CREATE TABLE account_info(
 'contacts_id'TEXT NOT NULL,
 'account_content'TEXT NOT NULL,
 'account_label'TEXT NOT NULL,
-'account_index'TEXT NOT NULL
+'account_index'TEXT NOT NULL,
+'account_creation'INTEGER NOT NULL,
+'account_modification'INTEGER NOT NULL
+);
+
+CREATE TABLE relate_info(
+'contacts_id'TEXT NOT NULL,
+'relate_id'TEXT NOT NULL,
+'relate_label'TEXT NOT NULL,
+'relate_index'TEXT NOT NULL,
+'relate_creation'INTEGER NOT NULL,
+'relate_modification'INTEGER NOT NULL
 );
 
 CREATE TABLE certificate_info(
 'contacts_id'TEXT NOT NULL,
 'certificate_content'TEXT NOT NULL,
 'certificate_label'TEXT NOT NULL,
-'certificate_index'TEXT NOT NULL
+'certificate_index'TEXT NOT NULL,
+'certificate_creation'INTEGER NOT NULL,
+'certificate_modification'INTEGER NOT NULL
 );
 
 CREATE TABLE tag_info(
@@ -110,7 +137,9 @@ CREATE TABLE memo_info(
 'memo_subject'TEXT,
 'memo_des'TEXT,
 'memo_date'TEXT,
-'memo_remind'INTEGER
+'memo_remind'INTEGER,
+'memo_creation'INTEGER NOT NULL,
+'memo_modification'INTEGER NOT NULL
 );
 
 CREATE TABLE date_type(

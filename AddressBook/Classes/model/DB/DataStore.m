@@ -9,7 +9,6 @@
 #import "DataStore.h"
 #import "DBConnection.h"
 
-
 @implementation DataStore
 
 //config
@@ -92,6 +91,50 @@
 	[stmt release];
 }
 */
+
++(void)RemoveContact:(ABRecordRef)pABRecordRef
+{
+	if (pABRecordRef == nil)
+	{
+		return;
+	}
+	//if()
+	{
+		ABRecordID  pRecordID  = ABRecordGetRecordID(pABRecordRef);
+		//移除基本信息
+		[self removeContactsBaseInfo:pABRecordRef];
+		
+		[self removePhones:pRecordID];
+		[self removeUrls:pRecordID];
+		[self removeEmails:pRecordID];
+		[self removeAddresses:pRecordID];
+		[self removeInstantMessage:pRecordID];
+		[self removeDates:pRecordID];
+		[self removeAllAccounts:pRecordID];
+		[self removeAllrelate:pRecordID];
+		
+		[self removeAllCertificate:pRecordID];
+	}
+}
+
++(void)removeContactsBaseInfo:(ABRecordRef)pABRecordRef
+{
+	if (pABRecordRef == nil)
+	{
+		return;
+	}
+	ABRecordID  pRecordID  = ABRecordGetRecordID(pABRecordRef);
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"DELETE FROM contacts_info WHERE contacts_id = ?"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
 
 +(void)insertContactsBaseInfo:(ABRecordRef)pABRecordRef
 {
@@ -310,7 +353,7 @@
 		//获取dates值
 		NSDate* datesContent = (NSDate*)ABMultiValueCopyValueAtIndex(dates, y);
 		
-		[self insertDates:pRecordID:[datesContent timeIntervalSince1970]:datesLabel:y];
+		[self insertDates:pRecordID:[datesContent timeIntervalSince1970]:datesLabel:y:0];
 		
 	}
 	
@@ -339,7 +382,7 @@
 		NSString* username = [instantMessageContent valueForKey:(NSString *)kABPersonInstantMessageUsernameKey];
 		NSString* service = [instantMessageContent valueForKey:(NSString *)kABPersonInstantMessageServiceKey];
 		
-		[self insertInstantMessage:pRecordID:username:service:instantMessageLabel:l];
+		[self insertInstantMessage:pRecordID:username:service:instantMessageLabel:l:0];
 	}
 	
 	//读取电话多值
@@ -489,12 +532,29 @@
 {
 	Statement* stmt = nil;
 	
-	stmt = [DBConnection statementWithQuery:"INSERT INTO email_info VALUES(?,?,?,?)"];
+	stmt = [DBConnection statementWithQuery:"INSERT INTO email_info VALUES(?,?,?,?,?,?)"];
 	
 	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
 	[stmt bindString:pContent						                forIndex:2];//2.content
 	[stmt bindString:pLabel									        forIndex:3];//3.label
 	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:4];//4.index
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:5];//5.creation
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:6];//6.modification
+	
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
++(void)removeEmails:(ABRecordID)pRecordID
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"DELETE FROM email_info WHERE contacts_id = ?"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
 	
 	[stmt retain];
 	[stmt step];
@@ -508,7 +568,7 @@
 {
 	Statement* stmt = nil;
 	
-	stmt = [DBConnection statementWithQuery:"INSERT INTO address_info VALUES(?,?,?,?,?,?,?,?)"];
+	stmt = [DBConnection statementWithQuery:"INSERT INTO address_info VALUES(?,?,?,?,?,?,?,?,?,?)"];
 	
 	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
 	[stmt bindString:pStreet						                forIndex:2];//2.street
@@ -518,6 +578,8 @@
 	[stmt bindString:pCountry						                forIndex:6];//6.country
 	[stmt bindString:pLabel									        forIndex:7];//7.label
 	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:8];//8.index
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:9];//9.creation
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:10];//10.modification
 	
 	[stmt retain];
 	[stmt step];
@@ -525,17 +587,34 @@
 	[stmt release];
 }
 
-+(void)insertDates:(ABRecordID)pRecordID:(NSInteger)pContent:(NSString*)pLabel:(NSInteger)pIndex
++(void)removeAddresses:(ABRecordID)pRecordID
 {
 	Statement* stmt = nil;
 	
-	stmt = [DBConnection statementWithQuery:"INSERT INTO date_info VALUES(?,?,?,?,?)"];
+	stmt = [DBConnection statementWithQuery:"DELETE FROM address_info WHERE contacts_id = ?"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
++(void)insertDates:(ABRecordID)pRecordID:(NSInteger)pContent:(NSString*)pLabel:(NSInteger)pIndex:(NSInteger)pType
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"INSERT INTO date_info VALUES(?,?,?,?,?,?,?,?)"];
 	
 	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
 	[stmt bindInt32:pContent						                forIndex:2];//2.time
 	[stmt bindString:pLabel									        forIndex:3];//3.label
 	[stmt bindString:@"0"									        forIndex:4];//4.remind
 	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:5];//5.index
+	[stmt bindString:[NSString stringWithFormat:@"%d",pType]	    forIndex:6];//6.type
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:6];//6.creation
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:7];//7.modification
 	
 	[stmt retain];
 	[stmt step];
@@ -543,17 +622,51 @@
 	[stmt release];
 }
 
-+(void)insertInstantMessage:(ABRecordID)pRecordID:(NSString*)pUsername:(NSString*)pService:(NSString*)pLabel:(NSInteger)pIndex
++(void)removeDates:(ABRecordID)pRecordID
 {
 	Statement* stmt = nil;
 	
-	stmt = [DBConnection statementWithQuery:"INSERT INTO instantMessage_info VALUES(?,?,?,?,?)"];
+	stmt = [DBConnection statementWithQuery:"DELETE FROM date_info WHERE contacts_id = ?"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
++(void)insertInstantMessage:(ABRecordID)pRecordID:(NSString*)pUsername:(NSString*)pService:(NSString*)pLabel:(NSInteger)pIndex:(NSInteger)pType
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"INSERT INTO instantMessage_info VALUES(?,?,?,?,?,?,?,?)"];
 	
 	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
 	[stmt bindString:pUsername						                forIndex:2];//2.username
-	[stmt bindString:pService									    forIndex:3];//3.service
+	if(pService)
+	{
+		[stmt bindString:pService									forIndex:3];//3.service
+	}
 	[stmt bindString:pLabel										    forIndex:4];//4.label
 	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:5];//5.index
+	[stmt bindString:[NSString stringWithFormat:@"%d",pType]	    forIndex:6];//6.type
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:7];//7.creation
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:8];//8.modification
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
++(void)removeInstantMessage:(ABRecordID)pRecordID
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"DELETE FROM instantMessage_info WHERE contacts_id = ?"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
 	
 	[stmt retain];
 	[stmt step];
@@ -565,13 +678,29 @@
 {
 	Statement* stmt = nil;
 	
-	stmt = [DBConnection statementWithQuery:"INSERT INTO tel_info VALUES(?,?,?,?,?)"];
+	stmt = [DBConnection statementWithQuery:"INSERT INTO tel_info VALUES(?,?,?,?,?,?,?)"];
 	
 	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
 	[stmt bindString:pContent						                forIndex:2];//2.num
 	[stmt bindString:pLabel									        forIndex:3];//3.label
 	[stmt bindString:@"0"									        forIndex:4];//4.servicer
 	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:5];//5.index
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:6];//6.creation
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:7];//7.modification
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
++(void)removePhones:(ABRecordID)pRecordID
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"DELETE FROM tel_info WHERE contacts_id = ?"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
 	
 	[stmt retain];
 	[stmt step];
@@ -583,12 +712,28 @@
 {
 	Statement* stmt = nil;
 	
-	stmt = [DBConnection statementWithQuery:"INSERT INTO url_info VALUES(?,?,?,?)"];
+	stmt = [DBConnection statementWithQuery:"INSERT INTO url_info VALUES(?,?,?,?,?,?)"];
 	
 	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
 	[stmt bindString:pContent						                forIndex:2];//2.num
 	[stmt bindString:pLabel									        forIndex:3];//3.label
 	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:4];//4.index
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:5];//5.creation
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:6];//6.modification
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
++(void)removeUrls:(ABRecordID)pRecordID
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"DELETE FROM url_info WHERE contacts_id = ?"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
 	
 	[stmt retain];
 	[stmt step];
@@ -740,12 +885,14 @@
 {
 	Statement* stmt = nil;
 	
-	stmt = [DBConnection statementWithQuery:"INSERT INTO account_info VALUES(?,?,?,?)"];
+	stmt = [DBConnection statementWithQuery:"INSERT INTO account_info VALUES(?,?,?,?,?,?)"];
 	
 	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
 	[stmt bindString:pContent						                forIndex:2];//2.content
 	[stmt bindString:pLabel									        forIndex:3];//3.label
 	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:4];//4.index
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:5];//5.creation
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:6];//6.modification
 	
 	[stmt retain];
 	[stmt step];
@@ -805,12 +952,14 @@
 {
 	Statement* stmt = nil;
 	
-	stmt = [DBConnection statementWithQuery:"INSERT INTO certificate_info VALUES(?,?,?,?)"];
+	stmt = [DBConnection statementWithQuery:"INSERT INTO certificate_info VALUES(?,?,?,?,?,?)"];
 	
 	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
 	[stmt bindString:pContent						                forIndex:2];//2.content
 	[stmt bindString:pLabel									        forIndex:3];//3.label
 	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:4];//4.index
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:5];//5.creation
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:6];//6.modification
 	
 	[stmt retain];
 	[stmt step];
@@ -857,6 +1006,20 @@
 	Statement* stmt = nil;
 	
 	stmt = [DBConnection statementWithQuery:"DELETE FROM certificate_info WHERE contacts_id = ?"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
++(void)removeAllrelate:(ABRecordID)pRecordID
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"DELETE FROM relate_info WHERE contacts_id = ?"];
 	
 	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
 	
