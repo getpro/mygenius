@@ -74,7 +74,7 @@
 {
 	if(editing == YES)
 	{
-		[m_pSegmentedControl setHidden:YES];
+		//[m_pSegmentedControl setHidden:YES];
 	}
 	[super setEditing:editing];
 }
@@ -83,7 +83,7 @@
 {
 	if(editing == YES)
 	{
-		[m_pSegmentedControl setHidden:YES];
+		//[m_pSegmentedControl setHidden:YES];
 	}
 	else
 	{

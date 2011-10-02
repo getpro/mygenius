@@ -11,7 +11,7 @@
 
 @implementation CustomPicker
 
-@synthesize pickerSheet;
+//@synthesize pickerSheet;
 @synthesize picker;
 @synthesize sourceArray;
 @synthesize Target;
@@ -33,11 +33,45 @@
 		
 		//sourceArray = [[NSArray alloc]initWithObjects: @"iOS应用软件开发", @"iOS企业OA开发",@"iOS定制应用", @"iOS游戏开发", nil];
 		
-		CGRect pFrame = CGRectMake(0, 200, SCREEN_W, SCREEN_H - 200);
-		pickerSheet = [[UIActionSheet alloc] initWithFrame:pFrame];
-		pickerSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+		//CGRect pFrame = CGRectMake(0, 200, SCREEN_W, SCREEN_H - 200);
+		//pickerSheet = [[UIActionSheet alloc] initWithFrame:pFrame];
+		//pickerSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+		
+		UIToolbar * toolbar = [UIToolbar new];
+		toolbar.barStyle = UIBarStyleBlackOpaque;
+		
+		// size up the toolbar and set its frame
+		[toolbar sizeToFit];
+		//CGFloat toolbarHeight = [toolbar frame].size.height;
+		//CGRect mainViewBounds = self.view.bounds;
+		[toolbar setFrame:CGRectMake(0,230,SCREEN_W,40)];
+		[self addSubview:toolbar];
 		
 		
+		UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc]
+									   initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+									   target:self action:@selector(pickerHideCancel)];
+		
+		cancelItem.style = UIBarButtonItemStyleBordered;
+		
+		// flex item used to separate the left groups items and right grouped items
+		UIBarButtonItem *flexItem1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+																				  target:nil
+																				  action:nil];
+		
+		UIBarButtonItem *flexItem2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+																				   target:nil
+																				   action:nil];
+		
+		UIBarButtonItem *donelItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleBordered 
+																	 target:self action:@selector(pickerHideOK)];
+		
+		donelItem.style = UIBarButtonItemStyleBordered;
+		
+		NSArray *items = [NSArray arrayWithObjects: cancelItem, flexItem1,flexItem2,donelItem, nil];
+		[toolbar setItems:items animated:NO];
+		
+		/*
 		CGRect btnFrame = CGRectMake(10, 5, 60, 30);
 		UIButton* cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 		[cancelButton awakeFromNib];
@@ -55,17 +89,19 @@
 		okButton.backgroundColor = [UIColor clearColor];
 		[okButton setTitle:@"完成" forState:UIControlStateNormal];
 		[pickerSheet addSubview:okButton];
+		*/
 		
 		
-		CGRect pickerFrame = CGRectMake(0, 40, SCREEN_W, 222);
-		picker=[ [UIPickerView alloc] initWithFrame:pickerFrame]; 
+		
+		CGRect pickerFrame = CGRectMake(0, 270, SCREEN_W, 240);
+		picker=[ [UIPickerView alloc] initWithFrame:pickerFrame];
 		picker.autoresizingMask=UIViewAutoresizingFlexibleWidth;
 		picker.showsSelectionIndicator = YES;
 		picker.delegate   = self; 
 		picker.dataSource = self;
-		[pickerSheet addSubview:picker];
+		[self addSubview:picker];
 		
-		[self addSubview:pickerSheet];
+		//[self addSubview:pickerSheet];
     }
     return self;
 }
@@ -117,7 +153,7 @@
 {
 	[sourceArray release];
     [picker		 release];
-    [pickerSheet release];
+    //[pickerSheet release];
 	
     [super dealloc];
 }

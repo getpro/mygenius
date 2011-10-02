@@ -10,7 +10,7 @@
 
 @interface CustomPicker : UIView < UIPickerViewDelegate, UIPickerViewDataSource >
 {
-	UIActionSheet * pickerSheet;
+	//UIActionSheet * pickerSheet;
 	UIPickerView  * picker;
     NSArray		  * sourceArray;
 	
@@ -18,7 +18,7 @@
 	SEL Selector;
 }
 
-@property(nonatomic, retain)UIActionSheet* pickerSheet;
+//@property(nonatomic, retain)UIActionSheet* pickerSheet;
 @property(nonatomic, retain)UIPickerView* picker;
 @property(nonatomic, retain)NSArray* sourceArray;
 
