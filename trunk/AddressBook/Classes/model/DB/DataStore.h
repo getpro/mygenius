@@ -11,6 +11,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 
 #import "ABContactsHelper.h"
+#import "LabelAndContent.h"
 
 //系统设置
 #define CONFIG_ID @"1001"
@@ -103,10 +104,14 @@ typedef enum
 //高级信息
 +(void)updateGroup:(ABRecordID)pRecordID:(ABRecordID)pGroupID;
 
+
 +(void)updateBlood:(ABRecordID)pRecordID:(NSString*)pStr;
++(NSString*)getBlood:(ABRecordID)pRecordID;
 
 +(void)insertAccounts:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex;
++(NSArray*)getAccounts:(ABRecordID)pRecordID;
 
 +(void)insertCertificate:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex;
++(NSArray*)getCertificate:(ABRecordID)pRecordID;
 
 @end
