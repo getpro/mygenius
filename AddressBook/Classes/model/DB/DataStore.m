@@ -787,6 +787,20 @@
 	return retArray;
 }
 
++(void)removeAllAccounts:(ABRecordID)pRecordID
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"DELETE FROM account_info WHERE contacts_id = ?"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
 +(void)insertCertificate:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex
 {
 	Statement* stmt = nil;
@@ -836,6 +850,20 @@
 	[stmt reset];
 	
 	return retArray;
+}
+
++(void)removeAllCertificate:(ABRecordID)pRecordID
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"DELETE FROM certificate_info WHERE contacts_id = ?"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
 }
 
 @end

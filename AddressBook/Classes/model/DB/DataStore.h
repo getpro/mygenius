@@ -108,10 +108,15 @@ typedef enum
 +(void)updateBlood:(ABRecordID)pRecordID:(NSString*)pStr;
 +(NSString*)getBlood:(ABRecordID)pRecordID;
 
+
+//帐号
 +(void)insertAccounts:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex;
 +(NSArray*)getAccounts:(ABRecordID)pRecordID;
++(void)removeAllAccounts:(ABRecordID)pRecordID;
 
+//身份证
 +(void)insertCertificate:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex;
 +(NSArray*)getCertificate:(ABRecordID)pRecordID;
++(void)removeAllCertificate:(ABRecordID)pRecordID;
 
 @end

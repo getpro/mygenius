@@ -163,6 +163,8 @@ typedef enum
 	}
 	
 	//帐号
+	[DataStore removeAllAccounts:pRecordID];
+	
 	CAttributeString * attrAccount = nil;
 	for(int i = 0;i < [m_pAccountsContainer.attributes count];i++)
 	{
@@ -176,6 +178,8 @@ typedef enum
 	}
 	
 	//证件
+	[DataStore removeAllCertificate:pRecordID];
+	
 	CAttributeString * attrCertificate = nil;
 	for(int i = 0;i < [m_pCertificateContainer.attributes count];i++)
 	{

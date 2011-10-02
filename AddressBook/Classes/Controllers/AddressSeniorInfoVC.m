@@ -10,6 +10,7 @@
 #import "PublicData.h"
 #import "AddressBaseInfoVC.h"
 #import "AddFieldVC.h"
+#import "AddressBookAppDelegate.h"
 
 @implementation AddressSeniorInfoVC
 
@@ -212,7 +213,78 @@ typedef enum
 -(IBAction)doneItemBtn:    (id)sender
 {
 	//保存属性
+	//CFErrorRef   errorRef;
+	NSError    * error;
 	
+	//ABAddressBookAddRecord(addressBook,m_pContact.record,&errorRef);
+	//ABAddressBookSave(addressBook, &errorRef);
+	
+	ABRecordID  pRecordID  = ABRecordGetRecordID(m_pContact.record);
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
+	CAttributeGroup *attrGroup = nil;
+	//分组
+	attrGroup = [m_pContainer.attributes objectAtIndex:0];
+	if(attrGroup && attrGroup.stringValue)
+	{
+		//设置分组
+		ABRecordID pGroupID = [DataStore GetGroupID:attrGroup.stringValue];
+		
+		//ABGroup * pGroup = [app.m_arrGroup objectAtIndex:2];
+		ABGroup * pGroup = nil;
+		
+		for(pGroup in app.m_arrGroup)
+		{
+			if(ABRecordGetRecordID(pGroup.record) == pGroupID)
+			{
+				break;
+			}
+		}
+		
+		//没有效果
+		if([pGroup addMember:m_pContact withError:&error])
+		{
+			[DataStore updateGroup:pRecordID:pGroupID];
+		}
+	}
+	
+	//血型
+	CAttributeBlood *attrBlood = nil;
+	attrBlood = [m_pContainer.attributes objectAtIndex:1];
+	if(attrBlood && attrBlood.stringValue)
+	{
+		[DataStore updateBlood:pRecordID:attrBlood.stringValue];
+	}
+	
+	//帐号
+	[DataStore removeAllAccounts:pRecordID];
+	
+	CAttributeString * attrAccount = nil;
+	for(int i = 0;i < [m_pAccountsContainer.attributes count];i++)
+	{
+		attrAccount = [m_pAccountsContainer.attributes objectAtIndex:i];
+		NSString *pContent = attrAccount.m_pCell.textField.text;
+		if(attrAccount.label && pContent)
+		{
+			[DataStore insertAccounts:pRecordID :pContent
+									 :attrAccount.label :i];
+		}
+	}
+	
+	//证件
+	[DataStore removeAllCertificate:pRecordID];
+	
+	CAttributeString * attrCertificate = nil;
+	for(int i = 0;i < [m_pCertificateContainer.attributes count];i++)
+	{
+		attrCertificate = [m_pCertificateContainer.attributes objectAtIndex:i];
+		NSString *pContent = attrCertificate.m_pCell.textField.text;
+		if(attrCertificate.label && pContent)
+		{
+			[DataStore insertCertificate:pRecordID :pContent
+										:attrCertificate.label :i];
+		}
+	}
 	
 	[self setEditing:NO animated:YES];
 }
