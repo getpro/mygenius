@@ -653,14 +653,14 @@
 
 +(NSString*)GetGroupName:(ABRecordID)pGroupID
 {
-	NSString*  pName = 0;
-	Statement *stmt = nil;
+	NSString*  pName = nil;
+	Statement *stmt  = nil;
 	
 	stmt = [DBConnection statementWithQuery:"SELECT group_name FROM group_info WHERE group_id = ? "];
 	[stmt retain];
     
     // Note that the parameters are numbered from 1, not from 0.
-    [stmt bindInt32:pGroupID forIndex:1];
+    [stmt bindString:[NSString stringWithFormat:@"%d",pGroupID] forIndex:1];
     if ([stmt step] == SQLITE_ROW)
 	{
         // Restore image from Database
@@ -715,6 +715,27 @@
     [stmt step];
 }
 
++(NSString*)getBlood:(ABRecordID)pRecordID
+{
+	NSString*  pName = nil;
+	Statement *stmt  = nil;
+	
+	stmt = [DBConnection statementWithQuery:"SELECT contacts_blood FROM contacts_info WHERE contacts_id = ? "];
+	[stmt retain];
+    
+    // Note that the parameters are numbered from 1, not from 0.
+    [stmt bindString:[NSString stringWithFormat:@"%d",pRecordID] forIndex:1];
+    if ([stmt step] == SQLITE_ROW)
+	{
+        // Restore image from Database
+        pName = [stmt getString:0];
+    }
+	
+    [stmt reset];
+    [stmt release];
+	return pName;
+}
+
 +(void)insertAccounts:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex
 {
 	Statement* stmt = nil;
@@ -732,6 +753,40 @@
 	[stmt release];
 }
 
++(NSArray*)getAccounts:(ABRecordID)pRecordID
+{
+	NSMutableArray *retArray = [[[NSMutableArray alloc] init] autorelease];
+	
+	Statement * stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"SELECT * FROM account_info WHERE contacts_id = ?"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	
+	NSInteger count = 0;
+	
+	while ([stmt step] == SQLITE_ROW)
+	{
+		NSString * pContent		    = [NSString stringWithFormat:@"%@", [stmt getString:1]];
+		NSString * pLabel           = [NSString stringWithFormat:@"%@", [stmt getString:2]];
+		
+		LabelAndContent * pLabelAndContent = [[LabelAndContent alloc]init];
+		
+		pLabelAndContent.m_strLabel		    	 = pLabel;
+		pLabelAndContent.m_strContent		     = pContent;
+		
+		[retArray addObject:pLabelAndContent];
+		
+		[pLabelAndContent release];
+		
+		count++;
+	}
+	
+	[stmt reset];
+	
+	return retArray;
+}
+
 +(void)insertCertificate:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex
 {
 	Statement* stmt = nil;
@@ -747,6 +802,40 @@
 	[stmt step];
     [stmt reset];
 	[stmt release];
+}
+
++(NSArray*)getCertificate:(ABRecordID)pRecordID
+{
+	NSMutableArray *retArray = [[[NSMutableArray alloc] init] autorelease];
+	
+	Statement * stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"SELECT * FROM certificate_info WHERE contacts_id = ?"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	
+	NSInteger count = 0;
+	
+	while ([stmt step] == SQLITE_ROW)
+	{
+		NSString * pContent		    = [NSString stringWithFormat:@"%@", [stmt getString:1]];
+		NSString * pLabel           = [NSString stringWithFormat:@"%@", [stmt getString:2]];
+		
+		LabelAndContent * pLabelAndContent = [[LabelAndContent alloc]init];
+		
+		pLabelAndContent.m_strLabel		    	 = pLabel;
+		pLabelAndContent.m_strContent		     = pContent;
+		
+		[retArray addObject:pLabelAndContent];
+		
+		[pLabelAndContent release];
+		
+		count++;
+	}
+	
+	[stmt reset];
+	
+	return retArray;
 }
 
 @end

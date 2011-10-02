@@ -15,7 +15,7 @@
 {
 	IBOutlet UITableView     * m_pTableView_IB;
 	
-	IBOutlet UIBarButtonItem * m_pRightDone;        //编辑
+	IBOutlet UIBarButtonItem * m_pRightReturn;        //返回
 	IBOutlet UIBarButtonItem * m_pRightEdit;        //完成
 	
 	Tag_Type				   m_nType;
@@ -26,11 +26,13 @@
 }
 
 @property (nonatomic,retain) IBOutlet UITableView     * m_pTableView_IB;
-@property (nonatomic,retain) IBOutlet UIBarButtonItem * m_pRightDone;
+@property (nonatomic,retain) IBOutlet UIBarButtonItem * m_pRightReturn;
 @property (nonatomic,retain) IBOutlet UIBarButtonItem * m_pRightEdit;
 @property (nonatomic,assign) Tag_Type				    m_nType;
 @property (nonatomic, assign) id  Target;
 @property (nonatomic, assign) SEL Selector;
 
+-(IBAction)ReturnItemBtn:  (id)sender;
+-(IBAction)EditItemBtn:    (id)sender;
 
 @end

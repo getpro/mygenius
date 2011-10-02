@@ -19,7 +19,7 @@ typedef enum
 
 @implementation TagVC
 
-@synthesize m_pTableView_IB,m_pRightDone,m_pRightEdit,m_nType;
+@synthesize m_pTableView_IB,m_pRightReturn,m_pRightEdit,m_nType;
 @synthesize Target;
 @synthesize Selector;
 
@@ -29,6 +29,9 @@ typedef enum
     [super viewDidLoad];
 	
 	self.navigationItem.title = @"标签";
+	
+	self.navigationItem.rightBarButtonItem = m_pRightEdit;
+	self.navigationItem.leftBarButtonItem  = m_pRightReturn;
 	
 	switch (m_nType) 
 	{
@@ -84,7 +87,7 @@ typedef enum
 - (void)dealloc 
 {
 	[m_pTableView_IB release];
-	[m_pRightDone    release];
+	[m_pRightReturn  release];
 	[m_pRightEdit    release];
 	
 	[m_pDateArry     release];
@@ -245,6 +248,16 @@ typedef enum
 	}
 	
 	[self.navigationController popViewControllerAnimated:YES];
+}
+
+-(IBAction)ReturnItemBtn:  (id)sender
+{
+	[self.navigationController popViewControllerAnimated:YES];
+}
+
+-(IBAction)EditItemBtn:    (id)sender
+{
+	
 }
 
 @end

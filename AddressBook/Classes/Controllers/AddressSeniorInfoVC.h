@@ -47,4 +47,7 @@
 -(IBAction)cancelItemBtn:  (id)sender;
 -(IBAction)editItemBtn:    (id)sender;
 
+//加载数据
+-(void)LoadAttribute;
+
 @end

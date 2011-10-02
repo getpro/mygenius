@@ -45,6 +45,7 @@ typedef enum
 	//头像
 	if(m_pContact.image)
 	{
+		self.m_pHead_IB.contentMode = UIViewContentModeScaleAspectFit;
 		self.m_pHead_IB.image = m_pContact.image;
 	}
 	

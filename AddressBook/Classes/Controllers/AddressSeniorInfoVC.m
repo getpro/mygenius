@@ -75,7 +75,7 @@ typedef enum
 	self.navigationItem.title = @"";
 	self.navigationItem.rightBarButtonItem = m_pButtonItemEdit;
 	
-	m_pButtonItemReturn = self.navigationItem.leftBarButtonItem;
+	//m_pButtonItemReturn = self.navigationItem.leftBarButtonItem;
 	
 	if(m_pSegmentedControl)
 	{
@@ -100,38 +100,55 @@ typedef enum
 	m_pAccountsContainer	= [[CAttributeContainer alloc] init];
 	m_pCertificateContainer = [[CAttributeContainer alloc] init];
 	
+	[self LoadAttribute];
+	
+	[self setEditing:NO animated:NO];
+}
+
+
+-(void)LoadAttribute
+{
+	[m_pContainer		      removeAllObject];
+	[m_pMemoContainer		  removeAllObject];
+	[m_pAccountsContainer     removeAllObject];
+	[m_pCertificateContainer  removeAllObject];
+	
 	CAttribute *attr = nil;
+	ABRecordID  pRecordID  = ABRecordGetRecordID(m_pContact.record);
 	
 	attr = [[[CAttributeGroup alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"分组"];
+	((CAttributeGroup*)attr).stringValue = [DataStore GetGroupName:[DataStore GetGroupID2:pRecordID]];
 	
 	attr = [[[CAttributeBlood alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"血型"];
-	
-	//m_pData = [[NSMutableArray alloc]initWithArray:pContainer.attributes];
-	
+	((CAttributeBlood*)attr).stringValue = [DataStore getBlood:pRecordID];
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	((CAttributeString*)attr).nvController = self.navigationController;
 	((CAttributeString*)attr).m_nType      = Tag_Type_Memo;
 	[m_pMemoContainer setValue:attr        forKey:@"纪念日"];
 	
-	attr = [[[CAttributeString alloc] init] autorelease];
-	((CAttributeString*)attr).nvController = self.navigationController;
-	((CAttributeString*)attr).m_nType      = Tag_Type_Account;
-	[m_pAccountsContainer setValue:attr    forKey:@"帐号"];
+	NSArray * pArryAccount = [DataStore getAccounts:pRecordID];
+	for(LabelAndContent * pLabelAndContent in pArryAccount)
+	{
+		attr = [[[CAttributeString alloc] init] autorelease];
+		((CAttributeString*)attr).nvController = self.navigationController;
+		((CAttributeString*)attr).m_nType      = Tag_Type_Account;
+		[m_pAccountsContainer setValue:attr    forKey:pLabelAndContent.m_strLabel];
+		((CAttributeString*)attr).stringValue  = pLabelAndContent.m_strContent;
+	}
 	
-	attr = [[[CAttributeString alloc] init] autorelease];
-	((CAttributeString*)attr).nvController = self.navigationController;
-	((CAttributeString*)attr).m_nType      = Tag_Type_Certificate;
-	[m_pCertificateContainer setValue:attr forKey:@"证件"];
-	
-	
-	
-	
-	[self setEditing:NO animated:NO];
+	NSArray * pArryCertificate = [DataStore getCertificate:pRecordID];
+	for(LabelAndContent * pLabelAndContent in pArryCertificate)
+	{
+		attr = [[[CAttributeString alloc] init] autorelease];
+		((CAttributeString*)attr).nvController = self.navigationController;
+		((CAttributeString*)attr).m_nType      = Tag_Type_Certificate;
+		[m_pCertificateContainer setValue:attr forKey:pLabelAndContent.m_strLabel];
+		((CAttributeString*)attr).stringValue  = pLabelAndContent.m_strContent;
+	}
 }
-
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -163,12 +180,12 @@ typedef enum
 	if (editing)
 	{
 		self.navigationItem.rightBarButtonItem = m_pButtonItemDone;
-		self.navigationItem.leftBarButtonItem  = m_pButtonItemCancel;
+		//self.navigationItem.leftBarButtonItem  = m_pButtonItemCancel;
 	} 
-	else 
+	else
 	{
 		self.navigationItem.rightBarButtonItem = m_pButtonItemEdit;
-		self.navigationItem.leftBarButtonItem  = m_pButtonItemReturn;
+		//self.navigationItem.leftBarButtonItem  = m_pButtonItemReturn;
 	}
  	[m_pTableView_IB reloadData];
 }
@@ -194,6 +211,9 @@ typedef enum
 
 -(IBAction)doneItemBtn:    (id)sender
 {
+	//保存属性
+	
+	
 	[self setEditing:NO animated:YES];
 }
 
@@ -280,6 +300,10 @@ typedef enum
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+	if(!self.editing)
+	{
+		return (SeniorInfo_TableView_Section_Count - 1);
+	}
 	return SeniorInfo_TableView_Section_Count;
 }
 

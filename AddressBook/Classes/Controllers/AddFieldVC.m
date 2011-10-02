@@ -21,6 +21,7 @@ typedef enum
 @synthesize m_pTableView_IB;
 @synthesize Target;
 @synthesize Selector;
+@synthesize m_pRightReturn;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
@@ -28,6 +29,7 @@ typedef enum
     [super viewDidLoad];
 	
 	self.navigationItem.title = @"添加字段";
+	self.navigationItem.leftBarButtonItem  = m_pRightReturn;
 	
 	m_pSource = [NSArray arrayWithObjects:
 				 [NSDictionary dictionaryWithObjectsAndKeys:
@@ -77,6 +79,7 @@ typedef enum
 {
 	[m_pTableView_IB release];
 	[m_pSource       release];
+	[m_pRightReturn  release];
 	
     [super dealloc];
 }
@@ -144,6 +147,11 @@ typedef enum
 		[Target performSelector:Selector withObject:resultItem];
 	}
 	
+	[self.navigationController popViewControllerAnimated:YES];
+}
+
+-(IBAction)ReturnItemBtn:  (id)sender
+{
 	[self.navigationController popViewControllerAnimated:YES];
 }
 

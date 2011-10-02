@@ -27,6 +27,7 @@ NSString *KContactCell_ID = @"ContactCell";
 		m_nOffSet = 5;
 		
 		m_pHead = [[UIImageView alloc] initWithFrame:CGRectMake(m_nOffSet, (42 - HEAD_SIZE)/2, HEAD_SIZE, HEAD_SIZE)];
+		m_pHead.contentMode = UIViewContentModeScaleAspectFit;
 		[m_pHead setImage:[UIImage imageNamed:@"head.png"]];
 		[self addSubview:m_pHead];
 		

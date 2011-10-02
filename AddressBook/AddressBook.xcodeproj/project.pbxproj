@@ -66,6 +66,7 @@
 		21A327CB142D7B6A00F62134 /* syncAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A327CA142D7B6A00F62134 /* syncAccountVC.m */; };
 		21A327CD142D7BE000F62134 /* syncAccountVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21A327CC142D7BE000F62134 /* syncAccountVC.xib */; };
 		21A32829142D819700F62134 /* syncButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A32828142D819700F62134 /* syncButtonCell.m */; };
+		21BC034D143805DF00CE1192 /* LabelAndContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC034C143805DF00CE1192 /* LabelAndContent.m */; };
 		21BCEC5D142F60AA00FB27BE /* AddFieldVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BCEC5C142F60AA00FB27BE /* AddFieldVC.m */; };
 		21BCEC62142F612A00FB27BE /* AddFieldVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BCEC61142F612A00FB27BE /* AddFieldVC.xib */; };
 		21D256E2142B806E00306515 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D256E1142B806E00306515 /* background.png */; };
@@ -193,6 +194,8 @@
 		21A327CC142D7BE000F62134 /* syncAccountVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = syncAccountVC.xib; sourceTree = "<group>"; };
 		21A32827142D819700F62134 /* syncButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = syncButtonCell.h; sourceTree = "<group>"; };
 		21A32828142D819700F62134 /* syncButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = syncButtonCell.m; sourceTree = "<group>"; };
+		21BC034B143805DF00CE1192 /* LabelAndContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelAndContent.h; sourceTree = "<group>"; };
+		21BC034C143805DF00CE1192 /* LabelAndContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelAndContent.m; sourceTree = "<group>"; };
 		21BCEC5B142F60AA00FB27BE /* AddFieldVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFieldVC.h; sourceTree = "<group>"; };
 		21BCEC5C142F60AA00FB27BE /* AddFieldVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFieldVC.m; sourceTree = "<group>"; };
 		21BCEC61142F612A00FB27BE /* AddFieldVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFieldVC.xib; sourceTree = "<group>"; };
@@ -349,6 +352,8 @@
 				63458B5813E7B73D00338243 /* contactsInfo.m */,
 				21A2AE4113F66FD80051F3D7 /* memoInfo.h */,
 				21A2AE4213F66FD80051F3D7 /* memoInfo.m */,
+				21BC034B143805DF00CE1192 /* LabelAndContent.h */,
+				21BC034C143805DF00CE1192 /* LabelAndContent.m */,
 				211BFDAF141F9B10009C1EA5 /* pinyin.c */,
 				211BFDB0141F9B10009C1EA5 /* pinyin.h */,
 				210876271424C3A400159CC2 /* ModalAlert.h */,
@@ -733,6 +738,7 @@
 				21FFC2AE142F1185006DB72C /* CAttributeMemo.m in Sources */,
 				21BCEC5D142F60AA00FB27BE /* AddFieldVC.m in Sources */,
 				21E206ED1430CB8B00DE2CDB /* CAttributeRecommend.m in Sources */,
+				21BC034D143805DF00CE1192 /* LabelAndContent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

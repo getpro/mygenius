@@ -113,24 +113,34 @@
 	}
 }
 
--(NSUInteger)countOfAttributes {
+-(NSUInteger)countOfAttributes 
+{
 	return [self.attributes count];
 }
 
--(id)objectInAttributesAtIndex:(NSUInteger)index {
+-(id)objectInAttributesAtIndex:(NSUInteger)index 
+{
 	return [self.attributes objectAtIndex:index];
 }
 
-- (void)insertObject:(id)anObject inAttributesAtIndex:(NSUInteger)index {
+- (void)insertObject:(id)anObject inAttributesAtIndex:(NSUInteger)index 
+{
 	[self.attributes insertObject:anObject atIndex:index];
 }
 
-- (void)removeObjectFromAttributesAtIndex:(NSUInteger)index {
+- (void)removeObjectFromAttributesAtIndex:(NSUInteger)index 
+{
 	[self.attributes removeObjectAtIndex:index];
 }
 
--(void)replaceObjectInAttributesAtIndex:(NSUInteger)index withObject:(id)anObject {
+-(void)replaceObjectInAttributesAtIndex:(NSUInteger)index withObject:(id)anObject 
+{
 	[self.attributes replaceObjectAtIndex:index withObject:anObject];
+}
+
+- (void)removeAllObject
+{
+	[self.attributes removeAllObjects];
 }
 
 @end
