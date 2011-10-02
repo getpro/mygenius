@@ -42,17 +42,27 @@ typedef enum
 			break;
 		case Tag_Type_Memo:
 		{
-			m_pDateArry = [NSArray arrayWithObjects:@"结婚纪念日",@"周年",@"买车纪念日",nil];
+			m_pDateArry = [NSArray arrayWithObjects:@"结婚纪念日",@"购车纪念日",@"开店纪念日",@"相识纪念日",nil];
 		}
 			break;
 		case Tag_Type_Account:
 		{
-			m_pDateArry = [NSArray arrayWithObjects:@"QQ",@"MSN",@"Skype",@"招商",@"工商",@"农业",@"浦发",nil];
+			m_pDateArry = [NSArray arrayWithObjects:@"招商银行",@"工商银行",@"农业银行",nil];
 		}
 			break;
 		case Tag_Type_Certificate:
 		{
 			m_pDateArry = [NSArray arrayWithObjects:@"身份证",@"学生证",@"工作证",nil];
+		}
+			break;
+		case Tag_Type_InstantMessage:
+		{
+			m_pDateArry = [NSArray arrayWithObjects:@"QQ",@"MSN",@"Skype",@"淘宝旺旺",nil];
+		}
+			break;
+		case Tag_Type_Relate:
+		{
+			m_pDateArry = [NSArray arrayWithObjects:@"配偶",@"儿子",@"女儿",@"母亲",@"父亲",@"男朋友",@"女朋友",nil];
 		}
 			break;
 		default:

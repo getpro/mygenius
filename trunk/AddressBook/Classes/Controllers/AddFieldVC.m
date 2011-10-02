@@ -11,6 +11,7 @@
 typedef enum 
 {
     AddField_TableView_Section_Memo,        //纪念日
+	AddField_TableView_Section_IM,			//IM帐号
 	AddField_TableView_Section_Account,     //帐号
 	AddField_TableView_Section_ID,			//证件
 	AddField_TableView_Section_Count
@@ -38,7 +39,12 @@ typedef enum
 				  @"Short strings (eg: character name)", @"description",
 				  nil],
 				 [NSDictionary dictionaryWithObjectsAndKeys:
-				  @"帐号", @"name",
+				  @"IM帐号", @"name",
+				  @"CAttributeString", @"className",
+				  @"Longer strings (eg: novel contents)", @"description",
+				  nil],
+				 [NSDictionary dictionaryWithObjectsAndKeys:
+				  @"银行帐号", @"name",
 				  @"CAttributeString", @"className",
 				  @"Longer strings (eg: novel contents)", @"description",
 				  nil],

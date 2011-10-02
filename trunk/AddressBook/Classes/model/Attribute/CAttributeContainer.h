@@ -9,6 +9,7 @@
 #import "CAttributeString.h"
 #import "CAttributeGroup.h"
 #import "CAttributeBlood.h"
+#import "CAttributeConstellation.h"
 
 /*	
 	Characters and all kinds of resources (aspects, skills, etc) are all 
