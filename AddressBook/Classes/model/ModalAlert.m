@@ -84,7 +84,7 @@
 	
 	// Create Alert
 	ModalAlertDelegate *madelegate = [[ModalAlertDelegate alloc] initWithRunLoop:currentLoop];
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:question message:nil delegate:madelegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:question message:nil delegate:madelegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:@"确定", nil];
 	for (NSString *buttonTitle in buttons)
 		[alertView addButtonWithTitle:buttonTitle];
 	[alertView show];

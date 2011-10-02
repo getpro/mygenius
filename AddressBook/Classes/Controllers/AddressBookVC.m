@@ -76,10 +76,6 @@
 	//隐藏滚动条
 	m_pScrollView_IB.showsVerticalScrollIndicator   = NO;
 	m_pScrollView_IB.showsHorizontalScrollIndicator = NO;
-	
-	[self LoadGroup];
-
-	[self initData:0];
 }
 
 -(void)LoadGroup
@@ -663,16 +659,18 @@ ABRecordRef GRecord;
 	{
 		[DataStore insertContactsBaseInfo:person];
 		
+		CFErrorRef   errorRef;
+		
+		ABAddressBookAddRecord(addressBook,person,&errorRef);
+		ABAddressBookSave(addressBook, &errorRef);
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"changeAddress" object:nil];
+		
 		//GRecord = (person);
 		
 		//test
 		//NSError    * error;
 		//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
-		
-		//CFErrorRef   errorRef;
-		
-		//ABAddressBookAddRecord(addressBook,person,&errorRef);
-		//ABAddressBookSave(addressBook, &errorRef);
 		
 		//ABRecordRef aRecord = ABPersonCreate(); 
 		
@@ -713,6 +711,7 @@ ABRecordRef GRecord;
 		*/
 		
 		//[self performSelector:@selector(AddGp:)  withObject:nil afterDelay:0.5];
+		
 		
 		
 		//点击完成
@@ -796,6 +795,20 @@ ABRecordRef GRecord;
 	}
 }
 
+#pragma mark - UIViewController delegate methods
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	[self LoadGroup];
+	
+	[self initData:0];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+}
 
 @end

@@ -212,7 +212,32 @@
 
 -(void)changeAddress:(NSNotification*)notification
 {
+	if(addressBook)
+	{
+		CFRelease(addressBook);
+		addressBook = NULL;
+	}
 	
+	if(addressBook == nil)
+		addressBook = ABAddressBookCreate();
+	
+	//Group
+	//NSArray * groups = [ABContactsHelper groups];
+	//NSLog(@"groups[%d]",[groups count]);
+	
+	//所有联系人
+	ContactData * pAllContactData = [[ContactData alloc] init];
+	[m_arrContactData replaceObjectAtIndex:0 withObject:pAllContactData];
+	[pAllContactData release];
+	
+	/*
+	for(ABGroup * pGroup in groups)
+	{
+		[m_arrGroup addObject:pGroup];		
+		ContactData * pContactData = [[ContactData alloc] initWithArry:pGroup.members];
+		[m_arrContactData addObject:pContactData];
+	}
+	*/
 }
 
 
@@ -270,7 +295,11 @@
 	
 	[DBConnection closeDatabase];
 	
-	//[m_pContactData       release];
+	if(addressBook)
+	{
+		CFRelease(addressBook);
+		addressBook = NULL;
+	}
 	
 	[m_pAddressBookVC	  release];
 	[m_psyncVC			  release];
