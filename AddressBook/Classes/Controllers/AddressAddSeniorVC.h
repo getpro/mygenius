@@ -21,7 +21,9 @@
 	
 	//CAttributeContainer * m_pContainer;
 	CAttributeContainer      * m_pContainer;					//单项
+	
 	CAttributeContainer      * m_pMemoContainer;				//多项
+	CAttributeContainer      * m_pIMContainer;
 	CAttributeContainer      * m_pAccountsContainer;
 	CAttributeContainer      * m_pCertificateContainer;
 }

@@ -30,9 +30,11 @@
 typedef enum 
 {
 	Tag_Type_None,
-    Tag_Type_Memo,          //纪念日
-	Tag_Type_Account,	    //帐号
-	Tag_Type_Certificate,   //证件
+    Tag_Type_Memo,           //纪念日
+	Tag_Type_Account,	     //帐号
+	Tag_Type_Certificate,    //证件
+	Tag_Type_Relate,         //相关联系人
+	Tag_Type_InstantMessage, //IM帐号
 	Tag_Type_Count
 }Tag_Type;
 

@@ -28,6 +28,7 @@ typedef enum
     SeniorInfo_TableView_Section_Group,
 	SeniorInfo_TableView_Section_Blood,
 	SeniorInfo_TableView_Section_Memo,
+	SeniorInfo_TableView_Section_IM,
 	SeniorInfo_TableView_Section_Account,
 	SeniorInfo_TableView_Section_Certificate,
 	SeniorInfo_TableView_Section_AddField,
@@ -100,6 +101,7 @@ typedef enum
 	m_pMemoContainer		= [[CAttributeContainer alloc] init];
 	m_pAccountsContainer	= [[CAttributeContainer alloc] init];
 	m_pCertificateContainer = [[CAttributeContainer alloc] init];
+	m_pIMContainer          = [[CAttributeContainer alloc] init];
 	
 	[self LoadAttribute];
 	
@@ -113,6 +115,7 @@ typedef enum
 	[m_pMemoContainer		  removeAllObject];
 	[m_pAccountsContainer     removeAllObject];
 	[m_pCertificateContainer  removeAllObject];
+	[m_pIMContainer           removeAllObject];
 	
 	CAttribute *attr = nil;
 	ABRecordID  pRecordID  = ABRecordGetRecordID(m_pContact.record);
@@ -204,6 +207,7 @@ typedef enum
 	
 	[m_pContainer		  release];
 	[m_pMemoContainer	  release];
+	[m_pIMContainer       release];
 	[m_pAccountsContainer release];
 	[m_pCertificateContainer release];
 	
@@ -227,7 +231,27 @@ typedef enum
 	attrGroup = [m_pContainer.attributes objectAtIndex:0];
 	if(attrGroup && attrGroup.stringValue)
 	{
-		//设置分组
+		//移除之前分组
+		int nowGroupID = [DataStore GetGroupID2:pRecordID];
+		ABGroup * pNowGroup = nil;
+		if(nowGroupID > 0)
+		{
+			for(pNowGroup in app.m_arrGroup)
+			{
+				if(ABRecordGetRecordID(pNowGroup.record) == nowGroupID)
+				{
+					break;
+				}
+			}
+			
+			if([pNowGroup removeMember:m_pContact withError:&error])
+			{
+				[DataStore updateGroup:pRecordID:0];
+			}
+			
+		}
+		
+		//设置新分组
 		ABRecordID pGroupID = [DataStore GetGroupID:attrGroup.stringValue];
 		
 		//ABGroup * pGroup = [app.m_arrGroup objectAtIndex:2];
@@ -241,7 +265,6 @@ typedef enum
 			}
 		}
 		
-		//没有效果
 		if([pGroup addMember:m_pContact withError:&error])
 		{
 			[DataStore updateGroup:pRecordID:pGroupID];
@@ -285,6 +308,8 @@ typedef enum
 										:attrCertificate.label :i];
 		}
 	}
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"changeAddress" object:nil];
 	
 	[self setEditing:NO animated:YES];
 }
@@ -346,12 +371,19 @@ typedef enum
 			((CAttributeString*)attr).m_nType      = Tag_Type_Certificate;
 			[m_pCertificateContainer setValue:attr forKey:@"证件"];
 		}
-		else if([text isEqual:@"帐号"])
+		else if([text isEqual:@"银行帐号"])
 		{
 			attr = [[[CAttributeString alloc] init] autorelease];
 			((CAttributeString*)attr).nvController = self.navigationController;
 			((CAttributeString*)attr).m_nType      = Tag_Type_Account;
-			[m_pAccountsContainer setValue:attr forKey:@"帐号"];
+			[m_pAccountsContainer setValue:attr forKey:@"银行帐号"];
+		}
+		else if([text isEqual:@"IM帐号"])
+		{
+			attr = [[[CAttributeString alloc] init] autorelease];
+			((CAttributeString*)attr).nvController = self.navigationController;
+			((CAttributeString*)attr).m_nType      = Tag_Type_InstantMessage;
+			[m_pIMContainer setValue:attr forKey:@"IM帐号"];
 		}
 		
 		[m_pTableView_IB reloadData];
@@ -422,6 +454,11 @@ typedef enum
 			pRetNum = [m_pCertificateContainer.attributes count];
 			break;
 		}
+		case SeniorInfo_TableView_Section_IM:
+		{
+			pRetNum = [m_pIMContainer.attributes count];
+			break;
+		}
 		default:
 			break;
 	}
@@ -480,6 +517,12 @@ typedef enum
 		case SeniorInfo_TableView_Section_Certificate:
 		{
 			attr = [m_pCertificateContainer.attributes objectAtIndex:row];
+			
+			break;
+		}
+		case SeniorInfo_TableView_Section_IM:
+		{
+			attr = [m_pIMContainer.attributes objectAtIndex:row];
 			
 			break;
 		}
@@ -574,6 +617,12 @@ typedef enum
 		case SeniorInfo_TableView_Section_Certificate:
 		{
 			attr = [m_pCertificateContainer.attributes objectAtIndex:row];
+			
+			break;
+		}
+		case SeniorInfo_TableView_Section_IM:
+		{
+			attr = [m_pIMContainer.attributes objectAtIndex:row];
 			
 			break;
 		}

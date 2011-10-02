@@ -683,7 +683,7 @@ ABRecordRef GRecord;
 						 CFSTR("Jijo1"), &anError); 
 		ABRecordSetValue(aRecord, kABPersonLastNameProperty, 
 						 CFSTR("Pulikkottil1"), &anError); 
-		if (anError != NULL) 
+		if (anError != NULL)
 		{
 			NSLog(@"error while creating..");
 		}
