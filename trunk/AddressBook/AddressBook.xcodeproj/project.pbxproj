@@ -70,6 +70,10 @@
 		21BC034D143805DF00CE1192 /* LabelAndContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC034C143805DF00CE1192 /* LabelAndContent.m */; };
 		21BCEC5D142F60AA00FB27BE /* AddFieldVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BCEC5C142F60AA00FB27BE /* AddFieldVC.m */; };
 		21BCEC62142F612A00FB27BE /* AddFieldVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BCEC61142F612A00FB27BE /* AddFieldVC.xib */; };
+		21C941EA143951FB00EE7AAC /* RecommendVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C941E8143951FB00EE7AAC /* RecommendVC.m */; };
+		21C941EB143951FB00EE7AAC /* RecommendVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21C941E9143951FB00EE7AAC /* RecommendVC.xib */; };
+		21C9426714395A0A00EE7AAC /* Memo.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C9426514395A0A00EE7AAC /* Memo.m */; };
+		21C9426814395A0A00EE7AAC /* Memo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21C9426614395A0A00EE7AAC /* Memo.xib */; };
 		21D256E2142B806E00306515 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D256E1142B806E00306515 /* background.png */; };
 		21D25782142B889700306515 /* backup.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D2577C142B889700306515 /* backup.png */; };
 		21D25783142B889700306515 /* backup_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D2577D142B889700306515 /* backup_hover.png */; };
@@ -202,6 +206,12 @@
 		21BCEC5B142F60AA00FB27BE /* AddFieldVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFieldVC.h; sourceTree = "<group>"; };
 		21BCEC5C142F60AA00FB27BE /* AddFieldVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFieldVC.m; sourceTree = "<group>"; };
 		21BCEC61142F612A00FB27BE /* AddFieldVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFieldVC.xib; sourceTree = "<group>"; };
+		21C941E7143951FB00EE7AAC /* RecommendVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendVC.h; sourceTree = "<group>"; };
+		21C941E8143951FB00EE7AAC /* RecommendVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendVC.m; sourceTree = "<group>"; };
+		21C941E9143951FB00EE7AAC /* RecommendVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecommendVC.xib; sourceTree = "<group>"; };
+		21C9426414395A0A00EE7AAC /* Memo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Memo.h; sourceTree = "<group>"; };
+		21C9426514395A0A00EE7AAC /* Memo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Memo.m; sourceTree = "<group>"; };
+		21C9426614395A0A00EE7AAC /* Memo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Memo.xib; sourceTree = "<group>"; };
 		21D256E1142B806E00306515 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		21D2577C142B889700306515 /* backup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backup.png; sourceTree = "<group>"; };
 		21D2577D142B889700306515 /* backup_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backup_hover.png; sourceTree = "<group>"; };
@@ -493,6 +503,12 @@
 				2106B7FB142E169800F9DD6C /* TagVC.h */,
 				2106B7FC142E169800F9DD6C /* TagVC.m */,
 				2106B800142E16FF00F9DD6C /* TagVC.xib */,
+				21C9426414395A0A00EE7AAC /* Memo.h */,
+				21C9426514395A0A00EE7AAC /* Memo.m */,
+				21C9426614395A0A00EE7AAC /* Memo.xib */,
+				21C941E7143951FB00EE7AAC /* RecommendVC.h */,
+				21C941E8143951FB00EE7AAC /* RecommendVC.m */,
+				21C941E9143951FB00EE7AAC /* RecommendVC.xib */,
 				21E5AE82141DF56100B5EBA5 /* CustomDatePicker.h */,
 				21E5AE83141DF56100B5EBA5 /* CustomDatePicker.m */,
 				21E5AE84141DF56100B5EBA5 /* CustomDatePicker.xib */,
@@ -689,6 +705,8 @@
 				219A4301142D98B900594D2B /* AddressAddSeniorVC.xib in Resources */,
 				2106B801142E16FF00F9DD6C /* TagVC.xib in Resources */,
 				21BCEC62142F612A00FB27BE /* AddFieldVC.xib in Resources */,
+				21C941EB143951FB00EE7AAC /* RecommendVC.xib in Resources */,
+				21C9426814395A0A00EE7AAC /* Memo.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,6 +763,8 @@
 				21E206ED1430CB8B00DE2CDB /* CAttributeRecommend.m in Sources */,
 				21BC034D143805DF00CE1192 /* LabelAndContent.m in Sources */,
 				2158386E1438B61B0034356B /* CAttributeConstellation.m in Sources */,
+				21C941EA143951FB00EE7AAC /* RecommendVC.m in Sources */,
+				21C9426714395A0A00EE7AAC /* Memo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

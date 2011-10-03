@@ -27,11 +27,16 @@ typedef enum
 {
     SeniorInfo_TableView_Section_Group,
 	SeniorInfo_TableView_Section_Blood,
+	SeniorInfo_TableView_Section_Constellation,
+	SeniorInfo_TableView_Section_Recommend,
+	
 	SeniorInfo_TableView_Section_Memo,
 	SeniorInfo_TableView_Section_IM,
 	SeniorInfo_TableView_Section_Account,
 	SeniorInfo_TableView_Section_Certificate,
+	
 	SeniorInfo_TableView_Section_AddField,
+	
 	SeniorInfo_TableView_Section_Count
 }SeniorInfo_TableView_Section;
 
@@ -128,11 +133,37 @@ typedef enum
 	[m_pContainer setValue:attr forKey:@"血型"];
 	((CAttributeBlood*)attr).stringValue = [DataStore getBlood:pRecordID];
 	
+	attr = [[[CAttributeConstellation alloc] init] autorelease];
+	[m_pContainer setValue:attr forKey:@"星座"];
+	((CAttributeConstellation*)attr).stringValue = [DataStore getConstellation:pRecordID];
+	
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	ContactData * AllContactData = (ContactData *)[app.m_arrContactData objectAtIndex:0];
+	
+	attr = [[[CAttributeRecommend alloc] init] autorelease];
+	((CAttributeString*)attr).nvController = self.navigationController;
+	[m_pContainer setValue:attr forKey:@"推荐人"];
+	((CAttributeRecommend*)attr).stringValue = [AllContactData getContactsNameByID:[DataStore getRecommend:pRecordID]];
+	
+	
+	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	((CAttributeString*)attr).nvController = self.navigationController;
 	((CAttributeString*)attr).m_nType      = Tag_Type_Memo;
 	[m_pMemoContainer setValue:attr        forKey:@"纪念日"];
 	
+	//IM帐号
+	NSArray * pArryIM = [DataStore getInstantMessages:pRecordID:1];
+	for(LabelAndContent * pLabelAndContent in pArryIM)
+	{
+		attr = [[[CAttributeString alloc] init] autorelease];
+		((CAttributeString*)attr).nvController = self.navigationController;
+		((CAttributeString*)attr).m_nType      = Tag_Type_InstantMessage;
+		[m_pIMContainer setValue:attr    forKey:pLabelAndContent.m_strLabel];
+		((CAttributeString*)attr).stringValue  = pLabelAndContent.m_strContent;
+	}
+	
+	//银行帐号
 	NSArray * pArryAccount = [DataStore getAccounts:pRecordID];
 	for(LabelAndContent * pLabelAndContent in pArryAccount)
 	{
@@ -143,6 +174,7 @@ typedef enum
 		((CAttributeString*)attr).stringValue  = pLabelAndContent.m_strContent;
 	}
 	
+	//证件
 	NSArray * pArryCertificate = [DataStore getCertificate:pRecordID];
 	for(LabelAndContent * pLabelAndContent in pArryCertificate)
 	{
@@ -152,6 +184,7 @@ typedef enum
 		[m_pCertificateContainer setValue:attr forKey:pLabelAndContent.m_strLabel];
 		((CAttributeString*)attr).stringValue  = pLabelAndContent.m_strContent;
 	}
+	
 }
 
 /*
@@ -277,6 +310,35 @@ typedef enum
 	if(attrBlood && attrBlood.stringValue)
 	{
 		[DataStore updateBlood:pRecordID:attrBlood.stringValue];
+	}
+	
+	//星座
+	CAttributeConstellation *attrConstellation = nil;
+	attrConstellation = [m_pContainer.attributes objectAtIndex:2];
+	if(attrConstellation && attrConstellation.stringValue)
+	{
+		[DataStore updateConstellation:pRecordID:attrConstellation.stringValue];
+	}
+	
+	//推荐人
+	CAttributeRecommend *attrRecommend = nil;
+	attrRecommend = [m_pContainer.attributes objectAtIndex:3];
+	if(attrRecommend && attrRecommend.m_pABContact)
+	{
+		[DataStore updateRecommend:pRecordID:ABRecordGetRecordID(attrRecommend.m_pABContact.record)];
+	}
+	
+	//IM信息
+	[DataStore removeInstantMessage:pRecordID:1];
+	CAttributeString * attrInstantMessage = nil;
+	for(int i = 0;i < [m_pIMContainer.attributes count];i++)
+	{
+		attrInstantMessage = [m_pIMContainer.attributes objectAtIndex:i];
+		NSString *pContent = attrInstantMessage.m_pCell.textField.text;
+		if(attrInstantMessage.label && pContent)
+		{		
+			[DataStore insertInstantMessage:pRecordID:pContent:nil:attrInstantMessage.label:i:1];
+		}
 	}
 	
 	//帐号
@@ -434,6 +496,16 @@ typedef enum
 			pRetNum = 1;
 			break;
 		}
+		case SeniorInfo_TableView_Section_Recommend:
+		{
+			pRetNum = 1;
+			break;
+		}
+		case SeniorInfo_TableView_Section_Constellation:
+		{
+			pRetNum = 1;
+			break;
+		}
 		case SeniorInfo_TableView_Section_AddField:
 		{
 			pRetNum = 1;
@@ -499,6 +571,22 @@ typedef enum
 			if (row == 0)
 			{
 				attr = [m_pContainer.attributes objectAtIndex:1];
+			}
+			break;
+		}
+		case SeniorInfo_TableView_Section_Constellation:
+		{
+			if (row == 0)
+			{
+				attr = [m_pContainer.attributes objectAtIndex:2];
+			}
+			break;
+		}
+		case SeniorInfo_TableView_Section_Recommend:
+		{
+			if (row == 0)
+			{
+				attr = [m_pContainer.attributes objectAtIndex:3];
 			}
 			break;
 		}
@@ -599,6 +687,22 @@ typedef enum
 			if (row == 0)
 			{
 				attr = [m_pContainer.attributes objectAtIndex:1];
+			}
+			break;
+		}
+		case SeniorInfo_TableView_Section_Constellation:
+		{
+			if (row == 0)
+			{
+				attr = [m_pContainer.attributes objectAtIndex:2];
+			}
+			break;
+		}
+		case SeniorInfo_TableView_Section_Recommend:
+		{
+			if (row == 0)
+			{
+				attr = [m_pContainer.attributes objectAtIndex:3];
 			}
 			break;
 		}
