@@ -80,16 +80,16 @@
 
 - (UITableViewCell*)cellForTableView:(UITableView *)tableView 
 {
-	static NSString* cellIdentifier = @"CAttributeStringCell";
-	EditableCell* cell = (EditableCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-	if (![cell isKindOfClass:[EditableCell class]]) 
+	static NSString* cellIdentifier = @"CAttributeMemoCell";
+	TagCell* cell = (TagCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+	if (![cell isKindOfClass:[TagCell class]]) 
 	{
-		cell = [[[EditableCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier] autorelease];
+		cell = [[[TagCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier] autorelease];
+		cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
 	
 	if (cell != nil)
 	{
-		cell.bIsNOTextField = YES;
 		cell.textLabel.text = self.label;
 		[cell setTarget:self withLabel:@"label" withkey:@"stringValue"];
 		cell.Target   = self;

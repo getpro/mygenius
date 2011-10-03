@@ -14,6 +14,7 @@ typedef enum
 	AddField_TableView_Section_IM,			//IM帐号
 	AddField_TableView_Section_Account,     //帐号
 	AddField_TableView_Section_ID,			//证件
+	AddField_TableView_Section_Relate,		//相关联系人
 	AddField_TableView_Section_Count
 }AddField_TableView_Section;
 
@@ -35,7 +36,7 @@ typedef enum
 	m_pSource = [NSArray arrayWithObjects:
 				 [NSDictionary dictionaryWithObjectsAndKeys:
 				  @"纪念日", @"name",
-				  @"CAttributeString", @"className",
+				  @"CAttributeMemo", @"className",
 				  @"Short strings (eg: character name)", @"description",
 				  nil],
 				 [NSDictionary dictionaryWithObjectsAndKeys:
@@ -51,6 +52,11 @@ typedef enum
 				 [NSDictionary dictionaryWithObjectsAndKeys:
 				  @"证件", @"name",
 				  @"CAttributeString", @"className",
+				  @"A simple counter with +/- keys (eg: fate points)", @"description",
+				  nil],
+				 [NSDictionary dictionaryWithObjectsAndKeys:
+				  @"相关联系人", @"name",
+				  @"CAttributeRelate", @"className",
 				  @"A simple counter with +/- keys (eg: fate points)", @"description",
 				  nil],
 				 nil];

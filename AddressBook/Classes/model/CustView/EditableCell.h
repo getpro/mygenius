@@ -18,13 +18,10 @@
 	
 	id  Target;
 	SEL Selector;
-	
-	BOOL bIsNOTextField;		 //UITextField点击无效果
 }
 
 @property (nonatomic, readonly) UITextField *textField;
 @property (nonatomic, assign) BOOL bIsLabel_Click;
-@property (nonatomic, assign) BOOL bIsNOTextField;
 
 @property (nonatomic, assign) id  Target;
 @property (nonatomic, assign) SEL Selector;

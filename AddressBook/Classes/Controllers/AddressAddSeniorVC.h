@@ -26,6 +26,7 @@
 	CAttributeContainer      * m_pIMContainer;
 	CAttributeContainer      * m_pAccountsContainer;
 	CAttributeContainer      * m_pCertificateContainer;
+	CAttributeContainer      * m_pRelateContainer;
 }
 
 @property (retain,nonatomic) IBOutlet UITableView * m_pTableView_IB;

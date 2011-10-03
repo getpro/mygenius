@@ -145,6 +145,9 @@ typedef enum
 +(void)removeAllCertificate:(ABRecordID)pRecordID;
 
 //相关联系人
-+(void)removeAllrelate:(ABRecordID)pRecordID;
++(void)insertRelate:(ABRecordID)pRecordID:(ABRecordID)pRelateID:(NSString*)pLabel:(NSInteger)pIndex;
++(NSArray*)getRelate:(ABRecordID)pRecordID;
++(void)removeAllRelate:(ABRecordID)pRecordID;
+
 
 @end

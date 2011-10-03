@@ -12,6 +12,7 @@
 #import "CAttributeConstellation.h"
 #import "CAttributeRecommend.h"
 #import "CAttributeMemo.h"
+#import "CAttributeRelate.h"
 
 /*	
 	Characters and all kinds of resources (aspects, skills, etc) are all 

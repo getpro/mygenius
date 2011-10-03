@@ -35,6 +35,8 @@
 		216525FC13E52FA30075F387 /* AddressBaseInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 216525FB13E52FA30075F387 /* AddressBaseInfoVC.m */; };
 		2165260E13E531BA0075F387 /* AddressPreInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2165260D13E531BA0075F387 /* AddressPreInfoVC.xib */; };
 		2165261013E531D10075F387 /* AddressBaseInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2165260F13E531D10075F387 /* AddressBaseInfoVC.xib */; };
+		216F72E21439D05100174368 /* TagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 216F72E11439D05100174368 /* TagCell.m */; };
+		216F73101439D1C500174368 /* CAttributeRelate.m in Sources */ = {isa = PBXBuildFile; fileRef = 216F730F1439D1C500174368 /* CAttributeRelate.m */; };
 		2176A7EF13E5705700944254 /* ImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176A7EE13E5705700944254 /* ImageStore.m */; };
 		2176A7F213E5708500944254 /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176A7F113E5708500944254 /* DataStore.m */; };
 		21873900141B6C52007D64B4 /* bottom_icon_contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 218738FB141B6C52007D64B4 /* bottom_icon_contacts.png */; };
@@ -86,7 +88,6 @@
 		21E5AE01141DEE6C00B5EBA5 /* leftBar_group_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E5ADFE141DEE6C00B5EBA5 /* leftBar_group_bg.png */; };
 		21E5AE02141DEE6C00B5EBA5 /* leftBar_group_number.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E5ADFF141DEE6C00B5EBA5 /* leftBar_group_number.png */; };
 		21E5AE88141DF56100B5EBA5 /* CustomDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E5AE83141DF56100B5EBA5 /* CustomDatePicker.m */; };
-		21E5AE89141DF56100B5EBA5 /* CustomDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E5AE84141DF56100B5EBA5 /* CustomDatePicker.xib */; };
 		21E5AE8E141DF5DC00B5EBA5 /* GroupItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E5AE8D141DF5DC00B5EBA5 /* GroupItemView.m */; };
 		21E712D913E3F13700BF47E6 /* PublicData.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E712D813E3F13700BF47E6 /* PublicData.m */; };
 		21E712F413E3F3E700BF47E6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21E712F313E3F3E700BF47E6 /* QuartzCore.framework */; };
@@ -158,6 +159,10 @@
 		216525FB13E52FA30075F387 /* AddressBaseInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBaseInfoVC.m; sourceTree = "<group>"; };
 		2165260D13E531BA0075F387 /* AddressPreInfoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressPreInfoVC.xib; sourceTree = "<group>"; };
 		2165260F13E531D10075F387 /* AddressBaseInfoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressBaseInfoVC.xib; sourceTree = "<group>"; };
+		216F72E01439D05100174368 /* TagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagCell.h; sourceTree = "<group>"; };
+		216F72E11439D05100174368 /* TagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagCell.m; sourceTree = "<group>"; };
+		216F730E1439D1C500174368 /* CAttributeRelate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAttributeRelate.h; sourceTree = "<group>"; };
+		216F730F1439D1C500174368 /* CAttributeRelate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAttributeRelate.m; sourceTree = "<group>"; };
 		2176A7ED13E5705700944254 /* ImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageStore.h; sourceTree = "<group>"; };
 		2176A7EE13E5705700944254 /* ImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageStore.m; sourceTree = "<group>"; };
 		2176A7F013E5708500944254 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
@@ -226,7 +231,6 @@
 		21E5ADFF141DEE6C00B5EBA5 /* leftBar_group_number.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftBar_group_number.png; sourceTree = "<group>"; };
 		21E5AE82141DF56100B5EBA5 /* CustomDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDatePicker.h; sourceTree = "<group>"; };
 		21E5AE83141DF56100B5EBA5 /* CustomDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDatePicker.m; sourceTree = "<group>"; };
-		21E5AE84141DF56100B5EBA5 /* CustomDatePicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomDatePicker.xib; sourceTree = "<group>"; };
 		21E5AE8C141DF5DC00B5EBA5 /* GroupItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupItemView.h; sourceTree = "<group>"; };
 		21E5AE8D141DF5DC00B5EBA5 /* GroupItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupItemView.m; sourceTree = "<group>"; };
 		21E712D713E3F13700BF47E6 /* PublicData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicData.h; sourceTree = "<group>"; };
@@ -509,15 +513,16 @@
 				21C941E7143951FB00EE7AAC /* RecommendVC.h */,
 				21C941E8143951FB00EE7AAC /* RecommendVC.m */,
 				21C941E9143951FB00EE7AAC /* RecommendVC.xib */,
-				21E5AE82141DF56100B5EBA5 /* CustomDatePicker.h */,
-				21E5AE83141DF56100B5EBA5 /* CustomDatePicker.m */,
-				21E5AE84141DF56100B5EBA5 /* CustomDatePicker.xib */,
 				21E5AE8C141DF5DC00B5EBA5 /* GroupItemView.h */,
 				21E5AE8D141DF5DC00B5EBA5 /* GroupItemView.m */,
+				21E5AE82141DF56100B5EBA5 /* CustomDatePicker.h */,
+				21E5AE83141DF56100B5EBA5 /* CustomDatePicker.m */,
 				212B47C214258D3B00DE4938 /* CustomPicker.h */,
 				212B47C314258D3B00DE4938 /* CustomPicker.m */,
 				21F57BC614278AA40099BEB5 /* CAttributeCell.h */,
 				21F57BC714278AA40099BEB5 /* CAttributeCell.m */,
+				216F72E01439D05100174368 /* TagCell.h */,
+				216F72E11439D05100174368 /* TagCell.m */,
 				21F57BC814278AA40099BEB5 /* EditableCell.h */,
 				21F57BC914278AA40099BEB5 /* EditableCell.m */,
 				2104CF8714238ECF0004FB9A /* ContactCell.h */,
@@ -555,6 +560,8 @@
 				2158386D1438B61B0034356B /* CAttributeConstellation.m */,
 				21E206EB1430CB8B00DE2CDB /* CAttributeRecommend.h */,
 				21E206EC1430CB8B00DE2CDB /* CAttributeRecommend.m */,
+				216F730E1439D1C500174368 /* CAttributeRelate.h */,
+				216F730F1439D1C500174368 /* CAttributeRelate.m */,
 				21FFC2AC142F1185006DB72C /* CAttributeMemo.h */,
 				21FFC2AD142F1185006DB72C /* CAttributeMemo.m */,
 				21F57BD514278CD40099BEB5 /* CAttributeString.h */,
@@ -690,7 +697,6 @@
 				21E5AE00141DEE6C00B5EBA5 /* leftBar_bg.png in Resources */,
 				21E5AE01141DEE6C00B5EBA5 /* leftBar_group_bg.png in Resources */,
 				21E5AE02141DEE6C00B5EBA5 /* leftBar_group_number.png in Resources */,
-				21E5AE89141DF56100B5EBA5 /* CustomDatePicker.xib in Resources */,
 				2104CFC11423929C0004FB9A /* arrow.png in Resources */,
 				210878361424F34B00159CC2 /* head_big.png in Resources */,
 				210878371424F34B00159CC2 /* head.png in Resources */,
@@ -765,6 +771,8 @@
 				2158386E1438B61B0034356B /* CAttributeConstellation.m in Sources */,
 				21C941EA143951FB00EE7AAC /* RecommendVC.m in Sources */,
 				21C9426714395A0A00EE7AAC /* Memo.m in Sources */,
+				216F72E21439D05100174368 /* TagCell.m in Sources */,
+				216F73101439D1C500174368 /* CAttributeRelate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
