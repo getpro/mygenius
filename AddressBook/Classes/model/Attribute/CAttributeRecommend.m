@@ -7,10 +7,14 @@
 //
 
 #import "CAttributeRecommend.h"
+#import "RecommendVC.h"
+
 
 @implementation CAttributeRecommend
 
 @synthesize stringValue;
+@synthesize nvController;
+@synthesize m_pABContact;
 
 - (NSString*)type
 {
@@ -53,7 +57,8 @@
 
 - (void)dealloc 
 {
-	[stringValue release];
+	[stringValue  release];
+	[m_pABContact release];
 	
 	[super dealloc];
 }
@@ -79,40 +84,33 @@
 
 -(void)getContentResult:(id)index
 {
-	/*
-	NSString * pIndex = (NSString*)index;
-	NSString * pStr = [m_pDateArry objectAtIndex:[pIndex intValue]];
+	ABContact * pABContact = (ABContact*)index;
 	
-	if(pStr)
+	if(pABContact)
 	{
-		self.stringValue = pStr;
+		self.stringValue  = pABContact.contactName;
+		self.m_pABContact = pABContact;
 	}
-	*/
 }
 
-/*
+
 - (UIViewController*) detailViewController:(BOOL)editing 
 {
 	//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	
-	CustomPicker *tvc = [[[CustomPicker alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)] autorelease];
-	tvc.sourceArray = m_pDateArry;
+	RecommendVC *tvc = [[[RecommendVC alloc] init] autorelease];
 	tvc.Target   = self;
 	tvc.Selector = @selector(getContentResult:);
 	
 	return (UIViewController*)tvc;
 }
-*/
+
  
 - (void) Show :(id) pVc
 {
-	/*
-	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	RecommendVC *tvc = (RecommendVC*) pVc;
 	
-	CustomPicker *tvc = (CustomPicker*) pVc;
-	
-	[app.window addSubview:tvc];
-	*/
+	[nvController pushViewController:tvc animated:YES];
 }
 
 @end

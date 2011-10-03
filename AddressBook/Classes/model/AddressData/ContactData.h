@@ -46,6 +46,7 @@
 -(NSString *)equalContactByAddressBookContacts:(NSString *)name withPhone:(NSString *)phone withLabel:(NSString *)label PhoneOrLabel:(BOOL)isPhone withFavorite:(BOOL)isFavorite;
 
 -(NSString *)getContactsNameByPhoneNumberAndLabel:(NSString *)phone withLabel:(NSString *)label;
+-(NSString *)getContactsNameByID:(ABRecordID)pContactID;
 
 +(BOOL) removeSelfFromAddressBook:(ABRecordRef)pABRecordRef;
 

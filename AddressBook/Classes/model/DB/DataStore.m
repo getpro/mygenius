@@ -108,7 +108,7 @@
 		[self removeUrls:pRecordID];
 		[self removeEmails:pRecordID];
 		[self removeAddresses:pRecordID];
-		[self removeInstantMessage:pRecordID];
+		[self removeInstantMessage:pRecordID:0];
 		[self removeDates:pRecordID];
 		[self removeAllAccounts:pRecordID];
 		[self removeAllrelate:pRecordID];
@@ -660,18 +660,54 @@
 	[stmt release];
 }
 
-+(void)removeInstantMessage:(ABRecordID)pRecordID
++(void)removeInstantMessage:(ABRecordID)pRecordID:(NSInteger)pType
 {
 	Statement* stmt = nil;
 	
-	stmt = [DBConnection statementWithQuery:"DELETE FROM instantMessage_info WHERE contacts_id = ?"];
+	stmt = [DBConnection statementWithQuery:"DELETE FROM instantMessage_info WHERE contacts_id = ? AND instantMessage_type = ?"];
 	
 	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	[stmt bindString:[NSString stringWithFormat:@"%d",pType]	    forIndex:2];//2.type
 	
 	[stmt retain];
 	[stmt step];
     [stmt reset];
 	[stmt release];
+}
+
++(NSArray*)getInstantMessages:(ABRecordID)pRecordID:(NSInteger)pType
+{
+	NSMutableArray *retArray = [[[NSMutableArray alloc] init] autorelease];
+	
+	Statement * stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"SELECT instantMessage_username,instantMessage_label FROM instantMessage_info WHERE contacts_id = ? AND instantMessage_type = ?"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	[stmt bindString:[NSString stringWithFormat:@"%d",pType]	    forIndex:2];//2.type
+	
+	NSInteger count = 0;
+	
+	while ([stmt step] == SQLITE_ROW)
+	{
+		NSString * pContent		    = [NSString stringWithFormat:@"%@", [stmt getString:0]];//username
+		NSString * pLabel           = [NSString stringWithFormat:@"%@", [stmt getString:1]];
+		
+		LabelAndContent * pLabelAndContent = [[LabelAndContent alloc]init];
+		
+		pLabelAndContent.m_strLabel		    	 = pLabel;
+		pLabelAndContent.m_strContent		     = pContent;
+		
+		[retArray addObject:pLabelAndContent];
+		
+		[pLabelAndContent release];
+		
+		count++;
+	}
+	
+	[stmt reset];
+	
+	return retArray;
 }
 
 +(void)insertPhones:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex
@@ -879,6 +915,68 @@
     [stmt reset];
     [stmt release];
 	return pName;
+}
+
++(void)updateConstellation:(ABRecordID)pRecordID:(NSString*)pStr;
+{
+	Statement *stmt = [DBConnection statementWithQuery:"UPDATE contacts_info SET contacts_constellation = ? WHERE contacts_id = ?"];
+	
+    [stmt bindString:pStr									       forIndex:1];
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]   forIndex:2];
+	
+    [stmt step];
+}
+
++(NSString*)getConstellation:(ABRecordID)pRecordID;
+{
+	NSString*  pName = nil;
+	Statement *stmt  = nil;
+	
+	stmt = [DBConnection statementWithQuery:"SELECT contacts_constellation FROM contacts_info WHERE contacts_id = ? "];
+	[stmt retain];
+    
+    // Note that the parameters are numbered from 1, not from 0.
+    [stmt bindString:[NSString stringWithFormat:@"%d",pRecordID] forIndex:1];
+    if ([stmt step] == SQLITE_ROW)
+	{
+        // Restore image from Database
+        pName = [stmt getString:0];
+    }
+	
+    [stmt reset];
+    [stmt release];
+	return pName;
+}
+
++(void)updateRecommend:(ABRecordID)pRecordID:(ABRecordID)pRecommendID;
+{
+	Statement *stmt = [DBConnection statementWithQuery:"UPDATE contacts_info SET contacts_recommend_id = ? WHERE contacts_id = ?"];
+	
+    [stmt bindString:[NSString stringWithFormat:@"%d",pRecommendID]   forIndex:1];
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]      forIndex:2];
+	
+    [stmt step];
+}
+
++(ABRecordID)getRecommend:(ABRecordID)pRecordID
+{
+	NSString*  pName = nil;
+	Statement *stmt  = nil;
+	
+	stmt = [DBConnection statementWithQuery:"SELECT contacts_recommend_id FROM contacts_info WHERE contacts_id = ? "];
+	[stmt retain];
+    
+    // Note that the parameters are numbered from 1, not from 0.
+    [stmt bindString:[NSString stringWithFormat:@"%d",pRecordID] forIndex:1];
+    if ([stmt step] == SQLITE_ROW)
+	{
+        // Restore image from Database
+        pName = [stmt getString:0];
+    }
+	
+    [stmt reset];
+    [stmt release];
+	return [pName intValue];
 }
 
 +(void)insertAccounts:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex

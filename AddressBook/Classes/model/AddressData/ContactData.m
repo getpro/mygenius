@@ -351,6 +351,16 @@
 	return nil;	
 }
 
+-(NSString *)getContactsNameByID:(ABRecordID)pContactID
+{
+	for(ABContact * contast in contactsArray)
+	{
+		if(pContactID == ABRecordGetRecordID(contast.record))
+			return contast.contactName;
+	}
+	return nil;
+}
+
 
 // 从通讯录中删除联联人
 +(BOOL)removeSelfFromAddressBook:(ABRecordRef)pABRecordRef

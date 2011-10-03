@@ -98,6 +98,7 @@ typedef enum
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"星座"];
+	((CAttributeString*)attr).stringValue = [DataStore getConstellation:ABRecordGetRecordID(m_pContact.record)];
 	
 	m_pData = [[NSMutableArray alloc]initWithArray:m_pContainer.attributes];
 	

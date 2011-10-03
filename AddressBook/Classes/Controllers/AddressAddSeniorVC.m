@@ -38,7 +38,7 @@ typedef enum
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad 
+- (void)viewDidLoad
 {
     [super viewDidLoad];
 	
@@ -65,12 +65,13 @@ typedef enum
 	attr = [[[CAttributeConstellation alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"星座"];
 	
-	attr = [[[CAttributeString alloc] init] autorelease];
+	attr = [[[CAttributeRecommend alloc] init] autorelease];
+	((CAttributeString*)attr).nvController = self.navigationController;
 	[m_pContainer setValue:attr forKey:@"推荐人"];
 	
-	attr = [[[CAttributeString alloc] init] autorelease];
-	((CAttributeString*)attr).nvController = self.navigationController;
-	((CAttributeString*)attr).m_nType      = Tag_Type_Memo;
+	attr = [[[CAttributeMemo alloc] init] autorelease];
+	((CAttributeMemo*)attr).nvController = self.navigationController;
+	((CAttributeMemo*)attr).m_nType      = Tag_Type_Memo;
 	[m_pMemoContainer setValue:attr        forKey:@"纪念日"];
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
@@ -178,6 +179,35 @@ typedef enum
 		[DataStore updateBlood:pRecordID:attrBlood.stringValue];
 	}
 	
+	//星座
+	CAttributeConstellation *attrConstellation = nil;
+	attrConstellation = [m_pContainer.attributes objectAtIndex:2];
+	if(attrConstellation && attrConstellation.stringValue)
+	{
+		[DataStore updateConstellation:pRecordID:attrConstellation.stringValue];
+	}
+	
+	//推荐人
+	CAttributeRecommend *attrRecommend = nil;
+	attrRecommend = [m_pContainer.attributes objectAtIndex:3];
+	if(attrRecommend && attrRecommend.m_pABContact)
+	{
+		[DataStore updateRecommend:pRecordID:ABRecordGetRecordID(attrRecommend.m_pABContact.record)];
+	}
+	
+	//IM信息
+	[DataStore removeInstantMessage:pRecordID:1];
+	CAttributeString * attrInstantMessage = nil;
+	for(int i = 0;i < [m_pIMContainer.attributes count];i++)
+	{
+		attrInstantMessage = [m_pIMContainer.attributes objectAtIndex:i];
+		NSString *pContent = attrInstantMessage.m_pCell.textField.text;
+		if(attrInstantMessage.label && pContent)
+		{		
+			[DataStore insertInstantMessage:pRecordID:pContent:nil:attrInstantMessage.label:i:1];
+		}
+	}
+	
 	//帐号
 	[DataStore removeAllAccounts:pRecordID];
 	
@@ -236,9 +266,9 @@ typedef enum
 		NSLog(@"[%@]",text);
 		if([text isEqual:@"纪念日"])
 		{
-			attr = [[[CAttributeString alloc] init] autorelease];
-			((CAttributeString*)attr).nvController = self.navigationController;
-			((CAttributeString*)attr).m_nType      = Tag_Type_Memo;
+			attr = [[[CAttributeMemo alloc] init] autorelease];
+			((CAttributeMemo*)attr).nvController = self.navigationController;
+			((CAttributeMemo*)attr).m_nType      = Tag_Type_Memo;
 			[m_pMemoContainer setValue:attr forKey:@"纪念日"];
 		}
 		else if([text isEqual:@"证件"])

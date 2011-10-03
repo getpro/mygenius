@@ -91,8 +91,8 @@ typedef enum
 
 //IM多值
 +(void)insertInstantMessage:(ABRecordID)pRecordID:(NSString*)pUsername:(NSString*)pService:(NSString*)pLabel:(NSInteger)pIndex:(NSInteger)pType;
-+(void)removeInstantMessage:(ABRecordID)pRecordID;
-
++(void)removeInstantMessage:(ABRecordID)pRecordID:(NSInteger)pType;
++(NSArray*)getInstantMessages:(ABRecordID)pRecordID:(NSInteger)pType;
 
 //电话多值
 +(void)insertPhones:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex;
@@ -122,10 +122,17 @@ typedef enum
 //高级信息
 +(void)updateGroup:(ABRecordID)pRecordID:(ABRecordID)pGroupID;
 
-
+//血型
 +(void)updateBlood:(ABRecordID)pRecordID:(NSString*)pStr;
 +(NSString*)getBlood:(ABRecordID)pRecordID;
 
+//星座
++(void)updateConstellation:(ABRecordID)pRecordID:(NSString*)pStr;
++(NSString*)getConstellation:(ABRecordID)pRecordID;
+
+//推荐人
++(void)updateRecommend:(ABRecordID)pRecordID:(ABRecordID)pRecommendID;
++(ABRecordID)getRecommend:(ABRecordID)pRecordID;
 
 //帐号
 +(void)insertAccounts:(ABRecordID)pRecordID:(NSString*)pContent:(NSString*)pLabel:(NSInteger)pIndex;

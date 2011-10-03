@@ -10,6 +10,8 @@
 #import "CAttributeGroup.h"
 #import "CAttributeBlood.h"
 #import "CAttributeConstellation.h"
+#import "CAttributeRecommend.h"
+#import "CAttributeMemo.h"
 
 /*	
 	Characters and all kinds of resources (aspects, skills, etc) are all 
