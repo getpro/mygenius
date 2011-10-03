@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "CAttribute.h"
 #import "PublicData.h"
-#import "EditableCell.h"
+#import "TagCell.h"
 
 @interface CAttributeMemo : CAttribute 
 {

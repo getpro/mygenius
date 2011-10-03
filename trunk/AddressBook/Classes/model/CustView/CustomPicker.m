@@ -11,7 +11,6 @@
 
 @implementation CustomPicker
 
-//@synthesize pickerSheet;
 @synthesize picker;
 @synthesize sourceArray;
 @synthesize Target;

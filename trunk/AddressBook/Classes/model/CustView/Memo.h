@@ -9,24 +9,33 @@
 #import <UIKit/UIKit.h>
 
 
-@interface Memo : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
+@interface Memo : UIViewController
 {
+	IBOutlet UITableView     * m_pTableView_IB;
+	
 	IBOutlet UIBarButtonItem * m_pReturn;        //返回
 	IBOutlet UIBarButtonItem * m_pDone;          //完成
 	
-	UIPickerView  * picker;
+	NSString * m_pRemind;
+	NSString * m_pTime;
+	
     NSArray		  * sourceArray;
 	
-	UIDatePicker  * datePickerView;
-
 	id  Target;
 	SEL Selector;
 }
 
+@property (nonatomic,retain) IBOutlet UITableView         * m_pTableView_IB;
 @property (nonatomic,retain) IBOutlet UIBarButtonItem     * m_pReturn;
 @property (nonatomic,retain) IBOutlet UIBarButtonItem     * m_pDone;
+@property (nonatomic,retain) NSString * m_pRemind;
+@property (nonatomic,retain) NSString * m_pTime;
+
 
 @property (nonatomic, assign) id  Target;
 @property (nonatomic, assign) SEL Selector;
+
+-(IBAction)ReturnItemBtn:  (id)sender;
+-(IBAction)DoneItemBtn:    (id)sender;
 
 @end

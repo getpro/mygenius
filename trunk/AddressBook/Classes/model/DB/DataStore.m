@@ -111,7 +111,7 @@
 		[self removeInstantMessage:pRecordID:0];
 		[self removeDates:pRecordID];
 		[self removeAllAccounts:pRecordID];
-		[self removeAllrelate:pRecordID];
+		[self removeAllRelate:pRecordID];
 		
 		[self removeAllCertificate:pRecordID];
 	}
@@ -1113,7 +1113,7 @@
 	[stmt release];
 }
 
-+(void)removeAllrelate:(ABRecordID)pRecordID
++(void)removeAllRelate:(ABRecordID)pRecordID
 {
 	Statement* stmt = nil;
 	
@@ -1125,6 +1125,59 @@
 	[stmt step];
     [stmt reset];
 	[stmt release];
+}
+
++(void)insertRelate:(ABRecordID)pRecordID:(ABRecordID)pRelateID:(NSString*)pLabel:(NSInteger)pIndex
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"INSERT INTO relate_info VALUES(?,?,?,?,?,?)"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRelateID]	forIndex:2];//2.relate_id
+	[stmt bindString:pLabel									        forIndex:3];//3.label
+	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:4];//4.index
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:5];//5.creation
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:6];//6.modification
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
++(NSArray*)getRelate:(ABRecordID)pRecordID
+{
+	NSMutableArray *retArray = [[[NSMutableArray alloc] init] autorelease];
+	
+	Statement * stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"SELECT * FROM relate_info WHERE contacts_id = ?"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	
+	NSInteger count = 0;
+	
+	while ([stmt step] == SQLITE_ROW)
+	{
+		NSString * pContent		    = [NSString stringWithFormat:@"%@", [stmt getString:1]];
+		NSString * pLabel           = [NSString stringWithFormat:@"%@", [stmt getString:2]];
+		
+		LabelAndContent * pLabelAndContent = [[LabelAndContent alloc]init];
+		
+		pLabelAndContent.m_strLabel		    	 = pLabel;
+		pLabelAndContent.m_strContent		     = pContent;
+		
+		[retArray addObject:pLabelAndContent];
+		
+		[pLabelAndContent release];
+		
+		count++;
+	}
+	
+	[stmt reset];
+	
+	return retArray;
 }
 
 @end

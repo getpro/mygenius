@@ -24,6 +24,7 @@ typedef enum
 	AddSenior_TableView_Section_IM,
 	AddSenior_TableView_Section_Account,
 	AddSenior_TableView_Section_Certificate,
+	AddSenior_TableView_Section_Relate,
 	
 	AddSenior_TableView_Section_AddField,
 	
@@ -53,6 +54,7 @@ typedef enum
 	m_pIMContainer          = [[CAttributeContainer alloc] init];
 	m_pAccountsContainer	= [[CAttributeContainer alloc] init];
 	m_pCertificateContainer = [[CAttributeContainer alloc] init];
+	m_pRelateContainer      = [[CAttributeContainer alloc] init];
 	
 	CAttribute *attr = nil;
 	
@@ -88,6 +90,12 @@ typedef enum
 	((CAttributeString*)attr).nvController = self.navigationController;
 	((CAttributeString*)attr).m_nType      = Tag_Type_Certificate;
 	[m_pCertificateContainer setValue:attr forKey:@"证件"];
+	
+	//相关联系人
+	attr = [[[CAttributeRelate alloc] init] autorelease];
+	((CAttributeRelate*)attr).nvController = self.navigationController;
+	((CAttributeRelate*)attr).m_nType      = Tag_Type_Relate;
+	[m_pRelateContainer setValue:attr forKey:@"相关联系人"];
 	
 	[m_pTableView_IB reloadData];
 	
@@ -128,6 +136,7 @@ typedef enum
 	[m_pMemoContainer	  release];
 	[m_pAccountsContainer release];
 	[m_pCertificateContainer release];
+	[m_pRelateContainer   release];
 	
     [super dealloc];
 }
@@ -238,6 +247,19 @@ typedef enum
 		}
 	}
 	
+	//相关联系人
+	[DataStore removeAllRelate:pRecordID];
+	CAttributeRelate * attrRelate = nil;
+	for(int i = 0;i < [m_pRelateContainer.attributes count];i++)
+	{
+		attrRelate = [m_pRelateContainer.attributes objectAtIndex:i];
+		if(attrRelate && attrRelate.m_pABContact)
+		{
+			[DataStore insertRelate:pRecordID:ABRecordGetRecordID(attrRelate.m_pABContact.record):attrRelate.label:i];
+		}
+	}
+	
+	
 	[self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -291,6 +313,13 @@ typedef enum
 			((CAttributeString*)attr).nvController = self.navigationController;
 			((CAttributeString*)attr).m_nType      = Tag_Type_InstantMessage;
 			[m_pIMContainer setValue:attr forKey:@"IM帐号"];
+		}
+		else if([text isEqual:@"相关联系人"])
+		{
+			attr = [[[CAttributeRelate alloc] init] autorelease];
+			((CAttributeRelate*)attr).nvController = self.navigationController;
+			((CAttributeRelate*)attr).m_nType      = Tag_Type_Relate;
+			[m_pRelateContainer setValue:attr forKey:@"相关联系人"];
 		}
 		
 		[m_pTableView_IB reloadData];
@@ -370,6 +399,11 @@ typedef enum
 		case AddSenior_TableView_Section_IM:
 		{
 			pRetNum = [m_pIMContainer.attributes count];
+			break;
+		}
+		case AddSenior_TableView_Section_Relate:
+		{
+			pRetNum = [m_pRelateContainer.attributes count];
 			break;
 		}
 		default:
@@ -455,6 +489,12 @@ typedef enum
 			
 			break;
 		}
+		case AddSenior_TableView_Section_Relate:
+		{
+			attr = [m_pRelateContainer.attributes objectAtIndex:row];
+			
+			break;
+		}	
 		case AddSenior_TableView_Section_AddField:
 		{
 			if (row == 0)
@@ -563,6 +603,12 @@ typedef enum
 		case AddSenior_TableView_Section_IM:
 		{
 			attr = [m_pIMContainer.attributes objectAtIndex:row];
+			
+			break;
+		}
+		case AddSenior_TableView_Section_Relate:
+		{
+			attr = [m_pRelateContainer.attributes objectAtIndex:row];
 			
 			break;
 		}

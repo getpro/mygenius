@@ -12,95 +12,72 @@
 @implementation CustomDatePicker
 
 @synthesize m_pDatePicker;
+@synthesize Target;
+@synthesize Selector;
 
-- (id)initWithFrame:(CGRect)frame target:(id)target actionCancel:(SEL)actionCancel actionDone:(SEL)actionDone
+- (id)initWithFrame:(CGRect)frame
 {
 	if (self=[super initWithFrame:frame])
 	{
 		[self setUserInteractionEnabled:YES];
-		
-		//self.backgroundColor = [UIColor clearColor];
-		
-		//半透明黑色背景
-		UIView * view = [[UIView alloc] initWithFrame:frame];
+		// Initialization code.
+		//黑色背景阴影
+		UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0,0,SCREEN_W,SCREEN_H)];
 		
 		[view setBackgroundColor:[UIColor blackColor]];
 		//[view setTag:LOAD_BACKGROUND];
-		[view setAlpha:0.8f];
+		[view setAlpha:0.6f];
 		[self addSubview:view];
 		
-		[view release];
+		//sourceArray = [[NSArray alloc]initWithObjects: @"iOS应用软件开发", @"iOS企业OA开发",@"iOS定制应用", @"iOS游戏开发", nil];
+		
+		//CGRect pFrame = CGRectMake(0, 200, SCREEN_W, SCREEN_H - 200);
+		//pickerSheet = [[UIActionSheet alloc] initWithFrame:pFrame];
+		//pickerSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+		
+		UIToolbar * toolbar = [UIToolbar new];
+		toolbar.barStyle = UIBarStyleBlackOpaque;
+		
+		// size up the toolbar and set its frame
+		[toolbar sizeToFit];
+		//CGFloat toolbarHeight = [toolbar frame].size.height;
+		//CGRect mainViewBounds = self.view.bounds;
+		[toolbar setFrame:CGRectMake(0,230,SCREEN_W,40)];
+		[self addSubview:toolbar];
 		
 		
-		CGRect pDatePicker = CGRectMake(0, 220, SCREEN_W, 216);
+		UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc]
+									   initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+									   target:self action:@selector(pickerHideCancel)];
 		
-		m_pDatePicker = [[UIDatePicker alloc]initWithFrame:pDatePicker];
+		cancelItem.style = UIBarButtonItemStyleBordered;
 		
-		m_pDatePicker.datePickerMode    = UIDatePickerModeDateAndTime;
-		m_pDatePicker.minuteInterval    = 5;
+		// flex item used to separate the left groups items and right grouped items
+		UIBarButtonItem *flexItem1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+																				   target:nil
+																				   action:nil];
 		
-		/*
-		[m_pDatePicker addTarget:target action:action
-				forControlEvents:UIControlEventValueChanged];
-		*/
+		UIBarButtonItem *flexItem2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+																				   target:nil
+																				   action:nil];
 		
-		//[m_pDatePicker addTarget:self action:@selector(touchUpOutside:)
-		//		forControlEvents:UIControlEventTouchUpOutside];
+		UIBarButtonItem *donelItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleBordered 
+																	 target:self action:@selector(pickerHideOK)];
 		
-		NSLocale * pLocale   = [[NSLocale alloc] initWithLocaleIdentifier:@"China"];
-		m_pDatePicker.locale = pLocale;
+		donelItem.style = UIBarButtonItemStyleBordered;
 		
-		[pLocale release];
+		NSArray *items = [NSArray arrayWithObjects: cancelItem, flexItem1,flexItem2,donelItem, nil];
+		[toolbar setItems:items animated:NO];
+		
+		
+		
+		m_pDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
+		//datePickerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+		m_pDatePicker.datePickerMode = UIDatePickerModeDateAndTime;
+		m_pDatePicker.frame = CGRectMake(0, 270, SCREEN_W, 250);
 		
 		[self addSubview:m_pDatePicker];
 		
-		//确定和取消
-		UIToolbar * pToolbarBg = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 436, SCREEN_W, 44)];
-		
-		pToolbarBg.barStyle = UIBarStyleBlackOpaque;
-		
-		UIToolbar * pToolbarCancel = [[UIToolbar alloc]initWithFrame:CGRectMake(40, 0, 100, 44)];
-		
-		pToolbarCancel.barStyle = UIBarStyleBlackOpaque;
-		
-		UIToolbar * pToolbarDone = [[UIToolbar alloc]initWithFrame:CGRectMake(180, 0, 100, 44)];
-		
-		pToolbarDone.barStyle = UIBarStyleBlackOpaque;
-		
-		[pToolbarBg addSubview:pToolbarCancel];
-		[pToolbarBg addSubview:pToolbarDone];
-		
-		
-		UIBarButtonItem * pCancel = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered
-										   target:target action:actionCancel];
-		
-		pCancel.width = 89.0f;
-		
-		UIBarButtonItem * pDone = [[UIBarButtonItem alloc]   initWithTitle:@"确定" style:UIBarButtonItemStyleBordered
-										   target:target action:actionDone];
-		
-		pDone.width = 89.0f;
-		
-		NSMutableArray * buttonCancels = [[NSMutableArray alloc] initWithCapacity:1];
-		NSMutableArray * buttonDones   = [[NSMutableArray alloc] initWithCapacity:1];
-		
-		[buttonCancels addObject:pCancel];
-		[pCancel release];
-		
-		[buttonDones addObject:pDone];
-		[pDone release];
-		
-		[pToolbarCancel setItems:buttonCancels animated:NO];
-		[pToolbarDone   setItems:buttonDones animated:NO];
-		
-		[buttonCancels release];
-		[buttonDones   release];
-		
-		[self addSubview:pToolbarBg];
-		
-		[pToolbarCancel release];
-		[pToolbarDone   release];
-		[pToolbarBg     release];
 	}
 	return self;
 }
@@ -110,6 +87,21 @@
 	[m_pDatePicker release];
 	
 	[super dealloc];
+}
+
+-(void)pickerHideOK
+{
+	if (Target && Selector && [Target respondsToSelector:Selector]) 
+	{
+		[Target performSelector:Selector withObject:m_pDatePicker.date];
+	}
+	
+	[self removeFromSuperview];
+}
+
+-(void)pickerHideCancel
+{
+	[self removeFromSuperview];
 }
 
 @end

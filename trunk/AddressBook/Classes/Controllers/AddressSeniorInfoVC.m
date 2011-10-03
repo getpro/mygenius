@@ -34,6 +34,7 @@ typedef enum
 	SeniorInfo_TableView_Section_IM,
 	SeniorInfo_TableView_Section_Account,
 	SeniorInfo_TableView_Section_Certificate,
+	SeniorInfo_TableView_Section_Relate,
 	
 	SeniorInfo_TableView_Section_AddField,
 	
@@ -107,6 +108,7 @@ typedef enum
 	m_pAccountsContainer	= [[CAttributeContainer alloc] init];
 	m_pCertificateContainer = [[CAttributeContainer alloc] init];
 	m_pIMContainer          = [[CAttributeContainer alloc] init];
+	m_pRelateContainer      = [[CAttributeContainer alloc] init];
 	
 	[self LoadAttribute];
 	
@@ -121,6 +123,7 @@ typedef enum
 	[m_pAccountsContainer     removeAllObject];
 	[m_pCertificateContainer  removeAllObject];
 	[m_pIMContainer           removeAllObject];
+	[m_pRelateContainer       removeAllObject];
 	
 	CAttribute *attr = nil;
 	ABRecordID  pRecordID  = ABRecordGetRecordID(m_pContact.record);
@@ -145,11 +148,9 @@ typedef enum
 	[m_pContainer setValue:attr forKey:@"推荐人"];
 	((CAttributeRecommend*)attr).stringValue = [AllContactData getContactsNameByID:[DataStore getRecommend:pRecordID]];
 	
-	
-	
-	attr = [[[CAttributeString alloc] init] autorelease];
-	((CAttributeString*)attr).nvController = self.navigationController;
-	((CAttributeString*)attr).m_nType      = Tag_Type_Memo;
+	attr = [[[CAttributeMemo alloc] init] autorelease];
+	((CAttributeMemo*)attr).nvController = self.navigationController;
+	((CAttributeMemo*)attr).m_nType      = Tag_Type_Memo;
 	[m_pMemoContainer setValue:attr        forKey:@"纪念日"];
 	
 	//IM帐号
@@ -185,6 +186,17 @@ typedef enum
 		((CAttributeString*)attr).stringValue  = pLabelAndContent.m_strContent;
 	}
 	
+	//相关联系人
+	NSArray * pArryRelate = [DataStore getRelate:pRecordID];
+	for(LabelAndContent * pLabelAndContent in pArryRelate)
+	{
+		attr = [[[CAttributeRelate alloc] init] autorelease];
+		((CAttributeRelate*)attr).nvController = self.navigationController;
+		((CAttributeRelate*)attr).m_nType      = Tag_Type_Relate;
+		[m_pRelateContainer setValue:attr forKey:pLabelAndContent.m_strLabel];
+		//m_strContent是一个ID
+		((CAttributeRelate*)attr).stringValue  = [AllContactData getContactsNameByID:[pLabelAndContent.m_strContent intValue]];
+	}
 }
 
 /*
@@ -243,6 +255,7 @@ typedef enum
 	[m_pIMContainer       release];
 	[m_pAccountsContainer release];
 	[m_pCertificateContainer release];
+	[m_pRelateContainer   release];
 	
     [super dealloc];
 }
@@ -371,6 +384,18 @@ typedef enum
 		}
 	}
 	
+	//相关联系人
+	[DataStore removeAllRelate:pRecordID];
+	CAttributeRelate * attrRelate = nil;
+	for(int i = 0;i < [m_pRelateContainer.attributes count];i++)
+	{
+		attrRelate = [m_pRelateContainer.attributes objectAtIndex:i];
+		if(attrRelate && attrRelate.m_pABContact)
+		{
+			[DataStore insertRelate:pRecordID:ABRecordGetRecordID(attrRelate.m_pABContact.record):attrRelate.label:i];
+		}
+	}
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"changeAddress" object:nil];
 	
 	[self setEditing:NO animated:YES];
@@ -421,9 +446,9 @@ typedef enum
 		NSLog(@"[%@]",text);
 		if([text isEqual:@"纪念日"])
 		{
-			attr = [[[CAttributeString alloc] init] autorelease];
-			((CAttributeString*)attr).nvController = self.navigationController;
-			((CAttributeString*)attr).m_nType      = Tag_Type_Memo;
+			attr = [[[CAttributeMemo alloc] init] autorelease];
+			((CAttributeMemo*)attr).nvController = self.navigationController;
+			((CAttributeMemo*)attr).m_nType      = Tag_Type_Memo;
 			[m_pMemoContainer setValue:attr forKey:@"纪念日"];
 		}
 		else if([text isEqual:@"证件"])
@@ -446,6 +471,13 @@ typedef enum
 			((CAttributeString*)attr).nvController = self.navigationController;
 			((CAttributeString*)attr).m_nType      = Tag_Type_InstantMessage;
 			[m_pIMContainer setValue:attr forKey:@"IM帐号"];
+		}
+		else if([text isEqual:@"相关联系人"])
+		{
+			attr = [[[CAttributeRelate alloc] init] autorelease];
+			((CAttributeRelate*)attr).nvController = self.navigationController;
+			((CAttributeRelate*)attr).m_nType      = Tag_Type_Relate;
+			[m_pRelateContainer setValue:attr forKey:@"相关联系人"];
 		}
 		
 		[m_pTableView_IB reloadData];
@@ -531,6 +563,11 @@ typedef enum
 			pRetNum = [m_pIMContainer.attributes count];
 			break;
 		}
+		case SeniorInfo_TableView_Section_Relate:
+		{
+			pRetNum = [m_pRelateContainer.attributes count];
+			break;
+		}
 		default:
 			break;
 	}
@@ -611,6 +648,12 @@ typedef enum
 		case SeniorInfo_TableView_Section_IM:
 		{
 			attr = [m_pIMContainer.attributes objectAtIndex:row];
+			
+			break;
+		}
+		case SeniorInfo_TableView_Section_Relate:
+		{
+			attr = [m_pRelateContainer.attributes objectAtIndex:row];
 			
 			break;
 		}
@@ -727,6 +770,12 @@ typedef enum
 		case SeniorInfo_TableView_Section_IM:
 		{
 			attr = [m_pIMContainer.attributes objectAtIndex:row];
+			
+			break;
+		}
+		case SeniorInfo_TableView_Section_Relate:
+		{
+			attr = [m_pRelateContainer.attributes objectAtIndex:row];
 			
 			break;
 		}

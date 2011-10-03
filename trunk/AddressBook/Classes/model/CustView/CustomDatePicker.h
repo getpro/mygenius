@@ -16,6 +16,10 @@
 
 @property (retain,nonatomic) UIDatePicker * m_pDatePicker;
 
-- (id)initWithFrame:(CGRect)frame target:(id)target actionCancel:(SEL)actionCancel actionDone:(SEL)actionDone;
+@property (nonatomic, assign) id  Target;
+@property (nonatomic, assign) SEL Selector;
+
+-(void)pickerHideOK;
+-(void)pickerHideCancel;
 
 @end

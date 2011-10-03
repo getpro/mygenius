@@ -15,7 +15,7 @@
 @synthesize bIsLabel_Click;
 @synthesize Target;
 @synthesize Selector;
-@synthesize bIsNOTextField;
+
 
 //响应标签按钮事件
 -(void)btnPressed:(id)sender
@@ -52,8 +52,6 @@
 		
 		//在textLabel上面添加一层Button,相应切换标签事件
 		bIsLabel_Click = NO;
-		
-		bIsNOTextField = NO;
 		
 		button = [[UIButton alloc] initWithFrame:CGRectZero];
 		[button setBackgroundColor:[UIColor clearColor]];
@@ -98,33 +96,16 @@
 
 	self.detailTextLabel.hidden = YES;
 	
-	if(bIsNOTextField)
+	if (self.editing)
 	{
-		if (self.editing)
-		{
-			textField.enabled = NO;
-			bIsLabel_Click    = YES;
-			button.frame = CGRectMake(40, 0, 80, 40);
-		}
-		else
-		{
-			bIsLabel_Click    = NO;
-			textField.enabled = NO;
-		}
+		textField.enabled = YES;
+		bIsLabel_Click    = YES;
+		button.frame = CGRectMake(40, 0, 80, 40);
 	}
 	else
 	{
-		if (self.editing)
-		{
-			textField.enabled = YES;
-			bIsLabel_Click    = YES;
-			button.frame = CGRectMake(40, 0, 80, 40);
-		}
-		else
-		{
-			bIsLabel_Click    = NO;
-			textField.enabled = NO;
-		}
+		bIsLabel_Click    = NO;
+		textField.enabled = NO;
 	}
 }
 

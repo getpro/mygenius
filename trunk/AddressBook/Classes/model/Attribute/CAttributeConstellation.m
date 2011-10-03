@@ -67,7 +67,7 @@
 
 - (UITableViewCell*)cellForTableView:(UITableView *)tableView 
 {
-	static NSString* cellIdentifier = @"CAttributeBloodCell";
+	static NSString* cellIdentifier = @"CAttributeConstellationCell";
 	CAttributeCell* cell = (CAttributeCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (![cell isKindOfClass:[CAttributeCell class]]) 
 	{
