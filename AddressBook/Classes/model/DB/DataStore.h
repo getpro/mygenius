@@ -85,7 +85,7 @@ typedef enum
 
 
 //dates多值
-+(void)insertDates:(ABRecordID)pRecordID:(NSInteger)pContent:(NSString*)pLabel:(NSInteger)pIndex:(NSInteger)pType;
++(void)insertDates:(ABRecordID)pRecordID:(NSInteger)pContent:(NSString*)pLabel:(NSInteger)pIndex:(NSInteger)pRemind:(NSInteger)pType;
 +(void)removeDates:(ABRecordID)pRecordID;
 
 

@@ -27,6 +27,8 @@
 	CAttributeContainer      * m_pAccountsContainer;
 	CAttributeContainer      * m_pCertificateContainer;
 	CAttributeContainer      * m_pRelateContainer;
+	
+	NSMutableArray           * m_pSectionArr;
 }
 
 @property (retain,nonatomic) IBOutlet UITableView * m_pTableView_IB;
@@ -34,5 +36,7 @@
 @property (retain,nonatomic) ABContact * m_pContact;
 
 -(IBAction)doneItemBtn:  (id)sender;
+
+- (CAttribute*) getAttribute:(NSIndexPath *)indexPath;
 
 @end

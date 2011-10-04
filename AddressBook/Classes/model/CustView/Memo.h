@@ -19,6 +19,9 @@
 	NSString * m_pRemind;
 	NSString * m_pTime;
 	
+	NSDate   * m_pDate;
+	NSInteger  m_nRemindIndex;
+	
     NSArray		  * sourceArray;
 	
 	id  Target;
@@ -30,7 +33,7 @@
 @property (nonatomic,retain) IBOutlet UIBarButtonItem     * m_pDone;
 @property (nonatomic,retain) NSString * m_pRemind;
 @property (nonatomic,retain) NSString * m_pTime;
-
+@property (nonatomic,retain) NSDate   * m_pDate;
 
 @property (nonatomic, assign) id  Target;
 @property (nonatomic, assign) SEL Selector;

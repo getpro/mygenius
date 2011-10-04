@@ -353,7 +353,7 @@
 		//获取dates值
 		NSDate* datesContent = (NSDate*)ABMultiValueCopyValueAtIndex(dates, y);
 		
-		[self insertDates:pRecordID:[datesContent timeIntervalSince1970]:datesLabel:y:0];
+		[self insertDates:pRecordID:[datesContent timeIntervalSince1970]:datesLabel:y:0:0];
 		
 	}
 	
@@ -414,66 +414,7 @@
 	[stmt release];
 }
 
-/*
-+(NSInteger)getContactsInfo:(NSMutableArray*)pArray
-{
-	if (pArray == nil) 
-	{
-		return 0;
-	}
-	
-	Statement * stmt = nil;
-	
-	stmt = [DBConnection statementWithQuery:"select * from contacts_info"];
-	
-	NSInteger count = 0;
-	
-	while ([stmt step] == SQLITE_ROW)
-	{
-		NSString * pcontactsID           = [NSString stringWithFormat:@"%@", [stmt getString:0]];
-		NSString * pcontactsName		 = [NSString stringWithFormat:@"%@", [stmt getString:1]];
-		NSString * pcontactsOrganization = [NSString stringWithFormat:@"%@", [stmt getString:2]];
-		NSInteger  pcontactsSex		     = [stmt getInt32:3];
-		NSString * pcontactsHomeEmail    = [NSString stringWithFormat:@"%@", [stmt getString:4]];
-		NSString * pcontactsWorkEmail    = [NSString stringWithFormat:@"%@", [stmt getString:5]];
-		NSString * pcontactsHomeAddress  = [NSString stringWithFormat:@"%@", [stmt getString:6]];
-		NSString * pcontactsWorkAddress  = [NSString stringWithFormat:@"%@", [stmt getString:7]];
-		NSString * pcontactsMobilePhone  = [NSString stringWithFormat:@"%@", [stmt getString:8]];
-		NSString * pcontactsIphone       = [NSString stringWithFormat:@"%@", [stmt getString:9]];
-		NSString * pcontactsRecommendID  = [NSString stringWithFormat:@"%@", [stmt getString:10]];
-		NSString * pcontactsRecommendName= [NSString stringWithFormat:@"%@", [stmt getString:11]];
-		NSString * pcontactsRelationID   = [NSString stringWithFormat:@"%@", [stmt getString:12]];
-		NSString * pcontactsRelationName = [NSString stringWithFormat:@"%@", [stmt getString:13]];
-		
-		contactsInfo * pContactsInfo = [[contactsInfo alloc]init];
-		
-		pContactsInfo.m_strcontactsID			 = pcontactsID;
-		pContactsInfo.m_strcontactsName		     = pcontactsName;
-		pContactsInfo.m_strcontactsOrganization  = pcontactsOrganization;
-		pContactsInfo.m_ncontactsSex		     = pcontactsSex;
-		pContactsInfo.m_strcontactsHomeEmail     = pcontactsHomeEmail;
-		pContactsInfo.m_strcontactsWorkEmail	 = pcontactsWorkEmail;
-		pContactsInfo.m_strcontactsHomeAddress   = pcontactsHomeAddress;
-		pContactsInfo.m_strcontactsWorkAddress   = pcontactsWorkAddress;
-		pContactsInfo.m_strcontactsMobilePhone	 = pcontactsMobilePhone;
-		pContactsInfo.m_strcontactsIphone		 = pcontactsIphone;
-		pContactsInfo.m_strcontactsRecommendID   = pcontactsRecommendID;
-		pContactsInfo.m_strcontactsRecommendName = pcontactsRecommendName;
-		pContactsInfo.m_strcontactsRelationID	 = pcontactsRelationID;
-		pContactsInfo.m_strcontactsRelationName  = pcontactsRelationName;
-		
-		[pArray addObject:pContactsInfo];
-		
-		[pContactsInfo release];
-		
-		count++;
-	}
-	
-	[stmt reset];
-	
-	return count;
-}
-*/
+
 
 +(BOOL)RecordIDIsExist:(ABRecordID)pRecordID
 {
@@ -601,7 +542,7 @@
 	[stmt release];
 }
 
-+(void)insertDates:(ABRecordID)pRecordID:(NSInteger)pContent:(NSString*)pLabel:(NSInteger)pIndex:(NSInteger)pType
++(void)insertDates:(ABRecordID)pRecordID:(NSInteger)pContent:(NSString*)pLabel:(NSInteger)pIndex:(NSInteger)pRemind:(NSInteger)pType
 {
 	Statement* stmt = nil;
 	
@@ -610,11 +551,11 @@
 	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
 	[stmt bindInt32:pContent						                forIndex:2];//2.time
 	[stmt bindString:pLabel									        forIndex:3];//3.label
-	[stmt bindString:@"0"									        forIndex:4];//4.remind
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRemind]	    forIndex:4];//4.remind
 	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:5];//5.index
 	[stmt bindString:[NSString stringWithFormat:@"%d",pType]	    forIndex:6];//6.type
-	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:6];//6.creation
-	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:7];//7.modification
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:7];//7.creation
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:8];//8.modification
 	
 	[stmt retain];
 	[stmt step];
