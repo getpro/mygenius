@@ -151,6 +151,7 @@ typedef enum
 
 //标签
 +(void)insertTag:(NSString*)pLabel;
++(void)removeTags;
 +(NSArray*)getTags;
 
 @end

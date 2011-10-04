@@ -1221,4 +1221,16 @@
 	return retArray;
 }
 
++(void)removeTags
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"DELETE FROM tag_info"];
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
 @end
