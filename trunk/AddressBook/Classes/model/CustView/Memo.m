@@ -28,6 +28,7 @@ typedef enum
 @synthesize m_pTableView_IB;
 @synthesize m_pRemind;
 @synthesize m_pTime;
+@synthesize m_pDate;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
@@ -48,6 +49,8 @@ typedef enum
 				   @"事件发生日",nil];
 	
 	[sourceArray retain];
+	
+	m_nRemindIndex = 0;
 }
 
 
@@ -82,6 +85,7 @@ typedef enum
 	[m_pTableView_IB release];
 	[m_pRemind		 release];
 	[m_pTime		 release];
+	[m_pDate         release];
 	
     [super dealloc];
 }
@@ -190,6 +194,8 @@ typedef enum
 	NSString * pIndex = (NSString*)index;
 	NSString * pStr = [sourceArray objectAtIndex:[pIndex intValue]];
 	
+	m_nRemindIndex = [pIndex intValue];
+	
 	if(pStr)
 	{
 		self.m_pRemind = pStr;
@@ -200,7 +206,9 @@ typedef enum
 
 -(void)getTimeResult:(id)index
 {
-	NSDate * date = (NSDate*)index; 
+	NSDate * date = (NSDate*)index;
+	
+	self.m_pDate = date;
 	
 	//NSLog(@"%@",date);
 	
@@ -278,6 +286,11 @@ typedef enum
 		}
 		
 		[Target setValue:pStr forKey:@"stringValue"];// update the model
+		
+		if (Target && Selector && [Target respondsToSelector:Selector])
+		{
+			[Target performSelector:Selector withObject:m_pDate withObject:[NSString stringWithFormat:@"%d",m_nRemindIndex]];
+		}
 	}
 	
 	[self.navigationController popViewControllerAnimated:YES];

@@ -15,6 +15,8 @@
 @synthesize stringValue;
 @synthesize nvController;
 @synthesize m_nType;
+@synthesize m_pDate;
+@synthesize m_nRemindIndex;
 
 - (NSString*)type
 {
@@ -49,6 +51,7 @@
 - (void)dealloc 
 {
 	[stringValue release];
+	[m_pDate     release];
 	
 	[super dealloc];
 }
@@ -102,17 +105,25 @@
 	return cell;
 }
 
--(void)getContentResult:(id)index
+-(void)getContentResult:(id)data :(id)index
 {
-	/*
-	ABContact * pABContact = (ABContact*)index;
+	NSDate * pDate = (NSDate*)data;
 	
-	if(pABContact)
+	NSString * pStr = (NSString*)index;
+	
+	if(pDate)
 	{
-		self.stringValue  = pABContact.contactName;
-		self.m_pABContact = pABContact;
+		self.m_pDate = pDate;
+		
+		if(pStr)
+		{
+			m_nRemindIndex = [pStr intValue];
+		}
+		else
+		{
+			m_nRemindIndex = 0;
+		}
 	}
-	*/
 }
 
 
@@ -122,7 +133,7 @@
 	
 	Memo *tvc = [[[Memo alloc] init] autorelease];
 	tvc.Target   = self;
-	tvc.Selector = @selector(getContentResult:);
+	tvc.Selector = @selector(getContentResult::);
 	
 	return (UIViewController*)tvc;
 }

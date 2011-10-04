@@ -46,9 +46,6 @@ typedef enum
 {
     [super viewDidLoad];
 	
-	[m_pTableView_IB setEditing:YES];
-	m_pTableView_IB.allowsSelectionDuringEditing = YES;
-	
 	self.navigationItem.title = @"高级信息";
 	self.navigationItem.rightBarButtonItem = m_pRightDone;
 	
@@ -59,47 +56,61 @@ typedef enum
 	m_pCertificateContainer = [[CAttributeContainer alloc] init];
 	m_pRelateContainer      = [[CAttributeContainer alloc] init];
 	
+	m_pSectionArr           = [[NSMutableArray alloc] initWithCapacity:AddSenior_TableView_Section_Count];
+	
 	CAttribute *attr = nil;
 	
 	attr = [[[CAttributeGroup alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"分组"];
+	[m_pSectionArr addObject:@"分组"];
 	
 	attr = [[[CAttributeBlood alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"血型"];
+	[m_pSectionArr addObject:@"血型"];
 	
 	attr = [[[CAttributeConstellation alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"星座"];
+	[m_pSectionArr addObject:@"星座"];
 	
 	attr = [[[CAttributeRecommend alloc] init] autorelease];
 	((CAttributeString*)attr).nvController = self.navigationController;
 	[m_pContainer setValue:attr forKey:@"推荐人"];
+	[m_pSectionArr addObject:@"推荐人"];
 	
 	attr = [[[CAttributeMemo alloc] init] autorelease];
 	((CAttributeMemo*)attr).nvController = self.navigationController;
 	((CAttributeMemo*)attr).m_nType      = Tag_Type_Memo;
 	[m_pMemoContainer setValue:attr        forKey:@"纪念日"];
+	[m_pSectionArr addObject:@"纪念日"];
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	((CAttributeString*)attr).nvController = self.navigationController;
 	((CAttributeString*)attr).m_nType      = Tag_Type_InstantMessage;
 	[m_pIMContainer setValue:attr          forKey:@"IM帐号"];
+	[m_pSectionArr addObject:@"IM帐号"];
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	((CAttributeString*)attr).nvController = self.navigationController;
 	((CAttributeString*)attr).m_nType      = Tag_Type_Account;
 	[m_pAccountsContainer setValue:attr    forKey:@"银行帐号"];
+	[m_pSectionArr addObject:@"银行帐号"];
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	((CAttributeString*)attr).nvController = self.navigationController;
 	((CAttributeString*)attr).m_nType      = Tag_Type_Certificate;
 	[m_pCertificateContainer setValue:attr forKey:@"证件"];
+	[m_pSectionArr addObject:@"证件"];
 	
 	//相关联系人
 	attr = [[[CAttributeRelate alloc] init] autorelease];
 	((CAttributeRelate*)attr).nvController = self.navigationController;
 	((CAttributeRelate*)attr).m_nType      = Tag_Type_Relate;
 	[m_pRelateContainer setValue:attr forKey:@"相关联系人"];
+	[m_pSectionArr addObject:@"相关联系人"];
 	
+	m_pTableView_IB.allowsSelectionDuringEditing = YES;
+	
+	[m_pTableView_IB setEditing:YES];
 	[m_pTableView_IB reloadData];
 	
 }
@@ -140,6 +151,7 @@ typedef enum
 	[m_pAccountsContainer release];
 	[m_pCertificateContainer release];
 	[m_pRelateContainer   release];
+	[m_pSectionArr        release];
 	
     [super dealloc];
 }
@@ -262,6 +274,17 @@ typedef enum
 		}
 	}
 	
+	//纪念日
+	[DataStore removeDates:pRecordID];
+	CAttributeMemo * attrMemo = nil;
+	for(int i = 0;i < [m_pMemoContainer.attributes count];i++)
+	{
+		attrMemo = [m_pMemoContainer.attributes objectAtIndex:i];
+		if(attrMemo && attrMemo.m_pDate && attrMemo.label)
+		{
+			[DataStore insertDates:pRecordID:[attrMemo.m_pDate timeIntervalSince1970]:attrMemo.label:i:attrMemo.m_nRemindIndex:1];
+		}
+	}
 	
 	[self.navigationController popViewControllerAnimated:YES];
 }
@@ -291,6 +314,10 @@ typedef enum
 		NSLog(@"[%@]",text);
 		if([text isEqual:@"纪念日"])
 		{
+			if([m_pMemoContainer.attributes count] == 0)
+			{
+				[m_pSectionArr addObject:@"纪念日"];
+			}
 			attr = [[[CAttributeMemo alloc] init] autorelease];
 			((CAttributeMemo*)attr).nvController = self.navigationController;
 			((CAttributeMemo*)attr).m_nType      = Tag_Type_Memo;
@@ -298,6 +325,10 @@ typedef enum
 		}
 		else if([text isEqual:@"证件"])
 		{
+			if([m_pCertificateContainer.attributes count] == 0)
+			{
+				[m_pSectionArr addObject:@"证件"];
+			}
 			attr = [[[CAttributeString alloc] init] autorelease];
 			((CAttributeString*)attr).nvController = self.navigationController;
 			((CAttributeString*)attr).m_nType      = Tag_Type_Certificate;
@@ -305,6 +336,10 @@ typedef enum
 		}
 		else if([text isEqual:@"银行帐号"])
 		{
+			if([m_pAccountsContainer.attributes count] == 0)
+			{
+				[m_pSectionArr addObject:@"银行帐号"];
+			}
 			attr = [[[CAttributeString alloc] init] autorelease];
 			((CAttributeString*)attr).nvController = self.navigationController;
 			((CAttributeString*)attr).m_nType      = Tag_Type_Account;
@@ -312,6 +347,10 @@ typedef enum
 		}
 		else if([text isEqual:@"IM帐号"])
 		{
+			if([m_pIMContainer.attributes count] == 0)
+			{
+				[m_pSectionArr addObject:@"IM帐号"];
+			}
 			attr = [[[CAttributeString alloc] init] autorelease];
 			((CAttributeString*)attr).nvController = self.navigationController;
 			((CAttributeString*)attr).m_nType      = Tag_Type_InstantMessage;
@@ -319,6 +358,10 @@ typedef enum
 		}
 		else if([text isEqual:@"相关联系人"])
 		{
+			if([m_pRelateContainer.attributes count] == 0)
+			{
+				[m_pSectionArr addObject:@"相关联系人"];
+			}
 			attr = [[[CAttributeRelate alloc] init] autorelease];
 			((CAttributeRelate*)attr).nvController = self.navigationController;
 			((CAttributeRelate*)attr).m_nType      = Tag_Type_Relate;
@@ -331,46 +374,63 @@ typedef enum
 
 #pragma mark - UITableView delegates
 
-
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath 
 {
 	//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	NSInteger row = [indexPath row];
 	
-    if (editingStyle == UITableViewCellEditingStyleDelete) 
+    if (editingStyle == UITableViewCellEditingStyleDelete)
 	{
-		switch (indexPath.section)
+		//switch (indexPath.section)
 		{
-			case AddSenior_TableView_Section_Memo:
+			NSString * pSectionName = [m_pSectionArr objectAtIndex:indexPath.section];
+			
+			if([pSectionName isEqual:@"纪念日"])
 			{
 				[m_pMemoContainer.attributes removeObjectAtIndex:row];
-				break;
+				if([m_pMemoContainer.attributes count] == 0)
+				{
+					[m_pSectionArr removeObject:@"纪念日"];
+				}
 			}
-			case AddSenior_TableView_Section_Account:
+			else if([pSectionName isEqual:@"银行帐号"])
 			{
 				[m_pAccountsContainer.attributes removeObjectAtIndex:row];
-				break;
+				if([m_pAccountsContainer.attributes count] == 0)
+				{
+					[m_pSectionArr removeObject:@"银行帐号"];
+				}
 			}
-			case AddSenior_TableView_Section_Certificate:
+			else if([pSectionName isEqual:@"证件"])
 			{
 				[m_pCertificateContainer.attributes removeObjectAtIndex:row];
-				break;
+				if([m_pCertificateContainer.attributes count] == 0)
+				{
+					[m_pSectionArr removeObject:@"证件"];
+				}
 			}
-			case AddSenior_TableView_Section_IM:
+			else if([pSectionName isEqual:@"IM帐号"])
 			{
 				[m_pIMContainer.attributes removeObjectAtIndex:row];
-				break;
+				if([m_pIMContainer.attributes count] == 0)
+				{
+					[m_pSectionArr removeObject:@"IM帐号"];
+				}
 			}
-			case AddSenior_TableView_Section_Relate:
+			else if([pSectionName isEqual:@"相关联系人"])
 			{
 				[m_pRelateContainer.attributes removeObjectAtIndex:row];
-				break;
+				if([m_pRelateContainer.attributes count] == 0)
+				{
+					[m_pSectionArr removeObject:@"相关联系人"];
+				}
 			}
-			default:
-				break;
 		}
 		
-		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+		[tableView reloadData];
+		//indexPath.section减1
+		//[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+		
     }   
     //else if (editingStyle == UITableViewCellEditingStyleInsert) 
 	//{
@@ -385,144 +445,108 @@ typedef enum
 	UITableViewCellEditingStyle pRetNum = UITableViewCellEditingStyleNone;
 	//NSInteger row = [indexPath row];
 	
-	switch (indexPath.section)
+	if([m_pSectionArr count] == indexPath.section)
 	{
-		case AddSenior_TableView_Section_Group:
+		pRetNum = UITableViewCellEditingStyleInsert;
+	}
+	else
+	{
+		NSString * pSectionName = [m_pSectionArr objectAtIndex:indexPath.section];
+		
+		if([pSectionName isEqual:@"分组"])
 		{
 			pRetNum = UITableViewCellEditingStyleNone;
-			break;
 		}
-		case AddSenior_TableView_Section_Blood:
+		else if([pSectionName isEqual:@"血型"])
 		{
 			pRetNum = UITableViewCellEditingStyleNone;
-			break;
 		}
-		case AddSenior_TableView_Section_Recommend:
+		else if([pSectionName isEqual:@"星座"])
 		{
 			pRetNum = UITableViewCellEditingStyleNone;
-			break;
 		}
-		case AddSenior_TableView_Section_Constellation:
+		else if([pSectionName isEqual:@"推荐人"])
 		{
 			pRetNum = UITableViewCellEditingStyleNone;
-			break;
 		}
-		case AddSenior_TableView_Section_Memo:
+		else if([pSectionName isEqual:@"纪念日"])
 		{
-			/*
-			CAttributeMemo * pMemo = (CAttributeMemo*)[m_pMemoContainer.attributes objectAtIndex:row];
-			if(pMemo && pMemo.stringValue)
-			{
-				pRetNum = UITableViewCellEditingStyleDelete;
-			}
-			*/
 			pRetNum = UITableViewCellEditingStyleDelete;
-			break;
 		}
-		case AddSenior_TableView_Section_Account:
+		else if([pSectionName isEqual:@"银行帐号"])
 		{
-			/*
-			CAttributeString * pAccount = (CAttributeString*)[m_pAccountsContainer.attributes objectAtIndex:row];
-			if(pAccount && pAccount.stringValue)
-			{
-				pRetNum = UITableViewCellEditingStyleDelete;
-			}
-			*/
 			pRetNum = UITableViewCellEditingStyleDelete;
-			break;
 		}
-		case AddSenior_TableView_Section_Certificate:
+		else if([pSectionName isEqual:@"证件"])
 		{
-			//pRetNum = [m_pCertificateContainer.attributes count];
 			pRetNum = UITableViewCellEditingStyleDelete;
-			break;
 		}
-		case AddSenior_TableView_Section_IM:
+		else if([pSectionName isEqual:@"IM帐号"])
 		{
-			//pRetNum = [m_pIMContainer.attributes count];
 			pRetNum = UITableViewCellEditingStyleDelete;
-			break;
 		}
-		case AddSenior_TableView_Section_Relate:
+		else if([pSectionName isEqual:@"相关联系人"])
 		{
-			//pRetNum = [m_pRelateContainer.attributes count];
 			pRetNum = UITableViewCellEditingStyleDelete;
-			break;
 		}
-		case AddSenior_TableView_Section_AddField:
-		{
-			pRetNum = UITableViewCellEditingStyleInsert;
-			break;
-		}
-		default:
-			break;
 	}
 	return pRetNum;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return AddSenior_TableView_Section_Count;
+	//return AddSenior_TableView_Section_Count;
+	return ([m_pSectionArr count] + 1);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	NSInteger pRetNum = 1;
-	
-	switch (section)
+
+	if([m_pSectionArr count] == section)
 	{
-		case AddSenior_TableView_Section_Group:
+		pRetNum = 1;
+	}
+	else
+	{
+		NSString * pSectionName = [m_pSectionArr objectAtIndex:section];
+		
+		if([pSectionName isEqual:@"分组"])
 		{
 			pRetNum = 1;
-			break;
 		}
-		case AddSenior_TableView_Section_Blood:
+		else if([pSectionName isEqual:@"血型"])
 		{
 			pRetNum = 1;
-			break;
 		}
-		case AddSenior_TableView_Section_Recommend:
+		else if([pSectionName isEqual:@"星座"])
 		{
 			pRetNum = 1;
-			break;
 		}
-		case AddSenior_TableView_Section_Constellation:
+		else if([pSectionName isEqual:@"推荐人"])
 		{
 			pRetNum = 1;
-			break;
 		}
-		case AddSenior_TableView_Section_AddField:
-		{
-			pRetNum = 1;
-			break;
-		}
-		case AddSenior_TableView_Section_Memo:
+		else if([pSectionName isEqual:@"纪念日"])
 		{
 			pRetNum = [m_pMemoContainer.attributes count];
-			break;
 		}
-		case AddSenior_TableView_Section_Account:
+		else if([pSectionName isEqual:@"银行帐号"])
 		{
 			pRetNum = [m_pAccountsContainer.attributes count];
-			break;
 		}
-		case AddSenior_TableView_Section_Certificate:
+		else if([pSectionName isEqual:@"证件"])
 		{
 			pRetNum = [m_pCertificateContainer.attributes count];
-			break;
 		}
-		case AddSenior_TableView_Section_IM:
+		else if([pSectionName isEqual:@"IM帐号"])
 		{
 			pRetNum = [m_pIMContainer.attributes count];
-			break;
 		}
-		case AddSenior_TableView_Section_Relate:
+		else if([pSectionName isEqual:@"相关联系人"])
 		{
 			pRetNum = [m_pRelateContainer.attributes count];
-			break;
 		}
-		default:
-			break;
 	}
 	
 	return pRetNum;
@@ -542,95 +566,28 @@ typedef enum
 - (UITableViewCell *)tableView:(UITableView *)tableView 
 		 cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSInteger row = [indexPath row];
+	//NSInteger row = [indexPath row];
 	UITableViewCell *cell = nil;
 	CAttribute      *attr = nil;
 	
-	switch (indexPath.section)
+	if([m_pSectionArr count] == indexPath.section)
 	{
-		case AddSenior_TableView_Section_Group:
+		static NSString* cellIdentifier = @"AddFieldCell";
+		UITableViewCell * cell2 = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+		if (![cell2 isKindOfClass:[UITableViewCell class]])
 		{
-			if (row == 0)
-			{
-				attr = [m_pContainer.attributes objectAtIndex:0];
-			}
-			break;
+			cell2 = [[[CAttributeCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier] autorelease];
+			cell2.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		}
-		case AddSenior_TableView_Section_Blood:
+		if (cell2 != nil)
 		{
-			if (row == 0)
-			{
-				attr = [m_pContainer.attributes objectAtIndex:1];
-			}
-			break;
+			cell2.textLabel.text = @"添加字段";
 		}
-		case AddSenior_TableView_Section_Constellation:
-		{
-			if (row == 0)
-			{
-				attr = [m_pContainer.attributes objectAtIndex:2];
-			}
-			break;
-		}
-		case AddSenior_TableView_Section_Recommend:
-		{
-			if (row == 0)
-			{
-				attr = [m_pContainer.attributes objectAtIndex:3];
-			}
-			break;
-		}
-		case AddSenior_TableView_Section_Memo:
-		{
-			attr = [m_pMemoContainer.attributes objectAtIndex:row];
-			
-			break;
-		}
-		case AddSenior_TableView_Section_Account:
-		{
-			attr = [m_pAccountsContainer.attributes objectAtIndex:row];
-			
-			break;
-		}
-		case AddSenior_TableView_Section_Certificate:
-		{
-			attr = [m_pCertificateContainer.attributes objectAtIndex:row];
-			
-			break;
-		}
-		case AddSenior_TableView_Section_IM:
-		{
-			attr = [m_pIMContainer.attributes objectAtIndex:row];
-			
-			break;
-		}
-		case AddSenior_TableView_Section_Relate:
-		{
-			attr = [m_pRelateContainer.attributes objectAtIndex:row];
-			
-			break;
-		}	
-		case AddSenior_TableView_Section_AddField:
-		{
-			if (row == 0)
-			{
-				static NSString* cellIdentifier = @"AddFieldCell";
-				UITableViewCell * cell2 = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-				if (![cell2 isKindOfClass:[UITableViewCell class]])
-				{
-					cell2 = [[[CAttributeCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier] autorelease];
-					cell2.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
-				}
-				if (cell2 != nil)
-				{
-					cell2.textLabel.text = @"添加字段";
-				}
-				return cell2;
-			}
-			break;
-		}
-		default:
-			break;
+		return cell2;
+	}
+	else
+	{
+		attr = [self getAttribute:indexPath];
 	}
 	
 	cell = [attr cellForTableView:tableView];
@@ -642,10 +599,11 @@ typedef enum
 {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
-	UIViewController *vc = nil;
-	NSInteger row = [indexPath row];
+	UIViewController *vc   = nil;
+	CAttribute       *attr = nil;
+	//NSInteger row = [indexPath row];
 	
-	if(indexPath.section == AddSenior_TableView_Section_AddField)
+	if([m_pSectionArr count] == indexPath.section)
 	{
 		NSLog(@"AddField");
 		
@@ -660,75 +618,9 @@ typedef enum
 		
 		return;
 	}
-	
-	CAttribute *attr = nil;
-	
-	switch (indexPath.section)
+	else
 	{
-		case AddSenior_TableView_Section_Group:
-		{
-			if (row == 0)
-			{
-				attr = [m_pContainer.attributes objectAtIndex:0];
-			}
-			break;
-		}
-		case AddSenior_TableView_Section_Blood:
-		{
-			if (row == 0)
-			{
-				attr = [m_pContainer.attributes objectAtIndex:1];
-			}
-			break;
-		}
-		case AddSenior_TableView_Section_Constellation:
-		{
-			if (row == 0)
-			{
-				attr = [m_pContainer.attributes objectAtIndex:2];
-			}
-			break;
-		}
-		case AddSenior_TableView_Section_Recommend:
-		{
-			if (row == 0)
-			{
-				attr = [m_pContainer.attributes objectAtIndex:3];
-			}
-			break;
-		}
-		case AddSenior_TableView_Section_Memo:
-		{
-			attr = [m_pMemoContainer.attributes objectAtIndex:row];
-			
-			break;
-		}
-		case AddSenior_TableView_Section_Account:
-		{
-			attr = [m_pAccountsContainer.attributes objectAtIndex:row];
-			
-			break;
-		}
-		case AddSenior_TableView_Section_Certificate:
-		{
-			attr = [m_pCertificateContainer.attributes objectAtIndex:row];
-			
-			break;
-		}
-		case AddSenior_TableView_Section_IM:
-		{
-			attr = [m_pIMContainer.attributes objectAtIndex:row];
-			
-			break;
-		}
-		case AddSenior_TableView_Section_Relate:
-		{
-			attr = [m_pRelateContainer.attributes objectAtIndex:row];
-			
-			break;
-		}
-		default:
-			break;
+		attr = [self getAttribute:indexPath];
 	}
 	
 	if (attr)
@@ -740,6 +632,54 @@ typedef enum
 	{
 		[attr Show:vc];
 	}
+}
+
+- (CAttribute*) getAttribute:(NSIndexPath *)indexPath
+{
+	CAttribute       *attr = nil;
+	NSString * pSectionName = [m_pSectionArr objectAtIndex:indexPath.section];
+	NSInteger row = [indexPath row];
+	
+	if(pSectionName == nil)
+		return nil;
+	
+	if([pSectionName isEqual:@"分组"])
+	{
+		attr = [m_pContainer.attributes objectAtIndex:0];
+	}
+	else if([pSectionName isEqual:@"血型"])
+	{
+		attr = [m_pContainer.attributes objectAtIndex:1];
+	}
+	else if([pSectionName isEqual:@"星座"])
+	{
+		attr = [m_pContainer.attributes objectAtIndex:2];
+	}
+	else if([pSectionName isEqual:@"推荐人"])
+	{
+		attr = [m_pContainer.attributes objectAtIndex:3];
+	}
+	else if([pSectionName isEqual:@"纪念日"])
+	{
+		attr = [m_pMemoContainer.attributes objectAtIndex:row];
+	}
+	else if([pSectionName isEqual:@"银行帐号"])
+	{
+		attr = [m_pAccountsContainer.attributes objectAtIndex:row];
+	}
+	else if([pSectionName isEqual:@"证件"])
+	{
+		attr = [m_pCertificateContainer.attributes objectAtIndex:row];
+	}
+	else if([pSectionName isEqual:@"IM帐号"])
+	{
+		attr = [m_pIMContainer.attributes objectAtIndex:row];
+	}
+	else if([pSectionName isEqual:@"相关联系人"])
+	{
+		attr = [m_pRelateContainer.attributes objectAtIndex:row];
+	}
+	return attr;
 }
 
 @end
