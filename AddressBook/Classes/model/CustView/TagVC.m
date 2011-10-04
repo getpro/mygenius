@@ -29,6 +29,7 @@ typedef enum
     [super viewDidLoad];
 	
 	self.navigationItem.title = @"标签";
+	m_pTableView_IB.allowsSelectionDuringEditing = YES;
 	
 	self.navigationItem.rightBarButtonItem = m_pRightEdit;
 	self.navigationItem.leftBarButtonItem  = m_pRightReturn;
@@ -109,10 +110,6 @@ typedef enum
 
 // if you want the entire table to just be re-orderable then just return UITableViewCellEditingStyleNone
 //
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	return UITableViewCellEditingStyleNone;
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -276,6 +273,65 @@ typedef enum
 	[self.navigationController popViewControllerAnimated:YES];
 }
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	UITableViewCellEditingStyle retval = UITableViewCellEditingStyleDelete;
+	NSInteger row = [indexPath row];
+	
+	switch (indexPath.section)
+	{
+		case Tag_TableView_Section_Content:
+		{
+			retval = UITableViewCellEditingStyleNone;
+			break;
+		}
+		case Tag_TableView_Section_Custom:
+		{
+			if (row == [app.m_arrCustomTag count])
+			{
+				retval = UITableViewCellEditingStyleInsert;
+			}
+			else
+			{
+				retval = UITableViewCellEditingStyleDelete;
+			}
+		}
+		default:
+			break;
+	}
+	return retval;
+}
+
+/*
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
+
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) 
+	{
+		NSInteger row = [indexPath row];
+		AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+		
+		if(indexPath.section == Tag_TableView_Section_Custom && row < [app.m_arrCustomTag count])
+		{
+			[app.m_arrCustomTag removeObjectAtIndex:row];
+			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+		}
+    }   
+    //else if (editingStyle == UITableViewCellEditingStyleInsert) 
+	//{
+	//	[self presentAttributeTypeChooser];
+    //}
+}
+
+
 -(IBAction)ReturnItemBtn:  (id)sender
 {
 	[self.navigationController popViewControllerAnimated:YES];
@@ -283,7 +339,39 @@ typedef enum
 
 -(IBAction)EditItemBtn:    (id)sender
 {
+	[self setEditing:YES animated:YES];
+}
+
+-(IBAction)DoneItemBtn:    (id)sender
+{
+	[DataStore removeTags];
 	
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
+	for(NSString * pStr in app.m_arrCustomTag)
+	{
+		[DataStore insertTag:pStr];
+	}
+	
+	[self setEditing:NO animated:YES];
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animate 
+{
+	[super setEditing:editing animated:animate];
+	[m_pTableView_IB setEditing:editing animated:animate];
+	
+	if (editing)
+	{
+		self.navigationItem.rightBarButtonItem = m_pItemDone;
+		//self.navigationItem.leftBarButtonItem  = m_pButtonItemCancel;
+	} 
+	else
+	{
+		self.navigationItem.rightBarButtonItem = m_pRightEdit;
+		//self.navigationItem.leftBarButtonItem  = m_pButtonItemReturn;
+	}
+ 	[m_pTableView_IB reloadData];
 }
 
 @end

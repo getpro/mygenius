@@ -16,7 +16,8 @@
 	IBOutlet UITableView     * m_pTableView_IB;
 	
 	IBOutlet UIBarButtonItem * m_pRightReturn;        //返回
-	IBOutlet UIBarButtonItem * m_pRightEdit;          //完成
+	IBOutlet UIBarButtonItem * m_pRightEdit;          //编辑
+	IBOutlet UIBarButtonItem * m_pItemDone;           //完成
 	
 	Tag_Type				   m_nType;
 	NSArray                  * m_pDateArry;
@@ -34,5 +35,6 @@
 
 -(IBAction)ReturnItemBtn:  (id)sender;
 -(IBAction)EditItemBtn:    (id)sender;
+-(IBAction)DoneItemBtn:    (id)sender;
 
 @end
