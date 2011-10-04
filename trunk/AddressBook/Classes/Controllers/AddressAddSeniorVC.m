@@ -15,17 +15,20 @@
 
 typedef enum 
 {
+	//单项
     AddSenior_TableView_Section_Group,
 	AddSenior_TableView_Section_Blood,
 	AddSenior_TableView_Section_Constellation,
 	AddSenior_TableView_Section_Recommend,
 	
+	//多项
 	AddSenior_TableView_Section_Memo,
 	AddSenior_TableView_Section_IM,
 	AddSenior_TableView_Section_Account,
 	AddSenior_TableView_Section_Certificate,
 	AddSenior_TableView_Section_Relate,
 	
+	//添加
 	AddSenior_TableView_Section_AddField,
 	
 	AddSenior_TableView_Section_Count
@@ -328,27 +331,139 @@ typedef enum
 
 #pragma mark - UITableView delegates
 
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+	//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	NSInteger row = [indexPath row];
+	
+    if (editingStyle == UITableViewCellEditingStyleDelete) 
+	{
+		switch (indexPath.section)
+		{
+			case AddSenior_TableView_Section_Memo:
+			{
+				[m_pMemoContainer.attributes removeObjectAtIndex:row];
+				break;
+			}
+			case AddSenior_TableView_Section_Account:
+			{
+				[m_pAccountsContainer.attributes removeObjectAtIndex:row];
+				break;
+			}
+			case AddSenior_TableView_Section_Certificate:
+			{
+				[m_pCertificateContainer.attributes removeObjectAtIndex:row];
+				break;
+			}
+			case AddSenior_TableView_Section_IM:
+			{
+				[m_pIMContainer.attributes removeObjectAtIndex:row];
+				break;
+			}
+			case AddSenior_TableView_Section_Relate:
+			{
+				[m_pRelateContainer.attributes removeObjectAtIndex:row];
+				break;
+			}
+			default:
+				break;
+		}
+		
+		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }   
+    //else if (editingStyle == UITableViewCellEditingStyleInsert) 
+	//{
+	//	[self presentAttributeTypeChooser];
+    //}
+}
+
 // if you want the entire table to just be re-orderable then just return UITableViewCellEditingStyleNone
 //
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-	if(indexPath.section == AddSenior_TableView_Section_AddField)
-		return UITableViewCellEditingStyleInsert;
+	UITableViewCellEditingStyle pRetNum = UITableViewCellEditingStyleNone;
+	//NSInteger row = [indexPath row];
 	
-	return UITableViewCellEditingStyleNone;
+	switch (indexPath.section)
+	{
+		case AddSenior_TableView_Section_Group:
+		{
+			pRetNum = UITableViewCellEditingStyleNone;
+			break;
+		}
+		case AddSenior_TableView_Section_Blood:
+		{
+			pRetNum = UITableViewCellEditingStyleNone;
+			break;
+		}
+		case AddSenior_TableView_Section_Recommend:
+		{
+			pRetNum = UITableViewCellEditingStyleNone;
+			break;
+		}
+		case AddSenior_TableView_Section_Constellation:
+		{
+			pRetNum = UITableViewCellEditingStyleNone;
+			break;
+		}
+		case AddSenior_TableView_Section_Memo:
+		{
+			/*
+			CAttributeMemo * pMemo = (CAttributeMemo*)[m_pMemoContainer.attributes objectAtIndex:row];
+			if(pMemo && pMemo.stringValue)
+			{
+				pRetNum = UITableViewCellEditingStyleDelete;
+			}
+			*/
+			pRetNum = UITableViewCellEditingStyleDelete;
+			break;
+		}
+		case AddSenior_TableView_Section_Account:
+		{
+			/*
+			CAttributeString * pAccount = (CAttributeString*)[m_pAccountsContainer.attributes objectAtIndex:row];
+			if(pAccount && pAccount.stringValue)
+			{
+				pRetNum = UITableViewCellEditingStyleDelete;
+			}
+			*/
+			pRetNum = UITableViewCellEditingStyleDelete;
+			break;
+		}
+		case AddSenior_TableView_Section_Certificate:
+		{
+			//pRetNum = [m_pCertificateContainer.attributes count];
+			pRetNum = UITableViewCellEditingStyleDelete;
+			break;
+		}
+		case AddSenior_TableView_Section_IM:
+		{
+			//pRetNum = [m_pIMContainer.attributes count];
+			pRetNum = UITableViewCellEditingStyleDelete;
+			break;
+		}
+		case AddSenior_TableView_Section_Relate:
+		{
+			//pRetNum = [m_pRelateContainer.attributes count];
+			pRetNum = UITableViewCellEditingStyleDelete;
+			break;
+		}
+		case AddSenior_TableView_Section_AddField:
+		{
+			pRetNum = UITableViewCellEditingStyleInsert;
+			break;
+		}
+		default:
+			break;
+	}
+	return pRetNum;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 	return AddSenior_TableView_Section_Count;
 }
-
-/*
- - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
- {
- 
- }
- */
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

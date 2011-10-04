@@ -47,6 +47,8 @@
 	// Get the default calendar from store.
 	self.defaultCalendar = [self.eventStore defaultCalendarForNewEvents];
 	
+	//NSArray * p = [self.eventStore calendars];
+	
 	//self.navigationController.delegate = self;
 	
 	// Fetch today's event on selected calendar and put them into the eventsList array
@@ -123,6 +125,7 @@
 	
 	// Create the predicate. Pass it the default calendar.
 	NSArray *calendarArray = [NSArray arrayWithObject:defaultCalendar];
+	
 	NSPredicate *predicate = [self.eventStore predicateForEventsWithStartDate:startDate endDate:endDate 
 																	calendars:calendarArray]; 
 	
