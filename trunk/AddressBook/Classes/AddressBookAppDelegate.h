@@ -81,6 +81,8 @@ ABAddressBookRef addressBook;
 */
 + (AddressBookAppDelegate * ) getAppDelegate;
 
+- (void)setBottomHiden:(BOOL)pHiden;
+
 - (NSString *)pathForTemporaryFileWithPrefix:(NSString *)prefix;
 - (NSURL *)smartURLForString:(NSString *)str;
 - (void)didStartNetworking;

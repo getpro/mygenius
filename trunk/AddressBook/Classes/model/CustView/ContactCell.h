@@ -17,11 +17,21 @@ extern NSString *KContactCell_ID;
 	UIImageView * m_pHead; //头像
 	
 	UILabel     * m_pName; //名字
+	
+	UIImageView * m_pMove;
+	UIImageView * m_pCheckSelect;
+	UIImageView * m_pCheck;
+	
+	BOOL m_IsSelect;
 }
 
 @property (nonatomic,assign) NSInteger m_nOffSet;
+@property (nonatomic,assign) BOOL m_IsSelect;
 
 @property (nonatomic,retain) UIImageView * m_pHead;
 @property (nonatomic,retain) UILabel     * m_pName;
+
+- (void) setOffSet:(BOOL)pHasOffSet;
+- (void) setSelect:(BOOL)pSelect;
 
 @end

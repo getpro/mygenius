@@ -41,6 +41,56 @@
 @synthesize contactNameDic;
 @synthesize sectionArray;
 
+-(void)GetPressed:(id)sender
+{
+	NSString * pStr = (NSString*)sender;
+	switch ([pStr intValue]) 
+	{
+		case 0:
+		{
+			//移动组
+		}
+			break;
+		case 1:
+		{
+			//删除
+		}
+			break;
+		case 2:
+		{
+			//取消
+			isLongPress = NO;
+			[m_pCheckBox removeFromSuperview];
+			[m_pTableView_IB reloadData];
+		}
+			break;
+		default:
+			break;
+	}
+}
+
+- (void)LongPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+	NSLog(@"LongPress");
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
+    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) 
+	{
+        NSLog(@"LongPressBegin");
+		
+    }
+	else if ([gestureRecognizer state] == UIGestureRecognizerStateEnded)
+	{
+		NSLog(@"LongPressEnd");
+		isLongPress = YES;
+		//[app setBottomHiden:YES];
+		
+		[app.window addSubview:m_pCheckBox];
+		
+		[m_pTableView_IB reloadData];
+	}
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -76,6 +126,17 @@
 	//隐藏滚动条
 	m_pScrollView_IB.showsVerticalScrollIndicator   = NO;
 	m_pScrollView_IB.showsHorizontalScrollIndicator = NO;
+	
+	UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(LongPress:)];
+	
+    [m_pTableView_IB addGestureRecognizer:longPressGesture];
+	
+    [longPressGesture release];
+	
+	m_pCheckBox = [[CheckBox alloc] initWithFrame:CGRectMake(0,424,320,56)];
+	m_pCheckBox.Target   = self;
+	m_pCheckBox.Selector = @selector(GetPressed:);
+	
 }
 
 -(void)LoadGroup
@@ -237,6 +298,8 @@
 	[sectionArray	  release];
 	[sectionName      release];
 	
+	[m_pCheckBox      release];
+	
     [super dealloc];
 }
 
@@ -245,6 +308,9 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)asearchBar
 {
 	NSLog(@"searchBarTextDidBeginEditing");
+	
+	isLongPress = NO;
+	[m_pCheckBox removeFromSuperview];
 	
 	self.m_pSearchBar.prompt = @"输入字母或汉字搜索";
 	[self.m_pTableView_IB setFrame:CGRectMake(0,TABLEVIEW_Y,TABLEVIEW_W + TABLEVIEW_X,TABLEVIEW_H)];
@@ -288,6 +354,8 @@
 {
 	NSLog(@"searchBarTextDidEndEditing");
 	
+	//这里有问题
+	/*
 	[self.m_pSearchBar setText:@""];
 	self.m_pSearchBar.prompt = nil;
 	[self.m_pSearchBar setFrame:CGRectMake(TABLEVIEW_X, 0, TABLEVIEW_W, SEARCH_BAR_H)];
@@ -297,6 +365,7 @@
 	
 	[m_pScrollView_IB setHidden:NO];
 	[m_pImageView_IB  setHidden:NO];
+	*/
 }
 
 #pragma mark TableView methods
@@ -304,11 +373,11 @@
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	//NSLog(@"cellForRowAtIndexPath");
-	
 	UITableViewCellStyle style =  UITableViewCellStyleSubtitle;
-	ContactCell *cell = (ContactCell*)[aTableView dequeueReusableCellWithIdentifier:KContactCell_ID];
+	
+	ContactCell * cell = (ContactCell*)[aTableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"%@_%d_%d",KContactCell_ID,indexPath.section,indexPath.row]];
 	if (!cell)
-		cell = [[[ContactCell alloc] initWithStyle:style reuseIdentifier:KContactCell_ID] autorelease];
+	cell = [[[ContactCell alloc] initWithStyle:style reuseIdentifier:[NSString stringWithFormat:@"%@_%d_%d",KContactCell_ID,indexPath.section,indexPath.row]] autorelease];
 	
 	ABContact *contact = nil;
 	
@@ -329,6 +398,14 @@
 		cell.m_pHead.image = [UIImage imageNamed:@"head.png"];
 	}
 
+	if(isLongPress)
+	{
+		[cell setOffSet:YES];
+	}
+	else
+	{
+		[cell setOffSet:NO];
+	}
 	
 	
 	/*
@@ -364,14 +441,31 @@
 	else
 		contact = [self.filteredArray objectAtIndex:indexPath.row];
 	
-	AddressPreInfoVC * pAddressPreInfoVC = [[AddressPreInfoVC alloc] init];
-	pAddressPreInfoVC.m_pContact = contact;
-	
-	[self.navigationController pushViewController:pAddressPreInfoVC animated:YES];
-	 
-	[pAddressPreInfoVC release];
+	if(isLongPress)
+	{
+		if (aTableView == self.m_pTableView_IB)
+		{
+			ContactCell  *cell = (ContactCell*)[self.m_pTableView_IB cellForRowAtIndexPath:indexPath];
+			if(cell.m_IsSelect)
+			{
+				[cell setSelect:NO];
+			}
+			else
+			{
+				[cell setSelect:YES];
+			}
+		}
+	}
+	else
+	{
+		AddressPreInfoVC * pAddressPreInfoVC = [[AddressPreInfoVC alloc] init];
+		pAddressPreInfoVC.m_pContact = contact;
+		
+		[self.navigationController pushViewController:pAddressPreInfoVC animated:YES];
+		
+		[pAddressPreInfoVC release];
+	}
 }
-
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)aTableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -380,7 +474,7 @@
 	
 	if(aTableView == self.m_pTableView_IB)
 		// Return NO if you do not want the specified item to be editable.
-		return YES;
+		return NO;
 	else
 		return NO;
 }
@@ -732,13 +826,12 @@ ABRecordRef GRecord;
 		if(pGroup.tag == pIndex)
 		{
 			[pGroup SetHidden:NO];
+			[self initData:pIndex];
 		}
 		else 
 		{
 			[pGroup SetHidden:YES];
 		}
-		
-		[self initData:pIndex];
 	}
 }
 
@@ -763,6 +856,8 @@ ABRecordRef GRecord;
 			
 			[app.m_arrGroup addObject:pNew];
 		}
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"changeAddress" object:nil];
 		
 		[self LoadGroup];
 	}

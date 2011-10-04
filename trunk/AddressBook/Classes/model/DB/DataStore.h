@@ -149,5 +149,8 @@ typedef enum
 +(NSArray*)getRelate:(ABRecordID)pRecordID;
 +(void)removeAllRelate:(ABRecordID)pRecordID;
 
+//标签
++(void)insertTag:(NSString*)pLabel;
++(NSArray*)getTags;
 
 @end

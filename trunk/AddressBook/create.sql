@@ -125,8 +125,7 @@ CREATE TABLE certificate_info(
 );
 
 CREATE TABLE tag_info(
-'tag_id'TEXT PRIMARY KEY,
-'tag_name'TEXT NOT NULL,
+'tag_name'TEXT PRIMARY KEY,
 'tag_type'TEXT NOT NULL,
 'tag_creation'INTEGER NOT NULL,
 'tag_modification'INTEGER NOT NULL

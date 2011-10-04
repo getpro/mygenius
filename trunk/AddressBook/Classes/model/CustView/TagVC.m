@@ -33,7 +33,7 @@ typedef enum
 	self.navigationItem.rightBarButtonItem = m_pRightEdit;
 	self.navigationItem.leftBarButtonItem  = m_pRightReturn;
 	
-	switch (m_nType) 
+	switch (m_nType)
 	{
 		case Tag_Type_None:
 		{
@@ -218,6 +218,21 @@ typedef enum
 	if(pStr)
 	{
 		NSLog(@"NewGroupName[%@]",pStr);
+		AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+		
+		for(NSString * pTag in app.m_arrCustomTag)
+		{
+			if([pTag isEqual:pStr])
+			{
+				return;
+			}
+		}
+		
+		[app.m_arrCustomTag addObject:pStr];
+		
+		[DataStore insertTag:pStr];
+		
+		[m_pTableView_IB reloadData];
 	}
 }
 
@@ -242,6 +257,7 @@ typedef enum
 			if (row == [app.m_arrCustomTag count])
 			{
 				[self GreateNewGroup];
+				return;
 			}
 			else
 			{

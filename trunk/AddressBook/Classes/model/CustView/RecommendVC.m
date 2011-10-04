@@ -14,13 +14,14 @@
 @synthesize m_pTableView_IB;
 @synthesize Target;
 @synthesize Selector;
+@synthesize m_pReturn;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
 	
-	
+	self.navigationItem.leftBarButtonItem  = m_pReturn;
 	
 }
 
@@ -50,6 +51,7 @@
 - (void)dealloc 
 {
 	[m_pTableView_IB release];
+	[m_pReturn       release];
 	
     [super dealloc];
 }
@@ -137,6 +139,11 @@
 		[Target performSelector:Selector withObject:pABContact];
 	}
 	
+	[self.navigationController popViewControllerAnimated:YES];
+}
+
+-(IBAction)ReturnItemBtn:  (id)sender
+{
 	[self.navigationController popViewControllerAnimated:YES];
 }
 

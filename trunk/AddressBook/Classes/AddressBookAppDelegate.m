@@ -48,10 +48,10 @@
 	m_arrCustomTag      = [[NSMutableArray alloc] initWithCapacity:10];
 	m_arrContactData    = [[NSMutableArray alloc] initWithCapacity:10];
 	
-	//test
-	[m_arrCustomTag addObject:@"自定义1"];
-	[m_arrCustomTag addObject:@"自定义2"];
-	[m_arrCustomTag addObject:@"自定义3"];
+	for(NSString * pStr in [DataStore getTags])
+	{
+		[m_arrCustomTag addObject:pStr];
+	}
 
 	//Group
 	NSArray * groups = [ABContactsHelper groups];
@@ -323,6 +323,13 @@
 +(AddressBookAppDelegate*)getAppDelegate
 {
     return (AddressBookAppDelegate*)[UIApplication sharedApplication].delegate;
+}
+
+- (void)setBottomHiden:(BOOL)pHiden
+{
+	//for(UIView * pView in tbController.viewControllers)
+	
+	//[pView setHidden:pHiden];
 }
 
 - (NSURL *)smartURLForString:(NSString *)str

@@ -13,6 +13,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 
 #import "GroupItemView.h"
+#import "CheckBox.h"
 
 @interface AddressBookVC : UIViewController  
 <
@@ -39,7 +40,9 @@ GroupItemViewDelegate
 	NSArray				*contacts;           //ContactData系统通讯录的数组的索引(成员是ABContact)
 	NSString			*sectionName;
 	
-	BOOL isSearch, isEdit, isGroup;
+	BOOL isSearch, isEdit, isGroup,isLongPress;
+	
+	CheckBox * m_pCheckBox;
 }
 
 @property (retain,nonatomic) UISearchDisplayController * m_pSearchDC;
