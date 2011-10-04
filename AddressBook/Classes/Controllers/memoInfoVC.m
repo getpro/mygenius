@@ -11,8 +11,6 @@
 
 @implementation memoInfoVC
 
-@synthesize m_pCustomDatePicker;
-
 typedef enum
 {
 	EViewInMemo_Subject = 1,
@@ -23,31 +21,6 @@ typedef enum
 }EViewInMemo;
 
 @synthesize m_pUIScrollView_IB;
-
-
-//响应UIDatePicker事件
--(void)DonePressed:(id)sender
-{
-	[self SetDat];
-	[m_pCustomDatePicker setHidden:YES];
-}
--(void)CancelPressed:(id)sender
-{
-	[m_pCustomDatePicker setHidden:YES];
-}
-
-
-//响应日期Pressed事件
--(void)DatePressed:(id)sender
-{
-	[m_pCustomDatePicker setHidden:NO];
-}
-
-//响应提醒Pressed事件
--(void)RemindPressed:(id)sender
-{
-	
-}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
@@ -65,14 +38,6 @@ typedef enum
 
 	/////
 	[m_pUIScrollView_IB setContentSize:CGSizeMake(SCREEN_W, frame.origin.y)];
-	
-	CGRect pRectCustomDatePicker = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
-	m_pCustomDatePicker = [[CustomDatePicker alloc]initWithFrame:pRectCustomDatePicker target:self actionCancel:@selector(CancelPressed:) actionDone:@selector(DonePressed:)];
-	
-	[m_pCustomDatePicker setHidden:YES];
-	
-	[self.view addSubview:m_pCustomDatePicker];
-	
 }
 
 
@@ -101,7 +66,6 @@ typedef enum
 - (void)dealloc 
 {
 	[m_pUIScrollView_IB  release];
-	[m_pCustomDatePicker release];
 	
     [super dealloc];
 }

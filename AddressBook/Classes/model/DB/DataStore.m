@@ -1180,4 +1180,45 @@
 	return retArray;
 }
 
++(void)insertTag:(NSString*)pLabel
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"INSERT INTO tag_info VALUES(?,?,?,?)"];
+	
+	[stmt bindString:pLabel  								        forIndex:1];//1.name
+	[stmt bindString:[NSString stringWithFormat:@"%d",0]	        forIndex:2];//2.type
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:3];//3.creation
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:4];//4.modification
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
++(NSArray*)getTags
+{
+	NSMutableArray *retArray = [[[NSMutableArray alloc] init] autorelease];
+	
+	Statement * stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"SELECT tag_name FROM tag_info"];
+	
+	NSInteger count = 0;
+	
+	while ([stmt step] == SQLITE_ROW)
+	{
+		NSString * pLabel           = [NSString stringWithFormat:@"%@", [stmt getString:0]];
+		
+		[retArray addObject:pLabel];
+		
+		count++;
+	}
+	
+	[stmt reset];
+	
+	return retArray;
+}
+
 @end

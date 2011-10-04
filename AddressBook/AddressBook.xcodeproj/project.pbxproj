@@ -84,6 +84,15 @@
 		21D25786142B889700306515 /* synchronous.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D25780142B889700306515 /* synchronous.png */; };
 		21D25787142B889700306515 /* synchronous_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 21D25781142B889700306515 /* synchronous_hover.png */; };
 		21E206ED1430CB8B00DE2CDB /* CAttributeRecommend.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E206EC1430CB8B00DE2CDB /* CAttributeRecommend.m */; };
+		21E27DBF143AB20D00A3F124 /* btn_3black.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E27DBA143AB20D00A3F124 /* btn_3black.png */; };
+		21E27DC0143AB20D00A3F124 /* btn_3blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E27DBB143AB20D00A3F124 /* btn_3blue.png */; };
+		21E27DC1143AB20D00A3F124 /* btn_3hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E27DBC143AB20D00A3F124 /* btn_3hover.png */; };
+		21E27DC2143AB20D00A3F124 /* btn_3red.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E27DBD143AB20D00A3F124 /* btn_3red.png */; };
+		21E27DC3143AB20D00A3F124 /* index_checkBox_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E27DBE143AB20D00A3F124 /* index_checkBox_bg.png */; };
+		21E27DC6143AB23D00A3F124 /* CheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E27DC5143AB23D00A3F124 /* CheckBox.m */; };
+		21E27E3E143AD27C00A3F124 /* checkBox_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E27E3B143AD27C00A3F124 /* checkBox_hover.png */; };
+		21E27E3F143AD27C00A3F124 /* checkBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E27E3C143AD27C00A3F124 /* checkBox.png */; };
+		21E27E40143AD27C00A3F124 /* move.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E27E3D143AD27C00A3F124 /* move.png */; };
 		21E5AE00141DEE6C00B5EBA5 /* leftBar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E5ADFD141DEE6C00B5EBA5 /* leftBar_bg.png */; };
 		21E5AE01141DEE6C00B5EBA5 /* leftBar_group_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E5ADFE141DEE6C00B5EBA5 /* leftBar_group_bg.png */; };
 		21E5AE02141DEE6C00B5EBA5 /* leftBar_group_number.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E5ADFF141DEE6C00B5EBA5 /* leftBar_group_number.png */; };
@@ -226,6 +235,16 @@
 		21D25781142B889700306515 /* synchronous_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = synchronous_hover.png; sourceTree = "<group>"; };
 		21E206EB1430CB8B00DE2CDB /* CAttributeRecommend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAttributeRecommend.h; sourceTree = "<group>"; };
 		21E206EC1430CB8B00DE2CDB /* CAttributeRecommend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAttributeRecommend.m; sourceTree = "<group>"; };
+		21E27DBA143AB20D00A3F124 /* btn_3black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_3black.png; sourceTree = "<group>"; };
+		21E27DBB143AB20D00A3F124 /* btn_3blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_3blue.png; sourceTree = "<group>"; };
+		21E27DBC143AB20D00A3F124 /* btn_3hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_3hover.png; sourceTree = "<group>"; };
+		21E27DBD143AB20D00A3F124 /* btn_3red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_3red.png; sourceTree = "<group>"; };
+		21E27DBE143AB20D00A3F124 /* index_checkBox_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = index_checkBox_bg.png; sourceTree = "<group>"; };
+		21E27DC4143AB23D00A3F124 /* CheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBox.h; sourceTree = "<group>"; };
+		21E27DC5143AB23D00A3F124 /* CheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBox.m; sourceTree = "<group>"; };
+		21E27E3B143AD27C00A3F124 /* checkBox_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkBox_hover.png; sourceTree = "<group>"; };
+		21E27E3C143AD27C00A3F124 /* checkBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkBox.png; sourceTree = "<group>"; };
+		21E27E3D143AD27C00A3F124 /* move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = move.png; sourceTree = "<group>"; };
 		21E5ADFD141DEE6C00B5EBA5 /* leftBar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftBar_bg.png; sourceTree = "<group>"; };
 		21E5ADFE141DEE6C00B5EBA5 /* leftBar_group_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftBar_group_bg.png; sourceTree = "<group>"; };
 		21E5ADFF141DEE6C00B5EBA5 /* leftBar_group_number.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftBar_group_number.png; sourceTree = "<group>"; };
@@ -335,6 +354,14 @@
 		218738F9141B6C52007D64B4 /* addressbook */ = {
 			isa = PBXGroup;
 			children = (
+				21E27E3B143AD27C00A3F124 /* checkBox_hover.png */,
+				21E27E3C143AD27C00A3F124 /* checkBox.png */,
+				21E27E3D143AD27C00A3F124 /* move.png */,
+				21E27DBA143AB20D00A3F124 /* btn_3black.png */,
+				21E27DBB143AB20D00A3F124 /* btn_3blue.png */,
+				21E27DBC143AB20D00A3F124 /* btn_3hover.png */,
+				21E27DBD143AB20D00A3F124 /* btn_3red.png */,
+				21E27DBE143AB20D00A3F124 /* index_checkBox_bg.png */,
 				210878341424F34B00159CC2 /* head_big.png */,
 				210878351424F34B00159CC2 /* head.png */,
 				21E5ADFD141DEE6C00B5EBA5 /* leftBar_bg.png */,
@@ -510,6 +537,8 @@
 				21C9426414395A0A00EE7AAC /* Memo.h */,
 				21C9426514395A0A00EE7AAC /* Memo.m */,
 				21C9426614395A0A00EE7AAC /* Memo.xib */,
+				21E27DC4143AB23D00A3F124 /* CheckBox.h */,
+				21E27DC5143AB23D00A3F124 /* CheckBox.m */,
 				21C941E7143951FB00EE7AAC /* RecommendVC.h */,
 				21C941E8143951FB00EE7AAC /* RecommendVC.m */,
 				21C941E9143951FB00EE7AAC /* RecommendVC.xib */,
@@ -713,6 +742,14 @@
 				21BCEC62142F612A00FB27BE /* AddFieldVC.xib in Resources */,
 				21C941EB143951FB00EE7AAC /* RecommendVC.xib in Resources */,
 				21C9426814395A0A00EE7AAC /* Memo.xib in Resources */,
+				21E27DBF143AB20D00A3F124 /* btn_3black.png in Resources */,
+				21E27DC0143AB20D00A3F124 /* btn_3blue.png in Resources */,
+				21E27DC1143AB20D00A3F124 /* btn_3hover.png in Resources */,
+				21E27DC2143AB20D00A3F124 /* btn_3red.png in Resources */,
+				21E27DC3143AB20D00A3F124 /* index_checkBox_bg.png in Resources */,
+				21E27E3E143AD27C00A3F124 /* checkBox_hover.png in Resources */,
+				21E27E3F143AD27C00A3F124 /* checkBox.png in Resources */,
+				21E27E40143AD27C00A3F124 /* move.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -773,6 +810,7 @@
 				21C9426714395A0A00EE7AAC /* Memo.m in Sources */,
 				216F72E21439D05100174368 /* TagCell.m in Sources */,
 				216F73101439D1C500174368 /* CAttributeRelate.m in Sources */,
+				21E27DC6143AB23D00A3F124 /* CheckBox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
