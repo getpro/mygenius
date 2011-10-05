@@ -11,8 +11,6 @@
 
 @implementation memoVC
 
-@synthesize m_pSearchDC;
-@synthesize m_pSearchBar;
 @synthesize m_pTableView_IB;
 @synthesize m_pRightAdd;
 
@@ -25,19 +23,6 @@
 	
 	self.navigationItem.title = @"备忘录";
 	self.navigationItem.rightBarButtonItem = m_pRightAdd;
-	
-	// Create a search bar
-	self.m_pSearchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 44.0f)] autorelease];
-	self.m_pSearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-	self.m_pSearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-	self.m_pSearchBar.keyboardType = UIKeyboardTypeDefault;
-	self.m_pSearchBar.delegate = self;
-	self.m_pTableView_IB.tableHeaderView = self.m_pSearchBar;
-	
-	// Create the search display controller
-	self.m_pSearchDC = [[[UISearchDisplayController alloc] initWithSearchBar:self.m_pSearchBar contentsController:self] autorelease];
-	self.m_pSearchDC.searchResultsDataSource = self;
-	self.m_pSearchDC.searchResultsDelegate = self;
 	
 	// Initialize an event store object with the init method. Initilize the array for events.
 	self.eventStore = [[EKEventStore alloc] init];
@@ -83,10 +68,8 @@
 }
 
 
-- (void)dealloc 
+- (void)dealloc
 {
-	[m_pSearchDC     release];
-	[m_pSearchBar    release];
 	[m_pTableView_IB release];
 	[m_pRightAdd     release];
 	
@@ -117,11 +100,19 @@
 
 // Fetching events happening in the next 24 hours with a predicate, limiting to the default calendar 
 - (NSArray *)fetchEventsForToday 
-{	
-	NSDate *startDate = [NSDate date];
+{
+	NSDate *NowDate = [NSDate date];
+    NSDateFormatter* indateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    //[dateFormatter setTimeStyle:NSDateFormatterFullStyle];
+    [indateFormatter setDateFormat:@"yyyy-MM-dd"];
+	
+	NSString *dateStr = [indateFormatter stringFromDate:NowDate];
+	
+    NSDate* startDate = [indateFormatter dateFromString:dateStr];
 	
 	// endDate is 1 day = 60*60*24 seconds = 86400 seconds from startDate
-	NSDate *endDate = [NSDate dateWithTimeIntervalSinceNow:86400];
+	NSDate *endDate = [NSDate dateWithTimeInterval:86400 sinceDate:startDate];
+	//NSDate *endDate = [NSDate distantFuture];
 	
 	// Create the predicate. Pass it the default calendar.
 	NSArray *calendarArray = [NSArray arrayWithObject:defaultCalendar];
@@ -141,20 +132,6 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	
-}
-
-
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)asearchBar
-{
-	self.m_pSearchBar.prompt = @"输入字母或汉字搜索";
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
-{
-	[self.m_pSearchBar setText:@""]; 
-	self.m_pSearchBar.prompt = nil;
-	[self.m_pSearchBar setFrame:CGRectMake(0.0f, 0.0f, 320.0f, 44.0f)];
-	self.m_pTableView_IB.tableHeaderView = self.m_pSearchBar;	
 }
 
 #pragma mark -
@@ -192,7 +169,8 @@
 #pragma mark -
 #pragma mark Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {	
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+{	
 	// Upon selecting an event, create an EKEventViewController to display the event.
 	self.detailViewController = [[EKEventViewController alloc] initWithNibName:nil bundle:nil];			
 	detailViewController.event = [self.eventsList objectAtIndex:indexPath.row];
@@ -295,3 +273,23 @@
 }
 
 @end
+
+/*
+
+ 下面是一段通过日期推算星期的代码
+ 
+ NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+ [inputFormatter setDateFormat:@"yyyy-MM-dd 'at' HH:mm"];
+ 
+ NSDate *formatterDate = [inputFormatter dateFromString:@"1999-07-11 at 10:30"];
+ 
+ NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+ [outputFormatter setDateFormat:@"HH:mm 'on' EEEE MMMM d"];
+ 
+ NSString *newDateString = [outputFormatter stringFromDate:formatterDate];
+ 
+ NSLog(@"newDateString %@", newDateString);
+ // For US English, the output is:
+ // newDateString 10:30 on Sunday July 11 
+ 
+*/
