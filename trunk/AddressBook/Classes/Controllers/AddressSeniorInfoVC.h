@@ -34,6 +34,8 @@
 	CAttributeContainer      * m_pAccountsContainer;
 	CAttributeContainer      * m_pCertificateContainer;
 	CAttributeContainer      * m_pRelateContainer;
+	
+	NSMutableArray           * m_pSectionArr;
 }
 
 @property (retain,nonatomic) IBOutlet UITableView * m_pTableView_IB;
@@ -50,6 +52,7 @@
 -(IBAction)editItemBtn:    (id)sender;
 
 //加载数据
--(void)LoadAttribute;
+-(void)LoadAttribute:(BOOL)pEditing;
+-(CAttribute*)getAttribute:(NSIndexPath *)indexPath;
 
 @end

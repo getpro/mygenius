@@ -32,3 +32,29 @@
 }
 
 @end
+
+
+
+@implementation date_info
+
+@synthesize m_nDate;
+@synthesize m_pLabel;
+@synthesize m_nRemind;
+
+- (id)init
+{
+    if ((self = [super init]))
+	{
+		m_pLabel		    = nil;
+	}
+	return self;
+}
+
+- (void)dealloc
+{
+	[m_pLabel	release];
+	
+    [super dealloc];
+}
+
+@end

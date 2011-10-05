@@ -577,6 +577,43 @@
 	[stmt release];
 }
 
++(NSArray*)getDates:(ABRecordID)pRecordID:(NSInteger)pType
+{
+	NSMutableArray *retArray = [[[NSMutableArray alloc] init] autorelease];
+	
+	Statement * stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"SELECT date_time,date_label,date_remind FROM date_info WHERE contacts_id = ? AND date_type = ?"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	[stmt bindString:[NSString stringWithFormat:@"%d",pType]	    forIndex:2];//2.type
+	
+	NSInteger count = 0;
+	
+	while ([stmt step] == SQLITE_ROW)
+	{
+		NSInteger  pDate		    = [stmt getInt32: 0];//date_time
+		NSString * pLabel           = [stmt getString:1];//date_label
+		NSString * pRemind          = [stmt getString:2];//date_remind
+		
+		date_info * pDate_info = [[date_info alloc]init];
+		
+		pDate_info.m_nDate		    	 = pDate;
+		pDate_info.m_pLabel		         = pLabel;
+		pDate_info.m_nRemind             = [pRemind intValue];
+		
+		[retArray addObject:pDate_info];
+		
+		[pDate_info release];
+		
+		count++;
+	}
+	
+	[stmt reset];
+	
+	return retArray;
+}
+
 +(void)insertInstantMessage:(ABRecordID)pRecordID:(NSString*)pUsername:(NSString*)pService:(NSString*)pLabel:(NSInteger)pIndex:(NSInteger)pType
 {
 	Statement* stmt = nil;
