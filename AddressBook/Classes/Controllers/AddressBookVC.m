@@ -15,7 +15,7 @@
 #import "AddressPreInfoVC.h"
 #import "AddressAddSeniorVC.h"
 #import "ABContactsHelper.h"
-#import "CustomPicker.h"
+
 
 @implementation AddressBookVC
 
@@ -41,6 +41,24 @@
 @synthesize contactNameDic;
 @synthesize sectionArray;
 
+-(void)getGroupResult:(id)index
+{
+	NSString * pIndex = (NSString*)index;
+	
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	ABGroup * pGroup = [app.m_arrGroup objectAtIndex:[pIndex intValue]];
+	
+	if(pGroup)
+	{
+		NSLog(@"Group[%@]",pGroup.name);
+		if([ModalAlert ask:@"是否确认移动分组?" withCancel:@"取消" withButtons:nil])
+		{
+			
+		}
+	}
+	
+}
+
 -(void)GetPressed:(id)sender
 {
 	NSString * pStr = (NSString*)sender;
@@ -48,12 +66,51 @@
 	{
 		case 0:
 		{
+			AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+			
 			//移动组
+			NSMutableArray * DateArry = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];
+			
+			for(int i = 0; i < [app.m_arrGroup count]; i++)
+			{
+				ABGroup * pGroup = [app.m_arrGroup objectAtIndex:(i)];
+				[DateArry addObject:pGroup.name];
+			}
+			
+			m_pGroupPicker.sourceArray = DateArry;
+			[app.window addSubview:m_pGroupPicker];
+			
 		}
 			break;
 		case 1:
 		{
 			//删除
+			if([ModalAlert ask:@"是否确认删除?" withCancel:@"取消" withButtons:nil])
+			{
+				ABContact *contact = nil;
+				
+				for(int pSection = 0;pSection < [self.sectionArray count];pSection++)
+				{
+					for(int pRow = 0;pRow < [[self.sectionArray objectAtIndex:pSection] count];pRow++)
+					{
+						NSIndexPath * indexPath = [NSIndexPath indexPathForRow:pRow inSection:pSection];
+						ContactCell  *cell = (ContactCell*)[self.m_pTableView_IB cellForRowAtIndexPath:indexPath];
+						
+						if(cell && cell.m_IsSelect)
+						{
+							contact = [[self.sectionArray objectAtIndex:pSection] objectAtIndex:pRow];
+							if(contact && [ContactData removeSelfFromAddressBook:contact.record])
+							{
+								[DataStore RemoveContact:contact.record];
+							}
+						}
+					}
+				}	
+				
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"changeAddress" object:nil];
+				
+				[self initData:m_nGroupIndex];
+			}
 		}
 			break;
 		case 2:
@@ -137,6 +194,10 @@
 	m_pCheckBox.Target   = self;
 	m_pCheckBox.Selector = @selector(GetPressed:);
 	
+	m_pGroupPicker = [[CustomPicker alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
+	m_pGroupPicker.Target   = self;
+	m_pGroupPicker.Selector = @selector(getGroupResult:);
+	
 }
 
 -(void)LoadGroup
@@ -187,6 +248,8 @@
 
 -(void)initData:(NSInteger)pIndex
 {
+	m_nGroupIndex = pIndex;
+	
 	NSLog(@"initData");
 	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	
@@ -299,6 +362,7 @@
 	[sectionName      release];
 	
 	[m_pCheckBox      release];
+	[m_pGroupPicker   release];
 	
     [super dealloc];
 }

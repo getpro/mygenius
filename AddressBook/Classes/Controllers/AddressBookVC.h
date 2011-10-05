@@ -14,6 +14,7 @@
 
 #import "GroupItemView.h"
 #import "CheckBox.h"
+#import "CustomPicker.h"
 
 @interface AddressBookVC : UIViewController  
 <
@@ -42,7 +43,10 @@ GroupItemViewDelegate
 	
 	BOOL isSearch, isEdit, isGroup,isLongPress;
 	
-	CheckBox * m_pCheckBox;
+	NSInteger     m_nGroupIndex;
+	
+	CheckBox     *m_pCheckBox;
+	CustomPicker *m_pGroupPicker;
 }
 
 @property (retain,nonatomic) UISearchDisplayController * m_pSearchDC;
