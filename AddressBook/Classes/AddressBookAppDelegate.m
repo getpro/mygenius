@@ -165,7 +165,7 @@
 	UIImage* MemoImage = [UIImage imageNamed:@"bottom_icon_memo.png"];
 	UITabBarItem * MemoItem = [[UITabBarItem alloc] initWithTitle:@"备忘录" image:MemoImage tag:0];
 	m_pMemoVC.tabBarItem = MemoItem;
-	m_pMemoVC.tabBarItem.badgeValue = @"2";
+	//m_pMemoVC.tabBarItem.badgeValue = @"2";
 	[MemoItem release];
 	
 	UINavigationController * MemoNavController = [[UINavigationController alloc] initWithRootViewController:m_pMemoVC];
