@@ -645,19 +645,19 @@ typedef enum
 	
 	if([pSectionName isEqual:@"分组"])
 	{
-		attr = [m_pContainer.attributes objectAtIndex:0];
+		attr = [m_pContainer.attributes objectAtIndex:indexPath.section];
 	}
 	else if([pSectionName isEqual:@"血型"])
 	{
-		attr = [m_pContainer.attributes objectAtIndex:1];
+		attr = [m_pContainer.attributes objectAtIndex:indexPath.section];
 	}
 	else if([pSectionName isEqual:@"星座"])
 	{
-		attr = [m_pContainer.attributes objectAtIndex:2];
+		attr = [m_pContainer.attributes objectAtIndex:indexPath.section];
 	}
 	else if([pSectionName isEqual:@"推荐人"])
 	{
-		attr = [m_pContainer.attributes objectAtIndex:3];
+		attr = [m_pContainer.attributes objectAtIndex:indexPath.section];
 	}
 	else if([pSectionName isEqual:@"纪念日"])
 	{
