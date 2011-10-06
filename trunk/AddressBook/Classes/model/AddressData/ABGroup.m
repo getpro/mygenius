@@ -49,9 +49,9 @@
 
 
 #pragma mark Record ID and Type
-- (ABRecordID) recordID {return ABRecordGetRecordID(record);}
+- (ABRecordID) recordID     {return ABRecordGetRecordID(record);}
 - (ABRecordType) recordType {return ABRecordGetRecordType(record);}
-- (BOOL) isPerson {return self.recordType == kABPersonType;}
+- (BOOL) isPerson           {return self.recordType == kABPersonType;}
 
 #pragma mark management
 - (NSArray *) members

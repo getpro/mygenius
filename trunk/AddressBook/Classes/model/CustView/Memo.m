@@ -242,7 +242,7 @@ typedef enum
 		{
 			//时间
 			{
-				CustomDatePicker *tvc = [[[CustomDatePicker alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)] autorelease];
+				CustomDatePicker *tvc = [[[CustomDatePicker alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H) DatePickerMode:UIDatePickerModeDateAndTime] autorelease];
 				tvc.Target   = self;
 				tvc.Selector = @selector(getTimeResult:);			
 				[app.window addSubview:tvc];

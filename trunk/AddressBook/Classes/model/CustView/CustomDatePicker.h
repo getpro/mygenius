@@ -19,6 +19,8 @@
 @property (nonatomic, assign) id  Target;
 @property (nonatomic, assign) SEL Selector;
 
+- (id)initWithFrame:(CGRect)frame DatePickerMode:(UIDatePickerMode)pMode;
+
 -(void)pickerHideOK;
 -(void)pickerHideCancel;
 

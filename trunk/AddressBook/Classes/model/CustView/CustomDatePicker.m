@@ -15,7 +15,7 @@
 @synthesize Target;
 @synthesize Selector;
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame DatePickerMode:(UIDatePickerMode)pMode
 {
 	if (self=[super initWithFrame:frame])
 	{
@@ -73,7 +73,7 @@
 		
 		m_pDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
 		//datePickerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		m_pDatePicker.datePickerMode = UIDatePickerModeDateAndTime;
+		m_pDatePicker.datePickerMode = pMode;
 		m_pDatePicker.frame = CGRectMake(0, 270, SCREEN_W, 250);
 		
 		[self addSubview:m_pDatePicker];

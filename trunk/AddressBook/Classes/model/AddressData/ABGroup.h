@@ -17,8 +17,8 @@
 + (id) groupWithRecord:   (ABRecordRef) record;
 + (id) groupWithRecordID: (ABRecordID)  recordID;
 
-@property (nonatomic, readonly) ABRecordRef record;
-@property (nonatomic, readonly) ABRecordID recordID;
+@property (nonatomic, readonly) ABRecordRef  record;
+@property (nonatomic, readonly) ABRecordID   recordID;
 @property (nonatomic, readonly) ABRecordType recordType;
 @property (nonatomic, readonly) BOOL isPerson;
 

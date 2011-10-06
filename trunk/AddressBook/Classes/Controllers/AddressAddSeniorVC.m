@@ -158,12 +158,9 @@ typedef enum
 
 -(IBAction)doneItemBtn:  (id)sender
 {
-	CFErrorRef   errorRef;
-	NSError    * error;
+	//CFErrorRef   errorRef;
+	NSError    * error = nil;
 	
-	ABAddressBookAddRecord(addressBook,m_pContact.record,&errorRef);
-	ABAddressBookSave(addressBook, &errorRef);
-
 	ABRecordID  pRecordID  = ABRecordGetRecordID(m_pContact.record);
 	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	
@@ -177,7 +174,6 @@ typedef enum
 		//设置分组
 		ABRecordID pGroupID = [DataStore GetGroupID:attrGroup.stringValue];
 		
-		//ABGroup * pGroup = [app.m_arrGroup objectAtIndex:2];
 		ABGroup * pGroup = nil;
 		
 		for(pGroup in app.m_arrGroup)
@@ -187,9 +183,11 @@ typedef enum
 				break;
 			}
 		}
+		
+		ABContact * pContact = [ABContact contactWithRecordID:pRecordID];
 	
 		//没有效果
-		if([pGroup addMember:m_pContact withError:&error])
+		if([pGroup addMember:pContact withError:&error])
 		{
 			[DataStore updateGroup:pRecordID:pGroupID];
 		}
@@ -285,6 +283,10 @@ typedef enum
 			[DataStore insertDates:pRecordID:[attrMemo.m_pDate timeIntervalSince1970]:attrMemo.label:i:attrMemo.m_nRemindIndex:1];
 		}
 	}
+	
+	//ABAddressBookSave(addressBook, &errorRef);
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"changeAddress" object:nil];
 	
 	[self.navigationController popViewControllerAnimated:YES];
 }

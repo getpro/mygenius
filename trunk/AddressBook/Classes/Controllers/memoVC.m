@@ -7,14 +7,38 @@
 //
 
 #import "memoVC.h"
+#import "MemoCell.h"
+#import "CustomDatePicker.h"
 #import "AddressBookAppDelegate.h"
 
 @implementation memoVC
 
 @synthesize m_pTableView_IB;
 @synthesize m_pRightAdd;
+@synthesize m_pDate;
 
 @synthesize eventsList, eventStore, defaultCalendar, detailViewController;
+
+-(void)getTimeResult:(id)index
+{
+	NSDate * date = (NSDate*)index;
+	
+	self.m_pDate = date;
+	
+	[self fetchEventsForToday];
+	
+	[m_pTableView_IB reloadData];
+}
+
+-(void)GetDatePressed:(id)sender
+{
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
+	CustomDatePicker *tvc = [[[CustomDatePicker alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H) DatePickerMode:UIDatePickerModeDate] autorelease];
+	tvc.Target   = self;
+	tvc.Selector = @selector(getTimeResult:);			
+	[app.window addSubview:tvc];
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
@@ -36,10 +60,21 @@
 	
 	//self.navigationController.delegate = self;
 	
-	// Fetch today's event on selected calendar and put them into the eventsList array
-	[self.eventsList addObjectsFromArray:[self fetchEventsForToday]];
+	NSDate *NowDate = [NSDate date];
+    NSDateFormatter* indateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    //[dateFormatter setTimeStyle:NSDateFormatterFullStyle];
+    [indateFormatter setDateFormat:@"yyyy-MM-dd"];
 	
-	[m_pTableView_IB reloadData];
+	NSString *dateStr = [indateFormatter stringFromDate:NowDate];
+	
+    NSDate* startDate = [indateFormatter dateFromString:dateStr];
+	
+	self.m_pDate = startDate;
+	
+	m_pDateButton = [[DateButton alloc] initWithFrame:CGRectMake(6,6,32,32)];
+	[self.navigationController.navigationBar addSubview:m_pDateButton];
+	m_pDateButton.Target   = self;
+	m_pDateButton.Selector = @selector(GetDatePressed:);
 }
 
 
@@ -72,6 +107,8 @@
 {
 	[m_pTableView_IB release];
 	[m_pRightAdd     release];
+	[m_pDate         release];
+	[m_pDateButton   release];
 	
 	[eventStore			  release];
 	[eventsList			  release];
@@ -99,49 +136,64 @@
 
 
 // Fetching events happening in the next 24 hours with a predicate, limiting to the default calendar 
-- (NSArray *)fetchEventsForToday 
+- (void)fetchEventsForToday 
 {
-	NSDate *NowDate = [NSDate date];
-    NSDateFormatter* indateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    //[dateFormatter setTimeStyle:NSDateFormatterFullStyle];
-    [indateFormatter setDateFormat:@"yyyy-MM-dd"];
-	
-	NSString *dateStr = [indateFormatter stringFromDate:NowDate];
-	
-    NSDate* startDate = [indateFormatter dateFromString:dateStr];
+	[self.eventsList removeAllObjects];
 	
 	// endDate is 1 day = 60*60*24 seconds = 86400 seconds from startDate
-	NSDate *endDate = [NSDate dateWithTimeInterval:86400 sinceDate:startDate];
+	NSDate *endDate = [NSDate dateWithTimeInterval:86400 sinceDate:self.m_pDate];
 	//NSDate *endDate = [NSDate distantFuture];
 	
 	// Create the predicate. Pass it the default calendar.
 	NSArray *calendarArray = [NSArray arrayWithObject:defaultCalendar];
 	
-	NSPredicate *predicate = [self.eventStore predicateForEventsWithStartDate:startDate endDate:endDate 
+	NSPredicate *predicate = [self.eventStore predicateForEventsWithStartDate:self.m_pDate endDate:endDate 
 																	calendars:calendarArray]; 
 	
 	// Fetch all events that match the predicate.
 	NSArray *events = [self.eventStore eventsMatchingPredicate:predicate];
 	
-	return events;
-}
-
-
-#pragma mark UIActionSheet_Delegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+	NSLog(@"%@",events);
+	
+	[self.eventsList addObjectsFromArray:events];
 	
 }
 
 #pragma mark -
 #pragma mark Table View
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)aTableView 
+{ 
+	return 1;
+}
+
+- (NSString *)tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger)section
+{
+	if(self.m_pDate)
+	{
+		//通过日期推算星期的代码
+		NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+		[inputFormatter setDateFormat:@"yyyy-MM-dd 'at' HH:mm"];
+		 
+		//NSDate *formatterDate = [inputFormatter dateFromString:@"1999-07-11 at 10:30"];
+		 
+		NSDateFormatter *outputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+		[outputFormatter setDateFormat:@"EEEE                MMMM d yyyy"];
+		 
+		NSString *newDateString = [outputFormatter stringFromDate:self.m_pDate];
+		
+		return newDateString;
+	}
+	else
+	{
+		return nil;
+	}
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
 	return eventsList.count;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
@@ -151,16 +203,18 @@
 	UITableViewCellAccessoryType editableCellAccessoryType =UITableViewCellAccessoryDisclosureIndicator;
 	
 	
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+	MemoCell *cell = (MemoCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if (cell == nil)
+	{
+		cell = [[[MemoCell alloc] initWithStyle:UITableViewCellStyleDefault 
 									   reuseIdentifier:CellIdentifier] autorelease];
 	}
 	
 	cell.accessoryType = editableCellAccessoryType;
 	
 	// Get the event at the row selected and display it's title
-	cell.textLabel.text = [[self.eventsList objectAtIndex:indexPath.row] title];
+	cell.m_pTitle.text  = [[self.eventsList objectAtIndex:indexPath.row] title];
+	cell.m_pLocate.text = [[self.eventsList objectAtIndex:indexPath.row] location];
 	
 	return cell;
 }
@@ -206,12 +260,23 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	[m_pTableView_IB deselectRowAtIndexPath:m_pTableView_IB.indexPathForSelectedRow animated:NO];
+	
+	[m_pDateButton setHidden:NO];
+	
+	//[m_pTableView_IB deselectRowAtIndexPath:m_pTableView_IB.indexPathForSelectedRow animated:NO];
+	
+	// Fetch today's event on selected calendar and put them into the eventsList array
+	[self fetchEventsForToday];
+	
+	[m_pTableView_IB reloadData];
+	
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
+	
+	[m_pDateButton setHidden:YES];
 }
 
 #pragma mark -
@@ -273,23 +338,3 @@
 }
 
 @end
-
-/*
-
- 下面是一段通过日期推算星期的代码
- 
- NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
- [inputFormatter setDateFormat:@"yyyy-MM-dd 'at' HH:mm"];
- 
- NSDate *formatterDate = [inputFormatter dateFromString:@"1999-07-11 at 10:30"];
- 
- NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
- [outputFormatter setDateFormat:@"HH:mm 'on' EEEE MMMM d"];
- 
- NSString *newDateString = [outputFormatter stringFromDate:formatterDate];
- 
- NSLog(@"newDateString %@", newDateString);
- // For US English, the output is:
- // newDateString 10:30 on Sunday July 11 
- 
-*/
