@@ -341,8 +341,7 @@ typedef enum
 	attrGroup = [m_pContainer.attributes objectAtIndex:0];
 	if(attrGroup && attrGroup.stringValue)
 	{
-		//移除之前分组
-		
+		//移动之前的分组ID
 		int nowGroupID = [DataStore GetGroupID2:pRecordID];
 		
 		//设置新分组
@@ -350,6 +349,22 @@ typedef enum
 		
 		if(nowGroupID != pGroupID)
 		{
+			//设置新分组
+			ABGroup * pGroup = nil;
+			for(pGroup in app.m_arrGroup)
+			{
+				if(ABRecordGetRecordID(pGroup.record) == pGroupID)
+				{
+					break;
+				}
+			}
+			
+			if([pGroup addMember:m_pContact withError:&error])
+			{
+				[DataStore updateGroup:pRecordID:pGroupID];
+			}
+			
+			//移除老分组
 			ABGroup * pNowGroup = nil;
 			if(nowGroupID > 0)
 			{
@@ -363,24 +378,8 @@ typedef enum
 				
 				if([pNowGroup removeMember:m_pContact withError:&error])
 				{
-					[DataStore updateGroup:pRecordID:0];
+					//[DataStore updateGroup:pRecordID:0];
 				}
-				
-			}
-			
-			ABGroup * pGroup = nil;
-			
-			for(pGroup in app.m_arrGroup)
-			{
-				if(ABRecordGetRecordID(pGroup.record) == pGroupID)
-				{
-					break;
-				}
-			}
-			
-			if([pGroup addMember:m_pContact withError:&error])
-			{
-				[DataStore updateGroup:pRecordID:pGroupID];
 			}
 		}
 	}

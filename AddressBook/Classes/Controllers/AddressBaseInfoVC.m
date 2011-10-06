@@ -88,6 +88,10 @@
 	else
 	{
 		[m_pSegmentedControl setHidden:NO];
+		
+		//编辑完成
+		
+		
 	}
 	[super setEditing:editing animated:animated];
 }

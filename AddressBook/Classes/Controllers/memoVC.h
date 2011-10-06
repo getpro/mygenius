@@ -11,9 +11,10 @@
 #import <EventKit/EventKit.h>
 #import <EventKitUI/EventKitUI.h>
 
+#import "DateButton.h"
+
 @interface memoVC : UIViewController 
-<  
-UIActionSheetDelegate,
+<
 UITableViewDelegate, 
 UITableViewDataSource,
 EKEventEditViewDelegate
@@ -27,6 +28,8 @@ EKEventEditViewDelegate
 	EKCalendar *defaultCalendar;
 	NSMutableArray *eventsList;
 	
+	NSDate     *m_pDate;
+	DateButton *m_pDateButton;
 }
 
 @property (retain,nonatomic) IBOutlet UITableView      * m_pTableView_IB;
@@ -36,8 +39,9 @@ EKEventEditViewDelegate
 @property (nonatomic, retain) EKCalendar *defaultCalendar;
 @property (nonatomic, retain) NSMutableArray *eventsList;
 @property (nonatomic, retain) EKEventViewController *detailViewController;
+@property (nonatomic, retain) NSDate *m_pDate;
 
-- (NSArray *) fetchEventsForToday;
+-(void) fetchEventsForToday;
 
 -(IBAction)addItemBtn:(id)sender;
 

@@ -53,10 +53,77 @@
 		NSLog(@"Group[%@]",pGroup.name);
 		if([ModalAlert ask:@"是否确认移动分组?" withCancel:@"取消" withButtons:nil])
 		{
+			ABContact *contact = nil;
+			NSError   *error;
 			
+			for(int pSection = 0;pSection < [self.sectionArray count];pSection++)
+			{
+				for(int pRow = 0;pRow < [[self.sectionArray objectAtIndex:pSection] count];pRow++)
+				{
+					NSIndexPath * indexPath = [NSIndexPath indexPathForRow:pRow inSection:pSection];
+					ContactCell  *cell = (ContactCell*)[self.m_pTableView_IB cellForRowAtIndexPath:indexPath];
+					
+					if(cell && cell.m_IsSelect)
+					{
+						contact = [[self.sectionArray objectAtIndex:pSection] objectAtIndex:pRow];
+						if(contact)
+						{
+							//移动分组
+							ABRecordID  pRecordID  = ABRecordGetRecordID(contact.record);
+							
+							//移动之前的分组ID
+							int nowGroupID = [DataStore GetGroupID2:pRecordID];
+							
+							//设置新分组
+							ABRecordID pGroupID = pGroup.recordID;
+							
+							if(nowGroupID != pGroupID)
+							{
+								//设置新分组
+								ABGroup * pGroup = nil;
+								for(pGroup in app.m_arrGroup)
+								{
+									if(ABRecordGetRecordID(pGroup.record) == pGroupID)
+									{
+										break;
+									}
+								}
+								
+								if([pGroup addMember:contact withError:&error])
+								{
+									[DataStore updateGroup:pRecordID:pGroupID];
+								}
+								
+								//移除老分组
+								ABGroup * pNowGroup = nil;
+								if(nowGroupID > 0)
+								{
+									for(pNowGroup in app.m_arrGroup)
+									{
+										if(ABRecordGetRecordID(pNowGroup.record) == nowGroupID)
+										{
+											break;
+										}
+									}
+									
+									if([pNowGroup removeMember:contact withError:&error])
+									{
+										//[DataStore updateGroup:pRecordID:0];
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"changeAddress" object:nil];
+			
+			[self LoadGroup];
+			
+			[self initData:m_nGroupIndex];
 		}
 	}
-	
 }
 
 -(void)GetPressed:(id)sender
@@ -105,9 +172,11 @@
 							}
 						}
 					}
-				}	
+				}
 				
 				[[NSNotificationCenter defaultCenter] postNotificationName:@"changeAddress" object:nil];
+				
+				[self LoadGroup];
 				
 				[self initData:m_nGroupIndex];
 			}
@@ -218,8 +287,10 @@
 	pLabel = [[[GroupItemView alloc] initWithFrame:CGRectMake(0,0,TABLEVIEW_X,40) 
 												  :@"全部"
 												  :[AllContactData.contactsArray count]] autorelease];
-	
-	[pLabel SetHidden:NO];
+	if(m_nGroupIndex == 0)
+	{
+		[pLabel SetHidden:NO];
+	}
 	pLabel.delegate = self;
 	pLabel.tag = 0;
 	
@@ -239,6 +310,11 @@
 		
 		pLabel.delegate = self;
 		pLabel.tag = i;
+		
+		if(m_nGroupIndex == i)
+		{
+			[pLabel SetHidden:NO];
+		}
 		
 		[m_pScrollView_IB addSubview:pLabel];
 	}
@@ -316,7 +392,13 @@
 		NSUInteger firstLetter = [ALPHA rangeOfString:[sectionName substringToIndex:1]].location;
 		
 		if (firstLetter != NSNotFound)
+		{
 			[[self.sectionArray objectAtIndex:firstLetter] addObject:contact];
+		}
+		else 
+		{
+			//添加到# Section
+		}
 	}
 	
 	[m_pTableView_IB reloadData];
@@ -331,7 +413,8 @@
 }
 */
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning 
+{
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -596,7 +679,6 @@
 	else return nil; // search table
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
 {
 	//NSLog(@"sectionForSectionIndexTitle");
@@ -608,9 +690,6 @@
 	}
 	return [ALPHA rangeOfString:title].location;
 }
-
-
-
 
 - (NSString *)tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger)section
 {
@@ -823,54 +902,6 @@ ABRecordRef GRecord;
 		ABAddressBookSave(addressBook, &errorRef);
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"changeAddress" object:nil];
-		
-		//GRecord = (person);
-		
-		//test
-		//NSError    * error;
-		//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
-		
-		//ABRecordRef aRecord = ABPersonCreate(); 
-		
-		/*
-		ABRecordRef aRecord = CFRetain(person);
-		
-		CFErrorRef  anError = NULL;
-		
-		ABRecordSetValue(aRecord, kABPersonFirstNameProperty, 
-						 CFSTR("Jijo1"), &anError); 
-		ABRecordSetValue(aRecord, kABPersonLastNameProperty, 
-						 CFSTR("Pulikkottil1"), &anError); 
-		if (anError != NULL)
-		{
-			NSLog(@"error while creating..");
-		}
-		
-		CFErrorRef error2 = NULL; 
-		
-		BOOL isAdded = ABAddressBookAddRecord (addressBook,aRecord,&error2);
-		
-		if(isAdded)
-		{
-			NSLog(@"added..");
-		}
-		if (error2 != NULL) 
-		{
-			NSLog(@"ABAddressBookAddRecord %@", error2);
-		} 
-		error2 = NULL;
-		
-		ABAddressBookSave (addressBook, &error2);
-	
-		ABGroup * pGroup = [app.m_arrGroup objectAtIndex:2];
-		
-		[pGroup addMember2:aRecord withError:&error];
-		 
-		*/
-		
-		//[self performSelector:@selector(AddGp:)  withObject:nil afterDelay:0.5];
-		
-		
 		
 		//点击完成
 		AddressAddSeniorVC * pVc = [[AddressAddSeniorVC alloc] init];

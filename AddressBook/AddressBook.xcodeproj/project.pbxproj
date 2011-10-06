@@ -63,12 +63,16 @@
 		219D99CB13E5163100506FCB /* image07_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99C113E5163100506FCB /* image07_kuang.png */; };
 		219D99CC13E5163100506FCB /* image08_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99C213E5163100506FCB /* image08_kuang.png */; };
 		219D99CD13E5163100506FCB /* image09_kuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 219D99C313E5163100506FCB /* image09_kuang.png */; };
+		219E3426143D642900F1F111 /* data.png in Resources */ = {isa = PBXBuildFile; fileRef = 219E3424143D642900F1F111 /* data.png */; };
+		219E3427143D642900F1F111 /* data_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 219E3425143D642900F1F111 /* data_hover.png */; };
+		219E342A143D646000F1F111 /* DateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 219E3429143D646000F1F111 /* DateButton.m */; };
 		21A2AD0713F650F90051F3D7 /* memoInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A2AD0613F650F90051F3D7 /* memoInfoVC.m */; };
 		21A2AD0913F6511B0051F3D7 /* memoInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21A2AD0813F6511B0051F3D7 /* memoInfoVC.xib */; };
 		21A2AE4313F66FD80051F3D7 /* memoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A2AE4213F66FD80051F3D7 /* memoInfo.m */; };
 		21A327CB142D7B6A00F62134 /* syncAccountVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A327CA142D7B6A00F62134 /* syncAccountVC.m */; };
 		21A327CD142D7BE000F62134 /* syncAccountVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21A327CC142D7BE000F62134 /* syncAccountVC.xib */; };
 		21A32829142D819700F62134 /* syncButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A32828142D819700F62134 /* syncButtonCell.m */; };
+		21A6EF73143D507A0099B486 /* MemoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A6EF72143D507A0099B486 /* MemoCell.m */; };
 		21BC034D143805DF00CE1192 /* LabelAndContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC034C143805DF00CE1192 /* LabelAndContent.m */; };
 		21BCEC5D142F60AA00FB27BE /* AddFieldVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BCEC5C142F60AA00FB27BE /* AddFieldVC.m */; };
 		21BCEC62142F612A00FB27BE /* AddFieldVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BCEC61142F612A00FB27BE /* AddFieldVC.xib */; };
@@ -205,6 +209,10 @@
 		219D99C113E5163100506FCB /* image07_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image07_kuang.png; sourceTree = "<group>"; };
 		219D99C213E5163100506FCB /* image08_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image08_kuang.png; sourceTree = "<group>"; };
 		219D99C313E5163100506FCB /* image09_kuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image09_kuang.png; sourceTree = "<group>"; };
+		219E3424143D642900F1F111 /* data.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = data.png; sourceTree = "<group>"; };
+		219E3425143D642900F1F111 /* data_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = data_hover.png; sourceTree = "<group>"; };
+		219E3428143D646000F1F111 /* DateButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateButton.h; sourceTree = "<group>"; };
+		219E3429143D646000F1F111 /* DateButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateButton.m; sourceTree = "<group>"; };
 		21A2AD0513F650F90051F3D7 /* memoInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memoInfoVC.h; sourceTree = "<group>"; };
 		21A2AD0613F650F90051F3D7 /* memoInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = memoInfoVC.m; sourceTree = "<group>"; };
 		21A2AD0813F6511B0051F3D7 /* memoInfoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = memoInfoVC.xib; sourceTree = "<group>"; };
@@ -215,6 +223,8 @@
 		21A327CC142D7BE000F62134 /* syncAccountVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = syncAccountVC.xib; sourceTree = "<group>"; };
 		21A32827142D819700F62134 /* syncButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = syncButtonCell.h; sourceTree = "<group>"; };
 		21A32828142D819700F62134 /* syncButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = syncButtonCell.m; sourceTree = "<group>"; };
+		21A6EF71143D507A0099B486 /* MemoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoCell.h; sourceTree = "<group>"; };
+		21A6EF72143D507A0099B486 /* MemoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoCell.m; sourceTree = "<group>"; };
 		21BC034B143805DF00CE1192 /* LabelAndContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelAndContent.h; sourceTree = "<group>"; };
 		21BC034C143805DF00CE1192 /* LabelAndContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelAndContent.m; sourceTree = "<group>"; };
 		21BCEC5B142F60AA00FB27BE /* AddFieldVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFieldVC.h; sourceTree = "<group>"; };
@@ -428,6 +438,7 @@
 		219D99B913E5163100506FCB /* image */ = {
 			isa = PBXGroup;
 			children = (
+				219E3423143D642900F1F111 /* memo */,
 				21D2577B142B889700306515 /* sync */,
 				218738F9141B6C52007D64B4 /* addressbook */,
 				218738FA141B6C52007D64B4 /* common */,
@@ -515,6 +526,15 @@
 			name = "更多";
 			sourceTree = "<group>";
 		};
+		219E3423143D642900F1F111 /* memo */ = {
+			isa = PBXGroup;
+			children = (
+				219E3424143D642900F1F111 /* data.png */,
+				219E3425143D642900F1F111 /* data_hover.png */,
+			);
+			path = memo;
+			sourceTree = "<group>";
+		};
 		21D2577B142B889700306515 /* sync */ = {
 			isa = PBXGroup;
 			children = (
@@ -554,10 +574,14 @@
 				216F72E11439D05100174368 /* TagCell.m */,
 				21F57BC814278AA40099BEB5 /* EditableCell.h */,
 				21F57BC914278AA40099BEB5 /* EditableCell.m */,
+				21A6EF71143D507A0099B486 /* MemoCell.h */,
+				21A6EF72143D507A0099B486 /* MemoCell.m */,
 				2104CF8714238ECF0004FB9A /* ContactCell.h */,
 				2104CF8814238ECF0004FB9A /* ContactCell.m */,
 				21A32827142D819700F62134 /* syncButtonCell.h */,
 				21A32828142D819700F62134 /* syncButtonCell.m */,
+				219E3428143D646000F1F111 /* DateButton.h */,
+				219E3429143D646000F1F111 /* DateButton.m */,
 			);
 			path = CustView;
 			sourceTree = "<group>";
@@ -750,6 +774,8 @@
 				21E27E3E143AD27C00A3F124 /* checkBox_hover.png in Resources */,
 				21E27E3F143AD27C00A3F124 /* checkBox.png in Resources */,
 				21E27E40143AD27C00A3F124 /* move.png in Resources */,
+				219E3426143D642900F1F111 /* data.png in Resources */,
+				219E3427143D642900F1F111 /* data_hover.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -811,6 +837,8 @@
 				216F72E21439D05100174368 /* TagCell.m in Sources */,
 				216F73101439D1C500174368 /* CAttributeRelate.m in Sources */,
 				21E27DC6143AB23D00A3F124 /* CheckBox.m in Sources */,
+				21A6EF73143D507A0099B486 /* MemoCell.m in Sources */,
+				219E342A143D646000F1F111 /* DateButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
