@@ -11,7 +11,7 @@
 #import "FtpUpLoad.h"
 #import "syncButtonCell.h"
 
-typedef enum 
+typedef enum
 {
     Sync_TableView_Section_Sync,
     Sync_TableView_Section_BackUp,

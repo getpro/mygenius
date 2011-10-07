@@ -19,7 +19,7 @@
 @synthesize m_arrMemoInfo;
 @synthesize m_arrGroup;
 @synthesize m_arrCustomTag;
-//@synthesize m_pContactData;
+@synthesize m_arrServicerRule;
 @synthesize m_arrContactData;
 
 @synthesize networkingCount = _networkingCount;
@@ -47,12 +47,20 @@
 	m_arrGroup          = [[NSMutableArray alloc] initWithCapacity:10];
 	m_arrCustomTag      = [[NSMutableArray alloc] initWithCapacity:10];
 	m_arrContactData    = [[NSMutableArray alloc] initWithCapacity:10];
+	m_arrServicerRule   = [[NSMutableArray alloc] initWithCapacity:10];
 	
+	//自定义标签
 	for(NSString * pStr in [DataStore getTags])
 	{
 		[m_arrCustomTag addObject:pStr];
 	}
 
+	//运营商规则
+	for(LabelAndContent * pLabelAndContent in [DataStore getServicerRules])
+	{
+		[m_arrServicerRule addObject:pLabelAndContent];
+	}
+	
 	//Group
 	NSArray * groups = [ABContactsHelper groups];
 	//NSLog(@"groups[%d]",[groups count]);
@@ -313,6 +321,7 @@
 	[m_arrGroup           release];
 	[m_arrCustomTag       release];
 	[m_arrContactData     release];
+	[m_arrServicerRule    release];
 	
 	[tbController	      release];
     [window				  release];

@@ -119,6 +119,10 @@
 			
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"changeAddress" object:nil];
 			
+			//取消
+			isLongPress = NO;
+			[m_pCheckBox removeFromSuperview];
+			
 			[self LoadGroup];
 			
 			[self initData:m_nGroupIndex];
@@ -176,6 +180,10 @@
 				
 				[[NSNotificationCenter defaultCenter] postNotificationName:@"changeAddress" object:nil];
 				
+				//取消
+				isLongPress = NO;
+				[m_pCheckBox removeFromSuperview];
+				
 				[self LoadGroup];
 				
 				[self initData:m_nGroupIndex];
@@ -232,7 +240,7 @@
 	filteredArray    = [[NSMutableArray alloc] init];
 	contactNameArray = [[NSMutableArray alloc] init];
 	contactNameDic   = [[NSMutableDictionary alloc] init];
-	sectionArray     = [[NSMutableArray alloc] initWithCapacity:27];
+	sectionArray     = [[NSMutableArray alloc] initWithCapacity:28];
 	
 	// Create a search bar
 	self.m_pSearchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(TABLEVIEW_X, 0, TABLEVIEW_W, SEARCH_BAR_H)] autorelease];
@@ -336,7 +344,7 @@
 	{
 		[contactNameArray removeAllObjects];
 		[contactNameDic   removeAllObjects];
-		for (int i = 0; i < 27; i++) 
+		for (int i = 0; i < 28; i++)
 			[self.sectionArray replaceObjectAtIndex:i withObject:[NSMutableArray array]];
 		
 		[m_pTableView_IB reloadData];
@@ -347,7 +355,7 @@
 	[contactNameDic   removeAllObjects];
 	[sectionArray     removeAllObjects];
 	
-	for (int i = 0; i < 27; i++)
+	for (int i = 0; i < 28; i++)
 		[self.sectionArray addObject:[NSMutableArray array]];
 	
 	for(ABContact *contact in contacts)
@@ -395,9 +403,10 @@
 		{
 			[[self.sectionArray objectAtIndex:firstLetter] addObject:contact];
 		}
-		else 
+		else
 		{
 			//添加到# Section
+			[[self.sectionArray objectAtIndex:27] addObject:contact];
 		}
 	}
 	
@@ -658,7 +667,7 @@
 	//NSLog(@"numberOfSectionsInTableView");
 	
 	if(aTableView == self.m_pTableView_IB) 
-		return 27;
+		return 28;
 	return 1;
 }
 
@@ -670,9 +679,18 @@
 	if (aTableView == self.m_pTableView_IB)  // regular table
 	{
 		NSMutableArray *indices = [NSMutableArray arrayWithObject:UITableViewIndexSearch];
-		for (int i = 0; i < 27; i++) 
+		for (int i = 0; i < 28; i++)
 			if ([[sectionArray objectAtIndex:i] count])
-				[indices addObject:[[ALPHA substringFromIndex:i] substringToIndex:1]];
+			{
+				if(i == 27)
+				{
+					[indices addObject:@"#"];
+				}
+				else
+				{
+					[indices addObject:[[ALPHA substringFromIndex:i] substringToIndex:1]];
+				}
+			}
 		//[indices addObject:@"\ue057"]; // <-- using emoji
 		return indices;
 	}
@@ -699,6 +717,8 @@
 	{
 		if ([self.sectionArray count] > 0 && [[self.sectionArray objectAtIndex:section] count] == 0) 
 			return nil;
+		if(section == 27)
+			return @"#";
 		return [NSString stringWithFormat:@"%@", [[ALPHA substringFromIndex:section] substringToIndex:1]];
 	}
 	else return nil;

@@ -9,9 +9,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface moreVC : UIViewController 
+@interface moreVC : UIViewController
+<
+UITableViewDelegate, 
+UITableViewDataSource
+>
 {
-	
+	IBOutlet UITableView      * m_pTableView_IB;
 }
+
+@property (retain,nonatomic) IBOutlet UITableView      * m_pTableView_IB;
 
 @end
