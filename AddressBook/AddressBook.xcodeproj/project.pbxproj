@@ -73,6 +73,9 @@
 		21A327CD142D7BE000F62134 /* syncAccountVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21A327CC142D7BE000F62134 /* syncAccountVC.xib */; };
 		21A32829142D819700F62134 /* syncButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A32828142D819700F62134 /* syncButtonCell.m */; };
 		21A6EF73143D507A0099B486 /* MemoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A6EF72143D507A0099B486 /* MemoCell.m */; };
+		21BBF434143F1851001339A2 /* data2_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 21BBF432143F1851001339A2 /* data2_hover.png */; };
+		21BBF435143F1851001339A2 /* data2.png in Resources */ = {isa = PBXBuildFile; fileRef = 21BBF433143F1851001339A2 /* data2.png */; };
+		21BBF437143F187F001339A2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 21BBF436143F187F001339A2 /* Icon.png */; };
 		21BC034D143805DF00CE1192 /* LabelAndContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC034C143805DF00CE1192 /* LabelAndContent.m */; };
 		21BCEC5D142F60AA00FB27BE /* AddFieldVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BCEC5C142F60AA00FB27BE /* AddFieldVC.m */; };
 		21BCEC62142F612A00FB27BE /* AddFieldVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BCEC61142F612A00FB27BE /* AddFieldVC.xib */; };
@@ -225,6 +228,9 @@
 		21A32828142D819700F62134 /* syncButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = syncButtonCell.m; sourceTree = "<group>"; };
 		21A6EF71143D507A0099B486 /* MemoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoCell.h; sourceTree = "<group>"; };
 		21A6EF72143D507A0099B486 /* MemoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoCell.m; sourceTree = "<group>"; };
+		21BBF432143F1851001339A2 /* data2_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = data2_hover.png; sourceTree = "<group>"; };
+		21BBF433143F1851001339A2 /* data2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = data2.png; sourceTree = "<group>"; };
+		21BBF436143F187F001339A2 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		21BC034B143805DF00CE1192 /* LabelAndContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelAndContent.h; sourceTree = "<group>"; };
 		21BC034C143805DF00CE1192 /* LabelAndContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelAndContent.m; sourceTree = "<group>"; };
 		21BCEC5B142F60AA00FB27BE /* AddFieldVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFieldVC.h; sourceTree = "<group>"; };
@@ -529,6 +535,8 @@
 		219E3423143D642900F1F111 /* memo */ = {
 			isa = PBXGroup;
 			children = (
+				21BBF432143F1851001339A2 /* data2_hover.png */,
+				21BBF433143F1851001339A2 /* data2.png */,
 				219E3424143D642900F1F111 /* data.png */,
 				219E3425143D642900F1F111 /* data_hover.png */,
 			);
@@ -647,6 +655,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				21BBF436143F187F001339A2 /* Icon.png */,
 				219D99B913E5163100506FCB /* image */,
 				219D997213E5070A00506FCB /* AddressBook.db */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
@@ -776,6 +785,9 @@
 				21E27E40143AD27C00A3F124 /* move.png in Resources */,
 				219E3426143D642900F1F111 /* data.png in Resources */,
 				219E3427143D642900F1F111 /* data_hover.png in Resources */,
+				21BBF434143F1851001339A2 /* data2_hover.png in Resources */,
+				21BBF435143F1851001339A2 /* data2.png in Resources */,
+				21BBF437143F187F001339A2 /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

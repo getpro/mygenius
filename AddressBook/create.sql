@@ -131,6 +131,17 @@ CREATE TABLE tag_info(
 'tag_modification'INTEGER NOT NULL
 );
 
+CREATE TABLE servicer_rule(
+'servicer_rule_label'TEXT NOT NULL,
+'servicer_rule_content'TEXT NOT NULL
+);
+
+CREATE TABLE user_info(
+'user_info_phone'TEXT NOT NULL,
+'user_info_username'TEXT NOT NULL,
+'user_info_password'TEXT NOT NULL
+);
+
 CREATE TABLE memo_info(
 'memo_id'TEXT PRIMARY KEY,
 'memo_subject'TEXT,
@@ -152,4 +163,29 @@ CREATE TABLE config(
 'config_first_use'DATETIME
 );
 
-REPLACE INTO config VALUES(1001, 0, DATETIME('now'))
+REPLACE INTO config VALUES(1001, 0, DATETIME('now'));
+INSERT INTO servicer_rule VALUES("中国移动","134*");
+INSERT INTO servicer_rule VALUES("中国移动","135*");
+INSERT INTO servicer_rule VALUES("中国移动","136*");
+INSERT INTO servicer_rule VALUES("中国移动","137*");
+INSERT INTO servicer_rule VALUES("中国移动","138*");
+INSERT INTO servicer_rule VALUES("中国移动","139*");
+INSERT INTO servicer_rule VALUES("中国移动","150*");
+INSERT INTO servicer_rule VALUES("中国移动","151*");
+INSERT INTO servicer_rule VALUES("中国移动","152*");
+INSERT INTO servicer_rule VALUES("中国移动","157*");
+INSERT INTO servicer_rule VALUES("中国移动","158*");
+INSERT INTO servicer_rule VALUES("中国移动","159*");
+INSERT INTO servicer_rule VALUES("中国移动","187*");
+INSERT INTO servicer_rule VALUES("中国移动","188*");
+INSERT INTO servicer_rule VALUES("中国联通","130*");
+INSERT INTO servicer_rule VALUES("中国联通","131*");
+INSERT INTO servicer_rule VALUES("中国联通","132*");
+INSERT INTO servicer_rule VALUES("中国联通","155*");
+INSERT INTO servicer_rule VALUES("中国联通","156*");
+INSERT INTO servicer_rule VALUES("中国联通","185*");
+INSERT INTO servicer_rule VALUES("中国联通","186*");
+INSERT INTO servicer_rule VALUES("中国电信","133*");
+INSERT INTO servicer_rule VALUES("中国电信","153*");
+INSERT INTO servicer_rule VALUES("中国电信","180*");
+INSERT INTO servicer_rule VALUES("中国电信","189*");

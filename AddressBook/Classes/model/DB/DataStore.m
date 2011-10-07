@@ -54,6 +54,38 @@
     [stmt step]; // ignore error
 }
 
++(NSArray*)getServicerRules
+{
+	NSMutableArray *retArray = [[[NSMutableArray alloc] init] autorelease];
+	
+	Statement * stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"SELECT * FROM servicer_rule"];
+	
+	NSInteger count = 0;
+	
+	while ([stmt step] == SQLITE_ROW)
+	{
+		NSString * pLabel            = [stmt getString:0];//Label
+		NSString * pContent          = [stmt getString:1];//Content
+		
+		LabelAndContent * pLabelAndContent = [[LabelAndContent alloc]init];
+		
+		pLabelAndContent.m_strLabel		         = pLabel;
+		pLabelAndContent.m_strContent            = pContent;
+		
+		[retArray addObject:pLabelAndContent];
+		
+		[pLabelAndContent release];
+		
+		count++;
+	}
+	
+	[stmt reset];
+	
+	return retArray;
+}
+
 /* contacts_info */
 
 /*

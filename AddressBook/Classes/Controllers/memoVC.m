@@ -178,8 +178,8 @@
 		//NSDate *formatterDate = [inputFormatter dateFromString:@"1999-07-11 at 10:30"];
 		 
 		NSDateFormatter *outputFormatter = [[[NSDateFormatter alloc] init] autorelease];
-		[outputFormatter setDateFormat:@"EEEE                MMMM d yyyy"];
-		 
+		[outputFormatter setDateFormat:@"EEEE                          MMMM d yyyy"];
+		
 		NSString *newDateString = [outputFormatter stringFromDate:self.m_pDate];
 		
 		return newDateString;

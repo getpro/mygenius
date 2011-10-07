@@ -11,6 +11,7 @@
 #import "AddressBaseInfoVC.h"
 #import "ModalAlert.h"
 #import "ContactData.h"
+#import "AddressBookAppDelegate.h"
 
 typedef enum 
 {
@@ -43,6 +44,8 @@ typedef enum
 	
 	self.navigationItem.title = @"联系人";
 	self.navigationItem.rightBarButtonItem = m_pRightAdd;
+	
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	
 	//头像
 	if(m_pContact.image)
@@ -84,9 +87,33 @@ typedef enum
 	[m_pContainer setValue:attr forKey:@"分组"];
 	((CAttributeString*)attr).stringValue = [DataStore GetGroupName:[DataStore GetGroupID2:ABRecordGetRecordID(m_pContact.record)]];
 	
+	NSMutableString * pStrPhone = [NSMutableString stringWithCapacity:20];
+	NSString * pPhone = m_pContact.phonenumber;
+	if(pPhone)
+	{
+		[pStrPhone appendString:pPhone];
+		
+		if([[pPhone substringWithRange:NSMakeRange(0,1)] isEqualToString:@"+"])
+		{
+			pPhone = [pPhone substringWithRange:NSMakeRange(3,[pPhone length] - 3)];
+		}
+	
+		for(LabelAndContent * pLabelAndContent in app.m_arrServicerRule)
+		{
+			NSPredicate * pPredicate = [NSPredicate predicateWithFormat:@"SELF like[c] %@",pLabelAndContent.m_strContent];
+			
+			if([pPredicate evaluateWithObject:pPhone])
+			{
+				NSLog(@"[%@]",pLabelAndContent.m_strLabel);
+				[pStrPhone appendString:pLabelAndContent.m_strLabel];
+				break;
+			}
+		}
+	}
+	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"移动电话"];
-	((CAttributeString*)attr).stringValue = m_pContact.phonenumber;
+	((CAttributeString*)attr).stringValue = pStrPhone;
 	
 	attr = [[[CAttributeString alloc] init] autorelease];
 	[m_pContainer setValue:attr forKey:@"短信"];

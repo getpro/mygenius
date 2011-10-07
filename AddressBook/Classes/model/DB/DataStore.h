@@ -55,6 +55,9 @@ typedef enum
 +(void)Set_First_Use;
 
 
+//运营商规则
++(NSArray*)getServicerRules;
+
 /* contacts_info */
 
 //删除联系人
