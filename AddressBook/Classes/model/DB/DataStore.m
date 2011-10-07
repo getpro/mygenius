@@ -306,7 +306,186 @@
 	}
 	
 	//星座
-	//[stmt bindString:note	forIndex:20];//20.contacts_constellation
+	if(birthday != nil)
+	{
+		NSDateFormatter *formattermonth = [[[NSDateFormatter alloc] init] autorelease];
+		NSDateFormatter *formatterday   = [[[NSDateFormatter alloc] init] autorelease];
+		
+		[formattermonth setDateFormat:@"MM"];
+		[formatterday   setDateFormat:@"dd"];
+		
+		NSString *monthStr = [formattermonth stringFromDate:birthday];
+		NSString *dayStr   = [formatterday   stringFromDate:birthday];
+		
+		//NSLog(@"[%@]",monthStr);
+		//NSLog(@"[%@]",dayStr);
+		
+		int month = [monthStr intValue];
+		int day   = [dayStr   intValue];
+		
+		/*
+		 水平座 《1/21～2/18》 狮子座 《 7/23～ 8/23》
+		 双鱼座 《2/19～3/20》 处女座 《 8/24～ 9/22》
+		 牡羊座 《3/21～4/20》 天秤座 《 9/23～10/23》
+		 金牛座 《4/21～5/21》 天蝎座 《10/24～11/22》
+		 双子座 《5/22～6/21》 射手座 《11/23～12/21》
+		 巨蟹座 《6/22～7/22》 摩羯座 《12/22～ 1/20》
+		 */
+		
+		NSString * pConstellation = nil;
+		
+		switch (month) 
+		{
+			case 1:
+			{
+				if(day <= 20)
+				{
+					pConstellation = @"摩羯座";
+				}
+				else
+				{
+					pConstellation = @"水平座";
+				}
+			}
+				break;
+			case 2:
+			{
+				if(day <= 18)
+				{
+					pConstellation = @"水平座";
+				}
+				else
+				{
+					pConstellation = @"双鱼座";
+				}
+			}
+				break;
+			case 3:
+			{
+				if(day <= 20)
+				{
+					pConstellation = @"双鱼座";
+				}
+				else
+				{
+					pConstellation = @"牡羊座";
+				}
+			}
+				break;
+			case 4:
+			{
+				if(day <= 20)
+				{
+					pConstellation = @"牡羊座";
+				}
+				else
+				{
+					pConstellation = @"金牛座";
+				}
+			}
+				break;
+			case 5:
+			{
+				if(day <= 21)
+				{
+					pConstellation = @"金牛座";
+				}
+				else
+				{
+					pConstellation = @"双子座";
+				}
+			}
+				break;
+			case 6:
+			{
+				if(day <= 21)
+				{
+					pConstellation = @"双子座";
+				}
+				else
+				{
+					pConstellation = @"巨蟹座";
+				}
+			}
+				break;
+			case 7:
+			{
+				if(day <= 22)
+				{
+					pConstellation = @"巨蟹座";
+				}
+				else
+				{
+					pConstellation = @"狮子座";
+				}
+			}
+				break;
+			case 8:
+			{
+				if(day <= 23)
+				{
+					pConstellation = @"狮子座";
+				}
+				else
+				{
+					pConstellation = @"处女座";
+				}
+			}
+				break;
+			case 9:
+			{
+				if(day <= 22)
+				{
+					pConstellation = @"处女座";
+				}
+				else
+				{
+					pConstellation = @"天秤座";
+				}
+			}
+				break;
+			case 10:
+			{
+				if(day <= 23)
+				{
+					pConstellation = @"天秤座";
+				}
+				else
+				{
+					pConstellation = @"天蝎座";
+				}
+			}
+				break;
+			case 11:
+			{
+				if(day <= 22)
+				{
+					pConstellation = @"天蝎座";
+				}
+				else
+				{
+					pConstellation = @"射手座";
+				}
+			}
+				break;
+			case 12:
+			{
+				if(day <= 21)
+				{
+					pConstellation = @"射手座";
+				}
+				else
+				{
+					pConstellation = @"摩羯座";
+				}
+			}
+				break;
+			default:
+				break;
+		}
+		
+		[stmt bindString:pConstellation	forIndex:20];//20.contacts_constellation
+	}
 	
 	//血型
 	//[stmt bindString:note	forIndex:21];//21.contacts_blood
