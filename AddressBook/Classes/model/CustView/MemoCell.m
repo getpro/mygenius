@@ -13,7 +13,7 @@ NSString *KMemoCell_ID = @"MemoCell";
 
 @implementation MemoCell
 
-@synthesize m_nOffSet,m_IsSelect,m_pTitle,m_pLocate;
+@synthesize m_nOffSet,m_IsSelect,m_pTitle,m_pLocate,m_pTime;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     
@@ -31,6 +31,13 @@ NSString *KMemoCell_ID = @"MemoCell";
 		[m_pCheck setImage:[UIImage imageNamed:@"checkBox.png"]];
 		[self addSubview:m_pCheck];
 		
+		//全天类型
+		m_pTime = [[UILabel alloc] initWithFrame:CGRectMake(m_nOffSet,16,60,12)];
+		m_pTime.textAlignment = UITextAlignmentLeft;
+		m_pTime.backgroundColor = [UIColor clearColor];
+		m_pTime.font = [UIFont fontWithName:FONT_NAME size:10];
+		m_pTime.textColor = [UIColor blackColor];
+		[self addSubview:m_pTime];
 		
 		//标题
 		m_pTitle = [[UILabel alloc] initWithFrame:CGRectMake(m_nOffSet + 65,4,180,20)];
@@ -72,6 +79,7 @@ NSString *KMemoCell_ID = @"MemoCell";
 	[m_pCheck		release];
 	[m_pLocate      release];
 	[m_pTitle       release];
+	[m_pTime        release];
 	
     [super dealloc];
 }

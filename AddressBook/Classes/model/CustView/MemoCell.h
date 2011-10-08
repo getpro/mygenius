@@ -19,13 +19,14 @@ extern NSString *KMemoCell_ID;
 	UIImageView * m_pCheckSelect;
 	UIImageView * m_pCheck;
 	
+	UILabel     * m_pTime;		//全天
 	UILabel     * m_pTitle;		//标题
 	UILabel     * m_pLocate;    //位置
 }
 
 @property (nonatomic,retain) UILabel     * m_pTitle;
 @property (nonatomic,retain) UILabel     * m_pLocate;
-
+@property (nonatomic,retain) UILabel     * m_pTime;
 @property (nonatomic,assign) NSInteger m_nOffSet;
 @property (nonatomic,assign) BOOL m_IsSelect;
 
