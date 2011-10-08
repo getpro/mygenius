@@ -8,11 +8,18 @@
 
 #import "statisticsVC.h"
 
+
 @implementation statisticsVC
 
 @synthesize m_pSearchDC;
 @synthesize m_pSearchBar;
 @synthesize m_pTableView_IB;
+@synthesize m_pDate;
+
+-(void)GetDatePressed:(id)sender
+{
+	//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
@@ -36,7 +43,11 @@
 	self.m_pSearchDC.searchResultsDataSource = self;
 	self.m_pSearchDC.searchResultsDelegate = self;
 	
-	
+	m_pDateButton = [[checkDateButton alloc] initWithFrame:CGRectMake(6,7,50,30)];
+	[m_pDateButton setButtonDate:self.m_pDate];
+	[self.navigationController.navigationBar addSubview:m_pDateButton];
+	m_pDateButton.Target   = self;
+	m_pDateButton.Selector = @selector(GetDatePressed:);
 }
 
 
@@ -66,6 +77,8 @@
 
 - (void)dealloc 
 {
+	[m_pDate	release];
+	
     [super dealloc];
 }
 
@@ -127,6 +140,22 @@
 - (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section 
 {
 	return 0;
+}
+
+#pragma mark - UIViewController delegate methods
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	[m_pDateButton setHidden:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	
+	[m_pDateButton setHidden:YES];
 }
 
 @end

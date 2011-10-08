@@ -29,6 +29,7 @@
 		211BFDEF141FA06F009C1EA5 /* ABContactsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 211BFDE9141FA06F009C1EA5 /* ABContactsHelper.m */; };
 		211BFDF0141FA06F009C1EA5 /* ABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 211BFDEB141FA06F009C1EA5 /* ABGroup.m */; };
 		211BFDF1141FA06F009C1EA5 /* ContactData.m in Sources */ = {isa = PBXBuildFile; fileRef = 211BFDED141FA06F009C1EA5 /* ContactData.m */; };
+		211DC5C714409DF2002FDAF4 /* checkDateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 211DC5C614409DF2002FDAF4 /* checkDateButton.m */; };
 		212B47C414258D3B00DE4938 /* CustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 212B47C314258D3B00DE4938 /* CustomPicker.m */; };
 		2158386E1438B61B0034356B /* CAttributeConstellation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2158386D1438B61B0034356B /* CAttributeConstellation.m */; };
 		216525F913E52F8F0075F387 /* AddressPreInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 216525F813E52F8F0075F387 /* AddressPreInfoVC.m */; };
@@ -165,6 +166,8 @@
 		211BFDEB141FA06F009C1EA5 /* ABGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABGroup.m; sourceTree = "<group>"; };
 		211BFDEC141FA06F009C1EA5 /* ContactData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactData.h; sourceTree = "<group>"; };
 		211BFDED141FA06F009C1EA5 /* ContactData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactData.m; sourceTree = "<group>"; };
+		211DC5C514409DF2002FDAF4 /* checkDateButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = checkDateButton.h; sourceTree = "<group>"; };
+		211DC5C614409DF2002FDAF4 /* checkDateButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = checkDateButton.m; sourceTree = "<group>"; };
 		212B47C214258D3B00DE4938 /* CustomPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPicker.h; sourceTree = "<group>"; };
 		212B47C314258D3B00DE4938 /* CustomPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPicker.m; sourceTree = "<group>"; };
 		2158386C1438B61B0034356B /* CAttributeConstellation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAttributeConstellation.h; sourceTree = "<group>"; };
@@ -590,6 +593,8 @@
 				21A32828142D819700F62134 /* syncButtonCell.m */,
 				219E3428143D646000F1F111 /* DateButton.h */,
 				219E3429143D646000F1F111 /* DateButton.m */,
+				211DC5C514409DF2002FDAF4 /* checkDateButton.h */,
+				211DC5C614409DF2002FDAF4 /* checkDateButton.m */,
 			);
 			path = CustView;
 			sourceTree = "<group>";
@@ -851,6 +856,7 @@
 				21E27DC6143AB23D00A3F124 /* CheckBox.m in Sources */,
 				21A6EF73143D507A0099B486 /* MemoCell.m in Sources */,
 				219E342A143D646000F1F111 /* DateButton.m in Sources */,
+				211DC5C714409DF2002FDAF4 /* checkDateButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

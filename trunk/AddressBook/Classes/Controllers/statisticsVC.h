@@ -9,6 +9,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "checkDateButton.h"
+
 @interface statisticsVC : UIViewController
 <
 UISearchBarDelegate,
@@ -20,10 +22,16 @@ UITableViewDataSource
 	UISearchBar				  * m_pSearchBar;
 	
 	IBOutlet UITableView      * m_pTableView_IB;
+	
+	NSDate          *m_pDate;
+	checkDateButton *m_pDateButton;
 }
 
 @property (retain,nonatomic) UISearchDisplayController * m_pSearchDC;
 @property (retain,nonatomic) UISearchBar			   * m_pSearchBar;
 @property (retain,nonatomic) IBOutlet UITableView      * m_pTableView_IB;
+@property (nonatomic, retain) NSDate *m_pDate;
+
+
 
 @end

@@ -25,6 +25,8 @@
 	
 	self.m_pDate = date;
 	
+	[m_pDateButton setButtonDate:self.m_pDate];
+	
 	[self fetchEventsForToday];
 	
 	[m_pTableView_IB reloadData];
@@ -72,6 +74,7 @@
 	self.m_pDate = startDate;
 	
 	m_pDateButton = [[DateButton alloc] initWithFrame:CGRectMake(6,6,32,32)];
+	[m_pDateButton setButtonDate:self.m_pDate];
 	[self.navigationController.navigationBar addSubview:m_pDateButton];
 	m_pDateButton.Target   = self;
 	m_pDateButton.Selector = @selector(GetDatePressed:);
@@ -213,8 +216,33 @@
 	cell.accessoryType = editableCellAccessoryType;
 	
 	// Get the event at the row selected and display it's title
-	cell.m_pTitle.text  = [[self.eventsList objectAtIndex:indexPath.row] title];
-	cell.m_pLocate.text = [[self.eventsList objectAtIndex:indexPath.row] location];
+	EKEvent * pEvent = (EKEvent*)[self.eventsList objectAtIndex:indexPath.row];
+	if(pEvent)
+	{	
+		cell.m_pTitle.text  = [pEvent title];
+		cell.m_pLocate.text = [pEvent location];
+		
+		if([pEvent isAllDay])
+		{
+			cell.m_pTime.text = @"全天";
+		}
+		else
+		{
+			NSDate * pStartDate = [pEvent startDate];
+			NSDate * pEndDate   = [pEvent endDate];
+			
+			NSDateFormatter *Formatter = [[[NSDateFormatter alloc] init] autorelease];
+			[Formatter setDateFormat:@"HH:mm"];
+			
+			NSString *StartString = [Formatter stringFromDate:pStartDate];
+			NSString *EndString   = [Formatter stringFromDate:pEndDate];
+			
+			//NSLog(@"[%@]",StartString);
+			//NSLog(@"[%@]",EndString);
+			cell.m_pTime.text = [NSString stringWithFormat:@"%@-%@",StartString,EndString];
+		}
+		
+	}
 	
 	return cell;
 }
