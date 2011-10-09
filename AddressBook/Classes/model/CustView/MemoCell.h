@@ -22,11 +22,13 @@ extern NSString *KMemoCell_ID;
 	UILabel     * m_pTime;		//全天
 	UILabel     * m_pTitle;		//标题
 	UILabel     * m_pLocate;    //位置
+	UILabel     * m_pType;      //类型
 }
 
 @property (nonatomic,retain) UILabel     * m_pTitle;
 @property (nonatomic,retain) UILabel     * m_pLocate;
 @property (nonatomic,retain) UILabel     * m_pTime;
+@property (nonatomic,retain) UILabel     * m_pType;
 @property (nonatomic,assign) NSInteger m_nOffSet;
 @property (nonatomic,assign) BOOL m_IsSelect;
 

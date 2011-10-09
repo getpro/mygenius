@@ -7,9 +7,9 @@
 //
 
 #import "memoVC.h"
-#import "MemoCell.h"
 #import "CustomDatePicker.h"
 #import "AddressBookAppDelegate.h"
+#import "ModalAlert.h"
 
 @implementation memoVC
 
@@ -34,12 +34,100 @@
 
 -(void)GetDatePressed:(id)sender
 {
+	isLongPress = NO;
+	[m_pMemoCheckBox removeFromSuperview];
+	
 	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	
 	CustomDatePicker *tvc = [[[CustomDatePicker alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H) DatePickerMode:UIDatePickerModeDate] autorelease];
 	tvc.Target   = self;
 	tvc.Selector = @selector(getTimeResult:);			
 	[app.window addSubview:tvc];
+}
+
+-(void)GetPressed:(id)sender
+{
+	NSString * pStr = (NSString*)sender;
+	switch ([pStr intValue]) 
+	{
+		case 0:
+		{
+			//删除
+			if([ModalAlert ask:@"是否确认删除?" withCancel:@"取消" withButtons:nil])
+			{
+				//临时数组
+				NSMutableArray *pTempList = [NSMutableArray arrayWithCapacity:[self.eventsList count]];
+				for(int pRow = 0;pRow < [self.eventsList count];pRow++)
+				{
+					EKEvent * pEvent = (EKEvent*)[self.eventsList objectAtIndex:pRow];
+					[pTempList addObject:pEvent];
+				}
+				
+				for(int pRow = 0;pRow < [self.eventsList count];pRow++)
+				{
+					NSIndexPath * indexPath = [NSIndexPath indexPathForRow:pRow inSection:0];
+					MemoCell  *cell = (MemoCell*)[self.m_pTableView_IB cellForRowAtIndexPath:indexPath];
+					
+					if(cell && cell.m_IsSelect)
+					{
+						NSError * error = nil;
+						EKEvent * pEvent = (EKEvent*)[self.eventsList objectAtIndex:pRow];
+						if(pEvent)
+						{
+							if([self.eventStore removeEvent:pEvent span:EKSpanThisEvent error:&error])
+							{
+								[pTempList removeObject:pEvent];
+							}
+						}
+					}
+				}
+				
+				[self.eventsList removeAllObjects];
+				for(int pRow = 0;pRow < [pTempList count];pRow++)
+				{
+					EKEvent * pEvent = (EKEvent*)[pTempList objectAtIndex:pRow];
+					[self.eventsList addObject:pEvent];
+				}
+				
+				isLongPress = NO;
+				[m_pMemoCheckBox removeFromSuperview];
+				[m_pTableView_IB reloadData];
+			}
+		}
+			break;
+		case 1:
+		{
+			//取消
+			isLongPress = NO;
+			[m_pMemoCheckBox removeFromSuperview];
+			[m_pTableView_IB reloadData];
+		}
+			break;
+		default:
+			break;
+	}
+}
+
+- (void)LongPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+	NSLog(@"LongPress");
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
+    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) 
+	{
+        NSLog(@"LongPressBegin");
+		
+    }
+	else if ([gestureRecognizer state] == UIGestureRecognizerStateEnded)
+	{
+		NSLog(@"LongPressEnd");
+		isLongPress = YES;
+		//[app setBottomHiden:YES];
+		
+		[app.window addSubview:m_pMemoCheckBox];
+		
+		[m_pTableView_IB reloadData];
+	}
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -78,6 +166,16 @@
 	[self.navigationController.navigationBar addSubview:m_pDateButton];
 	m_pDateButton.Target   = self;
 	m_pDateButton.Selector = @selector(GetDatePressed:);
+	
+	m_pMemoCheckBox = [[MemoCheckBox alloc] initWithFrame:CGRectMake(0,424,320,56)];
+	m_pMemoCheckBox.Target   = self;
+	m_pMemoCheckBox.Selector = @selector(GetPressed:);
+	
+	UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(LongPress:)];
+	
+    [m_pTableView_IB addGestureRecognizer:longPressGesture];
+	
+    [longPressGesture release];
 }
 
 
@@ -112,6 +210,7 @@
 	[m_pRightAdd     release];
 	[m_pDate         release];
 	[m_pDateButton   release];
+	[m_pMemoCheckBox release];
 	
 	[eventStore			  release];
 	[eventsList			  release];
@@ -123,6 +222,9 @@
 
 -(IBAction)addItemBtn:(id)sender
 {
+	isLongPress = NO;
+	[m_pMemoCheckBox removeFromSuperview];
+	
 	// When add button is pushed, create an EKEventEditViewController to display the event.
 	EKEventEditViewController *addController = [[EKEventEditViewController alloc] initWithNibName:nil bundle:nil];
 	
@@ -160,6 +262,27 @@
 	
 	[self.eventsList addObjectsFromArray:events];
 	
+}
+
+-(void) checkType:(NSString*)pStr :(MemoCell*)pCell
+{
+	NSRange pRang = [pStr rangeOfString:@"生日"];
+	
+	if(pRang.length)
+	{
+		pCell.m_pType.text = @"生日";
+		return;
+	}
+	
+	pRang = [pStr rangeOfString:@"纪念日"];
+	
+	if(pRang.length)
+	{
+		pCell.m_pType.text = @"纪念日";
+		return;
+	}
+	
+	pCell.m_pType.text = @"";
 }
 
 #pragma mark -
@@ -200,17 +323,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-	static NSString *CellIdentifier = @"memoCell";
+	//static NSString *CellIdentifier = @"memoCell";
 	
 	// Add disclosure triangle to cell
-	UITableViewCellAccessoryType editableCellAccessoryType =UITableViewCellAccessoryDisclosureIndicator;
+	UITableViewCellAccessoryType editableCellAccessoryType = UITableViewCellAccessoryNone;
 	
-	
-	MemoCell *cell = (MemoCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	MemoCell *cell = (MemoCell*)[tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"memoCell_%d",indexPath.row]];
 	if (cell == nil)
 	{
 		cell = [[[MemoCell alloc] initWithStyle:UITableViewCellStyleDefault 
-									   reuseIdentifier:CellIdentifier] autorelease];
+									   reuseIdentifier:[NSString stringWithFormat:@"memoCell_%d",indexPath.row]] autorelease];
 	}
 	
 	cell.accessoryType = editableCellAccessoryType;
@@ -242,6 +364,24 @@
 			cell.m_pTime.text = [NSString stringWithFormat:@"%@-%@",StartString,EndString];
 		}
 		
+		NSString * pNote = [pEvent notes];
+		if(pNote)
+		{
+			[self checkType:pNote:cell];
+		}
+		else
+		{
+			cell.m_pType.text = @"";
+		}
+	}
+	
+	if(isLongPress)
+	{
+		[cell setOffSet:YES];
+	}
+	else
+	{
+		[cell setOffSet:NO];
 	}
 	
 	return cell;
@@ -252,19 +392,38 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
-{	
-	// Upon selecting an event, create an EKEventViewController to display the event.
-	self.detailViewController = [[EKEventViewController alloc] initWithNibName:nil bundle:nil];			
-	detailViewController.event = [self.eventsList objectAtIndex:indexPath.row];
+{
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
-	// Allow event editing.
-	detailViewController.allowsEditing = YES;
-	
-	//	Push detailViewController onto the navigation controller stack
-	//	If the underlying event gets deleted, detailViewController will remove itself from
-	//	the stack and clear its event property.
-	[self.navigationController pushViewController:detailViewController animated:YES];
-	
+	if(isLongPress)
+	{
+		if (tableView == self.m_pTableView_IB)
+		{
+			MemoCell  *cell = (MemoCell*)[self.m_pTableView_IB cellForRowAtIndexPath:indexPath];
+			if(cell.m_IsSelect)
+			{
+				[cell setSelect:NO];
+			}
+			else
+			{
+				[cell setSelect:YES];
+			}
+		}
+	}
+	else
+	{
+		// Upon selecting an event, create an EKEventViewController to display the event.
+		self.detailViewController = [[EKEventViewController alloc] initWithNibName:nil bundle:nil];			
+		detailViewController.event = [self.eventsList objectAtIndex:indexPath.row];
+		
+		// Allow event editing.
+		detailViewController.allowsEditing = YES;
+		
+		//	Push detailViewController onto the navigation controller stack
+		//	If the underlying event gets deleted, detailViewController will remove itself from
+		//	the stack and clear its event property.
+		[self.navigationController pushViewController:detailViewController animated:YES];
+	}
 }
 
 #pragma mark -

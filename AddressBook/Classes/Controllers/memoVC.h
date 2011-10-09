@@ -12,6 +12,8 @@
 #import <EventKitUI/EventKitUI.h>
 
 #import "DateButton.h"
+#import "MemoCell.h"
+#import "MemoCheckBox.h"
 
 @interface memoVC : UIViewController 
 <
@@ -30,6 +32,10 @@ EKEventEditViewDelegate
 	
 	NSDate     *m_pDate;
 	DateButton *m_pDateButton;
+	
+	MemoCheckBox *m_pMemoCheckBox;
+	
+	BOOL isLongPress;
 }
 
 @property (retain,nonatomic) IBOutlet UITableView      * m_pTableView_IB;
@@ -42,6 +48,8 @@ EKEventEditViewDelegate
 @property (nonatomic, retain) NSDate *m_pDate;
 
 -(void) fetchEventsForToday;
+
+-(void) checkType:(NSString*)pStr :(MemoCell*)pCell;
 
 -(IBAction)addItemBtn:(id)sender;
 
