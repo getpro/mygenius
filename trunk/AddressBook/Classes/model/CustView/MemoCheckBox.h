@@ -1,16 +1,15 @@
 //
-//  CheckBox.h
+//  MemoCheckBox.h
 //  AddressBook
 //
-//  Created by Peteo on 11-10-4.
+//  Created by Peteo on 11-10-9.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
-//	
-//  通讯录长按弹出框
+//
+//  备忘录长按弹出框
 
 #import <UIKit/UIKit.h>
 
-
-@interface CheckBox : UIView 
+@interface MemoCheckBox : UIView 
 {
 	id  Target;
 	SEL Selector;

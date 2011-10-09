@@ -13,7 +13,7 @@ NSString *KMemoCell_ID = @"MemoCell";
 
 @implementation MemoCell
 
-@synthesize m_nOffSet,m_IsSelect,m_pTitle,m_pLocate,m_pTime;
+@synthesize m_nOffSet,m_IsSelect,m_pTitle,m_pLocate,m_pTime,m_pType;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     
@@ -23,11 +23,11 @@ NSString *KMemoCell_ID = @"MemoCell";
         // Initialization code.
 		m_nOffSet = 5;
 		
-		m_pCheckSelect = [[UIImageView alloc] initWithFrame:CGRectMake(4, 23, 12, 12)];
+		m_pCheckSelect = [[UIImageView alloc] initWithFrame:CGRectMake(4, 15, 12, 12)];
 		[m_pCheckSelect setImage:[UIImage imageNamed:@"checkBox_hover.png"]];
 		[self addSubview:m_pCheckSelect];
 		
-		m_pCheck = [[UIImageView alloc] initWithFrame:CGRectMake(4, 23, 12, 12)];
+		m_pCheck = [[UIImageView alloc] initWithFrame:CGRectMake(4, 15, 12, 12)];
 		[m_pCheck setImage:[UIImage imageNamed:@"checkBox.png"]];
 		[self addSubview:m_pCheck];
 		
@@ -55,6 +55,14 @@ NSString *KMemoCell_ID = @"MemoCell";
 		m_pLocate.textColor = [UIColor grayColor];
 		[self addSubview:m_pLocate];
 		
+		//类型
+		m_pType = [[UILabel alloc] initWithFrame:CGRectMake(270,12,40,20)];
+		m_pType.textAlignment = UITextAlignmentRight;
+		m_pType.backgroundColor = [UIColor clearColor];
+		m_pType.font = [UIFont fontWithName:FONT_NAME size:12];
+		m_pType.textColor = [UIColor grayColor];
+		[self addSubview:m_pType];
+		
 		[m_pCheckSelect setHidden:YES];
 		[m_pCheck	    setHidden:YES];
 		
@@ -80,6 +88,7 @@ NSString *KMemoCell_ID = @"MemoCell";
 	[m_pLocate      release];
 	[m_pTitle       release];
 	[m_pTime        release];
+	[m_pType        release];
 	
     [super dealloc];
 }
@@ -89,6 +98,10 @@ NSString *KMemoCell_ID = @"MemoCell";
 	if(pHasOffSet)
 	{
 		m_nOffSet = 20;
+		
+		m_pTime.frame   = CGRectMake(m_nOffSet,16,60,12);
+		m_pTitle.frame  = CGRectMake(m_nOffSet + 65,4,180,20);
+		m_pLocate.frame = CGRectMake(m_nOffSet + 65,24,180,20);
 		
 		if(m_IsSelect)
 		{
@@ -104,6 +117,10 @@ NSString *KMemoCell_ID = @"MemoCell";
 	else
 	{
 		m_nOffSet = 5;
+		
+		m_pTime.frame   = CGRectMake(m_nOffSet,16,60,12);
+		m_pTitle.frame  = CGRectMake(m_nOffSet + 65,4,180,20);
+		m_pLocate.frame = CGRectMake(m_nOffSet + 65,24,180,20);
 		
 		[m_pCheckSelect setHidden:YES];
 		[m_pCheck	    setHidden:YES];

@@ -118,6 +118,7 @@
 		21E7135A13E3F8DC00BF47E6 /* statisticsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E7135613E3F8DC00BF47E6 /* statisticsVC.xib */; };
 		21E7135B13E3F8DC00BF47E6 /* memoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E7135713E3F8DC00BF47E6 /* memoVC.xib */; };
 		21E7135C13E3F8DC00BF47E6 /* moreVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E7135813E3F8DC00BF47E6 /* moreVC.xib */; };
+		21EF12CA1441EE91003DA8D0 /* MemoCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EF12C91441EE91003DA8D0 /* MemoCheckBox.m */; };
 		21F57BCA14278AA40099BEB5 /* CAttributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F57BC714278AA40099BEB5 /* CAttributeCell.m */; };
 		21F57BCB14278AA40099BEB5 /* EditableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F57BC914278AA40099BEB5 /* EditableCell.m */; };
 		21F57BD714278CD40099BEB5 /* CAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F57BD214278CD40099BEB5 /* CAttribute.m */; };
@@ -289,6 +290,8 @@
 		21E7135613E3F8DC00BF47E6 /* statisticsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = statisticsVC.xib; sourceTree = "<group>"; };
 		21E7135713E3F8DC00BF47E6 /* memoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = memoVC.xib; sourceTree = "<group>"; };
 		21E7135813E3F8DC00BF47E6 /* moreVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = moreVC.xib; sourceTree = "<group>"; };
+		21EF12C81441EE91003DA8D0 /* MemoCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoCheckBox.h; sourceTree = "<group>"; };
+		21EF12C91441EE91003DA8D0 /* MemoCheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoCheckBox.m; sourceTree = "<group>"; };
 		21F57BC614278AA40099BEB5 /* CAttributeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAttributeCell.h; sourceTree = "<group>"; };
 		21F57BC714278AA40099BEB5 /* CAttributeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAttributeCell.m; sourceTree = "<group>"; };
 		21F57BC814278AA40099BEB5 /* EditableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditableCell.h; sourceTree = "<group>"; };
@@ -570,6 +573,8 @@
 				21C9426614395A0A00EE7AAC /* Memo.xib */,
 				21E27DC4143AB23D00A3F124 /* CheckBox.h */,
 				21E27DC5143AB23D00A3F124 /* CheckBox.m */,
+				21EF12C81441EE91003DA8D0 /* MemoCheckBox.h */,
+				21EF12C91441EE91003DA8D0 /* MemoCheckBox.m */,
 				21C941E7143951FB00EE7AAC /* RecommendVC.h */,
 				21C941E8143951FB00EE7AAC /* RecommendVC.m */,
 				21C941E9143951FB00EE7AAC /* RecommendVC.xib */,
@@ -857,6 +862,7 @@
 				21A6EF73143D507A0099B486 /* MemoCell.m in Sources */,
 				219E342A143D646000F1F111 /* DateButton.m in Sources */,
 				211DC5C714409DF2002FDAF4 /* checkDateButton.m in Sources */,
+				21EF12CA1441EE91003DA8D0 /* MemoCheckBox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
