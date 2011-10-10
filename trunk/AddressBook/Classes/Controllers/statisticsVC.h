@@ -23,15 +23,15 @@ UITableViewDataSource
 	
 	IBOutlet UITableView      * m_pTableView_IB;
 	
-	NSDate          *m_pDate;
+	NSDate          *m_pStartDate;
+	NSDate          *m_pEndDate;
 	checkDateButton *m_pDateButton;
 }
 
 @property (retain,nonatomic) UISearchDisplayController * m_pSearchDC;
 @property (retain,nonatomic) UISearchBar			   * m_pSearchBar;
 @property (retain,nonatomic) IBOutlet UITableView      * m_pTableView_IB;
-@property (nonatomic, retain) NSDate *m_pDate;
-
-
+@property (nonatomic, retain) NSDate *m_pStartDate;
+@property (nonatomic, retain) NSDate *m_pEndDate;
 
 @end

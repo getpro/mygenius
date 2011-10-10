@@ -35,115 +35,145 @@
 		
 		[self addTarget:self action:@selector(btnPressed:)forControlEvents:UIControlEventTouchUpInside];
 		
-		m_pMonth = [[UILabel alloc] initWithFrame:CGRectMake(0,1,32,10)];
+		m_pMonth = [[UILabel alloc] initWithFrame:CGRectMake(0,0,48,10)];
 		m_pMonth.textAlignment = UITextAlignmentCenter;
 		m_pMonth.backgroundColor = [UIColor clearColor];
-		m_pMonth.font = [UIFont fontWithName:FONT_NAME size:8];
+		m_pMonth.font = [UIFont fontWithName:FONT_NAME size:10];
 		m_pMonth.textColor = [UIColor whiteColor];
+		//m_pMonth.text = [NSString stringWithFormat:@"%@  %@",@"Oct",@"Nov"];
 		[self addSubview:m_pMonth];
 		
-		m_pDay = [[UILabel alloc] initWithFrame:CGRectMake(0,12,32,16)];
-		m_pDay.textAlignment = UITextAlignmentCenter;
-		m_pDay.backgroundColor = [UIColor clearColor];
-		m_pDay.font = [UIFont fontWithName:FONT_NAME size:14];
-		m_pDay.textColor = [UIColor brownColor];
-		[self addSubview:m_pDay];
+		m_pStartDay = [[UILabel alloc] initWithFrame:CGRectMake(0,11,20,16)];
+		m_pStartDay.textAlignment = UITextAlignmentCenter;
+		m_pStartDay.backgroundColor = [UIColor clearColor];
+		m_pStartDay.font = [UIFont fontWithName:FONT_NAME size:14];
+		m_pStartDay.textColor = [UIColor brownColor];
+		//m_pStartDay.text = @"25";
+		[self addSubview:m_pStartDay];
+		
+		m_pEndDay = [[UILabel alloc] initWithFrame:CGRectMake(30,11,20,16)];
+		m_pEndDay.textAlignment = UITextAlignmentCenter;
+		m_pEndDay.backgroundColor = [UIColor clearColor];
+		m_pEndDay.font = [UIFont fontWithName:FONT_NAME size:14];
+		m_pEndDay.textColor = [UIColor brownColor];
+		//m_pEndDay.text = @"3";
+		[self addSubview:m_pEndDay];
 		
 	}
 	return self;
 }
 
--(void) setButtonDate:(NSDate*)pDate
+-(void) setButtonDate:(NSDate*)pStartDate :(NSDate*)pEndDate
 {
-	//self.date = pDate;
-	
 	NSDateFormatter *formattermonth = [[[NSDateFormatter alloc] init] autorelease];
 	NSDateFormatter *formatterday   = [[[NSDateFormatter alloc] init] autorelease];
 	
 	[formattermonth setDateFormat:@"MM"];
 	[formatterday   setDateFormat:@"dd"];
 	
-	NSString *monthStr = [formattermonth stringFromDate:pDate];
-	NSString *dayStr   = [formatterday   stringFromDate:pDate];
+	NSString *monthStartStr = [formattermonth stringFromDate:pStartDate];
+	NSString *dayStartStr   = [formatterday   stringFromDate:pStartDate];
 	
-	//NSLog(@"[%@]",monthStr);
-	//NSLog(@"[%@]",dayStr);
+	NSString *monthEndStr = [formattermonth stringFromDate:pEndDate];
+	NSString *dayEndStr   = [formatterday   stringFromDate:pEndDate];
 	
-	int month   = [monthStr   intValue];
+	NSLog(@"[%@]",monthStartStr);
+	NSLog(@"[%@]",dayStartStr);
+	NSLog(@"[%@]",monthEndStr);
+	NSLog(@"[%@]",dayEndStr);
 	
-	m_pDay.text = dayStr;
+	if([monthStartStr isEqual:monthEndStr])
+	{
+		m_pMonth.text = [NSString stringWithFormat:@"%@",[self getMonthStr:[monthStartStr intValue]]];
+	}
+	else
+	{
+		m_pMonth.text = [NSString stringWithFormat:@"%@  %@",[self getMonthStr:[monthStartStr intValue]],[self getMonthStr:[monthEndStr intValue]]];
+	}
+
+	m_pStartDay.text = dayStartStr;
+	m_pEndDay.text   = dayEndStr;
 	
-	switch (month)
+}
+
+-(NSString*) getMonthStr:(int)pIndex
+{
+	NSString * pRet = nil;
+	
+	switch (pIndex)
 	{
 		case 1:
 		{
-			m_pMonth.text = @"JAN";
+			pRet = @"JAN";
 		}
 			break;
 		case 2:
 		{
-			m_pMonth.text = @"FEB";
+			pRet = @"FEB";
 		}
 			break;
 		case 3:
 		{
-			m_pMonth.text = @"MAR";
+			pRet = @"MAR";
 		}
 			break;
 		case 4:
 		{
-			m_pMonth.text = @"APR";
+			pRet = @"APR";
 		}
 			break;
 		case 5:
 		{
-			m_pMonth.text = @"MAY";
+			pRet = @"MAY";
 		}
 			break;
 		case 6:
 		{
-			m_pMonth.text = @"JUN";
+			pRet = @"JUN";
 		}
 			break;
 		case 7:
 		{
-			m_pMonth.text = @"JUL";
+			pRet = @"JUL";
 		}
 			break;
 		case 8:
 		{
-			m_pMonth.text = @"AUG";
+			pRet = @"AUG";
 		}
 			break;
 		case 9:
 		{
-			m_pMonth.text = @"SEP";
+			pRet = @"SEP";
 		}
 			break;
 		case 10:
 		{
-			m_pMonth.text = @"OCT";
+			pRet = @"OCT";
 		}
 			break;
 		case 11:
 		{
-			m_pMonth.text = @"NOV";
+			pRet = @"NOV";
 		}
 			break;
 		case 12:
 		{
-			m_pMonth.text = @"DEC";
+			pRet = @"DEC";
 		}
 			break;
 		default:
 			break;
 	}
+	
+	return pRet;
 }
 
 - (void)dealloc 
 {
-	[m_pMonth release];
-	[m_pDay   release];
+	[m_pMonth	   release];
+	[m_pStartDay   release];
+	[m_pEndDay     release];
 	
     [super dealloc];
 }

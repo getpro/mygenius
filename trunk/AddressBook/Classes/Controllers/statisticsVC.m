@@ -7,26 +7,30 @@
 //
 
 #import "statisticsVC.h"
-
+#import "statisticsCheckVC.h"
 
 @implementation statisticsVC
 
 @synthesize m_pSearchDC;
 @synthesize m_pSearchBar;
 @synthesize m_pTableView_IB;
-@synthesize m_pDate;
+@synthesize m_pStartDate;
+@synthesize m_pEndDate;
 
 -(void)GetDatePressed:(id)sender
 {
-	//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	statisticsCheckVC * pStatisticsCheckVC = [[statisticsCheckVC alloc] init];
+	
+	[self.navigationController pushViewController:pStatisticsCheckVC animated:YES];
+	
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad 
+- (void)viewDidLoad
 {
     [super viewDidLoad];
 	
-	self.navigationItem.title = @"日程统计";
+	self.navigationItem.title = @"日程查询";
 	
 	// Create a search bar
 	self.m_pSearchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)] autorelease];
@@ -43,11 +47,24 @@
 	self.m_pSearchDC.searchResultsDataSource = self;
 	self.m_pSearchDC.searchResultsDelegate = self;
 	
+	NSDate *NowDate = [NSDate date];
+    NSDateFormatter* indateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [indateFormatter setDateFormat:@"yyyy-MM-dd"];
+	NSString *dateStr   = [indateFormatter stringFromDate:NowDate];
+    NSDate   *startDate = [indateFormatter dateFromString:dateStr];
+	self.m_pStartDate   = startDate;
+	
+	// endDate is 1 day = 60*60*24 seconds = 86400 seconds from startDate
+	self.m_pEndDate     = [NSDate dateWithTimeInterval:86400 * 7 sinceDate:self.m_pStartDate];
+	
 	m_pDateButton = [[checkDateButton alloc] initWithFrame:CGRectMake(6,7,50,30)];
-	[m_pDateButton setButtonDate:self.m_pDate];
+	[m_pDateButton setButtonDate:self.m_pStartDate :self.m_pEndDate];
 	[self.navigationController.navigationBar addSubview:m_pDateButton];
 	m_pDateButton.Target   = self;
 	m_pDateButton.Selector = @selector(GetDatePressed:);
+	
+	
+	
 }
 
 
@@ -77,7 +94,8 @@
 
 - (void)dealloc 
 {
-	[m_pDate	release];
+	[m_pStartDate	release];
+	[m_pEndDate	    release];
 	
     [super dealloc];
 }
