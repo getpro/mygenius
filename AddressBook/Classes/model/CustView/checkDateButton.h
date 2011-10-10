@@ -15,12 +15,15 @@
 	SEL Selector;
 	
 	UILabel    *m_pMonth;
-	UILabel    *m_pDay;
+	UILabel    *m_pStartDay;
+	UILabel    *m_pEndDay;
 }
 
 @property (nonatomic, assign) id  Target;
 @property (nonatomic, assign) SEL Selector;
 
--(void) setButtonDate:(NSDate*)pDate;
+-(NSString*) getMonthStr:(int)pIndex;
+
+-(void) setButtonDate:(NSDate*)pStartDate :(NSDate*)pEndDate;
 
 @end

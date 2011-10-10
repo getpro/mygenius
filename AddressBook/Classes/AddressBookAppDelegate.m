@@ -182,7 +182,7 @@
 	m_pstatisticsVC = [[statisticsVC alloc] init];
 	
 	UIImage* DateImage = [UIImage imageNamed:@"bottom_icon_statistics.png.png"];
-	UITabBarItem * DateBookItem = [[UITabBarItem alloc] initWithTitle:@"日程统计" image:DateImage tag:0];
+	UITabBarItem * DateBookItem = [[UITabBarItem alloc] initWithTitle:@"日程查询" image:DateImage tag:0];
 	m_pstatisticsVC.tabBarItem = DateBookItem;
 	[DateBookItem release];
 	

@@ -74,6 +74,8 @@
 		21A327CD142D7BE000F62134 /* syncAccountVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21A327CC142D7BE000F62134 /* syncAccountVC.xib */; };
 		21A32829142D819700F62134 /* syncButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A32828142D819700F62134 /* syncButtonCell.m */; };
 		21A6EF73143D507A0099B486 /* MemoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A6EF72143D507A0099B486 /* MemoCell.m */; };
+		21B324D7144339F200A881E9 /* statisticsCheckVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B324D5144339F200A881E9 /* statisticsCheckVC.m */; };
+		21B324D8144339F200A881E9 /* statisticsCheckVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21B324D6144339F200A881E9 /* statisticsCheckVC.xib */; };
 		21BBF434143F1851001339A2 /* data2_hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 21BBF432143F1851001339A2 /* data2_hover.png */; };
 		21BBF435143F1851001339A2 /* data2.png in Resources */ = {isa = PBXBuildFile; fileRef = 21BBF433143F1851001339A2 /* data2.png */; };
 		21BBF437143F187F001339A2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 21BBF436143F187F001339A2 /* Icon.png */; };
@@ -232,6 +234,9 @@
 		21A32828142D819700F62134 /* syncButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = syncButtonCell.m; sourceTree = "<group>"; };
 		21A6EF71143D507A0099B486 /* MemoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoCell.h; sourceTree = "<group>"; };
 		21A6EF72143D507A0099B486 /* MemoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoCell.m; sourceTree = "<group>"; };
+		21B324D4144339F200A881E9 /* statisticsCheckVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = statisticsCheckVC.h; sourceTree = "<group>"; };
+		21B324D5144339F200A881E9 /* statisticsCheckVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = statisticsCheckVC.m; sourceTree = "<group>"; };
+		21B324D6144339F200A881E9 /* statisticsCheckVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = statisticsCheckVC.xib; sourceTree = "<group>"; };
 		21BBF432143F1851001339A2 /* data2_hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = data2_hover.png; sourceTree = "<group>"; };
 		21BBF433143F1851001339A2 /* data2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = data2.png; sourceTree = "<group>"; };
 		21BBF436143F187F001339A2 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -524,6 +529,9 @@
 				21E7131F13E3F58700BF47E6 /* statisticsVC.h */,
 				21E7132013E3F58700BF47E6 /* statisticsVC.m */,
 				21E7135613E3F8DC00BF47E6 /* statisticsVC.xib */,
+				21B324D4144339F200A881E9 /* statisticsCheckVC.h */,
+				21B324D5144339F200A881E9 /* statisticsCheckVC.m */,
+				21B324D6144339F200A881E9 /* statisticsCheckVC.xib */,
 			);
 			name = "统计";
 			sourceTree = "<group>";
@@ -798,6 +806,7 @@
 				21BBF434143F1851001339A2 /* data2_hover.png in Resources */,
 				21BBF435143F1851001339A2 /* data2.png in Resources */,
 				21BBF437143F187F001339A2 /* Icon.png in Resources */,
+				21B324D8144339F200A881E9 /* statisticsCheckVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -863,6 +872,7 @@
 				219E342A143D646000F1F111 /* DateButton.m in Sources */,
 				211DC5C714409DF2002FDAF4 /* checkDateButton.m in Sources */,
 				21EF12CA1441EE91003DA8D0 /* MemoCheckBox.m in Sources */,
+				21B324D7144339F200A881E9 /* statisticsCheckVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
