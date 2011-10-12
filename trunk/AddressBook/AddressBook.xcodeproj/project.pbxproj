@@ -120,6 +120,13 @@
 		21E7135A13E3F8DC00BF47E6 /* statisticsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E7135613E3F8DC00BF47E6 /* statisticsVC.xib */; };
 		21E7135B13E3F8DC00BF47E6 /* memoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E7135713E3F8DC00BF47E6 /* memoVC.xib */; };
 		21E7135C13E3F8DC00BF47E6 /* moreVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E7135813E3F8DC00BF47E6 /* moreVC.xib */; };
+		21E83D721445C8DA00881E49 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E83D711445C8DA00881E49 /* Default.png */; };
+		21E83D811445CB5200881E49 /* aboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E83D7F1445CB5200881E49 /* aboutVC.m */; };
+		21E83D821445CB5200881E49 /* aboutVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E83D801445CB5200881E49 /* aboutVC.xib */; };
+		21E83D871445CC6B00881E49 /* about_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E83D861445CC6B00881E49 /* about_bg.png */; };
+		21E83DA21445D2B200881E49 /* helpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E83DA01445D2B200881E49 /* helpVC.m */; };
+		21E83DA31445D2B200881E49 /* helpVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E83DA11445D2B200881E49 /* helpVC.xib */; };
+		21E83DBB1445D5F300881E49 /* help.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21E83DBA1445D5F300881E49 /* help.txt */; };
 		21EF12CA1441EE91003DA8D0 /* MemoCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EF12C91441EE91003DA8D0 /* MemoCheckBox.m */; };
 		21F57BCA14278AA40099BEB5 /* CAttributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F57BC714278AA40099BEB5 /* CAttributeCell.m */; };
 		21F57BCB14278AA40099BEB5 /* EditableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F57BC914278AA40099BEB5 /* EditableCell.m */; };
@@ -295,6 +302,15 @@
 		21E7135613E3F8DC00BF47E6 /* statisticsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = statisticsVC.xib; sourceTree = "<group>"; };
 		21E7135713E3F8DC00BF47E6 /* memoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = memoVC.xib; sourceTree = "<group>"; };
 		21E7135813E3F8DC00BF47E6 /* moreVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = moreVC.xib; sourceTree = "<group>"; };
+		21E83D711445C8DA00881E49 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		21E83D7E1445CB5200881E49 /* aboutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aboutVC.h; sourceTree = "<group>"; };
+		21E83D7F1445CB5200881E49 /* aboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aboutVC.m; sourceTree = "<group>"; };
+		21E83D801445CB5200881E49 /* aboutVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = aboutVC.xib; sourceTree = "<group>"; };
+		21E83D861445CC6B00881E49 /* about_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_bg.png; sourceTree = "<group>"; };
+		21E83D9F1445D2B200881E49 /* helpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = helpVC.h; sourceTree = "<group>"; };
+		21E83DA01445D2B200881E49 /* helpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = helpVC.m; sourceTree = "<group>"; };
+		21E83DA11445D2B200881E49 /* helpVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = helpVC.xib; sourceTree = "<group>"; };
+		21E83DBA1445D5F300881E49 /* help.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = help.txt; sourceTree = "<group>"; };
 		21EF12C81441EE91003DA8D0 /* MemoCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoCheckBox.h; sourceTree = "<group>"; };
 		21EF12C91441EE91003DA8D0 /* MemoCheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoCheckBox.m; sourceTree = "<group>"; };
 		21F57BC614278AA40099BEB5 /* CAttributeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAttributeCell.h; sourceTree = "<group>"; };
@@ -455,6 +471,7 @@
 		219D99B913E5163100506FCB /* image */ = {
 			isa = PBXGroup;
 			children = (
+				21E83D851445CC6B00881E49 /* more */,
 				219E3423143D642900F1F111 /* memo */,
 				21D2577B142B889700306515 /* sync */,
 				218738F9141B6C52007D64B4 /* addressbook */,
@@ -542,6 +559,12 @@
 				21E7132513E3F5E800BF47E6 /* moreVC.h */,
 				21E7132613E3F5E800BF47E6 /* moreVC.m */,
 				21E7135813E3F8DC00BF47E6 /* moreVC.xib */,
+				21E83D7E1445CB5200881E49 /* aboutVC.h */,
+				21E83D7F1445CB5200881E49 /* aboutVC.m */,
+				21E83D801445CB5200881E49 /* aboutVC.xib */,
+				21E83D9F1445D2B200881E49 /* helpVC.h */,
+				21E83DA01445D2B200881E49 /* helpVC.m */,
+				21E83DA11445D2B200881E49 /* helpVC.xib */,
 			);
 			name = "更多";
 			sourceTree = "<group>";
@@ -624,6 +647,14 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		21E83D851445CC6B00881E49 /* more */ = {
+			isa = PBXGroup;
+			children = (
+				21E83D861445CC6B00881E49 /* about_bg.png */,
+			);
+			path = more;
+			sourceTree = "<group>";
+		};
 		21F57BD014278CD40099BEB5 /* Attribute */ = {
 			isa = PBXGroup;
 			children = (
@@ -673,6 +704,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				21E83DBA1445D5F300881E49 /* help.txt */,
+				21E83D711445C8DA00881E49 /* Default.png */,
 				21BBF436143F187F001339A2 /* Icon.png */,
 				219D99B913E5163100506FCB /* image */,
 				219D997213E5070A00506FCB /* AddressBook.db */,
@@ -807,6 +840,11 @@
 				21BBF435143F1851001339A2 /* data2.png in Resources */,
 				21BBF437143F187F001339A2 /* Icon.png in Resources */,
 				21B324D8144339F200A881E9 /* statisticsCheckVC.xib in Resources */,
+				21E83D721445C8DA00881E49 /* Default.png in Resources */,
+				21E83D821445CB5200881E49 /* aboutVC.xib in Resources */,
+				21E83D871445CC6B00881E49 /* about_bg.png in Resources */,
+				21E83DA31445D2B200881E49 /* helpVC.xib in Resources */,
+				21E83DBB1445D5F300881E49 /* help.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -873,6 +911,8 @@
 				211DC5C714409DF2002FDAF4 /* checkDateButton.m in Sources */,
 				21EF12CA1441EE91003DA8D0 /* MemoCheckBox.m in Sources */,
 				21B324D7144339F200A881E9 /* statisticsCheckVC.m in Sources */,
+				21E83D811445CB5200881E49 /* aboutVC.m in Sources */,
+				21E83DA21445D2B200881E49 /* helpVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
