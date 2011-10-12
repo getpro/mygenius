@@ -7,6 +7,8 @@
 //
 
 #import "moreVC.h"
+#import "aboutVC.h"
+#import "helpVC.h"
 
 typedef enum 
 {
@@ -117,6 +119,56 @@ typedef enum
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[aTableView deselectRowAtIndexPath:indexPath animated:YES];
+	
+	NSInteger pRow = indexPath.row;
+	
+	switch (indexPath.section) 
+	{
+		case More_TableView_Section_Services:
+		{
+			
+		}
+			break;
+		case More_TableView_Section_Share:
+		{
+			if(pRow == 0)
+			{
+				//分享好帮手
+				
+			}
+			else if(pRow == 1)
+			{
+				//意见反馈
+				
+			}
+		}
+			break;
+		case More_TableView_Section_Help:
+		{
+			if(pRow == 0)
+			{
+				//帮助信息
+				helpVC * pHelpVC = [[helpVC alloc] init];
+				
+				[self.navigationController pushViewController:pHelpVC animated:YES];
+				
+				[pHelpVC release];
+				
+			}
+			else if(pRow == 1)
+			{
+				//关于好帮手
+				aboutVC * pAboutVC = [[aboutVC alloc] init];
+				
+				[self.navigationController pushViewController:pAboutVC animated:YES];
+				
+				[pAboutVC release];
+			}
+		}
+			break;
+		default:
+			break;
+	}
 }
 
 // Override to support conditional editing of the table view.
