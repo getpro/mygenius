@@ -7,8 +7,10 @@
 //
 
 #import "AddressBookAppDelegate.h"
-
 #import "ABContactsHelper.h"
+
+//test
+#import "adviceVC.h"
 
 @implementation AddressBookAppDelegate
 
@@ -209,10 +211,14 @@
 	[moreNavController        release];
 	
 	
-	[self.window addSubview:tbController.view];
+	//[self.window addSubview:tbController.view];
 	
-	//[self.window addSubview:switchViewController.view];
-    
+	//test
+	adviceVC * pVC = [[adviceVC alloc] init];
+	UINavigationController * testController = [[UINavigationController alloc] initWithRootViewController:pVC];
+	[self.window addSubview:pVC.view];
+	
+	
     [self.window makeKeyAndVisible];
 	
     return YES;
