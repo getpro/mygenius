@@ -55,6 +55,8 @@
 		21907B141446FED000C8385F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21907B131446FED000C8385F /* SystemConfiguration.framework */; };
 		21907B1A1446FEEF00C8385F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21907B191446FEEF00C8385F /* OpenGLES.framework */; };
 		21907B201446FF3100C8385F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 21907B1F1446FF3100C8385F /* libz.dylib */; };
+		21907B491447039600C8385F /* adviceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21907B471447039600C8385F /* adviceVC.m */; };
+		21907B4A1447039600C8385F /* adviceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21907B481447039600C8385F /* adviceVC.xib */; };
 		219A4300142D98B900594D2B /* AddressAddSeniorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 219A42FE142D98B900594D2B /* AddressAddSeniorVC.m */; };
 		219A4301142D98B900594D2B /* AddressAddSeniorVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 219A42FF142D98B900594D2B /* AddressAddSeniorVC.xib */; };
 		219A4372142DA69D00594D2B /* CAttributeGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 219A4371142DA69D00594D2B /* CAttributeGroup.m */; };
@@ -231,6 +233,9 @@
 		21907B131446FED000C8385F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		21907B191446FEEF00C8385F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		21907B1F1446FF3100C8385F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		21907B461447039600C8385F /* adviceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adviceVC.h; sourceTree = "<group>"; };
+		21907B471447039600C8385F /* adviceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = adviceVC.m; sourceTree = "<group>"; };
+		21907B481447039600C8385F /* adviceVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = adviceVC.xib; sourceTree = "<group>"; };
 		219A42FD142D98B900594D2B /* AddressAddSeniorVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressAddSeniorVC.h; sourceTree = "<group>"; };
 		219A42FE142D98B900594D2B /* AddressAddSeniorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressAddSeniorVC.m; sourceTree = "<group>"; };
 		219A42FF142D98B900594D2B /* AddressAddSeniorVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressAddSeniorVC.xib; sourceTree = "<group>"; };
@@ -623,6 +628,9 @@
 				21E83D9F1445D2B200881E49 /* helpVC.h */,
 				21E83DA01445D2B200881E49 /* helpVC.m */,
 				21E83DA11445D2B200881E49 /* helpVC.xib */,
+				21907B461447039600C8385F /* adviceVC.h */,
+				21907B471447039600C8385F /* adviceVC.m */,
+				21907B481447039600C8385F /* adviceVC.xib */,
 			);
 			name = "更多";
 			sourceTree = "<group>";
@@ -907,6 +915,7 @@
 				21E83D871445CC6B00881E49 /* about_bg.png in Resources */,
 				21E83DA31445D2B200881E49 /* helpVC.xib in Resources */,
 				21E83DBB1445D5F300881E49 /* help.txt in Resources */,
+				21907B4A1447039600C8385F /* adviceVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -981,6 +990,7 @@
 				219079E61446FDC800C8385F /* ASIHTTPRequest.m in Sources */,
 				219079E71446FDC800C8385F /* ASIInputStream.m in Sources */,
 				219079E81446FDC800C8385F /* Reachability.m in Sources */,
+				21907B491447039600C8385F /* adviceVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
