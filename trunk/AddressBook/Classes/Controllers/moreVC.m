@@ -9,6 +9,7 @@
 #import "moreVC.h"
 #import "aboutVC.h"
 #import "helpVC.h"
+#import "adviceVC.h"
 
 typedef enum 
 {
@@ -139,7 +140,11 @@ typedef enum
 			else if(pRow == 1)
 			{
 				//意见反馈
+				adviceVC * pAdviceVC = [[adviceVC alloc] init];
 				
+				[self.navigationController pushViewController:pAdviceVC animated:YES];
+				
+				[pAdviceVC release];
 			}
 		}
 			break;
