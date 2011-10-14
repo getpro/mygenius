@@ -96,20 +96,20 @@ textarea	content	是	留言内容
 			
 			[request buildPostBody];
 			
-			//[request startSynchronous];
+			[request startSynchronous];
 			
-			[request setDelegate:self];
-			[request startAsynchronous];
+			//[request setDelegate:self];
+			//[request startAsynchronous];
 			
 			
-			/*
+			
 			NSError *error = [request error];
 			if (!error)
 			{
 				NSString *response = [request responseString];
 				NSLog(@"%@",response);
 			}
-			*/
+			
 			
 			
 			
