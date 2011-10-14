@@ -214,12 +214,12 @@ static void logNetworkStatus_(const char *name, int line, NetworkStatus status) 
 } // dealloc
 
 
-- (Reachability *) initWithReachabilityRef: (SCNetworkReachabilityRef) ref 
-{
-    self = [super init];
-	if (self != nil) 
-    {
+- (Reachability *) initWithReachabilityRef: (SCNetworkReachabilityRef) ref {
+	
+	if (self = [super init]) {
+		
 		reachabilityRef = ref;
+		
 	}
 	
 	return self;
@@ -742,7 +742,7 @@ static const SCNetworkReachabilityFlags kOnDemandConnection = kSCNetworkReachabi
 	SCNetworkReachabilityFlags flags;
 	if (SCNetworkReachabilityGetFlags(reachabilityRef, &flags))
 	{
-		if(self.key == kLocalWiFiConnection)
+		if(key == kLocalWiFiConnection)
 		{
 			retVal = [self localWiFiStatusForFlags: flags];
 		}
@@ -766,7 +766,7 @@ static const SCNetworkReachabilityFlags kOnDemandConnection = kSCNetworkReachabi
 		
 		logReachabilityFlags(flags);
 		
-		if(self.key == kLocalWiFiConnection) {
+		if(key == kLocalWiFiConnection) {
 			
 			status = [self localWiFiStatusForFlags: flags];
 			
