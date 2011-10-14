@@ -211,12 +211,12 @@
 	[moreNavController        release];
 	
 	
-	[self.window addSubview:tbController.view];
+	//[self.window addSubview:tbController.view];
 	
 	//test
-	//adviceVC * pVC = [[adviceVC alloc] init];
-	//UINavigationController * testController = [[UINavigationController alloc] initWithRootViewController:pVC];
-	//[self.window addSubview:pVC.view];
+	adviceVC * pVC = [[adviceVC alloc] init];
+	UINavigationController * testController = [[UINavigationController alloc] initWithRootViewController:pVC];
+	[self.window addSubview:pVC.view];
 	
 	
     [self.window makeKeyAndVisible];

@@ -16,6 +16,7 @@ textarea	content	是	留言内容
 
 #import "adviceVC.h"
 #import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 
 #define ADVICE_URL @"http://www.nilayahome.com/iphone/sybook/booksave.asp"
 
@@ -83,21 +84,23 @@ textarea	content	是	留言内容
 			[textView resignFirstResponder];
 			
 			//发送请求
-			/*
+			//ASIFormDataRequest
 			ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:ADVICE_URL]];
 			
 			// Default becomes POST when you use appendPostData: / appendPostDataFromFile: / setPostBody:
 			[request setRequestMethod:@"POST"];
 			
+			//[request appendPostData:[@"title=122&name=test&email=11&content=1122" dataUsingEncoding:NSUTF8StringEncoding]];
+			
 			[request appendPostData:[@"title=122&name=test&email=11&content=1122" dataUsingEncoding:NSUTF8StringEncoding]];
 			
-			//[request buildPostBody];
+			[request buildPostBody];
 			
 			//[request startSynchronous];
 			
 			[request setDelegate:self];
 			[request startAsynchronous];
-			*/
+			
 			
 			/*
 			NSError *error = [request error];
@@ -131,7 +134,7 @@ textarea	content	是	留言内容
 			
 			
 			
-			
+			/*
 			NSURL *url = [NSURL URLWithString:ADVICE_URL];
 			ASIHTTPRequest *theRequest = [ASIHTTPRequest requestWithURL:url];
 			
@@ -162,7 +165,7 @@ textarea	content	是	留言内容
                 NSString* response = [theRequest responseString];
                 NSLog(@"feedback response = %@",response);
 			}
-			
+			*/
 			
 			
 		}
@@ -180,7 +183,13 @@ textarea	content	是	留言内容
 	NSLog(@"%@",responseString);
 	
 	// Use when fetching binary data
-	//NSData *responseData = [request responseData];
+	NSData *responseData = [request responseData];
+	
+	NSString *stringdata=[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];  
+	
+	
+	NSLog(@"%@",stringdata);
+	
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
