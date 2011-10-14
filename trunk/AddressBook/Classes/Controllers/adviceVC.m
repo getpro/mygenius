@@ -84,38 +84,9 @@ textarea	content	是	留言内容
 			[textView resignFirstResponder];
 			
 			//发送请求
-			//ASIFormDataRequest
-			ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:ADVICE_URL]];
-			
-			// Default becomes POST when you use appendPostData: / appendPostDataFromFile: / setPostBody:
-			[request setRequestMethod:@"POST"];
-			
-			//[request appendPostData:[@"title=122&name=test&email=11&content=1122" dataUsingEncoding:NSUTF8StringEncoding]];
-			
-			[request appendPostData:[@"title=122&name=test&email=11&content=1122" dataUsingEncoding:NSUTF8StringEncoding]];
-			
-			[request buildPostBody];
-			
-			[request startSynchronous];
-			
-			//[request setDelegate:self];
-			//[request startAsynchronous];
-			
-			
-			
-			NSError *error = [request error];
-			if (!error)
-			{
-				NSString *response = [request responseString];
-				NSLog(@"%@",response);
-			}
-			
-			
-			
-			
 			
 			/*
-			NSString *post = @"title=122&name=test&email=11&content=1122";  
+			NSString *post = @"title=122&name=test&email=11@163.com&content=1122";  
 			
 			//NSString *post = @"";  
 			NSData *postData=[post dataUsingEncoding:NSUTF8StringEncoding];
@@ -134,10 +105,10 @@ textarea	content	是	留言内容
 			
 			
 			
-			/*
-			NSURL *url = [NSURL URLWithString:ADVICE_URL];
-			ASIHTTPRequest *theRequest = [ASIHTTPRequest requestWithURL:url];
 			
+			NSURL *url = [NSURL URLWithString:ADVICE_URL];
+			ASIFormDataRequest *theRequest = [ASIFormDataRequest requestWithURL:url];
+			[theRequest setRequestMethod:@"POST"];
 			//        [theRequest setDelegate:self];
 			//        [theRequest setDidFailSelector:@selector(urlhttpFailed:)];
 			//        [theRequest setDidFinishSelector:@selector(urlhttpFinished:)];
@@ -150,10 +121,15 @@ textarea	content	是	留言内容
 			ASIHTTPRequest.shouldUpdateNetworkActivityIndicator = YES;
 			
 			[theRequest appendPostData:[@"title=12&name=test&email=11&content=112" dataUsingEncoding:NSUTF8StringEncoding]];
-			[theRequest buildPostBody];
+			
 			[theRequest setTimeOutSeconds:10];
-			[theRequest addRequestHeader:@"Content-Type" value:@"text/xml; charset=utf-8"];
+			//[theRequest addRequestHeader:@"Content-Type" value:@"text/xml; charset=UTF-8"];
 			//[theRequest addRequestHeader:@"SOAPAction" value:@"http://guestbook2.eastmoney.com/AddMessageByMobile"];
+			
+			[theRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; charset=UTF-8"];
+			//theRequest.postBody = [NSMutableData dataWithData:[@"title=12&name=test&email=11@11.com&content=112" dataUsingEncoding:NSUTF8StringEncoding]];
+			
+			[theRequest buildPostBody];
 			
 			NSLog(@"theRequest head = %@",[theRequest requestHeaders]);
 			
@@ -165,7 +141,7 @@ textarea	content	是	留言内容
                 NSString* response = [theRequest responseString];
                 NSLog(@"feedback response = %@",response);
 			}
-			*/
+			
 			
 			
 		}

@@ -10,6 +10,7 @@
 #import "aboutVC.h"
 #import "helpVC.h"
 #import "adviceVC.h"
+#import "serviceListVC.h"
 
 typedef enum 
 {
@@ -127,7 +128,12 @@ typedef enum
 	{
 		case More_TableView_Section_Services:
 		{
+			//运营商
+			serviceListVC * pServiceListVC = [[serviceListVC alloc] init];
 			
+			[self.navigationController pushViewController:pServiceListVC animated:YES];
+			
+			[pServiceListVC release];
 		}
 			break;
 		case More_TableView_Section_Share:

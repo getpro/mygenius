@@ -17,6 +17,10 @@
 {
     [super viewDidLoad];
 	
+	self.navigationItem.title = @"运营商规则";
+	
+	m_pTableView_IB.backgroundColor = [UIColor clearColor];
+	
 	m_pTableView_IB.allowsSelectionDuringEditing = YES;
 	
 	//[m_pTableView_IB setEditing:YES];
