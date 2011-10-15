@@ -8,6 +8,7 @@
 
 #import "DataStore.h"
 #import "DBConnection.h"
+#import "AddressBookAppDelegate.h"
 
 @implementation DataStore
 
@@ -564,7 +565,7 @@
 		//获取dates值
 		NSDate* datesContent = (NSDate*)ABMultiValueCopyValueAtIndex(dates, y);
 		
-		[self insertDates:pRecordID:[datesContent timeIntervalSince1970]:datesLabel:y:0:0];
+		[self insertDates:@"0":pRecordID:[datesContent timeIntervalSince1970]:datesLabel:y:0:0];
 		
 	}
 	
@@ -753,20 +754,26 @@
 	[stmt release];
 }
 
-+(void)insertDates:(ABRecordID)pRecordID:(NSInteger)pContent:(NSString*)pLabel:(NSInteger)pIndex:(NSInteger)pRemind:(NSInteger)pType
++(void)upDateEvent:(NSString*)pIdentifier :(EKEvent*)pEvent
+{
+	Statement *stmt = [DBConnection statementWithQuery:"UPDATE date_info SET date_time = ?,date_label = ?,date_remind = ?,date_modification = ? WHERE date_identifier = ?"];
+	
+    [stmt bindInt32 :[[pEvent startDate] timeIntervalSince1970]	   forIndex:1];
+	[stmt bindString:[pEvent title]                                forIndex:2];
+	//[stmt bindString:pEvent									   forIndex:3];
+	[stmt bindInt32 :[[NSDate date] timeIntervalSince1970]		   forIndex:4];
+	[stmt bindString:pIdentifier								   forIndex:5];
+	
+    [stmt step];
+}
+
++(void)removeDateEvent:(NSString*)pIdentifier
 {
 	Statement* stmt = nil;
 	
-	stmt = [DBConnection statementWithQuery:"INSERT INTO date_info VALUES(?,?,?,?,?,?,?,?)"];
+	stmt = [DBConnection statementWithQuery:"DELETE FROM date_info WHERE date_identifier = ?"];
 	
-	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
-	[stmt bindInt32:pContent						                forIndex:2];//2.time
-	[stmt bindString:pLabel									        forIndex:3];//3.label
-	[stmt bindString:[NSString stringWithFormat:@"%d",pRemind]	    forIndex:4];//4.remind
-	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:5];//5.index
-	[stmt bindString:[NSString stringWithFormat:@"%d",pType]	    forIndex:6];//6.type
-	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:7];//7.creation
-	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:8];//8.modification
+	[stmt bindString:pIdentifier	forIndex:1];//1.id
 	
 	[stmt retain];
 	[stmt step];
@@ -774,8 +781,64 @@
 	[stmt release];
 }
 
++(void)insertDates:(NSString*)pIdentifier:(ABRecordID)pRecordID:(NSInteger)pContent:(NSString*)pLabel:(NSInteger)pIndex:(NSInteger)pRemind:(NSInteger)pType
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"INSERT INTO date_info VALUES(?,?,?,?,?,?,?,?,?)"];
+	
+	[stmt bindString:pIdentifier	                                forIndex:1];//1.Identifier
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:2];//2.id
+	[stmt bindInt32: pContent						                forIndex:3];//3.time
+	[stmt bindString:pLabel									        forIndex:4];//4.label
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRemind]	    forIndex:5];//5.remind
+	[stmt bindString:[NSString stringWithFormat:@"%d",pIndex]	    forIndex:6];//6.index
+	[stmt bindString:[NSString stringWithFormat:@"%d",pType]	    forIndex:7];//7.type
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:8];//8.creation
+	[stmt bindInt32:[[NSDate date] timeIntervalSince1970]			forIndex:9];//9.modification
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
++(void)removeDatesEvents:(ABRecordID)pRecordID
+{
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
+	Statement * stmt  = nil;
+	NSError   * error = nil;
+	
+	stmt = [DBConnection statementWithQuery:"SELECT date_identifier FROM date_info WHERE contacts_id = ?"];
+	
+	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
+	
+	NSInteger count = 0;
+	
+	while ([stmt step] == SQLITE_ROW)
+	{
+		NSString * pIdentifier  = [stmt getString:0];//date_identifier
+		
+		if(pIdentifier)
+		{
+			EKEvent * pEvent = [app.eventStore eventWithIdentifier:pIdentifier];
+			
+			if(pEvent)
+				[app.eventStore removeEvent:pEvent span:EKSpanThisEvent error:&error];
+			
+		}
+		
+		count++;
+	}
+	
+	[stmt reset];
+}
+
 +(void)removeDates:(ABRecordID)pRecordID
 {
+	[self removeDatesEvents:pRecordID];
+	
 	Statement* stmt = nil;
 	
 	stmt = [DBConnection statementWithQuery:"DELETE FROM date_info WHERE contacts_id = ?"];
@@ -790,11 +853,13 @@
 
 +(NSArray*)getDates:(ABRecordID)pRecordID:(NSInteger)pType
 {
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
 	NSMutableArray *retArray = [[[NSMutableArray alloc] init] autorelease];
 	
 	Statement * stmt = nil;
 	
-	stmt = [DBConnection statementWithQuery:"SELECT date_time,date_label,date_remind FROM date_info WHERE contacts_id = ? AND date_type = ?"];
+	stmt = [DBConnection statementWithQuery:"SELECT date_time,date_label,date_remind,date_identifier FROM date_info WHERE contacts_id = ? AND date_type = ?"];
 	
 	[stmt bindString:[NSString stringWithFormat:@"%d",pRecordID]	forIndex:1];//1.id
 	[stmt bindString:[NSString stringWithFormat:@"%d",pType]	    forIndex:2];//2.type
@@ -803,19 +868,39 @@
 	
 	while ([stmt step] == SQLITE_ROW)
 	{
-		NSInteger  pDate		    = [stmt getInt32: 0];//date_time
-		NSString * pLabel           = [stmt getString:1];//date_label
+		//NSInteger  pDate		    = [stmt getInt32: 0];//date_time
+		//NSString * pLabel           = [stmt getString:1];//date_label
 		NSString * pRemind          = [stmt getString:2];//date_remind
+		NSString * pIdentifier      = [stmt getString:3];//date_identifier
 		
-		date_info * pDate_info = [[date_info alloc]init];
+		EKEvent * pEvent = [app.eventStore eventWithIdentifier:pIdentifier];
 		
-		pDate_info.m_nDate		    	 = pDate;
-		pDate_info.m_pLabel		         = pLabel;
-		pDate_info.m_nRemind             = [pRemind intValue];
-		
-		[retArray addObject:pDate_info];
-		
-		[pDate_info release];
+		if(pEvent)
+		{
+			[self upDateEvent:pIdentifier:pEvent];
+			date_info * pDate_info = [[date_info alloc]init];
+			
+			pDate_info.m_nDate		    	 = [[pEvent startDate] timeIntervalSince1970];
+			pDate_info.m_pLabel		         = [pEvent title];
+			pDate_info.m_nRemind             = [pRemind intValue];
+			pDate_info.m_pIdentifier         = pIdentifier;
+			
+			/*
+			pDate_info.m_nDate		    	 = pDate;
+			pDate_info.m_pLabel		         = pLabel;
+			pDate_info.m_nRemind             = [pRemind intValue];
+			pDate_info.m_pIdentifier         = pIdentifier;
+			*/
+			
+			[retArray addObject:pDate_info];
+			
+			[pDate_info release];
+		}
+		else
+		{
+			//已删除
+			[self removeDateEvent:pIdentifier];
+		}
 		
 		count++;
 	}

@@ -40,19 +40,22 @@
 @synthesize m_nDate;
 @synthesize m_pLabel;
 @synthesize m_nRemind;
+@synthesize m_pIdentifier;
 
 - (id)init
 {
     if ((self = [super init]))
 	{
-		m_pLabel		    = nil;
+		m_pLabel      = nil;
+		m_pIdentifier = nil;
 	}
 	return self;
 }
 
 - (void)dealloc
 {
-	[m_pLabel	release];
+	[m_pLabel	   release];
+	[m_pIdentifier release];
 	
     [super dealloc];
 }

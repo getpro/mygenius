@@ -17,7 +17,7 @@
 @synthesize m_pRightAdd;
 @synthesize m_pDate;
 
-@synthesize eventsList, eventStore, defaultCalendar, detailViewController;
+@synthesize eventsList,detailViewController;
 
 -(void)getTimeResult:(id)index
 {
@@ -47,6 +47,7 @@
 
 -(void)GetPressed:(id)sender
 {
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	NSString * pStr = (NSString*)sender;
 	switch ([pStr intValue]) 
 	{
@@ -74,9 +75,12 @@
 						EKEvent * pEvent = (EKEvent*)[self.eventsList objectAtIndex:pRow];
 						if(pEvent)
 						{
-							if([self.eventStore removeEvent:pEvent span:EKSpanThisEvent error:&error])
+							if([app.eventStore removeEvent:pEvent span:EKSpanThisEvent error:&error])
 							{
 								[pTempList removeObject:pEvent];
+								
+								//如果是联系人的日历，移除数据库
+								[DataStore removeDateEvent:pEvent.eventIdentifier];
 							}
 						}
 					}
@@ -138,13 +142,7 @@
 	self.navigationItem.title = @"备忘录";
 	self.navigationItem.rightBarButtonItem = m_pRightAdd;
 	
-	// Initialize an event store object with the init method. Initilize the array for events.
-	self.eventStore = [[EKEventStore alloc] init];
-	
 	self.eventsList = [[NSMutableArray alloc] initWithArray:0];
-	
-	// Get the default calendar from store.
-	self.defaultCalendar = [self.eventStore defaultCalendarForNewEvents];
 	
 	//NSArray * p = [self.eventStore calendars];
 	
@@ -212,16 +210,15 @@
 	[m_pDateButton   release];
 	[m_pMemoCheckBox release];
 	
-	[eventStore			  release];
-	[eventsList			  release];
-	[defaultCalendar	  release];
 	[detailViewController release];
+	[eventsList			  release];
 	
     [super dealloc];
 }
 
 -(IBAction)addItemBtn:(id)sender
 {
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	isLongPress = NO;
 	[m_pMemoCheckBox removeFromSuperview];
 	
@@ -229,7 +226,7 @@
 	EKEventEditViewController *addController = [[EKEventEditViewController alloc] initWithNibName:nil bundle:nil];
 	
 	// set the addController's event store to the current event store.
-	addController.eventStore = self.eventStore;
+	addController.eventStore = app.eventStore;
 	
 	// present EventsAddViewController as a modal view controller
 	[self presentModalViewController:addController animated:YES];
@@ -243,6 +240,8 @@
 // Fetching events happening in the next 24 hours with a predicate, limiting to the default calendar 
 - (void)fetchEventsForToday 
 {
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
 	[self.eventsList removeAllObjects];
 	
 	// endDate is 1 day = 60*60*24 seconds = 86400 seconds from startDate
@@ -250,13 +249,13 @@
 	//NSDate *endDate = [NSDate distantFuture];
 	
 	// Create the predicate. Pass it the default calendar.
-	NSArray *calendarArray = [NSArray arrayWithObject:defaultCalendar];
+	NSArray *calendarArray = [NSArray arrayWithObject:app.defaultCalendar];
 	
-	NSPredicate *predicate = [self.eventStore predicateForEventsWithStartDate:self.m_pDate endDate:endDate 
+	NSPredicate *predicate = [app.eventStore predicateForEventsWithStartDate:self.m_pDate endDate:endDate 
 																	calendars:calendarArray]; 
 	
 	// Fetch all events that match the predicate.
-	NSArray *events = [self.eventStore eventsMatchingPredicate:predicate];
+	NSArray *events = [app.eventStore eventsMatchingPredicate:predicate];
 	
 	NSLog(@"%@",events);
 	
@@ -340,9 +339,12 @@
 	// Get the event at the row selected and display it's title
 	EKEvent * pEvent = (EKEvent*)[self.eventsList objectAtIndex:indexPath.row];
 	if(pEvent)
-	{	
+	{
 		cell.m_pTitle.text  = [pEvent title];
 		cell.m_pLocate.text = [pEvent location];
+		
+		NSLog(@"Event[%@]",pEvent.eventIdentifier);
+		NSLog(@"Event[%@]",pEvent.title);
 		
 		if([pEvent isAllDay])
 		{
@@ -475,8 +477,9 @@
 {
 	NSError *error = nil;
 	EKEvent *thisEvent = controller.event;
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	
-	switch (action) 
+	switch (action)
 	{
 		case EKEventEditViewActionCanceled:
 			// Edit action canceled, do nothing. 
@@ -487,7 +490,7 @@
 			// and reload table view.
 			// If the new event is being added to the default calendar, then update its 
 			// eventsList.
-			if (self.defaultCalendar ==  thisEvent.calendar) 
+			if (app.defaultCalendar ==  thisEvent.calendar) 
 			{
 				[self.eventsList addObject:thisEvent];
 			}
@@ -500,12 +503,17 @@
 			// and reload table view.
 			// If deleting an event from the currenly default calendar, then update its 
 			// eventsList.
-			if (self.defaultCalendar ==  thisEvent.calendar) 
+			if (app.defaultCalendar ==  thisEvent.calendar) 
 			{
 				[self.eventsList removeObject:thisEvent];
 			}
 			[controller.eventStore removeEvent:thisEvent span:EKSpanThisEvent error:&error];
+			
+			//如果是联系人的日历，移除数据库
+			[DataStore removeDateEvent:thisEvent.eventIdentifier];
+			
 			[m_pTableView_IB reloadData];
+			
 			break;
 			
 		default:
@@ -520,7 +528,9 @@
 // Set the calendar edited by EKEventEditViewController to our chosen calendar - the default calendar.
 - (EKCalendar *)eventEditViewControllerDefaultCalendarForNewEvents:(EKEventEditViewController *)controller 
 {
-	EKCalendar *calendarForEdit = self.defaultCalendar;
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
+	EKCalendar *calendarForEdit = app.defaultCalendar;
 	return calendarForEdit;
 }
 

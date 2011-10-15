@@ -21,12 +21,14 @@
 
 @interface date_info : NSObject
 {
+	NSString * m_pIdentifier;
 	NSInteger  m_nDate;
 	NSString * m_pLabel;
 	NSInteger  m_nRemind;
 }
 
 @property (nonatomic, retain) NSString*	m_pLabel;
+@property (nonatomic, retain) NSString*	m_pIdentifier;
 @property (nonatomic, assign) NSInteger	m_nRemind;
 @property (nonatomic, assign) NSInteger m_nDate;
 

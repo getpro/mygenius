@@ -24,6 +24,9 @@
 @synthesize m_arrServicerRule;
 @synthesize m_arrContactData;
 
+@synthesize eventStore;
+@synthesize defaultCalendar;
+
 @synthesize networkingCount = _networkingCount;
 
 #pragma mark -
@@ -36,6 +39,12 @@
 	
 	if(addressBook == nil)
 		addressBook = ABAddressBookCreate();
+	
+	// Initialize an event store object with the init method. Initilize the array for events.
+	self.eventStore = [[EKEventStore alloc] init];
+	
+	// Get the default calendar from store.
+	self.defaultCalendar = [self.eventStore defaultCalendarForNewEvents];
 	
 	//通讯录有改变
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeAddress:)
@@ -331,6 +340,9 @@
 	
 	[tbController	      release];
     [window				  release];
+	
+	[eventStore			  release];
+	[defaultCalendar	  release];
 	
     [super dealloc];
 }

@@ -87,6 +87,7 @@ CREATE TABLE instantMessage_info(
 );
 
 CREATE TABLE date_info(
+'date_identifier'TEXT NOT NULL,
 'contacts_id'TEXT NOT NULL,
 'date_time'INTEGER NOT NULL,
 'date_label'TEXT NOT NULL,

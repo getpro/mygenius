@@ -280,7 +280,27 @@ typedef enum
 		attrMemo = [m_pMemoContainer.attributes objectAtIndex:i];
 		if(attrMemo && attrMemo.m_pDate && attrMemo.label)
 		{
-			[DataStore insertDates:pRecordID:[attrMemo.m_pDate timeIntervalSince1970]:attrMemo.label:i:attrMemo.m_nRemindIndex:1];
+			//纪念日保存到日历中
+			NSError * error     = nil;
+			
+			EKEvent * thisEvent = [EKEvent eventWithEventStore:app.eventStore];
+			
+			thisEvent.calendar  = app.defaultCalendar;
+			
+			thisEvent.title     = [NSString stringWithFormat:@"%@%@",m_pContact.contactName,attrMemo.label];
+			
+			thisEvent.startDate = attrMemo.m_pDate;
+			
+			thisEvent.endDate   = attrMemo.m_pDate;
+			
+			BOOL pResult = [app.eventStore saveEvent:thisEvent span:EKSpanThisEvent error:&error];
+			
+			if(pResult)
+			{
+				NSLog(@"New Event[%@]",thisEvent.eventIdentifier);
+				
+				[DataStore insertDates:thisEvent.eventIdentifier:pRecordID:[attrMemo.m_pDate timeIntervalSince1970]:attrMemo.label:i:attrMemo.m_nRemindIndex:1];
+			}
 		}
 	}
 	
