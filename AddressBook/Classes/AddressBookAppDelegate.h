@@ -10,6 +10,8 @@
 
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import <EventKit/EventKit.h>
+#import <EventKitUI/EventKitUI.h>
 #import <QuartzCore/QuartzCore.h>
 
 #import "PublicData.h"
@@ -52,6 +54,10 @@ ABAddressBookRef addressBook;
 	
 	NSMutableArray * m_arrServicerRule;    //运营商规则
 	
+	//日历
+	EKEventStore *eventStore;
+	EKCalendar   *defaultCalendar;
+	
 	//FTP
 	NSInteger        _networkingCount;
 	
@@ -72,7 +78,8 @@ ABAddressBookRef addressBook;
 @property (nonatomic, retain) NSMutableArray * m_arrContactData;
 @property (nonatomic, retain) NSMutableArray * m_arrServicerRule;
 
-//@property (nonatomic, retain) ContactData    * m_pContactData;
+@property (nonatomic, retain) EKEventStore   * eventStore;
+@property (nonatomic, retain) EKCalendar     * defaultCalendar;
 
 @property (nonatomic, assign) NSInteger        networkingCount;
 

@@ -181,8 +181,8 @@ typedef enum
 	for(date_info * pDate_info in pArryMemo)
 	{
 		attr = [[[CAttributeMemo alloc] init] autorelease];
-		((CAttributeMemo*)attr).nvController = self.navigationController;
-		((CAttributeMemo*)attr).m_nType      = Tag_Type_Memo;
+		((CAttributeMemo*)attr).nvController     = self.navigationController;
+		((CAttributeMemo*)attr).m_nType          = Tag_Type_Memo;
 		[m_pMemoContainer setValue:attr        forKey:@"纪念日"];
 		((CAttributeMemo*)attr).m_nRemindIndex   = pDate_info.m_nRemind;
 		((CAttributeMemo*)attr).label            = pDate_info.m_pLabel;
@@ -293,7 +293,7 @@ typedef enum
 	{
 		self.navigationItem.rightBarButtonItem = m_pButtonItemDone;
 		//self.navigationItem.leftBarButtonItem  = m_pButtonItemCancel;
-	} 
+	}
 	else
 	{
 		self.navigationItem.rightBarButtonItem = m_pButtonItemEdit;
@@ -471,7 +471,26 @@ typedef enum
 		attrMemo = [m_pMemoContainer.attributes objectAtIndex:i];
 		if(attrMemo && attrMemo.m_pDate && attrMemo.label)
 		{
-			[DataStore insertDates:pRecordID:[attrMemo.m_pDate timeIntervalSince1970]:attrMemo.label:i:attrMemo.m_nRemindIndex:1];
+			NSError * error     = nil;
+			
+			EKEvent * thisEvent = [EKEvent eventWithEventStore:app.eventStore];
+			
+			thisEvent.calendar  = app.defaultCalendar;
+			
+			thisEvent.title     = [NSString stringWithFormat:@"%@%@",m_pContact.contactName,attrMemo.label];
+			
+			thisEvent.startDate = attrMemo.m_pDate;
+			
+			thisEvent.endDate   = attrMemo.m_pDate;
+			
+			BOOL pResult = [app.eventStore saveEvent:thisEvent span:EKSpanThisEvent error:&error];
+			
+			if(pResult)
+			{
+				NSLog(@"New Event[%@]",thisEvent.eventIdentifier);
+				
+				[DataStore insertDates:thisEvent.eventIdentifier:pRecordID:[attrMemo.m_pDate timeIntervalSince1970]:attrMemo.label:i:attrMemo.m_nRemindIndex:1];
+			}
 		}
 	}
 	

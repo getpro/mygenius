@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import <EventKit/EventKit.h>
+#import <EventKitUI/EventKitUI.h>
 
 #import "ABContactsHelper.h"
 #import "LabelAndContent.h"
@@ -88,8 +90,12 @@ typedef enum
 
 
 //dates多值
-+(void)insertDates:(ABRecordID)pRecordID:(NSInteger)pContent:(NSString*)pLabel:(NSInteger)pIndex:(NSInteger)pRemind:(NSInteger)pType;
++(void)insertDates:(NSString*)pIdentifier:(ABRecordID)pRecordID:(NSInteger)pContent:(NSString*)pLabel:(NSInteger)pIndex:(NSInteger)pRemind:(NSInteger)pType;
++(void)removeDateEvent:(NSString*)pIdentifier;
++(void)upDateEvent:(NSString*)pIdentifier:(EKEvent*)pEvent;
 +(void)removeDates:(ABRecordID)pRecordID;
+//移除日历中的event
++(void)removeDatesEvents:(ABRecordID)pRecordID;
 +(NSArray*)getDates:(ABRecordID)pRecordID:(NSInteger)pType;
 
 //IM多值

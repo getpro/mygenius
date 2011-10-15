@@ -170,7 +170,7 @@ textarea	content	是	留言内容
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
-	NSError *error = [request error];
+	//NSError *error = [request error];
 }
 
 @end
