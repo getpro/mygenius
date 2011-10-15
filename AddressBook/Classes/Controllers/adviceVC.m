@@ -104,14 +104,10 @@ textarea	content	是	留言内容
 			*/
 			
 			
-			
-			
 			NSURL *url = [NSURL URLWithString:ADVICE_URL];
 			ASIFormDataRequest *theRequest = [ASIFormDataRequest requestWithURL:url];
 			[theRequest setRequestMethod:@"POST"];
-			//        [theRequest setDelegate:self];
-			//        [theRequest setDidFailSelector:@selector(urlhttpFailed:)];
-			//        [theRequest setDidFinishSelector:@selector(urlhttpFinished:)];
+
 			
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0
 			//[theRequest setShouldContinueWhenAppEntersBackground:YES];
@@ -120,14 +116,10 @@ textarea	content	是	留言内容
 			[theRequest setAllowCompressedResponse:NO];
 			ASIHTTPRequest.shouldUpdateNetworkActivityIndicator = YES;
 			
-			[theRequest appendPostData:[@"title=12&name=test&email=11&content=112" dataUsingEncoding:NSUTF8StringEncoding]];
+			[theRequest appendPostData: [[NSString stringWithFormat:@"title=phone&name=advice&email=%@&content=%@",m_pTextPhone.text,m_pTextContent.text] dataUsingEncoding:NSUTF8StringEncoding]];
 			
 			[theRequest setTimeOutSeconds:10];
-			//[theRequest addRequestHeader:@"Content-Type" value:@"text/xml; charset=UTF-8"];
-			//[theRequest addRequestHeader:@"SOAPAction" value:@"http://guestbook2.eastmoney.com/AddMessageByMobile"];
-			
 			[theRequest addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; charset=UTF-8"];
-			//theRequest.postBody = [NSMutableData dataWithData:[@"title=12&name=test&email=11@11.com&content=112" dataUsingEncoding:NSUTF8StringEncoding]];
 			
 			[theRequest buildPostBody];
 			
@@ -139,18 +131,26 @@ textarea	content	是	留言内容
 			if (!error)
 			{
                 NSString* response = [theRequest responseString];
-                NSLog(@"feedback response = %@",response);
+                //NSLog(@"feedback response = %@",response);
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:response
+															   delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+				[alert show];	
+				[alert release];
 			}
-			
-			
-			
+			else
+			{
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"网络无法连接"
+															   delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+				[alert show];	
+				[alert release];
+			}
 		}
         return NO;
     }
     return YES;
 } 
 
-
+/*
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
 	// Use when fetching text data
@@ -172,5 +172,6 @@ textarea	content	是	留言内容
 {
 	//NSError *error = [request error];
 }
+*/
 
 @end

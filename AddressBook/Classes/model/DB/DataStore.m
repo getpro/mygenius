@@ -55,6 +55,38 @@
     [stmt step]; // ignore error
 }
 
++(void)removeServicerRules
+{
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"DELETE FROM servicer_rule"];
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
++(void)insertServicerRule:(NSString*)pLabel :(NSString*)pContent
+{
+	if(!pLabel ||!pContent || [pLabel isEqual:@""] || [pContent isEqual:@""] )
+	{
+		return;
+	}
+	
+	Statement* stmt = nil;
+	
+	stmt = [DBConnection statementWithQuery:"INSERT INTO servicer_rule VALUES(?,?)"];
+	
+	[stmt bindString:pLabel		forIndex:1];//1.label
+	[stmt bindString:pContent	forIndex:2];//2.content
+	
+	[stmt retain];
+	[stmt step];
+    [stmt reset];
+	[stmt release];
+}
+
 +(NSArray*)getServicerRules
 {
 	NSMutableArray *retArray = [[[NSMutableArray alloc] init] autorelease];

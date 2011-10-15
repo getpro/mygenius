@@ -59,6 +59,8 @@ typedef enum
 
 //运营商规则
 +(NSArray*)getServicerRules;
++(void)removeServicerRules;
++(void)insertServicerRule:(NSString*)pLabel :(NSString*)pContent;
 
 /* contacts_info */
 

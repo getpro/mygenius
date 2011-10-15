@@ -78,6 +78,8 @@
 	
     if (editingStyle == UITableViewCellEditingStyleDelete)
 	{
+		[m_arrRule removeObjectAtIndex:indexPath.section];
+		
 		[tableView reloadData];
     }   
     //else if (editingStyle == UITableViewCellEditingStyleInsert) 
@@ -90,19 +92,18 @@
 //
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-	//UITableViewCellEditingStyle pRetNum = UITableViewCellEditingStyleNone;
-	//NSInteger row = [indexPath row];
-	/*
-	if([m_pSectionArr count] == indexPath.section)
+	UITableViewCellEditingStyle pRetNum = UITableViewCellEditingStyleNone;
+
+	if([m_arrRule count] == indexPath.section)
 	{
 		pRetNum = UITableViewCellEditingStyleInsert;
 	}
 	else
 	{
-		
+		pRetNum = UITableViewCellEditingStyleDelete;
 	}
-	*/
-	return 0;
+	
+	return pRetNum;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -182,16 +183,24 @@
 	
 	//LabelAndContent * pArryContent = [m_arrRule objectAtIndex:[pIndex intValue]];
 	
-	[m_arrRule replaceObjectAtIndex:[pIndex intValue] withObject:pLabelcontent];
-	
-	/*
-	if(pArryContent)
+	if([pIndex intValue] == [m_arrRule count])
 	{
-		pArryContent.m_strLabel    = pLabelcontent.m_strLabel;
-		pArryContent.m_strContent  = pLabelcontent.m_strContent;
-		[m_pTableView_IB reloadData];
+		//添加新规则
+		[m_arrRule addObject:pLabelcontent];
 	}
-	*/
+	else
+	{
+		[m_arrRule replaceObjectAtIndex:[pIndex intValue] withObject:pLabelcontent];
+		
+		/*
+		 if(pArryContent)
+		 {
+		 pArryContent.m_strLabel    = pLabelcontent.m_strLabel;
+		 pArryContent.m_strContent  = pLabelcontent.m_strContent;
+		 [m_pTableView_IB reloadData];
+		 }
+		 */
+	}
 	
 	[m_pTableView_IB reloadData];
 }
@@ -227,7 +236,46 @@
 -(IBAction)doneItemBtn:    (id)sender
 {
 	//保存属性
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	
+	//检测Label是否有重名
+	for (int i = 0; i < [m_arrRule count]; i++) 
+	{
+		LabelAndContent * pLabelAndContent = (LabelAndContent*)[m_arrRule objectAtIndex:i];
+		for(int j = i + 1; j < [m_arrRule count]; j++)
+		{
+			LabelAndContent * pLabelAndContent2 = (LabelAndContent*)[m_arrRule objectAtIndex:j];
+			if([pLabelAndContent.m_strLabel isEqual:pLabelAndContent2.m_strLabel])
+			{
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"运营商名字重复!"
+															   delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+				[alert show];	
+				[alert release];
+				return;
+			}
+		}
+	}
+	
+	[DataStore removeServicerRules];
+	[app.m_arrServicerRule removeAllObjects];
+	
+	for(LabelAndContent * pLabelAndContent in m_arrRule)
+	{
+		NSArray * pArry = [pLabelAndContent.m_strContent componentsSeparatedByString:@","];
+		
+		for(NSString * pStr in pArry)
+		{
+			[DataStore insertServicerRule: pLabelAndContent.m_strLabel :pStr];
+		}
+	}
+	
+	for(LabelAndContent * pLabelAndContent in [DataStore getServicerRules])
+	{
+		[app.m_arrServicerRule addObject:pLabelAndContent];
+	}
+	
+	[self LoadRule];
+
 	[self setEditing:NO animated:YES];
 }
 
