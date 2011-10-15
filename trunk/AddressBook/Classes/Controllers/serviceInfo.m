@@ -79,20 +79,6 @@
 
 -(IBAction)doneItemBtn:    (id)sender
 {
-	//检测规则，并保存
-	NSString * pRule = m_pTextView.text;
-	if(pRule)
-	{
-		NSLog(@"pRule[%@]",pRule);
-		
-		NSArray * pArry = [pRule componentsSeparatedByString:@","];
-		
-		for(NSString * pStr in pArry)
-		{
-			NSLog(@"[%@]",pStr);
-		}
-	}
-	
 	if (Target && Selector && [Target respondsToSelector:Selector]) 
 	{
 		LabelAndContent * pNew = [[LabelAndContent alloc] init];
