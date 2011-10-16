@@ -8,9 +8,12 @@
 //  统计
 
 #import <UIKit/UIKit.h>
+#import <EventKit/EventKit.h>
+#import <EventKitUI/EventKitUI.h>
 
 #import "checkDateButton.h"
 #import "statisticsCheckVC.h"
+#import "MemoCell.h"
 
 @interface statisticsVC : UIViewController
 <
@@ -29,13 +32,27 @@ CheckDelegate
 	NSDate          *m_pStartDate;
 	NSDate          *m_pEndDate;
 	checkDateButton *m_pDateButton;
+	
+	NSMutableArray  *eventsList;   //所有事件
+	NSMutableArray	*sectionArray; //成员是NSMutableArray,每一个NSMutableArray包含了对应Event
+	NSMutableArray	*sectionTitle;
 }
 
 @property (retain,nonatomic) UISearchDisplayController * m_pSearchDC;
 @property (retain,nonatomic) UISearchBar			   * m_pSearchBar;
 @property (retain,nonatomic) IBOutlet UITableView      * m_pTableView_IB;
+
+
+@property (nonatomic, retain) NSMutableArray *eventsList;
+@property (nonatomic, retain) NSMutableArray *sectionArray;
+@property (nonatomic, retain) NSMutableArray *sectionTitle;
+
 @property (nonatomic, retain) NSDate *m_pStartDate;
 @property (nonatomic, retain) NSDate *m_pEndDate;
 @property (nonatomic, retain) ABContact *m_pABContact;
+
+-(void) checkType:(NSString*)pStr :(MemoCell*)pCell;
+
+-(void) fetchEvents;
 
 @end
