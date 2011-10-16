@@ -7,6 +7,7 @@
 //
 
 #import "statisticsVC.h"
+#import "AddressBookAppDelegate.h"
 
 @implementation statisticsVC
 
@@ -16,6 +17,9 @@
 @synthesize m_pStartDate;
 @synthesize m_pEndDate;
 @synthesize m_pABContact;
+@synthesize eventsList;
+@synthesize sectionArray;
+@synthesize sectionTitle;
 
 -(void)GetDatePressed:(id)sender
 {
@@ -35,6 +39,10 @@
     [super viewDidLoad];
 	
 	self.navigationItem.title = @"日程查询";
+	
+	eventsList   = [[NSMutableArray alloc] initWithArray:0];
+	sectionArray = [[NSMutableArray alloc] initWithArray:0];
+	sectionTitle = [[NSMutableArray alloc] initWithArray:0];
 	
 	// Create a search bar
 	self.m_pSearchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)] autorelease];
@@ -101,6 +109,9 @@
 	[m_pABContact   release];
 	[m_pStartDate	release];
 	[m_pEndDate	    release];
+	[eventsList     release];
+	[sectionArray   release];
+	[sectionTitle   release];
 	
     [super dealloc];
 }
@@ -124,7 +135,74 @@
 
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return nil;
+	//static NSString *CellIdentifier = @"memoCell";
+	
+	// Add disclosure triangle to cell
+	UITableViewCellAccessoryType editableCellAccessoryType = UITableViewCellAccessoryNone;
+	
+	MemoCell *cell = (MemoCell*)[aTableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"memoCell_%d_%d",indexPath.section,indexPath.row]];
+	if (cell == nil)
+	{
+		cell = [[[MemoCell alloc] initWithStyle:UITableViewCellStyleDefault 
+								reuseIdentifier:[NSString stringWithFormat:@"memoCell_%d_%d",indexPath.section,indexPath.row]] autorelease];
+	}
+	
+	cell.accessoryType = editableCellAccessoryType;
+	
+	// Get the event at the row selected and display it's title
+	//EKEvent * pEvent = (EKEvent*)[self.eventsList objectAtIndex:indexPath.row];
+	EKEvent * pEvent = (EKEvent*)[[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+	if(pEvent)
+	{
+		cell.m_pTitle.text  = [pEvent title];
+		cell.m_pLocate.text = [pEvent location];
+		
+		NSLog(@"Event[%@]",pEvent.eventIdentifier);
+		NSLog(@"Event[%@]",pEvent.title);
+		
+		if([pEvent isAllDay])
+		{
+			cell.m_pTime.text = @"全天";
+		}
+		else
+		{
+			NSDate * pStartDate = [pEvent startDate];
+			NSDate * pEndDate   = [pEvent endDate];
+			
+			NSDateFormatter *Formatter = [[[NSDateFormatter alloc] init] autorelease];
+			[Formatter setDateFormat:@"HH:mm"];
+			
+			NSString *StartString = [Formatter stringFromDate:pStartDate];
+			NSString *EndString   = [Formatter stringFromDate:pEndDate];
+			
+			//NSLog(@"[%@]",StartString);
+			//NSLog(@"[%@]",EndString);
+			cell.m_pTime.text = [NSString stringWithFormat:@"%@-%@",StartString,EndString];
+		}
+		
+		NSString * pNote = [pEvent notes];
+		if(pNote)
+		{
+			[self checkType:pNote:cell];
+		}
+		else
+		{
+			cell.m_pType.text = @"";
+		}
+	}
+	
+	/*
+	if(isLongPress)
+	{
+		[cell setOffSet:YES];
+	}
+	else
+	{
+		[cell setOffSet:NO];
+	}
+	*/
+	
+	return cell;
 }
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -140,7 +218,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)aTableView 
 { 
-	return 0;
+	return [sectionArray count];
 }
 
 
@@ -156,13 +234,20 @@
 
 - (NSString *)tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger)section
 {
-	return nil;
+	NSDate * pDateTitle = (NSDate*)[sectionTitle objectAtIndex:section];
+	//通过日期推算星期的代码
+	NSDateFormatter *outputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[outputFormatter setDateFormat:@"EEEE                          MMMM d yyyy"];
+	
+	NSString *newDateString = [outputFormatter stringFromDate:pDateTitle];
+	
+	return newDateString;
 }
 
 
 - (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section 
 {
-	return 0;
+	return [[self.sectionArray objectAtIndex:section] count];
 }
 
 #pragma mark - UIViewController delegate methods
@@ -172,6 +257,10 @@
 	[super viewWillAppear:animated];
 	
 	[m_pDateButton setHidden:NO];
+	
+	[self fetchEvents];
+	
+	[m_pTableView_IB reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -189,6 +278,88 @@
 	self.m_pABContact = pABContact;
 	
 	[m_pDateButton setButtonDate:self.m_pStartDate :self.m_pEndDate];
+}
+
+-(void) checkType:(NSString*)pStr :(MemoCell*)pCell
+{
+	NSRange pRang = [pStr rangeOfString:@"生日"];
+	
+	if(pRang.length)
+	{
+		pCell.m_pType.text = @"生日";
+		return;
+	}
+	
+	pRang = [pStr rangeOfString:@"纪念日"];
+	
+	if(pRang.length)
+	{
+		pCell.m_pType.text = @"纪念日";
+		return;
+	}
+	
+	pCell.m_pType.text = @"";
+}
+
+// Fetching events happening in the next 24 hours with a predicate, limiting to the default calendar 
+- (void)fetchEvents 
+{
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
+	[self.eventsList   removeAllObjects];
+	[self.sectionArray removeAllObjects];
+	[self.sectionTitle removeAllObjects];
+	
+	// Create the predicate. Pass it the default calendar.
+	//NSArray *calendarArray = [NSArray arrayWithObject:app.defaultCalendar];
+	
+	NSDate *endDate = [NSDate dateWithTimeInterval:86400 sinceDate:self.m_pEndDate];
+	
+	NSPredicate *predicate = [app.eventStore predicateForEventsWithStartDate:self.m_pStartDate 
+																	 endDate:endDate 
+																   calendars:nil]; 
+	
+	// Fetch all events that match the predicate.
+	NSArray *events = [app.eventStore eventsMatchingPredicate:predicate];
+	
+	//NSLog(@"%@",events);
+	
+	[self.eventsList addObjectsFromArray:events];
+	
+	int nCount = (int)([m_pEndDate timeIntervalSince1970] - [m_pStartDate timeIntervalSince1970])/86400;
+	
+	NSLog(@"nCount[%d]",nCount + 1);
+	
+	for (int i = 0; i < nCount + 1; i++)
+		[self.sectionArray addObject:[NSMutableArray array]];
+	
+	for (int i = 0; i < nCount + 1; i++)
+	{
+		NSDate *TitleDate = [NSDate dateWithTimeInterval:86400*i sinceDate:self.m_pStartDate];
+		
+		[sectionTitle addObject:TitleDate];
+	}
+	
+	for(EKEvent * pEvent in self.eventsList)
+	{
+		NSDateFormatter* indateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+		[indateFormatter setDateFormat:@"yyyy-MM-dd"];
+		
+		NSString *dateStr = [indateFormatter stringFromDate:[pEvent startDate]];
+		NSDate   *startDate = [indateFormatter dateFromString:dateStr];
+		
+		for (int i = 0; i < nCount + 1; i++)
+		{
+			NSDate * pDateTitle = (NSDate*)[sectionTitle objectAtIndex:i];
+			
+			if([startDate isEqualToDate:pDateTitle])
+			{
+				[[sectionArray objectAtIndex:i] addObject:pEvent];
+				break;
+			}
+		}
+	}
+	
 }
 
 @end

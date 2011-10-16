@@ -142,7 +142,7 @@
 	self.navigationItem.title = @"备忘录";
 	self.navigationItem.rightBarButtonItem = m_pRightAdd;
 	
-	self.eventsList = [[NSMutableArray alloc] initWithArray:0];
+	eventsList = [[NSMutableArray alloc] initWithArray:0];
 	
 	//NSArray * p = [self.eventStore calendars];
 	
@@ -150,7 +150,6 @@
 	
 	NSDate *NowDate = [NSDate date];
     NSDateFormatter* indateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    //[dateFormatter setTimeStyle:NSDateFormatterFullStyle];
     [indateFormatter setDateFormat:@"yyyy-MM-dd"];
 	
 	NSString *dateStr = [indateFormatter stringFromDate:NowDate];
@@ -235,8 +234,6 @@
 	[addController release];
 }
 
-
-
 // Fetching events happening in the next 24 hours with a predicate, limiting to the default calendar 
 - (void)fetchEventsForToday 
 {
@@ -257,7 +254,7 @@
 	// Fetch all events that match the predicate.
 	NSArray *events = [app.eventStore eventsMatchingPredicate:predicate];
 	
-	NSLog(@"%@",events);
+	//NSLog(@"%@",events);
 	
 	[self.eventsList addObjectsFromArray:events];
 	
@@ -297,8 +294,8 @@
 	if(self.m_pDate)
 	{
 		//通过日期推算星期的代码
-		NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
-		[inputFormatter setDateFormat:@"yyyy-MM-dd 'at' HH:mm"];
+		//NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+		//[inputFormatter setDateFormat:@"yyyy-MM-dd 'at' HH:mm"];
 		 
 		//NSDate *formatterDate = [inputFormatter dateFromString:@"1999-07-11 at 10:30"];
 		 
