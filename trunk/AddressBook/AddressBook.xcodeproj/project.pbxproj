@@ -96,6 +96,9 @@
 		21BC034D143805DF00CE1192 /* LabelAndContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BC034C143805DF00CE1192 /* LabelAndContent.m */; };
 		21BCEC5D142F60AA00FB27BE /* AddFieldVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BCEC5C142F60AA00FB27BE /* AddFieldVC.m */; };
 		21BCEC62142F612A00FB27BE /* AddFieldVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21BCEC61142F612A00FB27BE /* AddFieldVC.xib */; };
+		21BDAF34144B14E300B263FE /* LayerGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BDAF33144B14E300B263FE /* LayerGroup.m */; };
+		21BDAF3D144B15E400B263FE /* gl_blueAll.png in Resources */ = {isa = PBXBuildFile; fileRef = 21BDAF3B144B15E400B263FE /* gl_blueAll.png */; };
+		21BDAF3E144B15E400B263FE /* gl_leftArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 21BDAF3C144B15E400B263FE /* gl_leftArrow.png */; };
 		21C941EA143951FB00EE7AAC /* RecommendVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C941E8143951FB00EE7AAC /* RecommendVC.m */; };
 		21C941EB143951FB00EE7AAC /* RecommendVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21C941E9143951FB00EE7AAC /* RecommendVC.xib */; };
 		21C9426714395A0A00EE7AAC /* Memo.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C9426514395A0A00EE7AAC /* Memo.m */; };
@@ -297,6 +300,10 @@
 		21BCEC5B142F60AA00FB27BE /* AddFieldVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFieldVC.h; sourceTree = "<group>"; };
 		21BCEC5C142F60AA00FB27BE /* AddFieldVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFieldVC.m; sourceTree = "<group>"; };
 		21BCEC61142F612A00FB27BE /* AddFieldVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFieldVC.xib; sourceTree = "<group>"; };
+		21BDAF32144B14E300B263FE /* LayerGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerGroup.h; sourceTree = "<group>"; };
+		21BDAF33144B14E300B263FE /* LayerGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerGroup.m; sourceTree = "<group>"; };
+		21BDAF3B144B15E400B263FE /* gl_blueAll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gl_blueAll.png; sourceTree = "<group>"; };
+		21BDAF3C144B15E400B263FE /* gl_leftArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gl_leftArrow.png; sourceTree = "<group>"; };
 		21C941E7143951FB00EE7AAC /* RecommendVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendVC.h; sourceTree = "<group>"; };
 		21C941E8143951FB00EE7AAC /* RecommendVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendVC.m; sourceTree = "<group>"; };
 		21C941E9143951FB00EE7AAC /* RecommendVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecommendVC.xib; sourceTree = "<group>"; };
@@ -452,6 +459,8 @@
 		218738F9141B6C52007D64B4 /* addressbook */ = {
 			isa = PBXGroup;
 			children = (
+				21BDAF3B144B15E400B263FE /* gl_blueAll.png */,
+				21BDAF3C144B15E400B263FE /* gl_leftArrow.png */,
 				21E27E3B143AD27C00A3F124 /* checkBox_hover.png */,
 				21E27E3C143AD27C00A3F124 /* checkBox.png */,
 				21E27E3D143AD27C00A3F124 /* move.png */,
@@ -731,6 +740,8 @@
 				219E3429143D646000F1F111 /* DateButton.m */,
 				211DC5C514409DF2002FDAF4 /* checkDateButton.h */,
 				211DC5C614409DF2002FDAF4 /* checkDateButton.m */,
+				21BDAF32144B14E300B263FE /* LayerGroup.h */,
+				21BDAF33144B14E300B263FE /* LayerGroup.m */,
 			);
 			path = CustView;
 			sourceTree = "<group>";
@@ -952,6 +963,8 @@
 				21907B4A1447039600C8385F /* adviceVC.xib in Resources */,
 				21D798B814473EAC004B1CFA /* serviceListVC.xib in Resources */,
 				21D798BD14473EBC004B1CFA /* serviceInfo.xib in Resources */,
+				21BDAF3D144B15E400B263FE /* gl_blueAll.png in Resources */,
+				21BDAF3E144B15E400B263FE /* gl_leftArrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1031,6 +1044,7 @@
 				21B7F7B81447C31800F00403 /* ASINetworkQueue.m in Sources */,
 				21B7F7B91447C31800F00403 /* Reachability.m in Sources */,
 				21A70A9A14492E6000C451E6 /* RuleCheck.m in Sources */,
+				21BDAF34144B14E300B263FE /* LayerGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

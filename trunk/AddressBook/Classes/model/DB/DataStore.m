@@ -203,6 +203,8 @@
 
 +(void)insertContactsBaseInfo:(ABRecordRef)pABRecordRef
 {
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
 	if (pABRecordRef == nil)
 	{
 		return;
@@ -597,8 +599,28 @@
 		//获取dates值
 		NSDate* datesContent = (NSDate*)ABMultiValueCopyValueAtIndex(dates, y);
 		
-		[self insertDates:@"0":pRecordID:[datesContent timeIntervalSince1970]:datesLabel:y:0:0];
+		//创建Event
+		NSError * error     = nil;
 		
+		EKEvent * thisEvent = [EKEvent eventWithEventStore:app.eventStore];
+		
+		thisEvent.calendar  = app.defaultCalendar;
+		
+		ABContact * pABContact = [ABContact contactWithRecord:person];
+		
+		thisEvent.title     = [NSString stringWithFormat:@"%@%@",pABContact.contactName,datesLabel];
+		
+		thisEvent.startDate = datesContent;
+		
+		thisEvent.endDate   = datesContent;
+		
+		BOOL pResult = [app.eventStore saveEvent:thisEvent span:EKSpanThisEvent error:&error];
+		
+		//这里有问题
+		if(pResult)
+		{
+			[self insertDates:thisEvent.eventIdentifier:pRecordID:[datesContent timeIntervalSince1970]:datesLabel:y:0:0];
+		}
 	}
 	
 	//获取kind值

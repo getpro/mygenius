@@ -241,7 +241,14 @@
 	
 	NSString *newDateString = [outputFormatter stringFromDate:pDateTitle];
 	
-	return newDateString;
+	if([[sectionArray objectAtIndex:section] count] > 0)
+	{
+		return newDateString;
+	}
+	else
+	{
+		return nil;
+	}
 }
 
 

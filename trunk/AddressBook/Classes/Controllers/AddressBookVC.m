@@ -15,7 +15,7 @@
 #import "AddressPreInfoVC.h"
 #import "AddressAddSeniorVC.h"
 #import "ABContactsHelper.h"
-
+#import "LayerGroup.h"
 
 @implementation AddressBookVC
 
@@ -344,8 +344,10 @@
 	{
 		[contactNameArray removeAllObjects];
 		[contactNameDic   removeAllObjects];
+		[sectionArray     removeAllObjects];
+		
 		for (int i = 0; i < 28; i++)
-			[self.sectionArray replaceObjectAtIndex:i withObject:[NSMutableArray array]];
+			[self.sectionArray addObject:[NSMutableArray array]];
 		
 		[m_pTableView_IB reloadData];
 		return;
@@ -936,6 +938,22 @@ ABRecordRef GRecord;
 #pragma mark GroupItem methods
 -(void) GroupItemViewSelect:(NSInteger)pIndex
 {
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
+	if(m_nGroupIndex == pIndex)
+	{
+		NSLog(@"Double");
+		
+		//弹出layer_group
+		LayerGroup * pLayerGroup = [[LayerGroup alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
+		
+		[app.window addSubview:pLayerGroup];
+		
+		[pLayerGroup release];
+		
+		return;
+	}
+	
 	for(GroupItemView * pGroup in [m_pScrollView_IB subviews])
 	{
 		if(pGroup.tag == pIndex)
