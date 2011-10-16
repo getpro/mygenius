@@ -7,7 +7,6 @@
 //
 
 #import "statisticsVC.h"
-#import "statisticsCheckVC.h"
 
 @implementation statisticsVC
 
@@ -16,13 +15,18 @@
 @synthesize m_pTableView_IB;
 @synthesize m_pStartDate;
 @synthesize m_pEndDate;
+@synthesize m_pABContact;
 
 -(void)GetDatePressed:(id)sender
 {
 	statisticsCheckVC * pStatisticsCheckVC = [[statisticsCheckVC alloc] init];
+	pStatisticsCheckVC.delegate = self;
+	pStatisticsCheckVC.m_pStartDate = m_pStartDate;
+	pStatisticsCheckVC.m_pEndDate   = m_pEndDate;
 	
 	[self.navigationController pushViewController:pStatisticsCheckVC animated:YES];
 	
+	[pStatisticsCheckVC release];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -94,6 +98,7 @@
 
 - (void)dealloc 
 {
+	[m_pABContact   release];
 	[m_pStartDate	release];
 	[m_pEndDate	    release];
 	
@@ -174,6 +179,16 @@
 	[super viewWillDisappear:animated];
 	
 	[m_pDateButton setHidden:YES];
+}
+
+#pragma markCheckCallBack
+-(void)CheckCallBack:(NSDate*)pStartData :(NSDate*)pEndData :(ABContact*)pABContact
+{
+	self.m_pStartDate = pStartData;
+	self.m_pEndDate   = pEndData;
+	self.m_pABContact = pABContact;
+	
+	[m_pDateButton setButtonDate:self.m_pStartDate :self.m_pEndDate];
 }
 
 @end

@@ -35,10 +35,10 @@
 		
 		[self addTarget:self action:@selector(btnPressed:)forControlEvents:UIControlEventTouchUpInside];
 		
-		m_pMonth = [[UILabel alloc] initWithFrame:CGRectMake(0,0,48,10)];
+		m_pMonth = [[UILabel alloc] initWithFrame:CGRectMake(0,0,52,10)];
 		m_pMonth.textAlignment = UITextAlignmentCenter;
 		m_pMonth.backgroundColor = [UIColor clearColor];
-		m_pMonth.font = [UIFont fontWithName:FONT_NAME size:10];
+		m_pMonth.font = [UIFont fontWithName:FONT_NAME size:8];
 		m_pMonth.textColor = [UIColor whiteColor];
 		//m_pMonth.text = [NSString stringWithFormat:@"%@  %@",@"Oct",@"Nov"];
 		[self addSubview:m_pMonth];
