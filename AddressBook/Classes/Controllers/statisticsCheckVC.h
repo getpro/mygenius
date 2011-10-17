@@ -16,17 +16,20 @@
 
 @required
 
--(void)CheckCallBack:(NSDate*)pStartData :(NSDate*)pEndData :(ABContact*)pABContact;
+-(void)CheckCallBack:(NSDate*)pStartData :(NSDate*)pEndData :(ABContact*)pABContact:(NSInteger)pIndex;
 
 @end
 
-@interface statisticsCheckVC : UIViewController 
+@interface statisticsCheckVC : UIViewController  < UITextFieldDelegate >
 {
 	IBOutlet UITableView      * m_pTableView_IB;
+	UITextField               * m_pTextField;
 	
 	ABContact * m_pABContact;
 	NSDate    * m_pStartDate;
 	NSDate    * m_pEndDate;
+	NSArray   * m_pTypeArr;
+	NSInteger   m_nTypeIndex;
 	
 	id <CheckDelegate> delegate;
 }
@@ -35,7 +38,9 @@
 @property (retain,nonatomic) ABContact * m_pABContact;
 @property (retain,nonatomic) NSDate    * m_pStartDate;
 @property (retain,nonatomic) NSDate    * m_pEndDate;
+
 @property (nonatomic, assign) id <CheckDelegate> delegate;
+@property (nonatomic, assign) NSInteger   m_nTypeIndex;
 
 -(IBAction)search:(id)sender;
 

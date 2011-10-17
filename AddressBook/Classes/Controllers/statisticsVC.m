@@ -20,6 +20,7 @@
 @synthesize eventsList;
 @synthesize sectionArray;
 @synthesize sectionTitle;
+@synthesize filteredArray;
 
 -(void)GetDatePressed:(id)sender
 {
@@ -27,6 +28,8 @@
 	pStatisticsCheckVC.delegate = self;
 	pStatisticsCheckVC.m_pStartDate = m_pStartDate;
 	pStatisticsCheckVC.m_pEndDate   = m_pEndDate;
+	pStatisticsCheckVC.m_pABContact = m_pABContact;
+	pStatisticsCheckVC.m_nTypeIndex = m_nTypeIndex;
 	
 	[self.navigationController pushViewController:pStatisticsCheckVC animated:YES];
 	
@@ -43,6 +46,7 @@
 	eventsList   = [[NSMutableArray alloc] initWithArray:0];
 	sectionArray = [[NSMutableArray alloc] initWithArray:0];
 	sectionTitle = [[NSMutableArray alloc] initWithArray:0];
+	filteredArray= [[NSMutableArray alloc] initWithArray:0];
 	
 	// Create a search bar
 	self.m_pSearchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)] autorelease];
@@ -112,6 +116,7 @@
 	[eventsList     release];
 	[sectionArray   release];
 	[sectionTitle   release];
+	[filteredArray  release];
 	
     [super dealloc];
 }
@@ -121,6 +126,20 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)asearchBar
 {
 	//self.searchBar.prompt = @"输入字母、汉字或电话号码搜索";
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+	[filteredArray removeAllObjects];
+	
+	NSLog(@"textDidChange[%@]",searchText);
+	NSPredicate *pred;
+	pred = [NSPredicate predicateWithFormat:@"title contains[cd] %@ OR location contains[cd] %@ OR notes contains[cd] %@", 
+			searchText, searchText, searchText
+			];
+	NSArray * pFitlerArr = [self.eventsList filteredArrayUsingPredicate:pred];
+	NSLog(@"[%d]",[pFitlerArr count]);
+	[filteredArray addObjectsFromArray:pFitlerArr];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -141,6 +160,7 @@
 	UITableViewCellAccessoryType editableCellAccessoryType = UITableViewCellAccessoryNone;
 	
 	MemoCell *cell = (MemoCell*)[aTableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"memoCell_%d_%d",indexPath.section,indexPath.row]];
+	
 	if (cell == nil)
 	{
 		cell = [[[MemoCell alloc] initWithStyle:UITableViewCellStyleDefault 
@@ -151,14 +171,21 @@
 	
 	// Get the event at the row selected and display it's title
 	//EKEvent * pEvent = (EKEvent*)[self.eventsList objectAtIndex:indexPath.row];
-	EKEvent * pEvent = (EKEvent*)[[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+	
+	EKEvent * pEvent = nil;
+	
+	if (aTableView == self.m_pTableView_IB)
+		pEvent = (EKEvent*)[[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+	else
+		pEvent = (EKEvent*)[self.filteredArray objectAtIndex:indexPath.row];
+	
 	if(pEvent)
 	{
 		cell.m_pTitle.text  = [pEvent title];
 		cell.m_pLocate.text = [pEvent location];
 		
-		NSLog(@"Event[%@]",pEvent.eventIdentifier);
-		NSLog(@"Event[%@]",pEvent.title);
+		//NSLog(@"Event[%@]",pEvent.eventIdentifier);
+		//NSLog(@"Event[%@]",pEvent.title);
 		
 		if([pEvent isAllDay])
 		{
@@ -208,6 +235,15 @@
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[aTableView deselectRowAtIndexPath:indexPath animated:YES];
+	
+	EKEvent * pEvent = nil;
+	
+	if (aTableView == self.m_pTableView_IB)
+		pEvent = (EKEvent*)[[self.sectionArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+	else
+		pEvent = (EKEvent*)[self.filteredArray objectAtIndex:indexPath.row];
+	
+	
 }
 
 // Override to support conditional editing of the table view.
@@ -218,7 +254,9 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)aTableView 
 { 
-	return [sectionArray count];
+	if(aTableView == self.m_pTableView_IB) 
+		return [sectionArray count];
+	return 1;
 }
 
 
@@ -234,27 +272,37 @@
 
 - (NSString *)tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger)section
 {
-	NSDate * pDateTitle = (NSDate*)[sectionTitle objectAtIndex:section];
-	//通过日期推算星期的代码
-	NSDateFormatter *outputFormatter = [[[NSDateFormatter alloc] init] autorelease];
-	[outputFormatter setDateFormat:@"EEEE                          MMMM d yyyy"];
-	
-	NSString *newDateString = [outputFormatter stringFromDate:pDateTitle];
-	
-	if([[sectionArray objectAtIndex:section] count] > 0)
+	if (aTableView == self.m_pTableView_IB) 
 	{
-		return newDateString;
+		NSDate * pDateTitle = (NSDate*)[sectionTitle objectAtIndex:section];
+		//通过日期推算星期的代码
+		NSDateFormatter *outputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+		[outputFormatter setDateFormat:@"EEEE                          MMMM d yyyy"];
+		
+		NSString *newDateString = [outputFormatter stringFromDate:pDateTitle];
+		
+		if([[sectionArray objectAtIndex:section] count] > 0)
+		{
+			return newDateString;
+		}
+		else
+		{
+			return nil;
+		}
 	}
-	else
-	{
-		return nil;
-	}
+	else return nil;
 }
 
 
 - (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section 
 {
-	return [[self.sectionArray objectAtIndex:section] count];
+	//NSLog(@"numberOfRowsInSection");
+	if (aTableView == self.m_pTableView_IB && [self.sectionArray count])
+		return [[self.sectionArray objectAtIndex:section] count];
+	else
+	{
+		return self.filteredArray.count;
+	}
 }
 
 #pragma mark - UIViewController delegate methods
@@ -278,13 +326,18 @@
 }
 
 #pragma markCheckCallBack
--(void)CheckCallBack:(NSDate*)pStartData :(NSDate*)pEndData :(ABContact*)pABContact
+-(void)CheckCallBack:(NSDate*)pStartData :(NSDate*)pEndData :(ABContact*)pABContact :(NSInteger)pIndex
 {
 	self.m_pStartDate = pStartData;
 	self.m_pEndDate   = pEndData;
 	self.m_pABContact = pABContact;
+	m_nTypeIndex      = pIndex;
 	
 	[m_pDateButton setButtonDate:self.m_pStartDate :self.m_pEndDate];
+	
+	//重新查询
+	[self fetchEvents];
+	
 }
 
 -(void) checkType:(NSString*)pStr :(MemoCell*)pCell
@@ -319,19 +372,82 @@
 	
 	// Create the predicate. Pass it the default calendar.
 	//NSArray *calendarArray = [NSArray arrayWithObject:app.defaultCalendar];
+	NSPredicate *predicate = nil;
 	
 	NSDate *endDate = [NSDate dateWithTimeInterval:86400 sinceDate:self.m_pEndDate];
 	
-	NSPredicate *predicate = [app.eventStore predicateForEventsWithStartDate:self.m_pStartDate 
+	{
+		predicate = [app.eventStore predicateForEventsWithStartDate:self.m_pStartDate 
 																	 endDate:endDate 
-																   calendars:nil]; 
+																   calendars:nil];
+	}
 	
 	// Fetch all events that match the predicate.
 	NSArray *events = [app.eventStore eventsMatchingPredicate:predicate];
 	
+	NSArray *predicateTypeEvents = nil;
+	NSArray *predicateNameEvents = nil;
+	
 	//NSLog(@"%@",events);
 	
-	[self.eventsList addObjectsFromArray:events];
+	//过滤类型
+	
+	if(m_nTypeIndex == 0)
+	{
+		//全部
+		predicateTypeEvents = events;
+	}
+	else if(m_nTypeIndex == 1)
+	{
+		//生日
+		//Birthdays,Birthday,生日
+		
+		NSPredicate *pred;
+		pred = [NSPredicate predicateWithFormat:@"title contains[cd] %@ OR location contains[cd] %@ OR notes contains[cd] %@ OR title contains[cd] %@ OR location contains[cd] %@ OR notes contains[cd] %@", 
+				@"生日", @"生日", @"生日",
+				@"Birthday", @"Birthday", @"Birthday"
+				];
+		predicateTypeEvents = [events filteredArrayUsingPredicate:pred];
+	}
+	else if(m_nTypeIndex == 2)
+	{
+		//纪念日
+		NSPredicate *pred;
+		pred = [NSPredicate predicateWithFormat:@"title contains[cd] %@ OR location contains[cd] %@ OR notes contains[cd] %@", 
+				@"纪念日", @"纪念日", @"纪念日"
+				];
+		predicateTypeEvents = [events filteredArrayUsingPredicate:pred];
+	}
+	else if(m_nTypeIndex == 3)
+	{
+		//其他
+		
+	}
+	
+	if(predicateTypeEvents == nil|| [predicateTypeEvents count] == 0)
+	{
+		return;
+	}
+	
+	//过滤人名
+	if(m_pABContact == nil)
+	{
+		//全部联系人
+		predicateNameEvents = predicateTypeEvents;
+	}
+	else
+	{
+		NSPredicate *pred;
+		pred = [NSPredicate predicateWithFormat:@"title contains[cd] %@ OR location contains[cd] %@ OR notes contains[cd] %@ OR title contains[cd] %@ OR location contains[cd] %@ OR notes contains[cd] %@ OR title contains[cd] %@ OR location contains[cd] %@ OR notes contains[cd] %@ OR title contains[cd] %@ OR location contains[cd] %@ OR notes contains[cd] %@", 
+				m_pABContact.contactName, m_pABContact.contactName, m_pABContact.contactName,
+				m_pABContact.firstname, m_pABContact.firstname, m_pABContact.firstname,
+				m_pABContact.lastname, m_pABContact.lastname, m_pABContact.lastname,
+				m_pABContact.nickname, m_pABContact.nickname, m_pABContact.nickname
+				];
+		predicateNameEvents = [predicateTypeEvents filteredArrayUsingPredicate:pred];
+	}
+	
+	[self.eventsList addObjectsFromArray:predicateNameEvents];
 	
 	int nCount = (int)([m_pEndDate timeIntervalSince1970] - [m_pStartDate timeIntervalSince1970])/86400;
 	
