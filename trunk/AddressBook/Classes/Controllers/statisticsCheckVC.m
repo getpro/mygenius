@@ -26,6 +26,7 @@ typedef enum
 @synthesize m_pStartDate;
 @synthesize m_pEndDate;
 @synthesize delegate;
+@synthesize m_nTypeIndex;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
@@ -34,9 +35,29 @@ typedef enum
 	
 	self.navigationItem.title = @"查询设置";
 	
+	m_pTypeArr = [NSArray arrayWithObjects:@"全部",@"生日",@"纪念日",@"其他",nil];
+	[m_pTypeArr retain];
+	
 	m_pTableView_IB.backgroundColor = [UIColor clearColor];
 	
 	m_pTableView_IB.scrollEnabled = NO;
+	
+	m_pTextField = [[UITextField alloc] initWithFrame:CGRectMake(100, 10,200,32)];
+	m_pTextField.delegate = self;
+	m_pTextField.adjustsFontSizeToFitWidth = YES;
+	m_pTextField.font = [UIFont systemFontOfSize:17];
+	m_pTextField.minimumFontSize = 8;
+	//m_pTextField.textAlignment = UITextAlignmentCenter;
+	
+	// Instead of a "Return" button, our keyboard will have a "Done" button.  When it is hit, we 
+	// want to put away the keyboard.
+	m_pTextField.returnKeyType = UIReturnKeyDone;
+	/*
+	[textField addTarget:self
+				  action:@selector(doneWithKeyboard:)
+		forControlEvents:UIControlEventEditingDidEnd | UIControlEventEditingDidEndOnExit];
+	*/
+	m_pTextField.text = m_pABContact.contactName;
 }
 
 /*
@@ -69,6 +90,8 @@ typedef enum
 	[m_pABContact    release];
 	[m_pStartDate    release];
 	[m_pEndDate      release];
+	[m_pTextField    release];
+	[m_pTypeArr      release];
 	
     [super dealloc];
 }
@@ -86,11 +109,13 @@ typedef enum
 	}
 	if (cell != nil)
 	{
-		switch (indexPath.section) 
+		switch (indexPath.section)
 		{
 			case StatisticsCheck_TableView_Section_Contact:
 			{
+				cell.accessoryType = UITableViewCellAccessoryNone;
 				cell.textLabel.text = @"联系人";
+				[cell.contentView addSubview:m_pTextField];
 			}
 				break;
 			case StatisticsCheck_TableView_Section_Time:
@@ -135,6 +160,7 @@ typedef enum
 			case StatisticsCheck_TableView_Section_Type:
 			{
 				cell.textLabel.text = @"事件类型";
+				cell.detailTextLabel.text = [m_pTypeArr objectAtIndex:m_nTypeIndex];
 			}
 				break;
 			default:
@@ -210,6 +236,19 @@ typedef enum
 	[m_pTableView_IB reloadData];
 }
 
+-(void)getTypeResult:(id)index
+{
+	NSString * pIndex = (NSString*)index;
+	
+	m_nTypeIndex = [pIndex intValue];
+	
+	NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:StatisticsCheck_TableView_Section_Type];
+	UITableViewCell  *cell = (UITableViewCell*)[self.m_pTableView_IB cellForRowAtIndexPath:indexPath];
+	cell.detailTextLabel.text = [m_pTypeArr objectAtIndex:[pIndex intValue]];
+	
+	[self.m_pTableView_IB reloadData];
+}
+
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
@@ -221,11 +260,12 @@ typedef enum
 		case StatisticsCheck_TableView_Section_Contact:
 		{
 			//"联系人"
-			RecommendVC *tvc = [[[RecommendVC alloc] init] autorelease];
-			tvc.Target   = self;
-			tvc.Selector = @selector(getRecommendResult:);
+			//RecommendVC *tvc = [[[RecommendVC alloc] init] autorelease];
+			//tvc.Target   = self;
+			//tvc.Selector = @selector(getRecommendResult:);
 			
-			[self.navigationController pushViewController:tvc animated:YES];
+			//[self.navigationController pushViewController:tvc animated:YES];
+			
 		}
 			break;
 		case StatisticsCheck_TableView_Section_Time:
@@ -259,7 +299,12 @@ typedef enum
 		case StatisticsCheck_TableView_Section_Type:
 		{
 			//"事件类型";
+			CustomPicker *tvc = [[[CustomPicker alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)] autorelease];
+			tvc.Target   = self;
+			tvc.Selector = @selector(getTypeResult:);
+			tvc.sourceArray = m_pTypeArr;
 			
+			[app.window addSubview:tvc];
 		}
 			break;
 		default:
@@ -312,12 +357,54 @@ typedef enum
 		return;
 	}
 	
+	if(m_pTextField.text == nil || [m_pTextField.text isEqual:@""])
+	{
+		self.m_pABContact = nil;
+	}
+	else
+	{
+		NSArray * pArry = [ABContactsHelper contactsMatchingName:m_pTextField.text];
+		
+		if([pArry count] == 0)
+		{
+			//全名称匹配
+			AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+			ContactData * AllContactData = (ContactData *)[app.m_arrContactData objectAtIndex:0];
+			
+			ABContact * pABContact = [AllContactData byNameToGetContact:m_pTextField.text];
+			if(pABContact == nil)
+			{
+				//没有找到联系人
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"无该联系人信息"
+															   delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+				[alert show];	
+				[alert release];
+				
+				return;
+			}
+			else
+			{
+				self.m_pABContact = pABContact;
+			}
+		}
+		else
+		{
+			self.m_pABContact = (ABContact*)[pArry objectAtIndex:0];
+		}
+	}
+	
 	if(delegate)
 	{
-		[delegate CheckCallBack:m_pStartDate:m_pEndDate:m_pABContact];
+		[delegate CheckCallBack:m_pStartDate:m_pEndDate:m_pABContact:m_nTypeIndex];
 	}
 	
 	[self.navigationController popViewControllerAnimated:YES];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	[textField resignFirstResponder];
+	return NO;
 }
 
 @end

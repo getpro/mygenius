@@ -29,13 +29,15 @@ CheckDelegate
 	IBOutlet UITableView      * m_pTableView_IB;
 	
 	ABContact       *m_pABContact;
-	NSDate          *m_pStartDate;
-	NSDate          *m_pEndDate;
+	NSDate          *m_pStartDate;   //开始时间
+	NSDate          *m_pEndDate;     //结束时间
 	checkDateButton *m_pDateButton;
+	NSInteger        m_nTypeIndex;//@"全部",@"生日",@"纪念日",@"其他"
 	
 	NSMutableArray  *eventsList;   //所有事件
 	NSMutableArray	*sectionArray; //成员是NSMutableArray,每一个NSMutableArray包含了对应Event
 	NSMutableArray	*sectionTitle;
+	NSMutableArray  *filteredArray;//搜索数组
 }
 
 @property (retain,nonatomic) UISearchDisplayController * m_pSearchDC;
@@ -46,6 +48,7 @@ CheckDelegate
 @property (nonatomic, retain) NSMutableArray *eventsList;
 @property (nonatomic, retain) NSMutableArray *sectionArray;
 @property (nonatomic, retain) NSMutableArray *sectionTitle;
+@property (nonatomic, retain) NSMutableArray *filteredArray;
 
 @property (nonatomic, retain) NSDate *m_pStartDate;
 @property (nonatomic, retain) NSDate *m_pEndDate;
