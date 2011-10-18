@@ -421,7 +421,34 @@
 	else if(m_nTypeIndex == 3)
 	{
 		//其他
+		NSArray *predicateTypeEvents1 = nil;
+		NSArray *predicateTypeEvents2 = nil;
 		
+		NSPredicate *pred1;
+		pred1 = [NSPredicate predicateWithFormat:@"title contains[cd] %@ OR location contains[cd] %@ OR notes contains[cd] %@ OR title contains[cd] %@ OR location contains[cd] %@ OR notes contains[cd] %@", 
+				@"生日", @"生日", @"生日",
+				@"Birthday", @"Birthday", @"Birthday"
+				];
+		predicateTypeEvents1 = [events filteredArrayUsingPredicate:pred1];
+		
+		NSPredicate *pred2;
+		pred2 = [NSPredicate predicateWithFormat:@"title contains[cd] %@ OR location contains[cd] %@ OR notes contains[cd] %@", 
+				@"纪念日", @"纪念日", @"纪念日"
+				];
+		predicateTypeEvents2 = [events filteredArrayUsingPredicate:pred2];
+		
+		NSMutableArray * pTempArry = [NSMutableArray arrayWithCapacity:10];
+		
+		for(EKEvent * pEvent in events)
+		{
+			[pTempArry addObject:pEvent];
+		}
+		
+		[pTempArry removeObjectsInArray:predicateTypeEvents1];
+		
+		[pTempArry removeObjectsInArray:predicateTypeEvents2];
+		
+		predicateTypeEvents = pTempArry;
 	}
 	
 	if(predicateTypeEvents == nil|| [predicateTypeEvents count] == 0)

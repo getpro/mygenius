@@ -13,6 +13,7 @@
 
 @synthesize delegate = _delegate;
 @synthesize count = _count;
+@synthesize name  = _name;
 
 -(void)btnPressed:(id)sender
 {
@@ -32,7 +33,8 @@
         // Initialization code.
 		[self setUserInteractionEnabled:YES];
 		
-		_count = pCount;
+		_count     = pCount;
+		self.name  = pStr;
 		
 		self.backgroundColor = [UIColor clearColor];
 		
@@ -56,7 +58,7 @@
 		pLabel.backgroundColor = [UIColor clearColor];
 		pLabel.font = [UIFont fontWithName:FONT_NAME size:12];
 		pLabel.textColor = [UIColor whiteColor];
-		pLabel.text = pStr;
+		pLabel.text = self.name;
 		[self addSubview:pLabel];
 		
 		UIImage * pNumImg = [UIImage imageNamed:@"leftBar_group_number.png"];
@@ -111,6 +113,7 @@
 	[_SelectBg release];
 	[_NumBg	   release];
 	[_LabelNum release];
+	[_name     release];
 	
     [super dealloc];
 }
