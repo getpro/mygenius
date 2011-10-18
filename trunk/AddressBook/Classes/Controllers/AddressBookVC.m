@@ -29,6 +29,8 @@
 
 #define SEARCH_BAR_H 44.0f
 
+#define GROUPITEM_H  40.0f
+
 @synthesize m_pSearchDC;
 @synthesize m_pSearchBar;
 @synthesize m_pTableView_IB;
@@ -292,7 +294,7 @@
 	
 	//添加全部
 	GroupItemView * pLabel = nil;
-	pLabel = [[[GroupItemView alloc] initWithFrame:CGRectMake(0,0,TABLEVIEW_X,40) 
+	pLabel = [[[GroupItemView alloc] initWithFrame:CGRectMake(0,0,TABLEVIEW_X,GROUPITEM_H) 
 												  :@"全部"
 												  :[AllContactData.contactsArray count]] autorelease];
 	if(m_nGroupIndex == 0)
@@ -312,7 +314,7 @@
 		ContactData * GroupContactData = (ContactData *)[app.m_arrContactData objectAtIndex:i];
 		
 		ABGroup * pGroup = [app.m_arrGroup objectAtIndex:(i - 1)];
-		pLabel = [[[GroupItemView alloc] initWithFrame:CGRectMake(0,i * 40,TABLEVIEW_X,40) 
+		pLabel = [[[GroupItemView alloc] initWithFrame:CGRectMake(0,i * GROUPITEM_H,TABLEVIEW_X,GROUPITEM_H) 
 													  :pGroup.name 
 													  :[GroupContactData.contactsArray count]] autorelease];
 		
@@ -327,7 +329,7 @@
 		[m_pScrollView_IB addSubview:pLabel];
 	}
 		
-	[m_pScrollView_IB setContentSize:CGSizeMake(TABLEVIEW_X, 40 * (nCount + 1))];
+	[m_pScrollView_IB setContentSize:CGSizeMake(TABLEVIEW_X, GROUPITEM_H * (nCount + 1))];
 }
 
 -(void)initData:(NSInteger)pIndex
@@ -944,8 +946,29 @@ ABRecordRef GRecord;
 	{
 		NSLog(@"Double");
 		
+		GroupItemView * pGroup = nil;
+		
+		for(pGroup in [m_pScrollView_IB subviews])
+		{
+			if(pGroup.tag == m_nGroupIndex)
+			{
+				break;
+			}
+		}
+		
+		if(pGroup == nil)
+			return;
+		
 		//弹出layer_group
 		LayerGroup * pLayerGroup = [[LayerGroup alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
+		
+		//计算偏移坐标
+		int pOffSet_Y = GROUPITEM_H * m_nGroupIndex + GROUPITEM_H/2 - m_pScrollView_IB.contentOffset.y ;
+		
+		NSLog(@"Offset[%d]",pOffSet_Y);
+		
+		[pLayerGroup setOffSet:pOffSet_Y];
+		pLayerGroup.m_pName = pGroup.name;
 		
 		[app.window addSubview:pLayerGroup];
 		

@@ -24,10 +24,13 @@
 	UILabel		* _LabelNum; //数字显示
 	
 	NSInteger     _count;    //数字大小
+	
+	NSString    * _name;     //组名
 }
 
 @property (nonatomic,assign) id<GroupItemViewDelegate> delegate;
 @property (nonatomic,assign) NSInteger count;
+@property (nonatomic,retain) NSString  * name;
 
 - (id)initWithFrame:(CGRect)frame :(NSString*) pStr :(NSInteger)pCount;
 

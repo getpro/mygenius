@@ -16,6 +16,14 @@ UITableViewDataSource
 >
 {
 	UITableView * m_pTableView;
+	UIImageView * m_pArrImg;
+	UIImageView * m_pContentView;
+	NSString    * m_pName;
 }
+
+@property (nonatomic, retain) UIImageView  * m_pArrImg;
+@property (nonatomic, retain) NSString     * m_pName;
+
+-(void) setOffSet :(int)y;
 
 @end
