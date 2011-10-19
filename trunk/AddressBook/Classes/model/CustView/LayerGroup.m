@@ -12,6 +12,8 @@
 
 @synthesize m_pArrImg;
 @synthesize m_pName;
+@synthesize Target;
+@synthesize Selector;
 
 - (id)initWithFrame:(CGRect)frame 
 {    
@@ -224,38 +226,9 @@
 	
 	//AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	
-	switch (indexPath.row)
+	if (Target && Selector && [Target respondsToSelector:Selector]) 
 	{
-		case 0:
-		{
-			break;
-		}
-		case 1:
-		{
-			break;
-		}
-		case 2:
-		{
-			break;
-		}
-		case 3:
-		{
-			break;
-		}
-		case 4:
-		{
-			break;
-		}
-		case 5:
-		{
-			break;
-		}
-		case 6:
-		{
-			break;
-		}
-		default:
-			break;
+		[Target performSelector:Selector withObject:[NSString stringWithFormat:@"%d",indexPath.row]];
 	}
 	
 	[self removeFromSuperview];

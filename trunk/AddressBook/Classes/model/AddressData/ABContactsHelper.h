@@ -31,8 +31,9 @@ NSString *string1;
 + (BOOL) firstNameSorting;
 
 // Add contacts and groups
-+ (BOOL) addContact: (ABContact *) aContact withError: (NSError **) error;
-+ (BOOL) addGroup:   (ABGroup *) aGroup withError: (NSError **) error;
++ (BOOL) addContact:  (ABContact *) aContact withError: (NSError **) error;
++ (BOOL) addGroup:    (ABGroup *) aGroup withError: (NSError **) error;
++ (BOOL) removeGroup: (ABGroup *) aGroup withError: (NSError **) error;
 
 // Find contacts
 + (NSArray *) contactsMatchingName:  (NSString *) fname;
