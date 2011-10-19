@@ -43,6 +43,12 @@
 	return ABAddressBookSave(addressBook, (CFErrorRef *) error);
 }
 
++ (BOOL) removeGroup: (ABGroup *) aGroup withError: (NSError **) error
+{
+	if (!ABAddressBookRemoveRecord(addressBook, aGroup.record, (CFErrorRef *) error)) return NO;
+	return ABAddressBookSave(addressBook, (CFErrorRef *) error);
+}
+
 + (NSArray *) contactsMatchingName: (NSString *) fname
 {
 	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];

@@ -937,12 +937,116 @@ ABRecordRef GRecord;
 	}
 }
 
+-(void)GetLayerGroupPressed:(id)sender
+{
+	NSString * pIndex = (NSString *)sender;
+	
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	ABGroup * pGroup = [app.m_arrGroup objectAtIndex:m_nGroupIndex - 1];
+	
+	if(pGroup == nil)
+		return;
+	
+	switch ([pIndex intValue])
+	{
+		case 0:
+		{
+			//组名
+			break;
+		}
+		case 1:
+		{
+			// @"发送群组信息"; 
+			break;
+		}
+		case 2:
+		{
+			// @"发送群组邮件";
+			break;
+		}
+		case 3:
+		{
+			// @"重命名分组";
+			NSString * pStr = [ModalAlert ask:@"重命名分组" withTextPrompt:@"请输入组名称"];
+			if(pStr)
+			{
+				[pGroup setName:pStr];
+				
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"changeAddress" object:nil];
+				
+				[self LoadGroup];
+				
+				[self initData:m_nGroupIndex];
+			}
+			break;
+		}
+		case 4:
+		{
+			// @"删除分组";
+			
+			if([ModalAlert ask:@"是否确认删除分组?" withCancel:@"取消" withButtons:nil])
+			{
+				for(ABContact * pABContact in [pGroup members])
+				{
+					if(pABContact && [ContactData removeSelfFromAddressBook:pABContact.record])
+					{
+						[DataStore RemoveContact:pABContact.record];
+					}
+				}
+				
+				NSError * error;
+				[ABContactsHelper removeGroup:pGroup withError:&error];
+				
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"changeAddress" object:nil];
+				
+				[self LoadGroup];
+				
+				[self initData:0];
+			}
+			
+			break;
+		}
+		case 5:
+		{
+			// @"删除分组成员";
+			
+			if([ModalAlert ask:@"是否确认删除分组成员?" withCancel:@"取消" withButtons:nil])
+			{
+				for(ABContact * pABContact in [pGroup members])
+				{
+					if(pABContact && [ContactData removeSelfFromAddressBook:pABContact.record])
+					{
+						[DataStore RemoveContact:pABContact.record];
+					}
+				}
+				
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"changeAddress" object:nil];
+				
+				[self LoadGroup];
+				
+				[self initData:m_nGroupIndex];
+			}
+			
+			break;
+		}
+		case 6:
+		{
+			// @"完成";
+			break;
+		}
+		default:
+			break;
+	}
+	
+}
+
 #pragma mark GroupItem methods
 -(void) GroupItemViewSelect:(NSInteger)pIndex
 {
 	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
 	
-	if(m_nGroupIndex == pIndex)
+	//去掉“全部分组”
+	if(m_nGroupIndex == pIndex && pIndex != 0)
 	{
 		NSLog(@"Double");
 		
@@ -961,6 +1065,9 @@ ABRecordRef GRecord;
 		
 		//弹出layer_group
 		LayerGroup * pLayerGroup = [[LayerGroup alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
+		
+		pLayerGroup.Target   = self;
+		pLayerGroup.Selector = @selector(GetLayerGroupPressed:);
 		
 		//计算偏移坐标
 		int pOffSet_Y = GROUPITEM_H * m_nGroupIndex + GROUPITEM_H/2 - m_pScrollView_IB.contentOffset.y ;
@@ -1054,7 +1161,7 @@ ABRecordRef GRecord;
 	
 	[self LoadGroup];
 	
-	[self initData:0];
+	[self initData:m_nGroupIndex];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
