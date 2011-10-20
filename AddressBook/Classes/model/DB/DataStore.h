@@ -69,6 +69,7 @@ typedef enum
 
 //基本信息
 +(void)insertContactsBaseInfo:(ABRecordRef)pABRecordRef;
++(void)updateContactsBaseInfo:(ABRecordRef)pABRecordRef;
 +(void)removeContactsBaseInfo:(ABRecordRef)pABRecordRef;
 
 //+(NSInteger)getContactsInfo:(NSMutableArray*)pArray;
