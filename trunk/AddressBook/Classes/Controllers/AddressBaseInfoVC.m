@@ -51,6 +51,8 @@
 	
 	self.displayedPerson = m_pContact.record;
 	
+	//self.shouldShowLinkedPeople = YES;
+	
 	if(m_pSegmentedControl)
 	{
 		[m_pSegmentedControl setHidden:NO];
@@ -89,8 +91,14 @@
 	{
 		[m_pSegmentedControl setHidden:NO];
 		
-		//编辑完成
+		ABRecordRef pRecord    = m_pContact.record;
 		
+		//编辑完成
+		//if([DataStore RecordIDIsModify:pRecord])
+		{
+			[DataStore updateContactsBaseInfo:pRecord];
+			NSLog(@"IsChange");
+		}
 		
 	}
 	[super setEditing:editing animated:animated];

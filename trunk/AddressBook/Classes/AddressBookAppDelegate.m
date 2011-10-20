@@ -102,9 +102,9 @@
 		[DataStore Set_First_Use];
 	}
 	*/
-	 
+	
 	//系统通讯录的数据入库
-	[DBConnection beginTransaction];
+	//[DBConnection beginTransaction];
 	
 	ContactData * AllContactData = (ContactData *)[m_arrContactData objectAtIndex:0];
 	
@@ -123,7 +123,8 @@
 			NSLog(@"IN[%d]",pRecordID);
 			if([DataStore RecordIDIsModify:pRecord])
 			{
-				//[DataStore insertContactsBaseInfo:pRecord];
+				[DataStore updateContactsBaseInfo:pRecord];
+				NSLog(@"IsChange");
 			}
 		}
 		else
@@ -156,7 +157,7 @@
 		}
 	}
 	
-	[DBConnection commitTransaction];
+	//[DBConnection commitTransaction];
 	
 	//通讯录
 	m_pAddressBookVC = [[AddressBookVC alloc] init];
