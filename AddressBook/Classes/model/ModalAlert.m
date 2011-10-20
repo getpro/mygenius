@@ -150,6 +150,8 @@
 	ModalAlertDelegate *madelegate = [[ModalAlertDelegate alloc] initWithRunLoop:currentLoop];
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:question message:@"\n" delegate:madelegate cancelButtonTitle:button1 otherButtonTitles:button2, nil];
 
+	alertView.frame = CGRectMake(20, 70, 280, 130);
+	
 	// Build text field
 	UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 260.0f, 30.0f)];
 	tf.borderStyle = UITextBorderStyleRoundedRect;
@@ -162,19 +164,19 @@
 	tf.autocorrectionType = UITextAutocorrectionTypeNo;
 	tf.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 
-	
-	// Show alert and wait for it to finish displaying
-	[alertView show];
-	while (CGRectEqualToRect(alertView.bounds, CGRectZero));
-	
 	// Find the center for the text field and add it
 	CGRect bounds = alertView.bounds;
 	tf.center = CGPointMake(bounds.size.width / 2.0f, bounds.size.height / 2.0f - 10.0f);
 	[alertView addSubview:tf];
-	[tf release];
+	
+	// Show alert and wait for it to finish displaying
+	[alertView show];
+	//while (CGRectEqualToRect(alertView.bounds, CGRectZero));
+	
+	[tf becomeFirstResponder];
 	
 	// Set the field to first responder and move it into place
-	[madelegate performSelector:@selector(moveAlert:) withObject:alertView afterDelay: 0.7f];
+	//[madelegate performSelector:@selector(moveAlert:) withObject:alertView afterDelay: 0.7f];
 	
 	// Start the run loop
 	CFRunLoopRun();
@@ -184,8 +186,10 @@
 	NSString *answer = [[madelegate.text copy] autorelease];
 	if (index == 0) answer = nil; // assumes cancel in position 0
 
-	[alertView release];
+	[alertView  release];
 	[madelegate release];
+	[tf			release];
+	
 	return answer;
 }
 
