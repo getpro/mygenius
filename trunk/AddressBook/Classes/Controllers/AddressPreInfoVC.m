@@ -45,90 +45,9 @@ typedef enum
 	self.navigationItem.title = @"联系人";
 	self.navigationItem.rightBarButtonItem = m_pRightAdd;
 	
-	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
-	
-	//头像
-	if(m_pContact.image)
-	{
-		self.m_pHead_IB.contentMode = UIViewContentModeScaleAspectFit;
-		self.m_pHead_IB.image = m_pContact.image;
-	}
-	
-	//姓名
-	if(m_pContact.contactName)
-	{
-		self.m_pName_IB.text = m_pContact.contactName;
-	}
-	
-	//职位部门
-	NSMutableString * pJobAndDep = [NSMutableString stringWithCapacity:10];
-	if(m_pContact.jobtitle)
-	{
-		[pJobAndDep appendString:m_pContact.jobtitle];
-		[pJobAndDep appendString:@" "];
-	}
-	if(m_pContact.department)
-	{
-		[pJobAndDep appendString:m_pContact.department];
-	}
-	self.m_pJobAndDep_IB.text = pJobAndDep;
-	
-	//公司
-	if(m_pContact.organization)
-	{
-		self.m_pOrganization_IB.text = m_pContact.organization;
-	}
-	
 	m_pContainer = [[CAttributeContainer alloc] init];
 	
-	CAttribute *attr = nil;
-	
-	attr = [[[CAttributeString alloc] init] autorelease];
-	[m_pContainer setValue:attr forKey:@"分组"];
-	((CAttributeString*)attr).stringValue = [DataStore GetGroupName:[DataStore GetGroupID2:ABRecordGetRecordID(m_pContact.record)]];
-	
-	NSMutableString * pStrPhone = [NSMutableString stringWithCapacity:20];
-	NSString * pPhone = m_pContact.phonenumber;
-	if(pPhone)
-	{
-		[pStrPhone appendString:pPhone];
-		
-		if([[pPhone substringWithRange:NSMakeRange(0,1)] isEqualToString:@"+"])
-		{
-			pPhone = [pPhone substringWithRange:NSMakeRange(3,[pPhone length] - 3)];
-		}
-	
-		for(LabelAndContent * pLabelAndContent in app.m_arrServicerRule)
-		{
-			NSPredicate * pPredicate = [NSPredicate predicateWithFormat:@"SELF like[c] %@",pLabelAndContent.m_strContent];
-			
-			if([pPredicate evaluateWithObject:pPhone])
-			{
-				NSLog(@"[%@]",pLabelAndContent.m_strLabel);
-				[pStrPhone appendString:pLabelAndContent.m_strLabel];
-				break;
-			}
-		}
-	}
-	
-	attr = [[[CAttributeString alloc] init] autorelease];
-	[m_pContainer setValue:attr forKey:@"移动电话"];
-	((CAttributeString*)attr).stringValue = pStrPhone;
-	
-	attr = [[[CAttributeString alloc] init] autorelease];
-	[m_pContainer setValue:attr forKey:@"短信"];
-	((CAttributeString*)attr).stringValue = m_pContact.phonenumber;
-	
-	attr = [[[CAttributeString alloc] init] autorelease];
-	[m_pContainer setValue:attr forKey:@"邮件"];
-	((CAttributeString*)attr).stringValue = m_pContact.emailaddresse;
-	
-	attr = [[[CAttributeString alloc] init] autorelease];
-	[m_pContainer setValue:attr forKey:@"星座"];
-	((CAttributeString*)attr).stringValue = [DataStore getConstellation:ABRecordGetRecordID(m_pContact.record)];
-	
-	m_pData = [[NSMutableArray alloc]initWithArray:m_pContainer.attributes];
-	
+	[self Load];
 	
 }
 
@@ -439,6 +358,93 @@ typedef enum
 	}
 }
 
+-(void)Load
+{
+	AddressBookAppDelegate * app = [AddressBookAppDelegate getAppDelegate];
+	
+	//头像
+	if(m_pContact.image)
+	{
+		self.m_pHead_IB.contentMode = UIViewContentModeScaleAspectFit;
+		self.m_pHead_IB.image = m_pContact.image;
+	}
+	
+	//姓名
+	if(m_pContact.contactName)
+	{
+		self.m_pName_IB.text = m_pContact.contactName;
+	}
+	
+	//职位部门
+	NSMutableString * pJobAndDep = [NSMutableString stringWithCapacity:10];
+	if(m_pContact.jobtitle)
+	{
+		[pJobAndDep appendString:m_pContact.jobtitle];
+		[pJobAndDep appendString:@" "];
+	}
+	if(m_pContact.department)
+	{
+		[pJobAndDep appendString:m_pContact.department];
+	}
+	self.m_pJobAndDep_IB.text = pJobAndDep;
+	
+	//公司
+	if(m_pContact.organization)
+	{
+		self.m_pOrganization_IB.text = m_pContact.organization;
+	}
+	
+	[m_pContainer.attributes removeAllObjects];
+	
+	CAttribute *attr = nil;
+	
+	attr = [[[CAttributeString alloc] init] autorelease];
+	[m_pContainer setValue:attr forKey:@"分组"];
+	((CAttributeString*)attr).stringValue = [DataStore GetGroupName:[DataStore GetGroupID2:ABRecordGetRecordID(m_pContact.record)]];
+	
+	NSMutableString * pStrPhone = [NSMutableString stringWithCapacity:20];
+	NSString * pPhone = m_pContact.phonenumber;
+	if(pPhone)
+	{
+		[pStrPhone appendString:pPhone];
+		
+		if([[pPhone substringWithRange:NSMakeRange(0,1)] isEqualToString:@"+"])
+		{
+			pPhone = [pPhone substringWithRange:NSMakeRange(3,[pPhone length] - 3)];
+		}
+		
+		for(LabelAndContent * pLabelAndContent in app.m_arrServicerRule)
+		{
+			NSPredicate * pPredicate = [NSPredicate predicateWithFormat:@"SELF like[c] %@",pLabelAndContent.m_strContent];
+			
+			if([pPredicate evaluateWithObject:pPhone])
+			{
+				NSLog(@"[%@]",pLabelAndContent.m_strLabel);
+				[pStrPhone appendString:pLabelAndContent.m_strLabel];
+				break;
+			}
+		}
+	}
+	
+	attr = [[[CAttributeString alloc] init] autorelease];
+	[m_pContainer setValue:attr forKey:@"移动电话"];
+	((CAttributeString*)attr).stringValue = pStrPhone;
+	
+	attr = [[[CAttributeString alloc] init] autorelease];
+	[m_pContainer setValue:attr forKey:@"短信"];
+	((CAttributeString*)attr).stringValue = m_pContact.phonenumber;
+	
+	attr = [[[CAttributeString alloc] init] autorelease];
+	[m_pContainer setValue:attr forKey:@"邮件"];
+	((CAttributeString*)attr).stringValue = m_pContact.emailaddresse;
+	
+	attr = [[[CAttributeString alloc] init] autorelease];
+	[m_pContainer setValue:attr forKey:@"星座"];
+	((CAttributeString*)attr).stringValue = [DataStore getConstellation:ABRecordGetRecordID(m_pContact.record)];
+	
+	m_pData = [[NSMutableArray alloc]initWithArray:m_pContainer.attributes];
+}
+
 #pragma mark ABPersonViewControllerDelegate methods
 
 - (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
@@ -446,6 +452,20 @@ typedef enum
 	//[self dismissModalViewControllerAnimated:YES];
 	NSLog(@"111111111");
 	return NO;
+}
+
+#pragma mark - UIViewController delegate methods
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	[self Load];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
 }
 
 @end

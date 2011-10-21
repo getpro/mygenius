@@ -43,4 +43,6 @@
 -(IBAction)MoreInfoBtn:   (id)sender;
 -(IBAction)toggleBarStyle:(id)sender;
 
+-(void)Load;
+
 @end
