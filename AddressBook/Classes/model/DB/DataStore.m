@@ -1384,8 +1384,8 @@
 	
 	while ([stmt step] == SQLITE_ROW)
 	{
-		//NSInteger  pDate		    = [stmt getInt32: 0];//date_time
-		//NSString * pLabel           = [stmt getString:1];//date_label
+		NSInteger  pDate		    = [stmt getInt32: 0];//date_time
+		NSString * pLabel           = [stmt getString:1];//date_label
 		NSString * pRemind          = [stmt getString:2];//date_remind
 		NSString * pIdentifier      = [stmt getString:3];//date_identifier
 		
@@ -1393,20 +1393,21 @@
 		
 		if(pEvent)
 		{
-			[self upDateEvent:pIdentifier:pEvent];
+			//[self upDateEvent:pIdentifier:pEvent];
 			date_info * pDate_info = [[date_info alloc]init];
 			
+			/*
 			pDate_info.m_nDate		    	 = [[pEvent startDate] timeIntervalSince1970];
 			pDate_info.m_pLabel		         = [pEvent title];
 			pDate_info.m_nRemind             = [pRemind intValue];
 			pDate_info.m_pIdentifier         = pIdentifier;
+			*/
 			
-			/*
 			pDate_info.m_nDate		    	 = pDate;
 			pDate_info.m_pLabel		         = pLabel;
 			pDate_info.m_nRemind             = [pRemind intValue];
 			pDate_info.m_pIdentifier         = pIdentifier;
-			*/
+			
 			
 			[retArray addObject:pDate_info];
 			

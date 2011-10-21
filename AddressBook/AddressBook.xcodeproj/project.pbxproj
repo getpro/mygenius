@@ -1099,14 +1099,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yi Yang (3P2MDK6FQX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Aiming Jia (R47265F4JC)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7C6C385F-726A-4DCC-B739-4DCAEE53AA9F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C733A002-6BC0-4062-89D2-F116223AC086";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
