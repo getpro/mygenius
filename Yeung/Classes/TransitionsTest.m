@@ -244,6 +244,18 @@ Class restartTransition()
 		x = size.width;
 		y = size.height;
 		
+		CCLayerColor * pLayerColor = [CCLayerColor layerWithColor:ccc4(255,255,255,255)
+															width:size.width
+														   height:size.height];
+		[self addChild:pLayerColor];
+		
+		
+		NSString * picName = [NSString stringWithFormat:@"pic%d.png",sceneIdx+1];
+		
+		CCSprite * sprite = [CCSprite spriteWithFile:picName];
+		sprite.position =  ccp( size.width /2 , size.height/2 );
+		[self addChild:sprite];
+		
 		
 		CCLabelTTF *title = [CCLabelTTF labelWithString:transitions[sceneIdx] fontName:@"Thonburi" fontSize:40];
 		[self addChild:title];
@@ -355,6 +367,19 @@ Class restartTransition()
 		CGSize size = [[CCDirector sharedDirector] winSize];
 		x = size.width;
 		y = size.height;
+		
+		CCLayerColor * pLayerColor = [CCLayerColor layerWithColor:ccc4(255,255,255,255)
+															width:size.width
+														   height:size.height];
+		[self addChild:pLayerColor];
+		
+		
+		
+		NSString * picName = [NSString stringWithFormat:@"pic%d.png",sceneIdx+1];
+		
+		CCSprite * sprite = [CCSprite spriteWithFile:picName];
+		sprite.position =  ccp( size.width /2 , size.height/2 );
+		[self addChild:sprite];
 		
 		CCLabelTTF *title = [CCLabelTTF labelWithString:transitions[sceneIdx] fontName:@"Thonburi" fontSize:40];
 		[self addChild:title];
