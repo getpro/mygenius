@@ -22,6 +22,19 @@
 		21EE3700154946630004719A /* pic11.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36F4154946630004719A /* pic11.png */; };
 		21EE3701154946630004719A /* pic12.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36F5154946630004719A /* pic12.png */; };
 		21EE3702154946630004719A /* pic13.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36F6154946630004719A /* pic13.png */; };
+		21EE37A115494CB10004719A /* TransitionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EE37A015494CB10004719A /* TransitionsTest.m */; };
+		21EE37DA1549502F0004719A /* b1-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE37CE1549502F0004719A /* b1-hd.png */; };
+		21EE37DB1549502F0004719A /* b1.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE37CF1549502F0004719A /* b1.png */; };
+		21EE37DC1549502F0004719A /* b2-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE37D01549502F0004719A /* b2-hd.png */; };
+		21EE37DD1549502F0004719A /* b2.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE37D11549502F0004719A /* b2.png */; };
+		21EE37DE1549502F0004719A /* f1-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE37D21549502F0004719A /* f1-hd.png */; };
+		21EE37DF1549502F0004719A /* f1.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE37D31549502F0004719A /* f1.png */; };
+		21EE37E01549502F0004719A /* f2-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE37D41549502F0004719A /* f2-hd.png */; };
+		21EE37E11549502F0004719A /* f2.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE37D51549502F0004719A /* f2.png */; };
+		21EE37E21549502F0004719A /* r1-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE37D61549502F0004719A /* r1-hd.png */; };
+		21EE37E31549502F0004719A /* r1.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE37D71549502F0004719A /* r1.png */; };
+		21EE37E41549502F0004719A /* r2-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE37D81549502F0004719A /* r2-hd.png */; };
+		21EE37E51549502F0004719A /* r2.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE37D91549502F0004719A /* r2.png */; };
 		504DFBCE10AF12E9006D82FE /* CLScoreServerPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 504DFBC810AF12E9006D82FE /* CLScoreServerPost.h */; };
 		504DFBCF10AF12E9006D82FE /* CLScoreServerPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 504DFBC910AF12E9006D82FE /* CLScoreServerPost.m */; };
 		504DFBD010AF12E9006D82FE /* CLScoreServerRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 504DFBCA10AF12E9006D82FE /* CLScoreServerRequest.h */; };
@@ -281,6 +294,20 @@
 		21EE36F4154946630004719A /* pic11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic11.png; sourceTree = "<group>"; };
 		21EE36F5154946630004719A /* pic12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic12.png; sourceTree = "<group>"; };
 		21EE36F6154946630004719A /* pic13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic13.png; sourceTree = "<group>"; };
+		21EE379F15494CB10004719A /* TransitionsTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionsTest.h; sourceTree = "<group>"; };
+		21EE37A015494CB10004719A /* TransitionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionsTest.m; sourceTree = "<group>"; };
+		21EE37CE1549502F0004719A /* b1-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b1-hd.png"; sourceTree = "<group>"; };
+		21EE37CF1549502F0004719A /* b1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b1.png; sourceTree = "<group>"; };
+		21EE37D01549502F0004719A /* b2-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b2-hd.png"; sourceTree = "<group>"; };
+		21EE37D11549502F0004719A /* b2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b2.png; sourceTree = "<group>"; };
+		21EE37D21549502F0004719A /* f1-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "f1-hd.png"; sourceTree = "<group>"; };
+		21EE37D31549502F0004719A /* f1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = f1.png; sourceTree = "<group>"; };
+		21EE37D41549502F0004719A /* f2-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "f2-hd.png"; sourceTree = "<group>"; };
+		21EE37D51549502F0004719A /* f2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = f2.png; sourceTree = "<group>"; };
+		21EE37D61549502F0004719A /* r1-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "r1-hd.png"; sourceTree = "<group>"; };
+		21EE37D71549502F0004719A /* r1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = r1.png; sourceTree = "<group>"; };
+		21EE37D81549502F0004719A /* r2-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "r2-hd.png"; sourceTree = "<group>"; };
+		21EE37D91549502F0004719A /* r2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = r2.png; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		504DFBC810AF12E9006D82FE /* CLScoreServerPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLScoreServerPost.h; sourceTree = "<group>"; };
 		504DFBC910AF12E9006D82FE /* CLScoreServerPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLScoreServerPost.m; sourceTree = "<group>"; };
@@ -559,6 +586,18 @@
 		21EE36AE154940170004719A /* img */ = {
 			isa = PBXGroup;
 			children = (
+				21EE37CE1549502F0004719A /* b1-hd.png */,
+				21EE37CF1549502F0004719A /* b1.png */,
+				21EE37D01549502F0004719A /* b2-hd.png */,
+				21EE37D11549502F0004719A /* b2.png */,
+				21EE37D21549502F0004719A /* f1-hd.png */,
+				21EE37D31549502F0004719A /* f1.png */,
+				21EE37D41549502F0004719A /* f2-hd.png */,
+				21EE37D51549502F0004719A /* f2.png */,
+				21EE37D61549502F0004719A /* r1-hd.png */,
+				21EE37D71549502F0004719A /* r1.png */,
+				21EE37D81549502F0004719A /* r2-hd.png */,
+				21EE37D91549502F0004719A /* r2.png */,
 				21EE36AF154940170004719A /* pic1.png */,
 				21EE36EB154946630004719A /* pic2.png */,
 				21EE36EC154946630004719A /* pic3.png */,
@@ -619,6 +658,8 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				21EE379F15494CB10004719A /* TransitionsTest.h */,
+				21EE37A015494CB10004719A /* TransitionsTest.m */,
 				E0F80F5D120A0182005866B8 /* GameConfig.h */,
 				506EDC2F102F528A00A389B3 /* HelloWorldLayer.h */,
 				506EDC30102F528A00A389B3 /* HelloWorldLayer.m */,
@@ -1157,6 +1198,18 @@
 				21EE3700154946630004719A /* pic11.png in Resources */,
 				21EE3701154946630004719A /* pic12.png in Resources */,
 				21EE3702154946630004719A /* pic13.png in Resources */,
+				21EE37DA1549502F0004719A /* b1-hd.png in Resources */,
+				21EE37DB1549502F0004719A /* b1.png in Resources */,
+				21EE37DC1549502F0004719A /* b2-hd.png in Resources */,
+				21EE37DD1549502F0004719A /* b2.png in Resources */,
+				21EE37DE1549502F0004719A /* f1-hd.png in Resources */,
+				21EE37DF1549502F0004719A /* f1.png in Resources */,
+				21EE37E01549502F0004719A /* f2-hd.png in Resources */,
+				21EE37E11549502F0004719A /* f2.png in Resources */,
+				21EE37E21549502F0004719A /* r1-hd.png in Resources */,
+				21EE37E31549502F0004719A /* r1.png in Resources */,
+				21EE37E41549502F0004719A /* r2-hd.png in Resources */,
+				21EE37E51549502F0004719A /* r2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1171,6 +1224,7 @@
 				1F3B9A2D0EF2145700286867 /* YeungAppDelegate.m in Sources */,
 				506EDC31102F528A00A389B3 /* HelloWorldLayer.m in Sources */,
 				E0F80F60120A0182005866B8 /* RootViewController.m in Sources */,
+				21EE37A115494CB10004719A /* TransitionsTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

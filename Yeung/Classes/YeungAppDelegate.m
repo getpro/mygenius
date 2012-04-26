@@ -10,8 +10,10 @@
 
 #import "YeungAppDelegate.h"
 #import "GameConfig.h"
-#import "HelloWorldLayer.h"
 #import "RootViewController.h"
+
+#import "HelloWorldLayer.h"
+#import "TransitionsTest.h"
 
 @implementation YeungAppDelegate
 
@@ -110,7 +112,7 @@
 	[self removeStartupFlicker];
 	
 	// Run the intro Scene
-	[[CCDirector sharedDirector] runWithScene: [HelloWorldLayer scene]];
+	[[CCDirector sharedDirector] runWithScene: [TextLayer scene]];
 }
 
 
