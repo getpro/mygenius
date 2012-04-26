@@ -9,6 +9,19 @@
 /* Begin PBXBuildFile section */
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1F3B9A2D0EF2145700286867 /* YeungAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3B9A2B0EF2145700286867 /* YeungAppDelegate.m */; };
+		21EE36B0154940170004719A /* pic1.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36AF154940170004719A /* pic1.png */; };
+		21EE36F7154946630004719A /* pic2.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36EB154946630004719A /* pic2.png */; };
+		21EE36F8154946630004719A /* pic3.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36EC154946630004719A /* pic3.png */; };
+		21EE36F9154946630004719A /* pic4.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36ED154946630004719A /* pic4.png */; };
+		21EE36FA154946630004719A /* pic5.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36EE154946630004719A /* pic5.png */; };
+		21EE36FB154946630004719A /* pic6.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36EF154946630004719A /* pic6.png */; };
+		21EE36FC154946630004719A /* pic7.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36F0154946630004719A /* pic7.png */; };
+		21EE36FD154946630004719A /* pic8.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36F1154946630004719A /* pic8.png */; };
+		21EE36FE154946630004719A /* pic9.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36F2154946630004719A /* pic9.png */; };
+		21EE36FF154946630004719A /* pic10.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36F3154946630004719A /* pic10.png */; };
+		21EE3700154946630004719A /* pic11.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36F4154946630004719A /* pic11.png */; };
+		21EE3701154946630004719A /* pic12.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36F5154946630004719A /* pic12.png */; };
+		21EE3702154946630004719A /* pic13.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36F6154946630004719A /* pic13.png */; };
 		504DFBCE10AF12E9006D82FE /* CLScoreServerPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 504DFBC810AF12E9006D82FE /* CLScoreServerPost.h */; };
 		504DFBCF10AF12E9006D82FE /* CLScoreServerPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 504DFBC910AF12E9006D82FE /* CLScoreServerPost.m */; };
 		504DFBD010AF12E9006D82FE /* CLScoreServerRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 504DFBCA10AF12E9006D82FE /* CLScoreServerRequest.h */; };
@@ -255,6 +268,19 @@
 		1F3B9A2B0EF2145700286867 /* YeungAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YeungAppDelegate.m; path = Classes/YeungAppDelegate.m; sourceTree = SOURCE_ROOT; };
 		1F3B9A2C0EF2145700286867 /* YeungAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YeungAppDelegate.h; path = Classes/YeungAppDelegate.h; sourceTree = SOURCE_ROOT; };
 		1F3B9A820EF2151B00286867 /* Yeung_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yeung_Prefix.pch; sourceTree = SOURCE_ROOT; };
+		21EE36AF154940170004719A /* pic1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic1.png; sourceTree = "<group>"; };
+		21EE36EB154946630004719A /* pic2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic2.png; sourceTree = "<group>"; };
+		21EE36EC154946630004719A /* pic3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic3.png; sourceTree = "<group>"; };
+		21EE36ED154946630004719A /* pic4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic4.png; sourceTree = "<group>"; };
+		21EE36EE154946630004719A /* pic5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic5.png; sourceTree = "<group>"; };
+		21EE36EF154946630004719A /* pic6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic6.png; sourceTree = "<group>"; };
+		21EE36F0154946630004719A /* pic7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic7.png; sourceTree = "<group>"; };
+		21EE36F1154946630004719A /* pic8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic8.png; sourceTree = "<group>"; };
+		21EE36F2154946630004719A /* pic9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic9.png; sourceTree = "<group>"; };
+		21EE36F3154946630004719A /* pic10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic10.png; sourceTree = "<group>"; };
+		21EE36F4154946630004719A /* pic11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic11.png; sourceTree = "<group>"; };
+		21EE36F5154946630004719A /* pic12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic12.png; sourceTree = "<group>"; };
+		21EE36F6154946630004719A /* pic13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic13.png; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		504DFBC810AF12E9006D82FE /* CLScoreServerPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLScoreServerPost.h; sourceTree = "<group>"; };
 		504DFBC910AF12E9006D82FE /* CLScoreServerPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLScoreServerPost.m; sourceTree = "<group>"; };
@@ -530,6 +556,26 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		21EE36AE154940170004719A /* img */ = {
+			isa = PBXGroup;
+			children = (
+				21EE36AF154940170004719A /* pic1.png */,
+				21EE36EB154946630004719A /* pic2.png */,
+				21EE36EC154946630004719A /* pic3.png */,
+				21EE36ED154946630004719A /* pic4.png */,
+				21EE36EE154946630004719A /* pic5.png */,
+				21EE36EF154946630004719A /* pic6.png */,
+				21EE36F0154946630004719A /* pic7.png */,
+				21EE36F1154946630004719A /* pic8.png */,
+				21EE36F2154946630004719A /* pic9.png */,
+				21EE36F3154946630004719A /* pic10.png */,
+				21EE36F4154946630004719A /* pic11.png */,
+				21EE36F5154946630004719A /* pic12.png */,
+				21EE36F6154946630004719A /* pic13.png */,
+			);
+			path = img;
+			sourceTree = "<group>";
+		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
@@ -649,6 +695,7 @@
 		50F414EB1069373D002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				21EE36AE154940170004719A /* img */,
 				E02BB762126CC1E0006E46A2 /* iTunesArtwork */,
 				E02BB4FE126CA50F006E46A2 /* Icon@2x.png */,
 				E02BB4FF126CA50F006E46A2 /* Icon-Small@2x.png */,
@@ -1097,6 +1144,19 @@
 				E02BB507126CA50F006E46A2 /* Icon-Small-50.png in Resources */,
 				E02BB508126CA50F006E46A2 /* Icon-72.png in Resources */,
 				E02BB763126CC1E0006E46A2 /* iTunesArtwork in Resources */,
+				21EE36B0154940170004719A /* pic1.png in Resources */,
+				21EE36F7154946630004719A /* pic2.png in Resources */,
+				21EE36F8154946630004719A /* pic3.png in Resources */,
+				21EE36F9154946630004719A /* pic4.png in Resources */,
+				21EE36FA154946630004719A /* pic5.png in Resources */,
+				21EE36FB154946630004719A /* pic6.png in Resources */,
+				21EE36FC154946630004719A /* pic7.png in Resources */,
+				21EE36FD154946630004719A /* pic8.png in Resources */,
+				21EE36FE154946630004719A /* pic9.png in Resources */,
+				21EE36FF154946630004719A /* pic10.png in Resources */,
+				21EE3700154946630004719A /* pic11.png in Resources */,
+				21EE3701154946630004719A /* pic12.png in Resources */,
+				21EE3702154946630004719A /* pic13.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1304,7 +1364,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xiaodong zhang (864MY8E4T9)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					DEBUG,
@@ -1316,9 +1376,10 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D887881C-CA96-48D3-91E6-A9F4142C7496";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -1329,7 +1390,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xiaodong zhang (864MY8E4T9)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NS_BLOCK_ASSERTIONS,
@@ -1341,8 +1402,9 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D887881C-CA96-48D3-91E6-A9F4142C7496";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
