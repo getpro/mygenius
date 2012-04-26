@@ -143,7 +143,7 @@
 	
 	[window release];
 	
-	[director end];	
+	[director end];
 }
 
 - (void)applicationSignificantTimeChange:(UIApplication *)application {
