@@ -77,7 +77,7 @@ typedef enum PlayWordLayer_Z
 {
 	if( (self=[super init])) 
 	{
-		m_bIsPingYin = NO;
+		m_bIsPingYin = YES;
 		
 		self.isTouchEnabled			= YES;
 		self.isAccelerometerEnabled = YES;
@@ -132,14 +132,16 @@ typedef enum PlayWordLayer_Z
 	[m_pChoiceArr1 removeAllObjects];
 	
 	//NSString * pStrWordName = [GameEngine GetInstance].m_pCurWord.word_name;
-	NSString * pStrWordName = nil;
+	NSString * pStrWordName = @"魔兽世界";
 	
 	//拼音
 	/*
 	NSArray * pPinYinArr = [[GameEngine GetInstance].m_pCurWord.word_pinying 
 							componentsSeparatedByString:@"|"];
 	*/
-	NSArray * pPinYinArr = nil;
+	NSString * word_pinying = @"mo|shou|shi|jie";
+	
+	NSArray * pPinYinArr = [word_pinying componentsSeparatedByString:@"|"];
 	
 	for(int i = 0; i < [pPinYinArr count]; i ++)
 	{
@@ -224,7 +226,8 @@ typedef enum PlayWordLayer_Z
 								  componentsSeparatedByString:@";"];
 	*/
 	
-	NSArray * pBuShouArr = nil;
+	NSString * word_struct = @"3%98;2%68,123;3%152;2%39,41";
+	NSArray  * pBuShouArr = [word_struct componentsSeparatedByString:@";"];
 	
 	for(int i = 0; i < [pBuShouArr count]; i ++)
 	{
@@ -495,7 +498,7 @@ typedef enum PlayWordLayer_Z
 		for(int i = 0;i < m_nTotalTurn;i ++)
 		{
 			CCSprite * word_gezi = [CCSprite spriteWithFile:@"file_word_gezi.png"];
-			word_gezi.position = ccp(GeziOffSet_X + word_gezi.contentSize.width/2 + i * (word_gezi.contentSize.width + ANSWER_OFFSET.x),165);
+			word_gezi.position = ccp(GeziOffSet_X + word_gezi.contentSize.width/2 + i * (word_gezi.contentSize.width + ANSWER_OFFSET.x),310);
 			word_gezi.tag      = PlayWordLayer_PinYin_Answer_Name_tag + i;
 			[self addChild:word_gezi z:1];
 			

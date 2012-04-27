@@ -7,7 +7,7 @@
 # Copyright 2012 The9. All rights reserved.
 
 
-if [ 1 == 1 ]
+if [ 1 == 0 ]
 then
 
 	TP="/usr/local/bin/TexturePacker"
