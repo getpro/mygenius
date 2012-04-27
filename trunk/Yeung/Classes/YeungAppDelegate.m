@@ -14,6 +14,10 @@
 
 #import "HelloWorldLayer.h"
 #import "TransitionsTest.h"
+#import "CCPaintWord.h"
+#import "CCWordPlay.h"
+#import "CCWordRePlay.h"
+#import "TestPaint.h"
 
 @implementation YeungAppDelegate
 
@@ -84,11 +88,8 @@
 	// By default, this template only supports Landscape orientations.
 	// Edit the RootViewController.m file to edit the supported orientations.
 	//
-#if GAME_AUTOROTATION == kGameAutorotationUIViewController
+	
 	[director setDeviceOrientation:kCCDeviceOrientationPortrait];
-#else
-	[director setDeviceOrientation:kCCDeviceOrientationLandscapeLeft];
-#endif
 	
 	[director setAnimationInterval:1.0/60];
 	[director setDisplayFPS:YES];
@@ -111,8 +112,13 @@
 	// Removes the startup flicker
 	[self removeStartupFlicker];
 	
+	//加载资源
+	CCSpriteFrameCache * cache = [CCSpriteFrameCache sharedSpriteFrameCache];
+	[cache addSpriteFramesWithFile:@"game-hd.plist" textureFile:@"game-hd.pvr.ccz"];
+	
 	// Run the intro Scene
-	[[CCDirector sharedDirector] runWithScene: [TextLayer scene]];
+	//[[CCDirector sharedDirector] runWithScene: [TestPaint scene]];
+	[[CCDirector sharedDirector] runWithScene: [CCPaintWord scene]];
 }
 
 
