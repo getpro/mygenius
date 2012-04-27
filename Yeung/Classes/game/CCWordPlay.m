@@ -68,17 +68,16 @@
 		[self addChild:paint_top_bg];
 		
 		//笔
+		/*
 		CCSprite * game_pencil = [CCSprite spriteWithSpriteFrameName:@"game_pencil.png"];
 		game_pencil.position = ccp(78,456);
 		[self addChild:game_pencil];
-		
+		*/
 		
 		//添加画板
 		CCPaint * pPaintView = [CCPaint nodeWithFlag:YES];
 		pPaintView.position    = ccp(0.0f,0.0f);
 		pPaintView.anchorPoint = CGPointZero;
-		//pPaintView.tag         = PaintWord_Paint_tag;
-		//[self addChild:pPaintView z:0];
 		
 		// Create the scroller and pass-in the pages (set widthOffset to 0 for fullscreen pages).
 		CCScrollLayer *scroller = [CCScrollLayer nodeWithLayers: [NSArray arrayWithObjects:pPaintView,nil] widthOffset: 0.5f * size.width horizontal:NO];
@@ -93,7 +92,7 @@
 		//炸弹
 		CCMenuItemSprite * menuItemzhadan = 
 		[CCMenuItemSprite itemFromNormalSprite:[CCSprite spriteWithSpriteFrameName:@"word_zhadan.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"word_zhadanSel.png"] target:self selector:@selector(menuZhaDanCallback:)];
-		menuItemzhadan.position = ccp(295,WORD_POS.y + menuItemzhadan.contentSize.height/2 - 12);
+		menuItemzhadan.position = ccp(size.width - menuItemzhadan.contentSize.width/2,WORD_POS.y + menuItemzhadan.contentSize.height/2 - 12);
 		
 		
 		//删除答案
@@ -115,26 +114,12 @@
 		//放弃
 		CCMenuItemSprite * menuItemSkip = 
 		[CCMenuItemSprite itemFromNormalSprite:[CCSprite spriteWithSpriteFrameName:@"word_giveup.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"word_giveupSel.png"] target:self selector:@selector(menuPassCallback:)];
-		menuItemSkip.position = ccp(size.width - menuItemSkip.contentSize.width/2 - 5,size.height - 55 - menuItemSkip.contentSize.height/2);
+		menuItemSkip.position = ccp(size.width - menuItemSkip.contentSize.width/2 - 5,size.height - paint_top_bg.contentSize.height - menuItemSkip.contentSize.height/2);
 		
-		CCMenu * pMenu = [CCMenu menuWithItems:/*menuItemReplay,*/menuItemSkip,menuItemzhadan,menuItemDelAnswer,menuItemChange,nil];
+		CCMenu * pMenu = [CCMenu menuWithItems:/*menuItemReplay,*/menuItemSkip,menuItemzhadan,menuItemDelAnswer/*,menuItemChange*/,nil];
 		pMenu.position    = CGPointZero;
 		pMenu.anchorPoint = CGPointZero;
 		[self addChild:pMenu z:2];
-		
-		//
-		//badge
-		bombBGSprite = [CCSprite spriteWithSpriteFrameName:@"CW_BombBadgeNumber.png"];
-		bombBGSprite.position    = ccp(280,WORD_POS.y + 58);
-		[self addChild:bombBGSprite z:2];
-		
-		bombsCountLabel = [CCLabelTTF labelWithString:@"0" fontName:GAME_FONT_NAME fontSize:16];
-		bombsCountLabel.position = ccp(280,WORD_POS.y + 58);
-		[self addChild:bombsCountLabel z:2];
-		
-		//[bombsCountLabel setString:[NSString stringWithFormat:@"%d", [[Account sharedInstance] bombCount]]];
-		
-		[self checkBombsCount];
 	}
 	return self;
 }

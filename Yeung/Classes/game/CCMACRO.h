@@ -25,7 +25,7 @@
 //单词的字体和大小
 #define WORD_FONT_NAME @"Arial"
 
-#define WORD_FONT_SIZE (30)
+#define WORD_FONT_SIZE (60)
 
 #define MAX_BOMBLIST_NUMBER  3
 #define MAX_COINLIST_NUMBER  4

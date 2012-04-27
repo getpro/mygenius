@@ -12,8 +12,8 @@
 #import "PacketDefine.h"
 #import "ColorButton.h"
 
-#define COLOR_SCROLL_WIDTH  (275)
-#define COLOR_SCROLL_HEIGTH (35)
+#define COLOR_SCROLL_WIDTH  (768)
+#define COLOR_SCROLL_HEIGTH (70)
 
 @interface CCPaintWord : CCLayer
 {
@@ -25,6 +25,8 @@
 	BOOL m_bIsWaiting;
 	
 	ColorButton  * LastColorButton;
+	
+	NSMutableArray * colorArr;
 }
 
 +(CCScene *) scene;

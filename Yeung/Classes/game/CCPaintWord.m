@@ -66,10 +66,9 @@ typedef enum PaintWord_Tag
 	
 	pColorButton.transform = CGAffineTransformMakeScale(1.3f,1.3f);
 	
-	/*
-	Account * pAccount = [Account sharedInstance];
+	//Account * pAccount = [Account sharedInstance];
 	
-	NSNumber * pColorValue = (NSNumber*)[pAccount.colorArr objectAtIndex:[pValue intValue]];
+	NSNumber * pColorValue = (NSNumber*)[colorArr objectAtIndex:[pValue intValue]];
 	if(pColorValue)
 	{
 		m_nPenColor = [pColorValue unsignedIntegerValue];
@@ -84,24 +83,35 @@ typedef enum PaintWord_Tag
 	}
 	
 	LastColorButton = pColorButton;
-	*/
 }
 
 -(void) LoadColor
 {
 	//系统控件
 	
-	//m_pColorScrollView = [[[UIScrollView alloc] initWithFrame:CGRectMake(0, 54, COLOR_SCROLL_WIDTH, COLOR_SCROLL_HEIGTH)] autorelease];
+	m_pColorScrollView = [[[UIScrollView alloc] initWithFrame:CGRectMake(0, 120, COLOR_SCROLL_WIDTH, COLOR_SCROLL_HEIGTH)] autorelease];
 	//[m_pColorScrollView setBackgroundColor:[UIColor greenColor]];
 	
 	//Account * pAccount = [Account sharedInstance];
 	
-	/*
+	colorArr = [[NSMutableArray alloc] initWithCapacity:10];
+	
+	//默认的免费颜色
+	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(  0,  0,  0)]];
+	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(255,  0,  0)]];
+	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(255,255,  0)]];
+	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(  0,136,255)]];
+	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB( 18,224,101)]];
+	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(  7,  7,252)]];
+	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(150,150,150)]];
+	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB( 30,225,255)]];
+	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(255,162,  0)]];
+	
 	CGFloat pWidth = 0.0f;
 	
-	for(int i = 0;i < [pAccount.colorArr count];i++)
+	for(int i = 0;i < [colorArr count];i++)
 	{
-		NSNumber * pValue = (NSNumber*)[pAccount.colorArr objectAtIndex:i];
+		NSNumber * pValue = (NSNumber*)[colorArr objectAtIndex:i];
 		if(pValue)
 		{
 			_UINT32 pColorValue = [pValue unsignedIntegerValue];
@@ -131,7 +141,6 @@ typedef enum PaintWord_Tag
 	}
 	
 	[[[CCDirector sharedDirector] openGLView] addSubview:m_pColorScrollView];
-	*/
 }
 
 // on "init" you need to initialize your instance
@@ -181,7 +190,7 @@ typedef enum PaintWord_Tag
 											pColor_Bg_H - menuItemMoreColor.contentSize.height/2 -5);
 		
 		*/
-		//[self LoadColor];
+		[self LoadColor];
 		
 		//添加画板
 		CCPaint * pPaintView   = [CCPaint nodeWithFlag:NO];
@@ -421,6 +430,8 @@ typedef enum PaintWord_Tag
 - (void) dealloc
 {
 	[self removeAllNotifications];
+	
+	[colorArr release];
 	
 	[super dealloc];
 }

@@ -119,6 +119,7 @@
 	// Run the intro Scene
 	//[[CCDirector sharedDirector] runWithScene: [TestPaint scene]];
 	[[CCDirector sharedDirector] runWithScene: [CCPaintWord scene]];
+	//[[CCDirector sharedDirector] runWithScene: [CCWordPlay scene]];
 }
 
 

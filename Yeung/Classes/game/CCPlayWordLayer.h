@@ -11,11 +11,11 @@
 #import "Word.h"
 #import "GuessData.h"
 
-#define WORD_POS      ccp(75.0f,15.0f)
-#define WORD_OFFSET	  ccp( 5.0f, 5.0f)
+#define WORD_POS      ccp(200.0f,20.0f)
+#define WORD_OFFSET	  ccp( 15.0f,15.0f)
 
-#define ANSWER_POS    ccp( 80.0f,112.0f)
-#define ANSWER_OFFSET ccp( 10.0f, 10.0f)
+#define ANSWER_POS    ccp( 80.0f,215.0f)
+#define ANSWER_OFFSET ccp( 20.0f, 20.0f)
 
 #define CHOICE_NUM (12)
 
