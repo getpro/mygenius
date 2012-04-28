@@ -9,6 +9,7 @@
 #import "CCPaint.h"
 #import "DrawData.h"
 #import "CCMACRO.h"
+#import "Packet.h"
 
 @implementation CCPaint
 
@@ -194,6 +195,83 @@
 	replaycurpoint = 0;
 	[m_pDrawTrackArr    removeAllObjects];
 	[m_pDrawActionArr   removeAllObjects];
+	
+	NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+	NSString *path  = [documentsDirectory stringByAppendingPathComponent:@"Draw.dat"];
+	
+	//[m_pDrawTrackArr  addObjectsFromArray:[NSArray arrayWithContentsOfFile:pathTrack]];
+	//[m_pDrawActionArr addObjectsFromArray:[NSArray arrayWithContentsOfFile:pathAction]];
+	
+	NSData * pData = [NSData dataWithContentsOfFile:path];
+	
+	DecodePacket* packet = [[[DecodePacket alloc] initWithBytes:[pData bytes]] autorelease];
+	
+	{
+		_INT32 pDataLength = [packet getUInt32];						       //数据长度
+		
+		_INT32 pDraw_Data_Length = ([packet getUInt32] - sizeof(_UINT32));     //画数据的长度
+		
+		if(pDraw_Data_Length > pDataLength)
+		{
+			return;
+		}
+		
+		_INT32 pDraw_Data_Count = pDraw_Data_Length/sizeof(Draw_Data);
+		
+		//m_pDrawTrackArr = [[NSMutableArray alloc] initWithCapacity:pDraw_Data_Count];
+		
+		Draw_Data * pDraw_Data = (Draw_Data*)malloc(pDraw_Data_Length);
+		ZEROMEMORY(pDraw_Data,pDraw_Data_Length);
+		
+		[packet getData:pDraw_Data :pDraw_Data_Length];
+		
+		for (int pIndex = 0; pIndex < pDraw_Data_Count; pIndex ++)
+		{
+			OC_Draw_Data * pOC_Draw_Data = [OC_Draw_Data DrawDataWithItems:pDraw_Data[pIndex].m_fX 
+																		  :pDraw_Data[pIndex].m_fY
+																		  :pDraw_Data[pIndex].m_fTime];
+			
+			[m_pDrawTrackArr addObject:pOC_Draw_Data];
+		}
+		
+		SAFE_FREE(pDraw_Data);
+		
+		///
+		_INT16 pDraw_Event_Length = ([packet getUInt32] - sizeof(_UINT32));   //事件总长度
+		
+		if(pDraw_Event_Length > pDataLength)
+		{
+			return;
+		}
+		
+		_INT32 pDraw_Event_Count = pDraw_Event_Length/sizeof(Draw_Event);
+		
+		//m_pDrawActionArr = [[NSMutableArray alloc] initWithCapacity:pDraw_Event_Count];
+		
+		Draw_Event * pDraw_Event = (Draw_Event*)malloc(pDraw_Event_Length);
+		ZEROMEMORY(pDraw_Event,pDraw_Event_Length);
+		
+		[packet getData:pDraw_Event :pDraw_Event_Length];
+		
+		for (int pIndex = 0; pIndex < pDraw_Event_Count; pIndex ++)
+		{
+			OC_Draw_Event * pOC_Draw_Event = [OC_Draw_Event DrawEventWithItems:pDraw_Event[pIndex].m_nSize 
+																			  :pDraw_Event[pIndex].m_nColor 
+																			  :pDraw_Event[pIndex].m_nTool 
+																			  :pDraw_Event[pIndex].m_nIndex];
+			
+			[m_pDrawActionArr addObject:pOC_Draw_Event];
+		}
+		
+		SAFE_FREE(pDraw_Event);
+	}
+	
+	
+	
+	NSLog(@"[%d]",[m_pDrawTrackArr  count]);
+	NSLog(@"[%d]",[m_pDrawActionArr count]);
 	
 	/*
 	if(pSelf)

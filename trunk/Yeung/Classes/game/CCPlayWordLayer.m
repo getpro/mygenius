@@ -139,7 +139,7 @@ typedef enum PlayWordLayer_Z
 	NSArray * pPinYinArr = [[GameEngine GetInstance].m_pCurWord.word_pinying 
 							componentsSeparatedByString:@"|"];
 	*/
-	NSString * word_pinying = @"mo|shou|shi|jie";
+	NSString * word_pinying = @"MO|SHOU|SHI|JIE";
 	
 	NSArray * pPinYinArr = [word_pinying componentsSeparatedByString:@"|"];
 	
@@ -214,8 +214,8 @@ typedef enum PlayWordLayer_Z
 		[m_pChoiceArr1 addObject:pChoiceArr];
 	}
 	
-	//NSLog(@"%@",m_pChoiceArr1);
-	//NSLog(@"%@",m_pAnswerArr1);
+	NSLog(@"%@",m_pChoiceArr1);
+	NSLog(@"%@",m_pAnswerArr1);
 	
 	//部首
 	[m_pAnswerArr2 removeAllObjects];
