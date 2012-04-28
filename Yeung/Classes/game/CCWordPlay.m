@@ -82,9 +82,10 @@
 		// Create the scroller and pass-in the pages (set widthOffset to 0 for fullscreen pages).
 		CCScrollLayer *scroller = [CCScrollLayer nodeWithLayers: [NSArray arrayWithObjects:pPaintView,nil] widthOffset: 0.5f * size.width horizontal:NO];
 		scroller.marginOffset = 0.5f * size.width;
-		scroller.position     = ccp(0.0f,92.0f);
-		scroller.oriPos       = ccp(0.0f,92.0f);
-		[scroller setClippingRegion:CGRectMake(0.0f,92.0f + 43.0f,PAINT_SIZE_W,PAINT_SIZE_H - 43.0f)];
+		
+		scroller.position     = ccp((size.width - PAINT_SIZE_W)/2,162.0f);
+		scroller.oriPos       = ccp((size.width - PAINT_SIZE_W)/2,162.0f);
+		[scroller setClippingRegion:CGRectMake((size.width - PAINT_SIZE_W)/2,162.0f + 43.0f,PAINT_SIZE_W,PAINT_SIZE_H - 43.0f)];
 		[self addChild:scroller z:0];
 		
 		[pPaintView replay:NO];
