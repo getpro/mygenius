@@ -11,6 +11,8 @@
 #import "CCPopup.h"
 #import "CCMACRO.h"
 #import "Common.h"
+#import "Packet.h"
+#import "DrawData.h"
 
 @interface CCPaintWord (Private)
 - (void)registerAllNotifications;
@@ -205,19 +207,19 @@ typedef enum PaintWord_Tag
 		
 		CCMenuItemSprite * menuItemRecycle = 
 		[CCMenuItemSprite itemFromNormalSprite:[CCSprite spriteWithSpriteFrameName:@"drawing_recycle.png"] selectedSprite:nil target:self selector:@selector(menuRecycleCallback:)];
-		menuItemRecycle.position = ccp(143,28);
+		menuItemRecycle.position = ccp(343,35);
 		
 		CCMenuItemSprite * menuItemDone = 
 		[CCMenuItemSprite itemFromNormalSprite:[CCSprite spriteWithSpriteFrameName:@"drawing_done.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"drawing_doneSel.png"] target:self selector:@selector(menuDoneCallback:)];
-		menuItemDone.position    = ccp(230,28);
+		menuItemDone.position    = ccp(530,35);
 		
 		CCMenuItemSprite * menuItemPen = 
 		[CCMenuItemSprite itemFromNormalSprite:[CCSprite spriteWithSpriteFrameName:@"drawing_pen.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"drawing_penSel.png"] target:self selector:@selector(menuPenCallback:)];
-		menuItemPen.position    = ccp(32,28);
+		menuItemPen.position    = ccp(52,35);
 		
 		CCMenuItemSprite * menuItemEraser = 
 		[CCMenuItemSprite itemFromNormalSprite:[CCSprite spriteWithSpriteFrameName:@"drawing_eraser.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"drawing_eraserSel.png"] target:self selector:@selector(menuEraserCallback:)];
-		menuItemEraser.position = ccp(88,28);
+		menuItemEraser.position = ccp(128,35);
 		
 		CCMenu * pMenu = [CCMenu menuWithItems:menuItemRecycle,menuItemDone,menuItemPen,menuItemEraser,nil];
 		pMenu.position    = CGPointZero;
@@ -229,7 +231,7 @@ typedef enum PaintWord_Tag
 		CCPopup * PenPopup   = [CCPopup node];
 		PenPopup.m_pCB		 = @selector(menuPenPopUpCallback:);
 		PenPopup.m_pTarget   = self;
-		PenPopup.position    = ccp(10,16);
+		PenPopup.position    = ccp(10,32);
 		PenPopup.tag         = PaintWord_Pen_tag;
 		PenPopup.anchorPoint = CGPointZero;
 		[self addChild:PenPopup];
@@ -237,7 +239,7 @@ typedef enum PaintWord_Tag
 		CCPopup * EraserPopup   = [CCPopup node];
 		EraserPopup.m_pCB		= @selector(menuEraserPopUpCallback:);
 		EraserPopup.m_pTarget   = self;
-		EraserPopup.position    = ccp(66,16);
+		EraserPopup.position    = ccp(80,32);
 		EraserPopup.tag			= PaintWord_Eraser_tag;
 		EraserPopup.anchorPoint = CGPointZero;
 		[self addChild:EraserPopup];
@@ -314,6 +316,96 @@ typedef enum PaintWord_Tag
 	
 	[PaintDoneAlertView show];
 	*/
+	
+	//test
+	BOOL success = NO;
+	//NSError * error;
+	//NSFileManager *fm = [NSFileManager defaultManager];
+	
+	NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	
+	NSString *path  = [documentsDirectory stringByAppendingPathComponent:@"Draw.dat"];
+	//NSString *pathAction = [documentsDirectory stringByAppendingPathComponent:@"Action.dat"];
+	
+	CCPaint * pPaintView = (CCPaint*)[self getChildByTag:PaintWord_Paint_tag];
+	
+	//success = [pPaintView.m_pDrawTrackArr  writeToFile:pathTrack  atomically:YES];
+	
+	//success = [pPaintView.m_pDrawActionArr writeToFile:pathAction atomically:YES];
+	
+	/////
+	
+	const int Draw_Data_Count  = [pPaintView.m_pDrawTrackArr  count];
+	const int Draw_Event_Count = [pPaintView.m_pDrawActionArr count];
+	
+	int NEED_MALLOC_SIZE = (Draw_Data_Count  * sizeof(Draw_Data)  +
+						    Draw_Event_Count * sizeof(Draw_Event) + sizeof(_UINT32) * 3);
+	
+	char * pDrawDataBuf = (char*)malloc(NEED_MALLOC_SIZE);
+	ZEROMEMORY(pDrawDataBuf,NEED_MALLOC_SIZE);
+	
+	EncodePacket* packet = [[[EncodePacket alloc] initWithBuffer:pDrawDataBuf] autorelease];
+	
+	[packet putUInt32:NEED_MALLOC_SIZE];
+	
+	//画的内容
+	//数据
+	
+	Draw_Data * pDrawData = (Draw_Data*)malloc(Draw_Data_Count * sizeof(Draw_Data));
+	
+	for(int i = 0;i < Draw_Data_Count;i++)
+	{
+		OC_Draw_Data * pOC_Draw_Data = (OC_Draw_Data*)[pPaintView.m_pDrawTrackArr objectAtIndex:i];
+		if(pOC_Draw_Data)
+		{
+			pDrawData[i].m_fX    = pOC_Draw_Data.m_fX;
+			pDrawData[i].m_fY    = pOC_Draw_Data.m_fY;
+			pDrawData[i].m_fTime = pOC_Draw_Data.m_fTime;
+		}
+	}
+	
+	//长度
+	[packet putUInt32:(sizeof(_UINT32) + Draw_Data_Count * sizeof(Draw_Data))];
+	//数据
+	[packet putData:pDrawData :Draw_Data_Count * sizeof(Draw_Data)];
+	
+	SAFE_FREE(pDrawData);
+	/////////////
+	
+	
+	//事件
+	Draw_Event * pDrawEvent = (Draw_Event*)malloc(Draw_Event_Count * sizeof(Draw_Event));
+	
+	for(int i = 0;i < Draw_Event_Count;i++)
+	{
+		OC_Draw_Event * pOC_Draw_Event = (OC_Draw_Event*)[pPaintView.m_pDrawActionArr objectAtIndex:i];
+		if(pOC_Draw_Event)
+		{
+			pDrawEvent[i].m_nColor = pOC_Draw_Event.m_nColor;
+			pDrawEvent[i].m_nIndex = pOC_Draw_Event.m_nIndex;
+			pDrawEvent[i].m_nSize  = pOC_Draw_Event.m_nSize;
+			pDrawEvent[i].m_nTool  = pOC_Draw_Event.m_nTool;
+		}
+	}
+	
+	//长度
+	[packet putUInt32:(sizeof(_UINT32) + Draw_Event_Count * sizeof(Draw_Event))];
+	//数据
+	[packet putData:pDrawEvent :Draw_Event_Count * sizeof(Draw_Event)];
+	
+	SAFE_FREE(pDrawEvent);
+	
+	//总长度
+	[packet putSize];
+	
+	
+	NSData * pData = [NSData dataWithBytes:pDrawDataBuf length:[packet getSize]];
+	
+	success = [pData writeToFile:path atomically:YES];
+	
+	SAFE_FREE(pDrawDataBuf);
+	
 }
 
 -(void) LoadColorDelay
