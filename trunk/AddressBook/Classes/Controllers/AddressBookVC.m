@@ -465,6 +465,69 @@
 
 #pragma mark UISearchBarDelegate methods
 
+
+// Search table
+// 搜索算法太慢，需要优化
+
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+	[filteredArray removeAllObjects];
+	
+	for(ABContact *contact in contacts)
+	{
+		NSString *string = contact.contactName;
+		NSString *name = @"";
+		for (int i = 0; i < [string length]; i++)
+		{
+			if([name length] < 1)
+				name = [NSString stringWithFormat:@"%c",pinyinFirstLetter([string characterAtIndex:i])];
+			else
+				name = [NSString stringWithFormat:@"%@%c",name,pinyinFirstLetter([string characterAtIndex:i])];
+		}
+		if ([ContactData searchResult:name searchText:self.m_pSearchBar.text])
+		{
+			[filteredArray addObject:contact];
+		}
+		else 
+		{
+			if ([ContactData searchResult:string searchText:self.m_pSearchBar.text])
+				[filteredArray addObject:contact];
+			else 
+			{
+				NSArray  * phoneArray = nil;
+				NSString * phone = @"";
+				
+				if(contact)
+				{
+					phoneArray = [ContactData getPhoneNumberAndPhoneLabelArray:contact];
+				}
+				
+				if(phoneArray && [phoneArray count] == 1)
+				{
+					NSDictionary *PhoneDic = [phoneArray objectAtIndex:0];
+					phone = [ContactData getPhoneNumberFromDic:PhoneDic];
+					if([ContactData searchResult:phone searchText:self.m_pSearchBar.text])
+						[filteredArray addObject:contact];
+				}
+				else  if(phoneArray && [phoneArray count] > 1)
+				{
+					for(NSDictionary *dic in phoneArray)
+					{
+						phone = [ContactData getPhoneNumberFromDic:dic];
+						if([ContactData searchResult:phone searchText:self.m_pSearchBar.text])
+						{
+							[filteredArray addObject:contact];
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)asearchBar
 {
 	NSLog(@"searchBarTextDidBeginEditing");
@@ -740,60 +803,7 @@
 	if (aTableView == self.m_pTableView_IB && [self.sectionArray count]) 
 		return [[self.sectionArray objectAtIndex:section] count];
 	else
-		[filteredArray removeAllObjects];
-	
-	// Search table
-	// 搜索算法太慢，需要优化
-	
-	for(ABContact *contact in contacts)
-	{
-		NSString *string = contact.contactName;
-		NSString *name = @"";
-		for (int i = 0; i < [string length]; i++)
-		{
-			if([name length] < 1)
-				name = [NSString stringWithFormat:@"%c",pinyinFirstLetter([string characterAtIndex:i])];
-			else
-				name = [NSString stringWithFormat:@"%@%c",name,pinyinFirstLetter([string characterAtIndex:i])];
-		}
-		if ([ContactData searchResult:name searchText:self.m_pSearchBar.text])
-			[filteredArray addObject:contact];
-		else 
-		{
-			if ([ContactData searchResult:string searchText:self.m_pSearchBar.text])
-				[filteredArray addObject:contact];
-			else 
-			{
-				NSArray  * phoneArray = nil;
-				NSString * phone = @"";
-				
-				if(contact)
-				{
-					phoneArray = [ContactData getPhoneNumberAndPhoneLabelArray:contact];
-				}
-				
-				if(phoneArray && [phoneArray count] == 1)
-				{
-					NSDictionary *PhoneDic = [phoneArray objectAtIndex:0];
-					phone = [ContactData getPhoneNumberFromDic:PhoneDic];
-					if([ContactData searchResult:phone searchText:self.m_pSearchBar.text])
-						[filteredArray addObject:contact];
-				}
-				else  if(phoneArray && [phoneArray count] > 1)
-				{
-					for(NSDictionary *dic in phoneArray)
-					{
-						phone = [ContactData getPhoneNumberFromDic:dic];
-						if([ContactData searchResult:phone searchText:self.m_pSearchBar.text])
-						{
-							[filteredArray addObject:contact];
-							break;
-						}
-					}
-				}
-			}
-		}
-	}
+		return self.filteredArray.count;
 	
 	/*
 	for(NSString *string in contactNameArray)
@@ -847,9 +857,6 @@
 		}
 	}
 	*/
-	
-	
-	return self.filteredArray.count;
 }
 
 

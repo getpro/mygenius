@@ -1650,6 +1650,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xiaodong zhang (864MY8E4T9)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1666,6 +1667,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = Yeung;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C9C74156-A177-4B7E-B433-834FFB1E43C3";
 				TARGETED_DEVICE_FAMILY = 2;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -1675,6 +1677,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xiaodong zhang (864MY8E4T9)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -1689,6 +1692,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = Yeung;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C9C74156-A177-4B7E-B433-834FFB1E43C3";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
@@ -1761,7 +1765,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D887881C-CA96-48D3-91E6-A9F4142C7496";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C9C74156-A177-4B7E-B433-834FFB1E43C3";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -1786,7 +1790,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D887881C-CA96-48D3-91E6-A9F4142C7496";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C9C74156-A177-4B7E-B433-834FFB1E43C3";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
