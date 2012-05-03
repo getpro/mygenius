@@ -11,6 +11,10 @@
 @interface LoginLayer : CCLayer 
 {
 	UIDatePicker * datePickerView;
+	
+	NSInteger      m_nWrongNum;
+	
+	BOOL           m_bIsRight;
 }
 
 +(CCScene *) scene;
