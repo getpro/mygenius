@@ -85,7 +85,7 @@
 		
 		scroller.position     = ccp((size.width - PAINT_SIZE_W)/2,162.0f);
 		scroller.oriPos       = ccp((size.width - PAINT_SIZE_W)/2,162.0f);
-		[scroller setClippingRegion:CGRectMake((size.width - PAINT_SIZE_W)/2,162.0f + 43.0f,PAINT_SIZE_W,PAINT_SIZE_H - 43.0f)];
+		[scroller setClippingRegion:CGRectMake((size.width - PAINT_SIZE_W)/2,162.0f + 86.0f,PAINT_SIZE_W,PAINT_SIZE_H - 86.0f)];
 		[self addChild:scroller z:0];
 		
 		[pPaintView replay:NO];

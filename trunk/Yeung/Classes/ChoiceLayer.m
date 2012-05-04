@@ -10,6 +10,8 @@
 
 @implementation ChoiceLayer
 
+#define ITEMOPEN ccp(200,360)
+
 +(CCScene *) scene
 {
 	// 'scene' is an autorelease object.
@@ -47,7 +49,7 @@
 										target:self 
 									  selector:@selector(menuOpenCallback:)];
 		
-		menuItemOpen.position = ccp(200,360);
+		menuItemOpen.position = ITEMOPEN;
 		
 		CCMenu * pMenu = [CCMenu menuWithItems:menuItemOpen,nil];
 		pMenu.position    = CGPointZero;
@@ -57,7 +59,7 @@
 		CCLabelTTF * LabelYes = [CCLabelTTF labelWithString:@"YES"
 												fontName:@"Marker Felt"
 												fontSize:42];
-		LabelYes.position = ccp(200,360);
+		LabelYes.position = ITEMOPEN;
 		[self addChild:LabelYes];
 		
 		
@@ -86,8 +88,27 @@
 	
 	CGSize size = [[CCDirector sharedDirector] winSize];
 	
-	spriteNo.contentSize.width;
-	spriteNo.contentSize.height;
+	CGFloat w = spriteNo.contentSize.width;
+	CGFloat h = spriteNo.contentSize.height;
+    
+    while (1) 
+    {
+        pRet.x = arc4random()%(int)(size.width -w) + w/2;
+        pRet.y = arc4random()%(int)(size.height-h) + h/2;
+        
+        CGRect pRect = 
+        
+        CGRectMake(ITEMOPEN.x - spriteNo.contentSize.width *1.5f,
+                   ITEMOPEN.y - spriteNo.contentSize.height*1.5f,
+                   spriteNo.contentSize.width*3,
+                   spriteNo.contentSize.height*3);
+        
+        if(!CGRectContainsPoint(pRect, pRet))
+        {
+            break;
+        }
+        
+    }
 	
 	return  pRet;
 }
@@ -112,6 +133,10 @@
 	if(CGRectContainsPoint(pRect,touchLocation))
 	{
 		NSLog(@"3333");
+        
+        CCMoveTo * pMoveTo = [CCMoveTo actionWithDuration:0.2f position:[self RandomPos]];
+        
+        [spriteNo runAction:pMoveTo];
 	}
 	
 	return YES;
@@ -121,12 +146,44 @@
 {
 	CGPoint touchLocation = [touch locationInView: [touch view]];
 	touchLocation = [[CCDirector sharedDirector] convertToGL: touchLocation];
+    
+    CGRect pRect = 
+	
+	CGRectMake(spriteNo.position.x - spriteNo.contentSize.width *0.5f,
+			   spriteNo.position.y - spriteNo.contentSize.height*0.5f,
+			   spriteNo.contentSize.width,
+			   spriteNo.contentSize.height);
+	
+	if(CGRectContainsPoint(pRect,touchLocation))
+	{
+		NSLog(@"3333");
+        
+        CCMoveTo * pMoveTo = [CCMoveTo actionWithDuration:0.2f position:[self RandomPos]];
+        
+        [spriteNo runAction:pMoveTo];
+	}
 }
 
 -(void) ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event
 {
 	CGPoint touchLocation = [touch locationInView: [touch view]];
 	touchLocation = [[CCDirector sharedDirector] convertToGL: touchLocation];
+    
+    CGRect pRect = 
+	
+	CGRectMake(spriteNo.position.x - spriteNo.contentSize.width *0.5f,
+			   spriteNo.position.y - spriteNo.contentSize.height*0.5f,
+			   spriteNo.contentSize.width,
+			   spriteNo.contentSize.height);
+	
+	if(CGRectContainsPoint(pRect,touchLocation))
+	{
+		NSLog(@"3333");
+        
+        CCMoveTo * pMoveTo = [CCMoveTo actionWithDuration:0.5f position:[self RandomPos]];
+        
+        [spriteNo runAction:pMoveTo];
+	}
 }	
 
 - (void) dealloc
