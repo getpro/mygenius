@@ -204,6 +204,12 @@ typedef enum PaintWord_Tag
 		//pPaintView.scale = 2.0f;
 		
 		[self addChild:pPaintView];
+        
+        //
+        CCSprite * pDamon  = [CCSprite spriteWithFile:@"damon.png"];
+        pDamon.position    = ccp(size.width/2,560.0f);
+        pDamon.opacity     = 100;
+        [self addChild:pDamon];
 		
 		CCMenuItemSprite * menuItemRecycle = 
 		[CCMenuItemSprite itemFromNormalSprite:[CCSprite spriteWithSpriteFrameName:@"drawing_recycle.png"] selectedSprite:nil target:self selector:@selector(menuRecycleCallback:)];

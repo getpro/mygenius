@@ -132,14 +132,14 @@ typedef enum PlayWordLayer_Z
 	[m_pChoiceArr1 removeAllObjects];
 	
 	//NSString * pStrWordName = [GameEngine GetInstance].m_pCurWord.word_name;
-	NSString * pStrWordName = @"魔兽世界";
+	NSString * pStrWordName = @"大萌";
 	
 	//拼音
 	/*
 	NSArray * pPinYinArr = [[GameEngine GetInstance].m_pCurWord.word_pinying 
 							componentsSeparatedByString:@"|"];
 	*/
-	NSString * word_pinying = @"MO|SHOU|SHI|JIE";
+	NSString * word_pinying = @"DA|MENG";
 	
 	NSArray * pPinYinArr = [word_pinying componentsSeparatedByString:@"|"];
 	
@@ -1995,7 +1995,7 @@ typedef enum PlayWordLayer_Z
 		CGSize size = [CCDirector sharedDirector].winSize;
 		
 		CCSprite * word_guess_right = [CCSprite spriteWithSpriteFrameName:@"word_guess_right.png"];
-		word_guess_right.position = ccp(size.width/2 + 40,260);
+		word_guess_right.position = ccp(size.width/2 + 40,560);
 		[self addChild:word_guess_right];
 		
 		CCScaleTo  *  ScaleTo1 = [CCScaleTo  actionWithDuration:0.2f scale:1.3f];
