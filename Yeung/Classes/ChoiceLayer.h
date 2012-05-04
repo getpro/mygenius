@@ -10,7 +10,7 @@
 
 @interface ChoiceLayer : CCLayer 
 {
-	
+	CCSprite * spriteNo;
 }
 
 +(CCScene *) scene;
