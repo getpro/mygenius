@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1F3B9A2D0EF2145700286867 /* YeungAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3B9A2B0EF2145700286867 /* YeungAppDelegate.m */; };
+		21065A681553D5350070F218 /* ChoiceLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21065A671553D5350070F218 /* ChoiceLayer.m */; };
 		2107CB69154B9ACA00338707 /* Packet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2107CB68154B9ACA00338707 /* Packet.m */; };
 		21825283154A9FEF00B11133 /* file_drawing_color1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2182527E154A9FEF00B11133 /* file_drawing_color1.png */; };
 		21825284154A9FEF00B11133 /* file_drawing_color2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2182527F154A9FEF00B11133 /* file_drawing_color2.png */; };
@@ -345,6 +346,8 @@
 		1F3B9A2B0EF2145700286867 /* YeungAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YeungAppDelegate.m; path = Classes/YeungAppDelegate.m; sourceTree = SOURCE_ROOT; };
 		1F3B9A2C0EF2145700286867 /* YeungAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YeungAppDelegate.h; path = Classes/YeungAppDelegate.h; sourceTree = SOURCE_ROOT; };
 		1F3B9A820EF2151B00286867 /* Yeung_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yeung_Prefix.pch; sourceTree = SOURCE_ROOT; };
+		21065A661553D5350070F218 /* ChoiceLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceLayer.h; sourceTree = "<group>"; };
+		21065A671553D5350070F218 /* ChoiceLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceLayer.m; sourceTree = "<group>"; };
 		2107CB67154B9ACA00338707 /* Packet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Packet.h; sourceTree = "<group>"; };
 		2107CB68154B9ACA00338707 /* Packet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Packet.m; sourceTree = "<group>"; };
 		2182527E154A9FEF00B11133 /* file_drawing_color1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = file_drawing_color1.png; path = Resources/game/file_drawing_color1.png; sourceTree = SOURCE_ROOT; };
@@ -900,6 +903,8 @@
 				21E7BA75155260700018FAD2 /* LoginLayer.m */,
 				506EDC2F102F528A00A389B3 /* HelloWorldLayer.h */,
 				506EDC30102F528A00A389B3 /* HelloWorldLayer.m */,
+				21065A661553D5350070F218 /* ChoiceLayer.h */,
+				21065A671553D5350070F218 /* ChoiceLayer.m */,
 				E0F80F5E120A0182005866B8 /* RootViewController.h */,
 				E0F80F5F120A0182005866B8 /* RootViewController.m */,
 				1F3B9A2C0EF2145700286867 /* YeungAppDelegate.h */,
@@ -1541,6 +1546,7 @@
 				21E2B776154A85E800B8FE8B /* TestPaint.m in Sources */,
 				2107CB69154B9ACA00338707 /* Packet.m in Sources */,
 				21E7BA76155260700018FAD2 /* LoginLayer.m in Sources */,
+				21065A681553D5350070F218 /* ChoiceLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1780,7 +1786,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C9C74156-A177-4B7E-B433-834FFB1E43C3";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos4.3;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -1805,7 +1811,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C9C74156-A177-4B7E-B433-834FFB1E43C3";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos4.3;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

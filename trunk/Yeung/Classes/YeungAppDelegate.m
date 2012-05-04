@@ -19,6 +19,7 @@
 #import "CCWordRePlay.h"
 #import "TestPaint.h"
 #import "LoginLayer.h"
+#import "ChoiceLayer.h"
 
 @implementation YeungAppDelegate
 
@@ -121,8 +122,9 @@
 	//[[CCDirector sharedDirector] runWithScene: [TestPaint scene]];
 	//[[CCDirector sharedDirector] runWithScene: [CCPaintWord scene]];
 	//[[CCDirector sharedDirector] runWithScene: [CCWordPlay scene]];
+	//[[CCDirector sharedDirector] runWithScene: [LoginLayer scene]];
 	
-	[[CCDirector sharedDirector] runWithScene: [LoginLayer scene]];
+	[[CCDirector sharedDirector] runWithScene: [ChoiceLayer scene]];
 }
 
 
