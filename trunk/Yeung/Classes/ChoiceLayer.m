@@ -7,6 +7,7 @@
 //
 
 #import "ChoiceLayer.h"
+#import "CongratulateLayer.h"
 
 @implementation ChoiceLayer
 
@@ -29,7 +30,9 @@
 
 -(void) menuOpenCallback:(id) pSender
 {
-	
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionPageTurn transitionWithDuration:1.0f
+																					 scene:[CongratulateLayer scene] 
+																				 backwards:kOrientationLeftOver]];
 }
 
 -(id) init

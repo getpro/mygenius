@@ -11,6 +11,7 @@
 #import "CCWordRePlay.h"
 #import "CCMACRO.h"
 #import "CCScrollLayer.h"
+#import "TransitionsTest.h"
 
 @interface CCWordPlay (Private)
 - (void)registerAllNotifications;
@@ -137,6 +138,11 @@
 	isWin = YES;
 	
 	m_bIsWaiting = YES;
+	
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"恭喜答对啦！"
+												   delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+	[alert show];	
+	[alert release];
 }
 
 - (void) dealloc
@@ -198,6 +204,11 @@
 	//跳过，也要发送自己猜的数据
 	
 	//[WordPassAlertView show];
+	
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定要放弃嘛？"
+												   delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+	[alert show];
+	[alert release];	
 }
 
 - (void)checkBombsCount {
@@ -243,6 +254,33 @@
 - (void)removeAllNotifications
 {
 	//[[NSNotificationCenter defaultCenter] removeObserver:self name:WordPassNotification   object:nil];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if(isWin)
+	{
+		//确定
+		[[CCDirector sharedDirector] replaceScene:[CCTransitionPageTurn transitionWithDuration:1.0f
+																						 scene:[TextLayer scene] 
+																					 backwards:kOrientationLeftOver]];
+	}
+	else
+	{
+		NSLog(@"[%d]",buttonIndex);
+		
+		if(buttonIndex == 0)
+		{
+			//取消
+		}
+		else if(buttonIndex == 1)
+		{
+			//确定
+			[[CCDirector sharedDirector] replaceScene:[CCTransitionPageTurn transitionWithDuration:1.0f
+																							 scene:[TextLayer scene] 
+																						 backwards:kOrientationLeftOver]];
+		}
+	}
 }
 
 @end

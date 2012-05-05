@@ -119,11 +119,14 @@
 	[cache addSpriteFramesWithFile:@"game-hd.plist" textureFile:@"game-hd.pvr.ccz"];
 	
 	// Run the intro Scene
+	//test
 	//[[CCDirector sharedDirector] runWithScene: [TestPaint scene]];
 	//[[CCDirector sharedDirector] runWithScene: [CCPaintWord scene]];
-	[[CCDirector sharedDirector] runWithScene: [CCWordPlay scene]];
+	//[[CCDirector sharedDirector] runWithScene: [CCWordPlay scene]];
+	[[CCDirector sharedDirector] runWithScene: [ChoiceLayer scene]];
+	//[[CCDirector sharedDirector] runWithScene: [TextLayer scene]];
+	
 	//[[CCDirector sharedDirector] runWithScene: [LoginLayer scene]];
-	//[[CCDirector sharedDirector] runWithScene: [ChoiceLayer scene]];
 }
 
 

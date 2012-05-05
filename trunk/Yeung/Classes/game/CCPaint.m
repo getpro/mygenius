@@ -79,7 +79,8 @@
 		//brush = [[CCSprite spriteWithSpriteFrameName:@"dot.png"] retain];
 		brush = [[CCSprite spriteWithFile:@"fire.png"] retain];
 		[brush setOpacity:20];
-		brush.scale	= 0.25f;
+		//brush.scale	= 0.25f;
+		brush.scale	= 0.1f;
 		brush.color = ccc3(0,0,0);
 		
 		/*
@@ -431,12 +432,16 @@
 	{
 		case 1:
 		{
-			brush.scale	= 0.25f;
+			//brush.scale	= 0.25f;
+			
+			brush.scale = 0.1f;
 		}
 			break;
 		case 2:
 		{
-			brush.scale	= 0.5f;
+			//brush.scale	= 0.5f;
+			
+			brush.scale	= 0.25f;
 		}
 			break;
 		case 3:
