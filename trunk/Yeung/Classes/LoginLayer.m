@@ -53,16 +53,34 @@
 	}
 	
 	NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
-	NSTimeZone      *timeZone  = [NSTimeZone localTimeZone];
+	//NSTimeZone      *timeZone  = [NSTimeZone localTimeZone];
+    
+    formatter.locale = [[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] autorelease];
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSArray* languages = [defaults objectForKey:@"AppleLanguages"];
+    if (languages.count > 0) {
+        NSString* currentLanguage = [languages objectAtIndex:0];
+        formatter.locale = [[[NSLocale alloc] initWithLocaleIdentifier:currentLanguage] autorelease];
+    } 
+    else 
+    {
+        formatter.locale = [NSLocale currentLocale];
+    }
 	
-	[formatter setTimeZone:timeZone];  
+	//[formatter setTimeZone:timeZone];  
 	[formatter setDateFormat:@"M/d/yyyy"];
+    //[formatter setDateFormat:@"yyyy-MM-dd HH:mm +0800"];
 	
 	NSString *stringTime = [formatter stringFromDate:datePickerView.date];
 	
 	CGSize size = [CCDirector sharedDirector].winSize;
+    
+    NSLog(@"[%@]",stringTime);
 	
-	if([stringTime isEqualToString:@"5/12/1988"])
+    //if([stringTime isEqualToString:@"5/12/1988"])
+    //时差
+	if([stringTime isEqualToString:@"5/13/1988"])
 	{
 		m_bIsRight = YES;
 		
@@ -84,7 +102,7 @@
 	}
 	else
 	{
-		CCLabelTTF * label = [CCLabelTTF labelWithString:@"不对"
+		CCLabelTTF * label = [CCLabelTTF labelWithString:@"亲，不对哦！"
 												fontName:@"Arial"
 												fontSize:42];
 		label.position = ccp(size.width/2,280);
@@ -103,7 +121,7 @@
 		
 		if(m_nWrongNum == 5)
 		{
-			CCLabelTTF * labelTip = [CCLabelTTF labelWithString:@"提示:"
+			CCLabelTTF * labelTip = [CCLabelTTF labelWithString:@"提示:某人生日哦！"
 													fontName:@"Arial"
 													fontSize:62];
 			labelTip.position = ccp(size.width/2,360);
@@ -124,7 +142,7 @@
 		sprite.position =  ccp( size.width /2 , size.height/2 );
 		[self addChild:sprite];
 		
-		CCLabelTTF * labelTip = [CCLabelTTF labelWithString:@"打开123"
+		CCLabelTTF * labelTip = [CCLabelTTF labelWithString:@"猜猜密码是多少？"
 												   fontName:@"Marker Felt"
 												   fontSize:72];
 		labelTip.position = ccp(size.width/2,680);
@@ -145,7 +163,7 @@
 		pMenu.anchorPoint = CGPointZero;
 		[self addChild:pMenu];
 		
-		CCLabelTTF * label = [CCLabelTTF labelWithString:@"打开"
+		CCLabelTTF * label = [CCLabelTTF labelWithString:@"开锁"
 												fontName:@"Marker Felt"
 												fontSize:42];
 		label.position = ccp(size.width/2,160);

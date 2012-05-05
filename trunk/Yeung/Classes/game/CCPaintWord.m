@@ -113,7 +113,10 @@ typedef enum PaintWord_Tag
 	
 	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(  9,  9,  9)]];
 	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB( 90, 90, 90)]];
-	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(200,200,200)]];
+    
+    [colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(120,163,190)]];
+    
+	//[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(200,200,200)]];
 	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(244,200,204)]];
 	
 	CGFloat pWidth = 0.0f;

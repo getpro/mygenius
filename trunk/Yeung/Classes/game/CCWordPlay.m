@@ -122,6 +122,14 @@
 		pMenu.position    = CGPointZero;
 		pMenu.anchorPoint = CGPointZero;
 		[self addChild:pMenu z:2];
+        
+        
+        
+        CCLabelTTF * labelTip = [CCLabelTTF labelWithString:@"猜猜我在画什么？"
+												   fontName:@"Marker Felt"
+												   fontSize:62];
+		labelTip.position = ccp(size.width/2 + 50,size.height - 60);
+		[self addChild:labelTip];
 	}
 	return self;
 }
@@ -205,7 +213,7 @@
 	
 	//[WordPassAlertView show];
 	
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定要放弃嘛？"
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定要放弃嘛？他是你最喜欢片子的男主角哦！"
 												   delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
 	[alert show];
 	[alert release];	

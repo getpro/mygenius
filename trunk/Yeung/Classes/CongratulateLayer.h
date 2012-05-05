@@ -10,7 +10,11 @@
 
 @interface CongratulateLayer : CCLayer 
 {
-	
+	NSMutableArray * m_pDrawTrackArr;	  //点数据
+    
+    CFTimeInterval   m_LastTime;
+    
+    int replaycurpoint;
 }
 
 +(CCScene *) scene;

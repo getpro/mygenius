@@ -20,6 +20,7 @@
 #import "TestPaint.h"
 #import "LoginLayer.h"
 #import "ChoiceLayer.h"
+#import "CongratulateLayer.h"
 
 @implementation YeungAppDelegate
 
@@ -94,7 +95,7 @@
 	[director setDeviceOrientation:kCCDeviceOrientationPortrait];
 	
 	[director setAnimationInterval:1.0/60];
-	[director setDisplayFPS:YES];
+	[director setDisplayFPS:NO];
 	
 	
 	// make the OpenGLView a child of the view controller
@@ -123,10 +124,12 @@
 	//[[CCDirector sharedDirector] runWithScene: [TestPaint scene]];
 	//[[CCDirector sharedDirector] runWithScene: [CCPaintWord scene]];
 	//[[CCDirector sharedDirector] runWithScene: [CCWordPlay scene]];
-	[[CCDirector sharedDirector] runWithScene: [ChoiceLayer scene]];
+	//[[CCDirector sharedDirector] runWithScene: [ChoiceLayer scene]];
 	//[[CCDirector sharedDirector] runWithScene: [TextLayer scene]];
-	
-	//[[CCDirector sharedDirector] runWithScene: [LoginLayer scene]];
+	//[[CCDirector sharedDirector] runWithScene: [CongratulateLayer scene]];
+    
+    
+	[[CCDirector sharedDirector] runWithScene: [LoginLayer scene]];
 }
 
 
