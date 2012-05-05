@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 #import "CCPlayWordLayer.h"
 
-@interface CCWordPlay : CCPlayWordLayer
+@interface CCWordPlay : CCPlayWordLayer <UIAlertViewDelegate>
 {
 	BOOL m_bIsWaiting;
 	

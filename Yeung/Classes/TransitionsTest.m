@@ -5,8 +5,10 @@
 //
 
 #import "TransitionsTest.h"
+#import "ChoiceLayer.h"
 
-#define TRANSITION_DURATION (1.2f)
+#define TRANSITION_DURATION (1.0f)
+#define PIC_MAX				(13)
 
 @interface FadeWhiteTransition : CCTransitionFade
 +(id) transitionWithDuration:(ccTime) t scene:(CCScene*)s;
@@ -265,10 +267,11 @@ Class restartTransition()
 		
 		CCLabelTTF *label = [CCLabelTTF labelWithString:@"SCENE 1" fontName:@"Marker Felt" fontSize:64];
 		[label setColor:ccc3(16,16,255)];
-		[label setPosition: ccp(x/2,y/2)];	
+		[label setPosition: ccp(x/2,y/2+300)];	
 		[self addChild: label];
 		
 		// menu
+		/*
 		CCMenuItemImage *item1 = [CCMenuItemImage itemFromNormalImage:@"b1.png" selectedImage:@"b2.png" target:self selector:@selector(backCallback:)];
 		CCMenuItemImage *item2 = [CCMenuItemImage itemFromNormalImage:@"r1.png" selectedImage:@"r2.png" target:self selector:@selector(restartCallback:)];
 		CCMenuItemImage *item3 = [CCMenuItemImage itemFromNormalImage:@"f1.png" selectedImage:@"f2.png" target:self selector:@selector(nextCallback:)];
@@ -278,8 +281,27 @@ Class restartTransition()
 		item2.position = ccp( size.width/2, 30);
 		item3.position = ccp( size.width/2 + 100,30);
 		[self addChild: menu z:1];
+		*/
 		
-		[self schedule:@selector(step:) interval:1.0f];
+		CCMenuItemSprite * menuItemNext = 
+		[CCMenuItemSprite itemFromNormalSprite:[CCSprite spriteWithFile:@"button_green_bg.png"] 
+								selectedSprite:[CCSprite spriteWithFile:@"button_green_bg_current.png"] 
+										target:self 
+									  selector:@selector(nextCallback:)];
+		
+		menuItemNext.position = ccp(size.width/2,160);
+		
+		CCMenu * pMenu = [CCMenu menuWithItems:menuItemNext,nil];
+		pMenu.position    = CGPointZero;
+		pMenu.anchorPoint = CGPointZero;
+		[self addChild:pMenu];
+		
+		CCLabelTTF * LabelNext = [CCLabelTTF labelWithString:@"NEXT"
+													fontName:@"Marker Felt"
+													fontSize:42];
+		LabelNext.position = ccp(size.width/2,160);
+		[self addChild:LabelNext];
+		
 	}
 	
 	return self;
@@ -291,15 +313,19 @@ Class restartTransition()
 	[super dealloc];
 }
 
--(void) step:(ccTime)dt
-{
-	NSLog(@"Scene1#step called");
-}
 -(void) nextCallback:(id) sender
 {
 	Class transition = nextTransition();
-	CCScene *s2 = [TextLayer2 node];
-	[[CCDirector sharedDirector] replaceScene: [transition transitionWithDuration:TRANSITION_DURATION scene:s2]];
+	
+	if(sceneIdx >= PIC_MAX)
+	{
+		[[CCDirector sharedDirector] replaceScene: [transition transitionWithDuration:TRANSITION_DURATION scene:[ChoiceLayer scene]]];
+	}
+	else
+	{
+		CCScene *s2 = [TextLayer2 node];
+		[[CCDirector sharedDirector] replaceScene: [transition transitionWithDuration:TRANSITION_DURATION scene:s2]];
+	}
 }	
 
 -(void) backCallback:(id) sender
@@ -384,14 +410,15 @@ Class restartTransition()
 		CCLabelTTF *title = [CCLabelTTF labelWithString:transitions[sceneIdx] fontName:@"Thonburi" fontSize:40];
 		[self addChild:title];
 		[title setColor:ccc3(255,32,32)];
-		[title setPosition: ccp(x/2, y-100)];	
+		[title setPosition: ccp(x/2, y-100)];
 		
 		CCLabelTTF *label = [CCLabelTTF labelWithString:@"SCENE 2" fontName:@"Marker Felt" fontSize:64];
 		[label setColor:ccc3(16,16,255)];
-		[label setPosition: ccp(x/2,y/2)];
+		[label setPosition: ccp(x/2,y/2+300)];
 		[self addChild: label];
 		
 		// menu
+		/*
 		CCMenuItemImage *item1 = [CCMenuItemImage itemFromNormalImage:@"b1.png" selectedImage:@"b2.png" target:self selector:@selector(backCallback:)];
 		CCMenuItemImage *item2 = [CCMenuItemImage itemFromNormalImage:@"r1.png" selectedImage:@"r2.png" target:self selector:@selector(restartCallback:)];
 		CCMenuItemImage *item3 = [CCMenuItemImage itemFromNormalImage:@"f1.png" selectedImage:@"f2.png" target:self selector:@selector(nextCallback:)];
@@ -401,8 +428,28 @@ Class restartTransition()
 		item2.position = ccp( size.width/2, 30);
 		item3.position = ccp( size.width/2 + 100,30);
 		[self addChild: menu z:1];
+		*/
 		
-		[self schedule:@selector(step:) interval:1.0f];
+		//
+		CCMenuItemSprite * menuItemNext = 
+		[CCMenuItemSprite itemFromNormalSprite:[CCSprite spriteWithFile:@"button_green_bg.png"] 
+								selectedSprite:[CCSprite spriteWithFile:@"button_green_bg_current.png"] 
+										target:self 
+									  selector:@selector(nextCallback:)];
+		
+		menuItemNext.position = ccp(size.width/2,160);
+		
+		CCMenu * pMenu = [CCMenu menuWithItems:menuItemNext,nil];
+		pMenu.position    = CGPointZero;
+		pMenu.anchorPoint = CGPointZero;
+		[self addChild:pMenu];
+		
+		CCLabelTTF * LabelNext = [CCLabelTTF labelWithString:@"NEXT"
+												   fontName:@"Marker Felt"
+												   fontSize:42];
+		LabelNext.position = ccp(size.width/2,160);
+		[self addChild:LabelNext];
+		
 	}
 	
 	return self;
@@ -418,10 +465,18 @@ Class restartTransition()
 -(void) nextCallback:(id) sender
 {
 	Class transition = nextTransition();
-	CCScene *s2 = [CCScene node];
-	[s2 addChild: [TextLayer node]];
-	[[CCDirector sharedDirector] replaceScene: [transition transitionWithDuration:TRANSITION_DURATION scene:s2]];
-}	
+	
+	if(sceneIdx >= PIC_MAX)
+	{
+		[[CCDirector sharedDirector] replaceScene: [transition transitionWithDuration:TRANSITION_DURATION scene:[ChoiceLayer scene]]];
+	}
+	else
+	{
+		CCScene *s2 = [CCScene node];
+		[s2 addChild: [TextLayer node]];
+		[[CCDirector sharedDirector] replaceScene: [transition transitionWithDuration:TRANSITION_DURATION scene:s2]];
+	}
+}
 
 -(void) backCallback:(id) sender
 {
@@ -438,11 +493,6 @@ Class restartTransition()
 	[s2 addChild: [TextLayer node]];
 	[[CCDirector sharedDirector] replaceScene: [transition transitionWithDuration:TRANSITION_DURATION scene:s2]];
 }
--(void) step:(ccTime)dt
-{
-	NSLog(@"Scene2#step called");
-}
-
 
 /// callbacks 
 -(void) onEnter

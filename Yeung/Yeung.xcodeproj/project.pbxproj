@@ -68,6 +68,7 @@
 		21E7BA76155260700018FAD2 /* LoginLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E7BA75155260700018FAD2 /* LoginLayer.m */; };
 		21E7BAD6155269D70018FAD2 /* button_green_bg_current.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E7BAD4155269D70018FAD2 /* button_green_bg_current.png */; };
 		21E7BAD7155269D70018FAD2 /* button_green_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 21E7BAD5155269D70018FAD2 /* button_green_bg.png */; };
+		21E94E6E1555174800C8EC84 /* CongratulateLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E94E6D1555174800C8EC84 /* CongratulateLayer.m */; };
 		21EE36B0154940170004719A /* pic1.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36AF154940170004719A /* pic1.png */; };
 		21EE36F7154946630004719A /* pic2.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36EB154946630004719A /* pic2.png */; };
 		21EE36F8154946630004719A /* pic3.png in Resources */ = {isa = PBXBuildFile; fileRef = 21EE36EC154946630004719A /* pic3.png */; };
@@ -426,6 +427,8 @@
 		21E7BA75155260700018FAD2 /* LoginLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginLayer.m; sourceTree = "<group>"; };
 		21E7BAD4155269D70018FAD2 /* button_green_bg_current.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_green_bg_current.png; sourceTree = "<group>"; };
 		21E7BAD5155269D70018FAD2 /* button_green_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_green_bg.png; sourceTree = "<group>"; };
+		21E94E6C1555174800C8EC84 /* CongratulateLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CongratulateLayer.h; sourceTree = "<group>"; };
+		21E94E6D1555174800C8EC84 /* CongratulateLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CongratulateLayer.m; sourceTree = "<group>"; };
 		21EE36AF154940170004719A /* pic1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic1.png; sourceTree = "<group>"; };
 		21EE36EB154946630004719A /* pic2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic2.png; sourceTree = "<group>"; };
 		21EE36EC154946630004719A /* pic3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic3.png; sourceTree = "<group>"; };
@@ -900,14 +903,16 @@
 			children = (
 				21E2B577154A6CAA00B8FE8B /* game */,
 				E0F80F5D120A0182005866B8 /* GameConfig.h */,
-				21EE379F15494CB10004719A /* TransitionsTest.h */,
-				21EE37A015494CB10004719A /* TransitionsTest.m */,
 				21E7BA74155260700018FAD2 /* LoginLayer.h */,
 				21E7BA75155260700018FAD2 /* LoginLayer.m */,
+				21EE379F15494CB10004719A /* TransitionsTest.h */,
+				21EE37A015494CB10004719A /* TransitionsTest.m */,
 				506EDC2F102F528A00A389B3 /* HelloWorldLayer.h */,
 				506EDC30102F528A00A389B3 /* HelloWorldLayer.m */,
 				21065A661553D5350070F218 /* ChoiceLayer.h */,
 				21065A671553D5350070F218 /* ChoiceLayer.m */,
+				21E94E6C1555174800C8EC84 /* CongratulateLayer.h */,
+				21E94E6D1555174800C8EC84 /* CongratulateLayer.m */,
 				E0F80F5E120A0182005866B8 /* RootViewController.h */,
 				E0F80F5F120A0182005866B8 /* RootViewController.m */,
 				1F3B9A2C0EF2145700286867 /* YeungAppDelegate.h */,
@@ -1551,6 +1556,7 @@
 				2107CB69154B9ACA00338707 /* Packet.m in Sources */,
 				21E7BA76155260700018FAD2 /* LoginLayer.m in Sources */,
 				21065A681553D5350070F218 /* ChoiceLayer.m in Sources */,
+				21E94E6E1555174800C8EC84 /* CongratulateLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

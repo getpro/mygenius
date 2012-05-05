@@ -99,6 +99,7 @@ typedef enum PaintWord_Tag
 	colorArr = [[NSMutableArray alloc] initWithCapacity:10];
 	
 	//默认的免费颜色
+	/*
 	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(  0,  0,  0)]];
 	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(255,  0,  0)]];
 	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(255,255,  0)]];
@@ -108,6 +109,12 @@ typedef enum PaintWord_Tag
 	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(150,150,150)]];
 	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB( 30,225,255)]];
 	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(255,162,  0)]];
+	*/
+	
+	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(  9,  9,  9)]];
+	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB( 90, 90, 90)]];
+	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(200,200,200)]];
+	[colorArr addObject:[NSNumber numberWithUnsignedInteger:MAKE_RGB(244,200,204)]];
 	
 	CGFloat pWidth = 0.0f;
 	

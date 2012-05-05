@@ -7,6 +7,7 @@
 //
 
 #import "LoginLayer.h"
+#import "CCWordPlay.h"
 
 @implementation LoginLayer
 
@@ -28,6 +29,13 @@
 -(void) GuessWordSuccess
 {
 	NSLog(@"11111111111111111");
+	
+	[datePickerView removeFromSuperview];
+	
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionPageTurn transitionWithDuration:1.0f
+																					 scene:[CCWordPlay scene] 
+																				 backwards:kOrientationLeftOver]];
+	
 }
 
 -(void) MoveItemDone:(id)sender
