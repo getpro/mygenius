@@ -10,7 +10,7 @@
 
 @interface CongratulateLayer : CCLayer 
 {
-
+	
 }
 
 +(CCScene *) scene;
