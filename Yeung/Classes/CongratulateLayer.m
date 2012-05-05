@@ -34,14 +34,12 @@
 	
 	emitter.texture = [[CCTextureCache sharedTextureCache] addImage: @"stars-grayscale.png"];
 	
-	//emitter_.totalParticles = 250;
+	emitter.totalParticles = 50;
 	
 	//emitter.life = 0.01f;
 	
 	//emitter.startSize    = 30.0f;
 	//emitter.startSizeVar = 10.0f;
-	
-	emitter.endRadius    = 10.0f;
 }
 
 -(id) init
@@ -98,7 +96,7 @@
 	CGPoint touchLocation = [touch locationInView: [touch view]];
 	touchLocation = [[CCDirector sharedDirector] convertToGL: touchLocation];
 	
-	[self CreatFlower:touchLocation];
+	//[self CreatFlower:touchLocation];
 }
 
 @end
