@@ -80,7 +80,7 @@
 		brush = [[CCSprite spriteWithFile:@"fire.png"] retain];
 		[brush setOpacity:20];
 		//brush.scale	= 0.25f;
-		brush.scale	= 0.1f;
+		brush.scale	= 0.15f;
 		brush.color = ccc3(0,0,0);
 		
 		/*
@@ -197,10 +197,15 @@
 	[m_pDrawTrackArr    removeAllObjects];
 	[m_pDrawActionArr   removeAllObjects];
 	
+    /*
 	NSArray  *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	
 	NSString *path  = [documentsDirectory stringByAppendingPathComponent:@"Draw.dat"];
+    */
+    
+    NSString *path = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Draw.dat"];
+    
 	
 	//[m_pDrawTrackArr  addObjectsFromArray:[NSArray arrayWithContentsOfFile:pathTrack]];
 	//[m_pDrawActionArr addObjectsFromArray:[NSArray arrayWithContentsOfFile:pathAction]];
@@ -434,7 +439,7 @@
 		{
 			//brush.scale	= 0.25f;
 			
-			brush.scale = 0.1f;
+			brush.scale = 0.15f;
 		}
 			break;
 		case 2:
@@ -589,7 +594,7 @@
 			}
 			else
 			{
-				[self schedule: @selector(replayDrawStroke:) interval:pData.m_fTime];
+				[self schedule: @selector(replayDrawStroke:) interval:pData.m_fTime/3];
 			}
 		}
 	}
