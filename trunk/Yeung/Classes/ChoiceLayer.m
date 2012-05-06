@@ -44,6 +44,20 @@
 		CCSprite * sprite = [CCSprite spriteWithFile:@"MainBG.png"];
 		sprite.position =  ccp( size.width /2 , size.height/2 );
 		[self addChild:sprite];
+        
+        
+        CCLabelTTF * Label1 = [CCLabelTTF labelWithString:@"这么好的老公"
+                                                fontName:@"Marker Felt"
+                                                fontSize:68];
+		Label1.position = ccp( size.width /2 , size.height/2+260);
+		[self addChild:Label1];
+        
+        CCLabelTTF * Label = [CCLabelTTF labelWithString:@"愿意嫁给我伐拉？"
+                                                   fontName:@"Marker Felt"
+                                                   fontSize:68];
+		Label.position = ccp( size.width /2 , size.height/2+200);
+		[self addChild:Label];
+        
 		
 		//
 		CCMenuItemSprite * menuItemOpen = 
@@ -59,7 +73,7 @@
 		pMenu.anchorPoint = CGPointZero;
 		[self addChild:pMenu];
 		
-		CCLabelTTF * LabelYes = [CCLabelTTF labelWithString:@"YES"
+		CCLabelTTF * LabelYes = [CCLabelTTF labelWithString:@"愿意"
 												fontName:@"Marker Felt"
 												fontSize:42];
 		LabelYes.position = ITEMOPEN;
@@ -68,10 +82,10 @@
 		
 		//
 		spriteNo = [CCSprite spriteWithFile:@"button_green_bg.png"];
-		spriteNo.position = ccp(size.width/2,160);
+		spriteNo.position = ccp(568,360);
 		[self addChild:spriteNo];
 		
-		CCLabelTTF * label = [CCLabelTTF labelWithString:@"NO"
+		CCLabelTTF * label = [CCLabelTTF labelWithString:@"不愿意"
 												fontName:@"Marker Felt"
 												fontSize:42];
 		label.position = ccp(spriteNo.contentSize.width/2,

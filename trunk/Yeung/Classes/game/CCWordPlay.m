@@ -118,7 +118,7 @@
 		[CCMenuItemSprite itemFromNormalSprite:[CCSprite spriteWithSpriteFrameName:@"word_giveup.png"] selectedSprite:[CCSprite spriteWithSpriteFrameName:@"word_giveupSel.png"] target:self selector:@selector(menuPassCallback:)];
 		menuItemSkip.position = ccp(size.width - menuItemSkip.contentSize.width/2 - 5,size.height - paint_top_bg.contentSize.height - menuItemSkip.contentSize.height/2);
 		
-		CCMenu * pMenu = [CCMenu menuWithItems:/*menuItemReplay,*/menuItemSkip,menuItemzhadan,menuItemDelAnswer/*,menuItemChange*/,nil];
+		CCMenu * pMenu = [CCMenu menuWithItems:/*menuItemReplay,*/menuItemSkip,menuItemzhadan,menuItemDelAnswer,menuItemChange,nil];
 		pMenu.position    = CGPointZero;
 		pMenu.anchorPoint = CGPointZero;
 		[self addChild:pMenu z:2];
@@ -191,6 +191,7 @@
 
 -(void) menuChangeCallback:(id) pSender
 {
+    /*
 	CCMenuItemSprite * menuItemChange = (CCMenuItemSprite*)pSender;
 	
 	[self ChangeMode];
@@ -205,6 +206,7 @@
 		[menuItemChange setNormalImage:[CCSprite spriteWithSpriteFrameName:@"change_pinyin.png"]];
 		[menuItemChange setSelectedImage:[CCSprite spriteWithSpriteFrameName:@"change_pinyinSel.png"]];
 	}
+    */
 }
 
 -(void) menuPassCallback:(id) pSender
@@ -213,7 +215,7 @@
 	
 	//[WordPassAlertView show];
 	
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定要放弃嘛？他是你最喜欢片子的男主角哦！"
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定要放弃嘛？他是你最喜欢片子的男主角哦！(用拼音的方式做答)"
 												   delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
 	[alert show];
 	[alert release];	
@@ -269,9 +271,9 @@
 	if(isWin)
 	{
 		//确定
-		[[CCDirector sharedDirector] replaceScene:[CCTransitionPageTurn transitionWithDuration:1.0f
-																						 scene:[TextLayer scene] 
-																					 backwards:kOrientationLeftOver]];
+		[[CCDirector sharedDirector] replaceScene:
+         [CCTransitionPageTurn transitionWithDuration:1.0f scene:[PreTestLayer scene] 
+                                                       backwards:kOrientationLeftOver]];
 	}
 	else
 	{
@@ -285,8 +287,8 @@
 		{
 			//确定
 			[[CCDirector sharedDirector] replaceScene:[CCTransitionPageTurn transitionWithDuration:1.0f
-																							 scene:[TextLayer scene] 
-																						 backwards:kOrientationLeftOver]];
+                                 scene:[PreTestLayer scene]
+                             backwards:kOrientationLeftOver]];
 		}
 	}
 }
