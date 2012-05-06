@@ -1,5 +1,15 @@
 #import "cocos2d.h"
 
+@interface PreTestLayer: CCLayer
+{
+	
+}
+
++(CCScene *) scene;
+
+@end
+
+
 @interface TextLayer: CCLayer
 {
 	
